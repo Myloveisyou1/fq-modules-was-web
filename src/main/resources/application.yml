@@ -1,0 +1,24 @@
+server:
+  port: 8038
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.45.0.21:3306/was?useUnicode=true&characterEncoding=UTF8
+    userName: root
+    password: 123456
+  application:
+    name: fq-modules-was-web
+  thymeleaf:
+      prefix: classpath:/templates/
+      suffix: .html
+      mode: LEGACYHTML5
+      encoding: UTF-8
+      servlet:
+        content-type: text/html
+      cache: false
+
+
+# Mybatis≈‰÷√
+mybatis:
+    type-aliases-package: com.fq.modules.was.web.mapper
+    mapper-locations: classpath:mybatis/**/*.xml

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <!--控制台的日志信息-->
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <!--日志信息格式-->
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <!--根据日志级别分离日志，输出基本信息到文件-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level><!--是否匹配Error-->
+            <onMatch>DENY</onMatch><!--匹配就禁止-->
+            <onMismatch>ACCEPT</onMismatch><!--不匹配就使用-->
+        </filter>
+        <encoder>
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略,每天都生成日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>log/%d{yyyy-MM-dd}/logback.info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 每产生一个日志文件，该日志文件的保存期限为30天 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--根据日志级别分离日志，输出错误信息到文件-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <!--只拦截ERROR的日志-->
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d - %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>log/%d{yyyy-MM-dd}/logback.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 每产生一个日志文件，该日志文件的保存期限为30天 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+    <root level="info">
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+
+</configuration>

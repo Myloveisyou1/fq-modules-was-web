@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- 公共css+js -->
+    <script src="js/common/base-css.js"></script>
+    <script src="js/common/base-js.js"></script>
+
+</head>
+
+<body>
+<div class="x-nav">
+      <span class="layui-breadcrumb" lay-separator="-">
+        <a href="">首页</a>
+        <a href="">系统设置</a>
+        <a>
+            <cite>用户配置</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row self-back">
+        <form class="layui-form layui-col-md12 x-so form-sel">
+            <input type="text" id="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            <button type="button" class="layui-btn layui-btn-normal" onclick="findAllUser()">搜索</button>
+            <!--<button type="button" class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon" onclick="findAllUser()">&#xe615;</i></button>-->
+        </form>
+    </div>
+    <xblock>
+        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+        <button class="layui-btn" onclick="x_admin_show('添加用户','user-add.html')"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px" id="totalCount"></span>
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>用户名称</th>
+            <th>联系方式</th>
+            <th>邮箱</th>
+            <th>所属角色</th>
+            <th>创建时间</th>
+            <th>登录时间</th>
+            <th>状态</th>
+            <th>操作</th>
+        </thead>
+        <tbody id="myTable">
+
+        </tbody>
+    </table>
+</div>
+
+<!-- 添加用户-->
+<div id="addUser" style="display: none">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>登录名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="user_name" name="username" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为您唯一的登入名
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为您唯一的登入名
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>邮箱
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="email" required="" lay-verify="email"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>角色</label>
+            <div class="layui-input-block" id="roles">
+
+            </div>
+        </div>
+        <div class="layui-form-item" id="add">
+            <label class="layui-form-label">
+            </label>
+            <button type="button"  class="layui-btn" lay-filter="add" onclick="addUser()">
+                新增用户
+            </button>
+        </div>
+        <div class="layui-form-item" style="display: none" id="edit">
+            <label class="layui-form-label">
+            </label>
+            <button type="button"  class="layui-btn" lay-filter="add" onclick="addUser()">
+                修改用户
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="js/common/base-code.js"></script>
+<script>
+    var layer = "";
+    layui.use(['layer'],function(){
+        layer = layui.layer;
+    });
+    $(function () {
+        parent.layer.load(2,{shade:0.3});
+        findAllUser();
+        parent.layer.closeAll("loading");
+    });
+
+    /*用户-停用*/
+    function member_stop(userName,type){
+
+        var tishi = type == 0?"启用":"禁用";
+        layer.confirm('确认要'+tishi+'吗？',function(index){
+
+            if (index) {
+                $.ajax({
+                    url:URL+"user/updateUser",
+                    type:"get",
+                    dataType:"json",
+                    data:{
+                        userName:userName,
+                        status:type
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(data.code == 200) {
+                            layer.msg(tishi+"成功",{icon:6});
+                            location.reload();
+                        } else if (data.code == 209){
+                            layer.msg(data.msg,{icon:2});
+                            top.location.href = URL+"login";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+
+                    },error:function(jqXHR, textStatus, errorThrown) {
+                        var data = jqXHR.responseText;
+                        if(jqXHR.status == 404){
+                            top.location.href = URL+"errorpage/404";
+                        } else if(jqXHR.status == 500){
+                            top.location.href = URL+"errorpage/500";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    }
+                });
+            }
+
+        });
+    }
+
+    /*用户-删除*/
+    function member_del(userName){
+        layer.confirm('确认要删除吗？',function(index){
+            if (index) {
+                $.ajax({
+                    url:URL+"user/deleteUser",
+                    type:"get",
+                    dataType:"json",
+                    data:{
+                        userName:userName,
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(data.code == 200) {
+                            layer.msg("删除成功",{icon:6});
+                            location.reload();
+                        } else if (data.code == 209){
+                            layer.msg(data.msg,{icon:2});
+                            top.location.href = URL+"login";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+
+                    },error:function(jqXHR, textStatus, errorThrown) {
+                        var data = jqXHR.responseText;
+                        if(jqXHR.status == 404){
+                            top.location.href = URL+"errorpage/404";
+                        } else if(jqXHR.status == 500){
+                            top.location.href = URL+"errorpage/500";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function delAll (argument) {
+
+        var data = tableCheck.getData();
+        console.log(data);
+
+        layer.confirm('确认要删除吗？'+data,function(index){
+            //捉到所有被选中的，发异步进行删除
+            layer.msg('删除成功', {icon: 1});
+            $(".layui-form-checked").not('.header').parents('tr').remove();
+        });
+    }
+
+    function findAllUser() {
+
+        var userName = $("#username").val();
+        parent.layer.load(2,{shade:0.3});
+        $.ajax({
+            url:URL+"user/findAllUser",
+            type:"get",
+            dataType:"json",
+            data:{
+                userName:userName
+            },
+            success:function(data){
+                console.log(data);
+                if(data.code == 200) {
+                    var res = data.data;
+                    if(res.length > 0) {
+                        var html = "";
+                        for(var i=0;i<res.length;i++) {
+                            var a = "",b = "",c = "'"+res[i].userName+"'",d = "'编辑'"+",'user-add.html?userName="+res[i].userName+"&roleId="+res[i].roleId+"'";
+                            if(res[i].status == 0) {
+                                a = '<span class="layui-btn layui-btn-normal layui-btn-mini">启用</span>';
+                                b = '<a onclick="member_stop('+c+',1)" href="javascript:;"  title="启用"><i class="layui-icon">&#xe601;</i></a>';
+                            } else if(res[i].status == 1) {
+                                a = '<span class="layui-btn layui-btn-normal layui-btn-mini layui-btn-disabled">禁用</span>';
+                                b = '<a onclick="member_stop('+c+',0)" href="javascript:;"  title="停用"><i class="layui-icon">&#xe62f;</i></a>';
+                            }
+                            console.log(b);
+                            html += '<tr><td><div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="2"><i class="layui-icon">&#xe605;</i></div></td>'+
+                            '<td>'+(i+1)+'</td>' +
+                            '<td>'+res[i].userName+'</td>' +
+                            '<td>'+res[i].tel+'</td>' +
+                            '<td>'+res[i].email+'</td>' +
+                            '<td>'+res[i].roleName+'</td>' +
+                            '<td>'+res[i].createTime+'</td>' +
+                            '<td>'+res[i].updateTime+'</td>' +
+                            '<td class="td-status">'+a+'</td>' +
+                            '<td class="td-manage">'+b+
+                            '<a title="编辑"  onclick="x_admin_show('+d+')" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
+                            '<a title="删除" onclick="member_del('+c+')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a></td></tr>';
+                        }
+
+                    } else {
+                        html += '<tr><td colspan="100">暂无数据</td></tr>';
+                    }
+                    $("#totalCount").html("共有数据："+data.totalCount+"条");
+                    $("#myTable").html(html);
+                } else if (data.code == 209){
+                    parent.layer.msg(data.msg,{icon:2});
+                    top.location.href = URL+"login";
+                } else {
+                    parent.layer.msg(data.msg,{icon:2});
+                }
+                parent.layer.closeAll("loading");
+            },error:function(jqXHR, textStatus, errorThrown) {
+                parent.layer.closeAll("loading");
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = URL+"errorpage/404";
+                } else if(jqXHR.status == 500){
+                    top.location.href = URL+"errorpage/500";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            }
+        });
+
+    }
+
+    /**
+     * 添加用户
+     * */
+    function addUser() {
+        layer.open({
+            type:1,
+            title: '添加用户',
+            content: $("#addUser"),
+            btn:['添加','取消'],
+            yes: function (index,layero) {
+                var phone = $("#phone").val();
+                var email = $("#L_email").val();
+                var userNames = $("#username").val();
+                if(userNames == "" || phone == "" || email == "") {
+                    layer.msg("请完整填写信息",{icon:2});
+                    return;
+                }
+                if(!(/^1[34578]\d{9}$/.test(phone))){
+                    layer.msg("手机号码有误，请重填",{icon:2});
+                    return false;
+                }
+                var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+                if(!reg.test(email)) {
+                    layer.msg("邮箱有误，请重填",{icon:2});
+                    return false;
+                }
+                var roles = document.getElementsByName("role");
+                var s='';
+                for(var i=0; i<roles.length; i++){
+                    if(roles[i].checked) {
+                        s +=roles[i].value+","; //如果选中，将value添加到变量s中
+                    }
+                }
+                console.log(s+" "+s.split(",").length);
+                if(s.length > 0) {
+                    if (s.indexOf(",") != -1) {
+                        if(s.split(",").length > 2) {
+                            layer.msg("只能选择一个角色",{icon:2});
+                            return;
+                        }
+                    }
+                } else {
+                    layer.msg("请选择一个角色",{icon:2});
+                    return;
+                }
+                $.ajax({
+                    url:URL+"project/addProject",
+                    type:"get",
+                    dataType:"json",
+                    data:{
+                        sessionId:SESSIONID,
+                        projectName:projectName,
+                        nameEn:nameEn
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(data.code == 200) {
+                            layer.msg("添加成功,请在项目列表查看",{icon:6,time:2000},function(){
+                                location.reload();
+                            });
+                        } else if (data.code == 209){
+                            layer.msg(data.msg,{icon:2});
+                            top.location.href = URL+"login";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+
+                    },error:function(jqXHR, textStatus, errorThrown) {
+                        var data = jqXHR.responseText;
+                        if(jqXHR.status == 404){
+                            top.location.href = URL+"errorpage/404";
+                        } else if(jqXHR.status == 500){
+                            top.location.href = URL+"errorpage/500";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>
+</body>
+
+</html>

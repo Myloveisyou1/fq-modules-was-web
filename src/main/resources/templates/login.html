@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>登录</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!-- 公共css+js -->
+    <link rel='icon' href='images/logo.ico' type='image/x-icon'/>
+    <link rel='stylesheet' href='css/font.css'/>
+    <link rel='stylesheet' href='css/xadmin.css'/>
+
+    <script type='text/javascript' src='lib/jquery.min.js'></script>
+    <script type='text/javascript' src='lib/layui/layui.js'></script>
+    <script type='text/javascript' src='js/xadmin.js'></script>
+    <script type='text/javascript' src='lib/html5.min.js'></script>
+    <script type='text/javascript' src='lib/respond.min.js'></script>
+    <script src="js/common/base-code.js"></script>
+
+</head>
+<body class="login-bg">
+<div class="login layui-anim layui-anim-up">
+    <div class="message">WAS后台接口管理系统</div>
+    <div id="darkbannerwrap"></div>
+
+    <!--<form method="post" class="layui-form" action="#">-->
+        <input name="userName" id="user_name" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" />
+        <hr class="hr15"/>
+        <input name="password" id="user_password" lay-verify="required" placeholder="密码"  type="password" class="layui-input"/>
+        <hr class="hr15"/>
+        <input value="登录" lay-submit="" lay-filter="login" style="width:100%;" type="submit" onclick="login()"/>
+  <!--  </form>-->
+</div>
+
+<script>
+    function login() {
+
+        var userName = $("#user_name").val();
+        var userPassword = $("#user_password").val();
+        if (userName == null || userName == "") {
+            layer.msg("登录名不能为空",{icon:7});
+            return;
+        }
+        if (userPassword == null || userPassword == "") {
+            layer.msg("密码不能为空",{icon:7});
+            return;
+        }
+        layer.load(2,{shade:0.3});
+        $.ajax({
+            url:URL+"signIn",
+            type:"post",
+            dataType:"json",
+            data:{
+                userName:userName,
+                password:userPassword
+            },
+            success:function(data){
+                layer.closeAll("loading");
+                console.log(data);
+                if(data.code == 200) {
+                    layer.msg("login success",{icon:6});
+                    USER = JSON.stringify(data.data.user);
+                    // MENU = JSON.stringify(data.data.menu);
+                    // console.log(MENU);
+//                     setCookie("SESSIONID",SESSIONID,1800*1000);
+//                  setCookie("MENU",MENU,1800*1000);
+                    setCookie("USER",USER,1800*1000);
+                    window.location.href = URL+"home";
+                } else {
+                    layer.msg(data.msg,{icon:5});
+                }
+            },error:function(jqXHR, textStatus, errorThrown) {
+                layer.closeAll("loading");
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = "404.html";
+                } else if(jqXHR.status == 500){
+                    top.location.href = "500.html";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

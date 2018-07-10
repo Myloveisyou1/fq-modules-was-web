@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- 公共css+js -->
+    <script src="js/common/base-css.js"></script>
+    <script src="js/common/base-js.js"></script>
+</head>
+
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="username" class="layui-form-label">
+                <span class="x-red">*</span>登录名
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="username" name="username" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为您唯一的登入名
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="x-red">*</span>手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="phone" name="phone" required="" lay-verify="phone"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <!--<div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>将会成为您唯一的登入名
+            </div>-->
+        </div>
+        <div class="layui-form-item">
+            <label for="L_email" class="layui-form-label">
+                <span class="x-red">*</span>邮箱
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_email" name="email" required="" lay-verify="email"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                <span class="x-red">*</span>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"><span class="x-red">*</span>角色</label>
+            <div class="layui-input-block" id="roles">
+
+            </div>
+        </div>
+        <div class="layui-form-item" id="add">
+            <label class="layui-form-label">
+            </label>
+            <button type="button"  class="layui-btn" lay-filter="add" onclick="addUser()">
+                新增用户
+            </button>
+        </div>
+        <div class="layui-form-item" style="display: none" id="edit">
+            <label class="layui-form-label">
+            </label>
+            <button type="button"  class="layui-btn" lay-filter="add" onclick="addUser()">
+                修改用户
+            </button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="js/common/base-code.js"></script>
+<script>
+    var userName = "",roleId = "",layer = "";
+    layui.use(['layer'],function(){
+        layer = layui.layer;
+    });
+    $(function () {
+        parent.layer.load(2,{shade:0.3});
+        //获取参数
+        userName= getRequest().userName;
+        roleId= getRequest().roleId;
+        if(userName != undefined) {
+            if (userName.length > 0) {
+                //修改操作
+                $("#add").hide();
+                $("#edit").show();
+                $("#username").attr("readOnly","true");
+                findUserByName(userName);
+            }
+        }
+        findAllRole();
+        parent.layer.closeAll("loading");
+    });
+
+    /**
+     * 查询用户信息
+     */
+    function findUserByName(userName) {
+
+        $.ajax({
+            url:URL+"user/findUserByName",
+            type:"get",
+            dataType:"json",
+            data:{
+                userName:userName
+            },
+            success:function(data){
+                console.log(data);
+                if(data.code == 200) {
+                    var user = data.data;
+                    var email = user.email;
+                    var loginTime = user.loginTime;
+                    var createTime = user.createTime;
+                    var status = user.status;
+                    var phone = user.tel;
+
+                    $("#username").val(userName);
+                    $("#phone").val(phone);
+                    $("#L_email").val(email);
+
+
+                } else if (data.code == 209){
+                    layer.msg(data.msg,{icon:2});
+                    top.location.href = URL+"login";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+
+            },error:function(jqXHR, textStatus, errorThrown) {
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = "404.html";
+                } else if(jqXHR.status == 500){
+                    top.location.href = "500.html";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            }
+        });
+    }
+    /**
+     * 增加用户
+     * */
+    function addUser() {
+        var phone = $("#phone").val();
+        var email = $("#L_email").val();
+        var userNames = $("#username").val();
+        if(userNames == "" || phone == "" || email == "") {
+            layer.msg("请完整填写信息",{icon:2});
+            return;
+        }
+        if(!(/^1[34578]\d{9}$/.test(phone))){
+            layer.msg("手机号码有误，请重填",{icon:2});
+            return false;
+        }
+        var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+        if(!reg.test(email)) {
+            layer.msg("邮箱有误，请重填",{icon:2});
+            return false;
+        }
+        var roles = document.getElementsByName("role");
+        var s='';
+        for(var i=0; i<roles.length; i++){
+            if(roles[i].checked) {
+               s +=roles[i].value+","; //如果选中，将value添加到变量s中
+            }
+        }
+        console.log(s+" "+s.split(",").length);
+        if(s.length > 0) {
+            if (s.indexOf(",") != -1) {
+                if(s.split(",").length > 2) {
+                    layer.msg("只能选择一个角色",{icon:2});
+                    return;
+                }
+            }
+        } else {
+            layer.msg("请选择一个角色",{icon:2});
+            return;
+        }
+        if(userName != undefined && userName != "") {
+            $.ajax({
+                url:URL+"user/updateUser",
+                type:"get",
+                dataType:"json",
+                data:{
+                    userName:userNames,
+                    tel:phone,
+                    email:email,
+                    roleId: s.split(",")[0]
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data.code == 200) {
+                        layer.msg("修改成功,请在用户列表查看",{icon:6,time:2000},function(){
+                            location.reload();
+                        });
+
+                    } else if (data.code == 209){
+                        layer.msg(data.msg,{icon:2});
+                        top.location.href = "../login.html";
+                    } else {
+                        layer.msg(data.msg,{icon:2});
+                    }
+
+                },error:function(jqXHR, textStatus, errorThrown) {
+                    var data = jqXHR.responseText;
+                    if(jqXHR.status == 404){
+                        top.location.href = "404.html";
+                    } else if(jqXHR.status == 500){
+                        top.location.href = "500.html";
+                    } else {
+                        layer.msg(data.msg,{icon:2});
+                    }
+                }
+            });
+        } else {
+            $.ajax({
+                url:URL+"user/addUser",
+                type:"post",
+                dataType:"json",
+                data:{
+                    userName:userNames,
+                    tel:phone,
+                    email:email,
+                    roleId: s.split(",")[0]
+                },
+                success:function(data){
+                    console.log(data);
+                    if(data.code == 200) {
+                        layer.msg("添加成功，请在用户列表查看",{icon:6,time:2000},function(){
+                            location.reload();
+                        });
+
+                    } else if (data.code == 209){
+                        layer.msg(data.msg,{icon:2});
+                        top.location.href = URL+"login";
+                    } else {
+                        layer.msg(data.msg,{icon:2});
+                    }
+
+                },error:function(jqXHR, textStatus, errorThrown) {
+                    var data = jqXHR.responseText;
+                    if(jqXHR.status == 404){
+                        top.location.href = "404.html";
+                    } else if(jqXHR.status == 500){
+                        top.location.href = "500.html";
+                    } else {
+                        layer.msg(data.msg,{icon:2});
+                    }
+                }
+            });
+        }
+    }
+    /**
+     * 查询所有角色
+     **/
+    function findAllRole() {
+        $.ajax({
+            url:URL+"role/findAllRole",
+            type:"get",
+            async:false,
+            dataType:"json",
+            success:function(data){
+                console.log(data);
+                if(data.code == 200) {
+                    var str = "";
+                    var list = data.data;
+                    if(list != null && list.length > 0) {
+                        for(var i=0;i<list.length;i++) {
+                            var xuanzhong = "";
+                            if(userName != "") {//修改
+                                if(roleId == list[i].gid) {
+                                    console.log(111111111111);
+                                    xuanzhong = 'checked=""';
+                                }
+                            } else{
+                                if(USER.roleId == list[i].gid) {
+                                    xuanzhong = 'checked=""';
+                                }
+                            }
+                            str += '<input type="checkbox" name="role" value="'+list[i].gid+'" lay-skin="primary" title="'+list[i].roleName+'"'+xuanzhong+'>';
+                            console.log(str);
+                        }
+                    }
+                    $("#roles").html(str);
+                } else if (data.code == 209){
+                    parent.layer.msg(data.msg,{icon:2});
+                    top.location.href = "../login.html";
+                } else {
+                    parent.layer.msg(data.msg,{icon:2});
+                }
+
+            },error:function(jqXHR, textStatus, errorThrown) {
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = "404.html";
+                } else if(jqXHR.status == 500){
+                    top.location.href = "500.html";
+                } else {
+                    parent.layer.msg(data.msg,{icon:2});
+                }
+            }
+        });
+
+    }
+</script>
+</body>
+
+</html>

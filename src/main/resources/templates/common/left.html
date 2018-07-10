@@ -1,0 +1,257 @@
+<ul id="nav">
+    <!--<li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>数字货币管理</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu" style="display: none;">
+            <li>
+                <a _href="number-coin.html">
+                    <i class="iconfont"></i>
+                    <cite>数字货币管理</cite>
+
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>数字货币监控及预警</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a _href="/control-waring.html">
+                    <i class="iconfont"></i>
+                    <cite>数字货币监控及预警</cite>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>地址池管理</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a _href="/address-pool.html">
+                    <i class="iconfont"></i>
+                    <cite>地址池明细</cite>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>平台充值管理</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a _href="/recharge-control.html">
+                    <i class="iconfont"></i>
+                    <cite>充值到账监控</cite>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>平台提币管理</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a _href="/withdraw-coin.html">
+                    <i class="iconfont"></i>
+                    <cite>平台提币管理</cite>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>系统管理</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a _href="/user.html">
+                    <i class="iconfont"></i>
+                    <cite>用户管理</cite>
+                </a>
+            </li>
+            <li>
+                <a _href="/role.html">
+                    <i class="iconfont"></i>
+                    <cite>角色管理</cite>
+                </a>
+            </li>
+            <li>
+                <a _href="/menu.html">
+                    <i class="iconfont"></i>
+                    <cite>菜单管理</cite>
+                </a>
+            </li>
+            <li>
+                <a _href="/icon.html">
+                    <i class="iconfont"></i>
+                    <cite>图标管理</cite>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <a href="javascript:;">
+            <i class="iconfont"></i>
+            <cite>代码生成器</cite>
+            <i class="iconfont nav_right"></i>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a _href="/generator.html">
+                    <i class="iconfont"></i>
+                    <cite>代码生成器</cite>
+                </a>
+            </li>
+        </ul>
+    </li>-->
+</ul>
+<script type="text/javascript">
+
+    $(function() {
+        /**
+         * 加载菜单信息
+         */
+        $.ajax({
+            url:URL+"menu/findMenuByRole",
+            type:"get",
+            dataType:"json",
+            async:false,
+            data:{
+                roleId:USER.roleId
+            },
+            success:function(data){
+                console.log(data);
+                var MENU = data.data;
+                if(data.code == 200) {
+                    var parent = "",a = "";
+                    for (var i=0;i<MENU.length;i++) {
+                        parent += '<li><a href="javascript:;" style="color: white;"><i class="iconfont">'+MENU[i].icon+'</i>' +
+                                '<cite>'+MENU[i].menuName+'</cite>' +
+                                '<i class="iconfont nav_right">&#xe697;</i></a>';
+                        //遍历二级菜单
+                        var menuLists = MENU[i].menuList;
+                        if(menuLists.length > 0) {
+                            var child = "";
+                            parent += '<ul class="sub-menu">';
+                            for(var j=0;j<menuLists.length;j++) {
+                                if (menuLists[j].menuName.split(";")[1] != 1) {
+                                    child += '<li>' +
+                                            '<a _href="'+menuLists[j].url+'" style="color: white;">' +
+                                            '<i class="iconfont">'+menuLists[j].icon+'</i>'+
+                                            '<cite>'+menuLists[j].menuName.split(";")[0]+'</cite>' +
+                                            '</a></li>';
+                                }
+
+                            }
+                            child += '</ul>';
+                            parent += child+'</li>';
+                        } else {
+                            parent += '</li>';
+                        }
+                    }
+                    console.log(parent);
+
+                    $("#nav").html(parent);
+                } else {
+                    layer.msg(data.msg,{icon:5});
+                }
+            },error:function(jqXHR, textStatus, errorThrown) {
+                layer.closeAll("loading");
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = "404.html";
+                } else if(jqXHR.status == 500){
+                    top.location.href = "500.html";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            }
+        });
+
+
+        var tab = {
+            tabAdd: function(title,url,id){
+                //新增一个Tab项
+                element.tabAdd('xbs_tab', {
+                    title: title
+                    ,content: '<iframe tab-id="'+id+'" frameborder="0" src="'+url+'" scrolling="yes" class="x-iframe"></iframe>'
+                    ,id: id
+                })
+            }
+            ,tabDelete: function(othis){
+                //删除指定Tab项
+                element.tabDelete('xbs_tab', '44'); //删除：“商品管理”
+
+
+                othis.addClass('layui-btn-disabled');
+            }
+            ,tabChange: function(id){
+                //切换到指定Tab项
+                element.tabChange('xbs_tab', id); //切换到：用户管理
+            }
+        };
+
+        /**
+         * 点击展开二级菜单
+         */
+        $('.left-nav #nav li').click(function (event) {
+            if($(this).children('.sub-menu').length){
+                if($(this).hasClass('open')){
+                    $(this).removeClass('open');
+                    $(this).find('.nav_right').html('&#xe697;');
+                    $(this).children('.sub-menu').stop().slideUp();
+                    $(this).siblings().children('.sub-menu').slideUp();
+                }else{
+                    $(this).addClass('open');
+                    $(this).children('a').find('.nav_right').html('&#xe6a6;');
+                    $(this).children('.sub-menu').stop().slideDown();
+                    $(this).siblings().children('.sub-menu').stop().slideUp();
+                    $(this).siblings().find('.nav_right').html('&#xe697;');
+                    $(this).siblings().removeClass('open');
+                }
+            }else{
+
+                var url = $(this).children('a').attr('_href');
+                var title = $(this).find('cite').html();
+                var index  = $('.left-nav #nav li').index($(this));
+
+                for (var i = 0; i <$('.x-iframe').length; i++) {
+                    if($('.x-iframe').eq(i).attr('tab-id')==index+1){
+                        tab.tabChange(index+1);
+                        event.stopPropagation();
+                        return;
+                    }
+                };
+
+                tab.tabAdd(title,url,index+1);
+                tab.tabChange(index+1);
+            }
+
+            event.stopPropagation();
+
+        })
+
+    })
+
+
+
+</script>

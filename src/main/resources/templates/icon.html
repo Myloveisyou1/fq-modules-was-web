@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>图标配置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+
+
+    <!-- 公共css+js -->
+    <script src="js/common/base-css.js"></script>
+    <script src="js/common/base-js.js"></script>
+
+</head>
+
+<body>
+<div class="x-nav">
+      <span class="layui-breadcrumb" lay-separator="-">
+        <a href="">首页</a>
+        <a href="">系统设置</a>
+        <a>
+            <cite>图标配置</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <xblock>
+        <button class="layui-btn" onclick="addIcon()"><i class="layui-icon"></i>添加</button>
+        <!--<span class="x-right" style="line-height:40px">共有数据：88 条</span>-->
+    </xblock>
+    <table class="layui-table layui-form" id="demo">
+        <thead>
+        <tr>
+            <th width="20">
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+            </th>
+            <th>ID</th>
+            <th>图标名称</th>
+            <th>图标图片</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
+            <!--<th>操作</th>-->
+        </thead>
+        <tbody class="x-cate" id="myTable">
+
+        </tbody>
+    </table>
+</div>
+
+<div id="addProject" style="display: none">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="x-red">*</span>图标名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" required="" lay-verify="pass"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="url" class="layui-form-label">
+                <span class="x-red">*</span>图标编码
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="url" required="" lay-verify="pass"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="js/common/base-code.js"></script>
+
+<script>
+    var layer = "";
+    layui.use(['layer'],function(){
+        layer = layui.layer;
+    });
+    $(function () {
+        parent.layer.load(2,{shade:0.3});
+        findIconList();
+        parent.layer.closeAll("loading");
+    });
+
+    function addIcon() {
+
+        layer.open({
+            type:1,
+            title: '添加图标',
+            content: $("#addProject"),
+            btn:['添加','取消'],
+            yes: function (index,layero) {
+
+                var name = $("#name").val();
+                var url = $("#url").val();
+
+                if(name == "" || url == "") {
+                    layer.msg("请完整填写信息",{icon:5});
+                    return;
+                }
+
+                $.ajax({
+                    url:URL+"menu/addIcon",
+                    type:"get",
+                    dataType:"json",
+                    data:{
+                        name:name,
+                        url:url
+                    },
+                    success:function(data){
+                        console.log(data);
+                        if(data.code == 200) {
+                            layer.msg("添加成功,请在项目列表查看",{icon:6,time:2000},function(){
+                                location.reload();
+                            });
+                        } else if (data.code == 209){
+                            layer.msg(data.msg,{icon:2});
+                            top.location.href = URL+"login";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+
+                    },error:function(jqXHR, textStatus, errorThrown) {
+                        var data = jqXHR.responseText;
+                        if(jqXHR.status == 404){
+                            top.location.href = URL+"errorpage/404";
+                        } else if(jqXHR.status == 500){
+                            top.location.href = URL+"errorpage/500";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function findIconList() {
+        $.ajax({
+            url:URL+"menu/findIconList",
+            type:"get",
+            async:false,
+            dataType:"json",
+            success:function(data){
+                console.log(data);
+                if(data.code == 200) {
+                    var res = data.data;
+                    if(res.length > 0) {
+                        var html = "";
+                        for(var i=0;i<res.length;i++) {
+                            html += '<tr><td><div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id="2"><i class="layui-icon">&#xe605;</i></div></td>'+
+                                    '<td>'+(i+1)+'</td>' +
+                                    '<td>'+res[i].name+'</td>' +
+                                    '<td><i class="iconfont">'+res[i].url+'</i></td>' +
+                                    '<td>'+res[i].createTime+'</td>' +
+                                    '<td>'+res[i].updateTime+'</td></tr>';
+                            /**
+                             * ' +
+                             '<td class="td-manage">'+
+                             '<a title="编辑"  onclick="updateProject('+res[i].gid+')" href="javascript:;"><i class="layui-icon">&#xe642;</i></a>'+
+                             '<a title="删除" onclick="member_del('+res[i].gid+')" href="javascript:;"><i class="layui-icon">&#xe640;</i></a></td>
+                             */
+                        }
+
+                    } else {
+                        html += '<tr><td colspan="100" align="center">暂无数据</td></tr>';
+                    }
+                    $("#myTable").html(html);
+                } else if(data.code == 209){
+                    parent.layer.msg(data.msg,{icon:2});
+                    top.location.href = URL+"login";
+                } else {
+                    parent.layer.msg(data.msg,{icon:2});
+                }
+            },error:function(jqXHR, textStatus, errorThrown) {
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = URL+"errorpage/404";
+                } else if(jqXHR.status == 500){
+                    top.location.href = URL+"errorpage/500";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            }
+
+        });
+    }
+</script>
+</body>
+</html>

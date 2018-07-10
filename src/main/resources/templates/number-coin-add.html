@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>添加币种</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- 公共css+js -->
+    <script src="js/common/base-css.js"></script>
+    <script src="js/common/base-js.js"></script>
+</head>
+<body>
+<div class="x-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="wasBaseCurrency" class="layui-form-label self-label">
+                执行方法
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasBaseCurrency" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入执行方法" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasTypes" class="layui-form-label">
+                <span class="x-red">*</span>币种类型
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasTypes" name="wasBaseCurrency" required  lay-verify="required" placeholder="请输入币种类型" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasTokenAddress" class="layui-form-label self-label">
+                代币合约地址
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasTokenAddress" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入代币合约地址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasMinConfirm" class="layui-form-label self-label">
+                最小确认数
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasMinConfirm" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入最小确认数" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasBeginBlock" class="layui-form-label self-label">
+                <span class="x-red">*</span>区块高度
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasBeginBlock" name="wasBaseCurrency" required  lay-verify="required" placeholder="请输入区块高度" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasBlockNum" class="layui-form-label self-label">
+                轮询位数
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasBlockNum" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入轮询位数" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasGateWay" class="layui-form-label self-label">
+                网关
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasGateWay" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入网关" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasPrecision" class="layui-form-label self-label">
+                精度
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasPrecision" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入精度" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasZeroGasPrice" class="layui-form-label self-label">
+                归零价格
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasZeroGasPrice" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入归零价格" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasZeroGasLimit" class="layui-form-label self-label">
+                归零限制
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasZeroGasLimit" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入归零限制" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasTransferGasPrice" class="layui-form-label self-label">
+                转账价格
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasTransferGasPrice" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入转账价格" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasTransferGasLimit" class="layui-form-label self-label">
+                转账限制
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="wasTransferGasLimit" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入转账限制" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="iconIntroduceUrl" class="layui-form-label self-label">
+                货币介绍URL
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="iconIntroduceUrl" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入货币介绍URL" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="blockBrowsersUrl" class="layui-form-label self-label">
+                区块浏览器URL
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="blockBrowsersUrl" name="wasBaseCurrency" required  lay-verify="pass" placeholder="请输入区块浏览器URL" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasStatuss" class="layui-form-label self-label">
+                <span class="x-red">*</span>状态
+            </label>
+            <div class="layui-input-block">
+                <select name="wasStatuss" id="wasStatuss" lay-verify="required">
+                    <option value="0" >禁用</option>
+                    <option value="1" >启用</option>
+                    <option value="2" >禁止提币</option>
+                    <option value="3" >开放提币</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasRemark" class="layui-form-label self-label">
+                <span class="x-red">*</span>备注
+            </label>
+            <div class="layui-input-block">
+                <textarea name="desc" id="wasRemark" required  lay-verify="required" placeholder="请输入备注内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="wasSpare" class="layui-form-label self-label">
+                <span class="x-red">*</span>备用标签
+            </label>
+            <div class="layui-input-block">
+                <textarea name="desc" id="wasSpare" required  lay-verify="required" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" id="add">
+            <label class="layui-form-label">
+            </label>
+            <button type="button"  class="layui-btn" lay-submit="" lay-filter="add" onclick="addUser(1)">
+                新增币种
+            </button>
+        </div>
+        <div class="layui-form-item" style="display: none" id="edit">
+            <label class="layui-form-label">
+            </label>
+            <button type="button"  class="layui-btn" lay-submit="" lay-filter="add" onclick="addUser(2)">
+                修改币种
+            </button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="js/common/base-code.js"></script>
+<script type="text/javascript">
+    var wasId = "";
+    $(function () {
+        wasId = getRequest().wasId;
+        if (wasId != undefined) {
+            //修改操作
+            $("#add").hide();
+            $("#edit").show();
+            findInfoById(wasId);
+        }
+    });
+
+    function findInfoById(wasId) {
+
+        $.ajax({
+            url:URL+"generator/wasdatadictionary/info/"+wasId,
+            type:"get",
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                if (data.code = 200) {
+                    //加载信息
+                    var bean = data.data;
+                    $("#wasBaseCurrency").val(bean.wasBaseCurrency);
+                    $("#wasTypes").val(bean.wasType);
+                    $("#wasTokenAddress").val(bean.wasTokenAddress);
+                    $("#wasMinConfirm").val(bean.wasMinConfirm);
+                    $("#wasBeginBlock").val(bean.wasBeginBlock);
+                    $("#wasBlockNum").val(bean.wasBlockNum);
+                    $("#wasGateWay").val(bean.wasGateWay);
+                    $("#wasPrecision").val(bean.wasPrecision);
+                    $("#wasZeroGasPrice").val(bean.wasZeroGasPrice);
+                    $("#wasZeroGasLimit").val(bean.wasZeroGasLimit);
+                    $("#wasTransferGasPrice").val(bean.wasTransferGasPrice);
+                    $("#wasTransferGasLimit").val(bean.wasTransferGasLimit);
+                    $("#iconIntroduceUrl").val(bean.wasCoinIntroduceUrl);
+                    $("#blockBrowsersUrl").val(bean.wasBlockBrowsersUrl);
+                    $("#wasStatuss").val(bean.wasStatus);
+                    $("#wasRemark").val(bean.wasRemark);
+                    $("#wasSpare").val(bean.wasSpare);
+                }else if (data.code == 209){
+                    layer.msg(data.msg,{icon:2});
+                    top.location.href = URL+"login";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            },error:function(jqXHR, textStatus, errorThrown) {
+                var data = jqXHR.responseText;
+                if(jqXHR.status == 404){
+                    top.location.href = "404.html";
+                } else if(jqXHR.status == 500){
+                    top.location.href = "500.html";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            }
+        })
+    }
+    function addUser(obj) {
+        var wasBaseCurrency = $("#wasBaseCurrency").val();
+        var wasType = $("#wasTypes").val();
+        var wasTokenAddress = $("#wasTokenAddress").val();
+        var wasMinConfirm = $("#wasMinConfirm").val();
+        var wasBeginBlock = $("#wasBeginBlock").val();
+        var wasBlockNum = $("#wasBlockNum").val();
+        var wasGateWay = $("#wasGateWay").val();
+        var wasPrecision = $("#wasPrecision").val();
+        var wasZeroGasPrice = $("#wasZeroGasPrice").val();
+        var wasZeroGasLimit = $("#wasZeroGasLimit").val();
+        var wasTransferGasPrice = $("#wasTransferGasPrice").val();
+        var wasTransferGasLimit = $("#wasTransferGasLimit").val();
+        var iconIntroduceUrl = $("#iconIntroduceUrl").val();
+        var blockBrowsersUrl = $("#blockBrowsersUrl").val();
+        var wasStatuss = $("#wasStatuss").val();
+        var wasRemark = $("#wasRemark").val();
+        var wasSpare = $("#wasSpare").val();
+        $.ajax({
+            url:URL+"generator/wasdatadictionary/saveOrUpdate",
+            type:"get",
+            dataType:"json",
+            data:{
+                saveOrUpdate:obj,
+                wasId:wasId,
+                wasBaseCurrency:wasBaseCurrency,
+                wasType:wasType,
+                wasTokenAddress:wasTokenAddress,
+                wasMinConfirm:wasMinConfirm,
+                wasBeginBlock:wasBeginBlock,
+                wasBlockNum:wasBlockNum,
+                wasGateWay:wasGateWay,
+                wasPrecision:wasPrecision,
+                wasZeroGasPrice:wasZeroGasPrice,
+                wasZeroGasLimit:wasZeroGasLimit,
+                wasTransferGasPrice:wasTransferGasPrice,
+                wasTransferGasLimit:wasTransferGasLimit,
+                iconIntroduceUrl:iconIntroduceUrl,
+                blockBrowsersUrl:blockBrowsersUrl,
+                wasStatus:wasStatuss,
+                wasRemark:wasRemark,
+                wasSpare:wasSpare
+            },success:function (data) {
+                console.log(data);
+                if(data.code == 200) {
+                    var type = "";
+                    if (obj == 1) {
+                        type = "新增成功";
+                    } else {
+                        type = "修改成功";
+                    }
+                    layer.msg(type+",请刷新列表查看",{icon:6,time:2000},function(){
+                        location.reload();
+                    });
+                } else if (data.code == 209){
+                    layer.msg(data.msg,{icon:2});
+                    top.location.href = URL+"login";
+                } else {
+                    layer.msg(data.msg,{icon:2});
+                }
+            },error:function(jqXHR, textStatus, errorThrown) {
+            var data = jqXHR.responseText;
+            if(jqXHR.status == 404){
+                top.location.href = "404.html";
+            } else if(jqXHR.status == 500){
+                top.location.href = "500.html";
+            } else {
+                layer.msg(data.msg,{icon:2});
+            }
+        }
+        })
+    }
+</script>
+</body>
+</html>
