@@ -68,13 +68,13 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
 
         boolean flag = warnHistoryMapper.addWarnHistory(warnHistory);
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"新增了【】的信息";
+        /*String content = getUserName()+"在"+DatesUtils.time()+"新增了【】的信息";
         String result = "新增成功";
         if (!flag) {
             result = "新增失败";
         }
         SysLog sysLog = new SysLog(1,getUserName(),content,result);
-        sysLogMapper.addSysLog(sysLog);
+        sysLogMapper.addSysLog(sysLog);*/
 
         return flag;
     }

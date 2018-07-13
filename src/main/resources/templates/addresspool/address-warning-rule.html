@@ -89,23 +89,42 @@
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label"><span class="x-red">*</span>提醒邮箱</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline" id="email">
                     <input type="text" id="wasEmail" required="" lay-verify="pass"
                            autocomplete="off" class="layui-input" placeholder="请输入邮箱">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-blue" onclick="addNodeEmail(1)">添加</span>
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label"><span class="x-red">*</span>提醒手机号</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline" id="tel">
                     <input type="text" id="wasTel" required="" lay-verify="pass"
                            autocomplete="off" class="layui-input" placeholder="请输入手机号">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-blue" onclick="addNodeTel(1)">添加</span>
                 </div>
             </div>
         </div>
     </form>
 </div>
+<!--<div id="child">
+    <div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">
+        <div style="padding-left:180px;cursor: pointer;" onclick="removeDiv(this)">X</div>
+        <div class="email" id="childEmail"></div>
+    </div>
+</div>
+<div id="child_Tel">
+    <div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">
+        <div style="padding-left:180px;cursor: pointer;" onclick="removeDiv(this)">X</div>
+        <div class="tel" id="childTel"></div>
+    </div>
+</div>-->
+
 <div id="updateAddress" style="display: none;">
     <form class="layui-form" id="myForms">
         <div class="layui-form-item">
@@ -133,18 +152,24 @@
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label"><span class="x-red">*</span>提醒邮箱</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline" id="demail">
                     <input type="text" id="dwasEmail" required="" lay-verify="pass"
                               autocomplete="off" class="layui-input" placeholder="请输入邮箱">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-blue" onclick="addNodeEmail(2)">添加</span>
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label"><span class="x-red">*</span>提醒手机号</label>
-                <div class="layui-input-inline">
+                <div class="layui-input-inline" id="dphone">
                     <input type="text" id="dwasTel" required="" lay-verify="pass"
                               autocomplete="off" class="layui-input" placeholder="请输入手机号">
+                </div>
+                <div class="layui-form-mid layui-word-aux">
+                    <span class="x-blue" onclick="addNodeTel(2)">添加</span>
                 </div>
             </div>
         </div>
@@ -218,7 +243,6 @@
         });
         parent.layer.closeAll("loading");
     })
-
     /**
      * 条件查询币种信息
      * */
@@ -242,32 +266,47 @@
             type:1,
             title: '新增提醒规则',
             content: $("#addAddress"),
-            area: ['450px', '350px'],
+            area: ['450px', '550px'],
+            offset: '100px',
             btn:['保存','取消'],
             yes: function (index,layero) {
 
+                var email = document.getElementsByClassName("email");
+                var strEmail = "";
+                for(var i=0;i<email.length;i++){
+                    var v = email[i].innerHTML;
+                    if (i == email.length-1) {
+                        strEmail+= v;
+                    } else {
+                        strEmail+= v+",";
+                    }
+                }
+                var phone = document.getElementsByClassName("tel");
+                var strTel = "";
+                for(var i=0;i<phone.length;i++){
+                    var v = phone[i].innerHTML;
+                    if (i == phone.length-1) {
+                        strTel+= v;
+                    } else {
+                        strTel+= v+",";
+                    }
+                }
+                console.log("保存的邮箱:"+strEmail);
+                console.log("保存的电话:"+strTel);
+
                 var wasType = $("#wasTypes").val();
                 var wasSource = $("#wasSources").val();
-                var email = $("#wasEmail").val();
-                var phone = $("#wasTel").val();
-                if (phone == null || phone == "" || phone == undefined) {
-                    layer.msg("请输入手机号",{icon:2});
+
+                if (strTel == null || strTel == "" || strTel == undefined) {
+                    layer.msg("请至少输入一个手机号",{icon:2});
                     return;
                 }
-                if (email == null || email == "" || email == undefined) {
-                    layer.msg("请输入邮箱",{icon:2});
+                if (strEmail == null || strEmail == "" || strEmail == undefined) {
+                    layer.msg("请至少输入一个邮箱",{icon:2});
                     return;
-                }
-                if(!(/^1[34578]\d{9}$/.test(phone))){
-                    layer.msg("手机号码有误，请重填",{icon:2});
-                    return false;
-                }
-                var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
-                if(!reg.test(email)) {
-                    layer.msg("邮箱有误，请重填",{icon:2});
-                    return false;
                 }
                 layer.load(2,{shade:0.3});
+
                 $.ajax({
                     url:URL+"v1/warnrule/save",
                     type:"get",
@@ -275,8 +314,8 @@
                     data:{
                         wasType:wasType,
                         wasSource:wasSource,
-                        wasWarnEmail:email,
-                        wasWarnTel:phone
+                        wasWarnEmail:strEmail,
+                        wasWarnTel:strTel
                     },
                     success:function(data){
                         layer.closeAll("loading");
@@ -315,29 +354,43 @@
             type:1,
             title: '编辑提醒规则',
             content: $("#updateAddress"),
-            area: ['450px', '350px'],
+            area: ['450px', '550px'],
+            offset: '100px',
             btn:['修改','取消'],
             yes: function (index,layero) {
                 var wasType = $("#dwasTypes").val();
                 var wasSource = $("#dwasSources").val();
-                var email = $("#dwasEmail").val();
-                var phone = $("#dwasTel").val();
-                if (phone == null || phone == "" || phone == undefined) {
-                    layer.msg("请输入手机号",{icon:2});
+
+                var email = document.getElementsByClassName("email");
+                var strEmail = "";
+                for(var i=0;i<email.length;i++){
+                    var v = email[i].innerHTML;
+                    if (i == email.length-1) {
+                        strEmail+= v;
+                    } else {
+                        strEmail+= v+",";
+                    }
+                }
+                var phone = document.getElementsByClassName("tel");
+                var strTel = "";
+                for(var i=0;i<phone.length;i++){
+                    var v = phone[i].innerHTML;
+                    if (i == phone.length-1) {
+                        strTel+= v;
+                    } else {
+                        strTel+= v+",";
+                    }
+                }
+                console.log("保存的邮箱:"+strEmail);
+                console.log("保存的电话:"+strTel);
+
+                if (strTel == null || strTel == "" || strTel == undefined) {
+                    layer.msg("请至少输入一个手机号",{icon:2});
                     return;
                 }
-                if (email == null || email == "" || email == undefined) {
-                    layer.msg("请输入邮箱",{icon:2});
+                if (strEmail == null || strEmail == "" || strEmail == undefined) {
+                    layer.msg("请至少输入一个邮箱",{icon:2});
                     return;
-                }
-                if(!(/^1[34578]\d{9}$/.test(phone))){
-                    layer.msg("手机号码有误，请重填",{icon:2});
-                    return false;
-                }
-                var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
-                if(!reg.test(email)) {
-                    layer.msg("邮箱有误，请重填",{icon:2});
-                    return false;
                 }
                 layer.load(2,{shade:0.3});
                 $.ajax({
@@ -348,8 +401,8 @@
                         wasId:wasId,
                         wasType:wasType,
                         wasSource:wasSource,
-                        wasWarnEmail:email,
-                        wasWarnTel:phone
+                        wasWarnEmail:strEmail,
+                        wasWarnTel:strTel
                     },
                     success:function(data){
                         layer.closeAll("loading");
@@ -386,9 +439,10 @@
             type:1,
             title: '提醒规则详情',
             content: $("#updateAddress"),
-            area: ['450px', '350px'],
+            area: ['450px', '550px'],
         });
     }
+
     function findById(wasId) {
         $.ajax({
             url:URL+"v1/warnrule/info/"+wasId,
@@ -397,11 +451,29 @@
             success:function(data){
                 console.log(data);
                 if(data.code == 200) {
-                    $("#dwasEmail").val(data.data.wasWarnEmail);
-                    $("#dwasTel").val(data.data.wasWarnTel);
                     $("#dwasTypes").find("option[value='"+data.data.wasType+"']").attr("selected",true);
                     $("#dwasSources").find("option[value='"+data.data.wasSource+"']").attr("selected",true);
                     form.render("select","selFilter");
+
+                    //先移除存在的
+                    $(".email").parent().remove();
+                    $(".tel").parent().remove();
+                    //邮箱+电话
+                    var emails = data.data.wasWarnEmail.split(",");
+                    var tels = data.data.wasWarnTel.split(",");
+
+                    for (var i=0;i<emails.length;i++) {
+                        var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
+                            '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
+                            '<div class="email" id="childEmail">'+emails[i]+'</div></div>';
+                        $("#demail").append(html);
+                    }
+                    for (var i=0;i<tels.length;i++) {
+                        var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
+                            '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
+                            '<div class="tel" id="childTel">'+tels[i]+'</div></div>';
+                        $("#dphone").append(html);
+                    }
                 } else if (data.code == 209){
                     parent.layer.msg(data.msg,{icon:2});
                     top.location.href = URL+"login";
@@ -420,6 +492,95 @@
                 }
             }
         });
+    }
+
+    /**添加邮箱**/
+    function addNodeEmail(num) {
+        var email = "";
+        if (num == 1) {
+            email = $("#wasEmail").val();
+        } else {
+            email = $("#dwasEmail").val();
+        }
+
+        if (email == null || email == "" || email == undefined) {
+            layer.msg("请输入邮箱",{icon:2});
+            return;
+        }
+        var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+        if(!reg.test(email)) {
+            layer.msg("邮箱有误，请重填",{icon:2});
+            return false;
+        }
+        var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
+                    '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
+                    '<div class="email" id="childEmail">'+email+'</div></div>';
+
+        //校验是否重复
+        var resultEmail = document.getElementsByClassName("email");
+        var flag = true;
+        for(var i=0;i<resultEmail.length;i++){
+            var v = resultEmail[i].innerHTML;
+            console.log(v+" "+email);
+            if (email == v) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            if (num == 1) {
+                $("#email").append(html);
+                $("#wasEmail").val("");
+            } else {
+                $("#demail").append(html);
+                $("#dwasEmail").val("");
+            }
+        } else {
+            layer.msg("邮箱已存在",{icon:2});
+        }
+    }
+    /**添加电话**/
+    function addNodeTel(num) {
+        var phone = "";
+        if (num == 1) {
+            phone = $("#wasTel").val();
+        } else {
+            phone = $("#dwasTel").val();
+        }
+        if (phone == null || phone == "" || phone == undefined) {
+            layer.msg("请输入手机号",{icon:2});
+            return;
+        }
+        if(!(/^1[34578]\d{9}$/.test(phone))){
+            layer.msg("手机号码有误，请重填",{icon:2});
+            return false;
+        }
+        var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
+            '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
+            '<div class="tel" id="childTel">'+phone+'</div></div>';
+        //校验是否重复
+        var resultTel = document.getElementsByClassName("tel");
+        var flag = true;
+        for(var i=0;i<resultTel.length;i++){
+            var v = resultTel[i].innerHTML;
+            if (phone == v) {
+                flag = false;
+            }
+        }
+        if (flag) {
+            if (num == 1) {
+                $("#tel").append(html);
+                $("#wasTel").val("");
+            } else {
+                $("#dphone").append(html);
+                $("#dwasTel").val("");
+            }
+        } else {
+            layer.msg("电话已存在",{icon:2});
+        }
+    }
+    /**移除邮箱或者电话**/
+    function removeDiv(obj) {
+        $(obj).parent().remove();
     }
 </script>
 </body>

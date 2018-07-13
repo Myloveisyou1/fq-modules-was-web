@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class IndexController {
 
@@ -93,7 +95,8 @@ public class IndexController {
      * @return
      */
     @GetMapping(value = "/address-pool")
-    public String addressPool() {
+    public String addressPool(Model model) {
+        model.addAttribute("url",Constant.URL_ADDRESS_LIST);
         return "/addresspool/address-pool";
     }
     /**
@@ -101,7 +104,10 @@ public class IndexController {
      * @return
      */
     @GetMapping(value = "/address-pool-details")
-    public String addressPooldetail() {
+    public String addressPooldetail(Model model, HttpServletRequest request) {
+        model.addAttribute("url",Constant.URL_ADDRESS_POOL_DETAILS);
+        model.addAttribute("wasType",request.getParameter("wasType"));
+        model.addAttribute("wasSource",request.getParameter("wasSource"));
         return "/addresspool/address-pool-details";
     }
     /**

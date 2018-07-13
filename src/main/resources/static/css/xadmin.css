@@ -169,6 +169,10 @@ xblock{
 .x-red{
     color: red;
 }
+.x-blue{
+    color: blue;
+    cursor: pointer;
+}
 .x-a{
     color: #1AA093;
 }

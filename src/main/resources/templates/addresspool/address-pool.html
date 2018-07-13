@@ -29,7 +29,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">币种简称:</label>
                     <div class="layui-input-inline">
-                        <select id="wasType" lay-filter="aihao">
+                        <select id="wasType" lay-filter="aihao" name="wasType">
                             <option value="" selected>全部</option>
                             <option value="btc">btc</option>
                             <option value="eth">eth</option>
@@ -39,7 +39,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">业务系统:</label>
                     <div class="layui-input-inline">
-                        <select id="wasSource" lay-filter="aihao">
+                        <select id="wasSource" lay-filter="aihao" name="wasSource">
                             <option value="" selected>全部</option>
                             <option value="pizza">pizza</option>
                             <option value="bita">bita</option>
@@ -49,7 +49,7 @@
                 <div class="layui-inline">
                     <label class="layui-form-label">剩余预警值:</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="wasSource" id="wasConfigNum" autocomplete="off" class="layui-input" placeholder="请输入剩余预警值">
+                        <input type="text" name="wasConfigNum" id="wasConfigNum" autocomplete="off" class="layui-input" placeholder="请输入剩余预警值">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -57,12 +57,12 @@
                         <button type="button" class="layui-btn layui-btn-normal" onclick="queryInfo()">搜索</button>
                     </div>
                 </div>
+                <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>
             </div>
         </form>
     </div>
     <xblock>
         <button class="layui-btn" onclick="add(1)"><i class="layui-icon"></i>新增</button>
-        <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>
     </xblock>
     <table class="layui-table" id="demo" lay-filter="demo">
 
@@ -302,9 +302,6 @@
                     layer.msg("百分比范围1%-99%",{icon:2});
                     return;
                 }
-                if(obj == 2) {
-                    menuType = $("#menu_type").val();
-                }
                 layer.load(2,{shade:0.3});
                 $.ajax({
                     url:URL+"v1/sysconfig/add",
@@ -390,7 +387,7 @@
                         wasType:wasType,
                         wasSource:wasSource,
                         wasNum:wasNum,
-                        wasPercent:"0."+wasPercent,
+                        wasPercent:wasPercent,
                         wasRemark:wasRemark
                     },
                     success:function(data){
@@ -431,7 +428,7 @@
                 console.log(data);
                 if(data.code == 200) {
                     $("#uwasNum").val(data.data.wasNum);
-                    $("#uwasPercent").val(data.data.wasPercent*100);
+                    $("#uwasPercent").val(data.data.wasPercent);
                     $("#uwasRemark").val(data.data.wasRemark);
                     $("#uwasTypes").find("option[value='"+wasType+"']").attr("selected",true);
                     $("#uwasSources").find("option[value='"+wasSource+"']").attr("selected",true);

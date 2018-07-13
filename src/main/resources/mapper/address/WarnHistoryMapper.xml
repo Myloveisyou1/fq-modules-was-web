@@ -13,6 +13,8 @@
                     <result property="wasAddressSurplusCount" column="was_address_surplus_count"/>
                     <result property="wasAddressRate" column="was_address_rate"/>
                     <result property="wasWarnNum" column="was_warn_num"/>
+                    <result property="wasWarnEmail" column="was_warn_email"/>
+                    <result property="wasWarnTel" column="was_warn_tel"/>
                     <result property="wasWarnTime" column="was_warn_time"/>
             </resultMap>
 
@@ -26,6 +28,8 @@
                 was_address_surplus_count,
                 was_address_rate,
                 was_warn_num,
+                was_warn_email,
+                was_warn_tel,
                 was_warn_time
             </sql>
 
@@ -38,6 +42,8 @@
                 was_address_surplus_count,
                 was_address_rate,
                 was_warn_num,
+                was_warn_email,
+                was_warn_tel,
                 was_warn_time
             </sql>
 
@@ -60,6 +66,8 @@
                         #{wasAddressSurplusCount},
                         #{wasAddressRate},
                         #{wasWarnNum},
+                        #{wasWarnEmail},
+                        #{wasWarnTel},
                         #{wasWarnTime}
                   )
     </insert>
@@ -75,6 +83,8 @@
                             <if test="wasAddressSurplusCount != null and wasAddressSurplusCount != ''">was_address_surplus_count = #{wasAddressSurplusCount},</if>
                             <if test="wasAddressRate != null and wasAddressRate != ''">was_address_rate = #{wasAddressRate},</if>
                             <if test="wasWarnNum != null and wasWarnNum != ''">was_warn_num = #{wasWarnNum},</if>
+                            <if test="wasWarnEmail != null and wasWarnEmail != ''">was_warn_email = #{wasWarnEmail},</if>
+                            <if test="wasWarnTel != null and wasWarnTel != ''">was_warn_tel = #{wasWarnTel},</if>
                             <if test="wasWarnTime != null and wasWarnTime != ''">was_warn_time = #{wasWarnTime}</if>
                     </trim>
         where was_id = #{wasId}
@@ -122,6 +132,12 @@
         <if test="bean.wasWarnNum != null and bean.wasWarnNum.trim() != ''">
             and was_warn_num = #{bean.wasWarnNum}
         </if>
+        <if test="bean.wasWarnEmail != null and bean.wasWarnEmail.trim() != ''">
+            and was_warn_email = #{bean.wasWarnEmail}
+        </if>
+        <if test="bean.wasWarnTel != null and bean.wasWarnTel.trim() != ''">
+            and was_warn_tel = #{bean.wasWarnTel}
+        </if>
         <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
             and was_warn_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_warn_time &lt;= concat(#{bean.endTime},' 23:59:59')
         </if>
@@ -154,6 +170,12 @@
         </if>
                 <if test="bean.wasWarnNum != null and bean.wasWarnNum.trim() != ''">
             and was_warn_num = #{bean.wasWarnNum}
+        </if>
+        <if test="bean.wasWarnEmail != null and bean.wasWarnEmail.trim() != ''">
+            and was_warn_email = #{bean.wasWarnEmail}
+        </if>
+        <if test="bean.wasWarnTel != null and bean.wasWarnTel.trim() != ''">
+            and was_warn_tel = #{bean.wasWarnTel}
         </if>
         <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
             and was_warn_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_warn_time &lt;= concat(#{bean.endTime},' 23:59:59')

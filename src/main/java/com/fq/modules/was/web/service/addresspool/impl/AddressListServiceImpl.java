@@ -1,9 +1,11 @@
 package com.fq.modules.was.web.service.addresspool.impl;
 
+import com.fq.modules.was.web.entity.datadictionary.WasDataDictionary;
 import com.fq.modules.was.web.entity.logs.SysLog;
 import com.fq.modules.was.web.mapper.setting.SysConfigMapper;
 import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
 import com.fq.modules.was.web.utils.CommonUtil;
+import com.fq.modules.was.web.utils.ExcelUtils;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -30,9 +32,6 @@ public class AddressListServiceImpl extends BaseServiceImpl implements AddressLi
     @Autowired
     private SysLogMapper sysLogMapper;
 
-    @Autowired
-    private SysConfigMapper sysConfigMapper;
-
     /**
     * 分页查询数据
     * @param params
@@ -51,20 +50,20 @@ public class AddressListServiceImpl extends BaseServiceImpl implements AddressLi
         long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
         pages.setTotalPage(Integer.valueOf(totalPage + ""));
 
+        list = getResultOfList(list);
+        map.put("result", list);//数据信息
+        map.put("pages", pages);//分页信息
+
+        return map;
+    }
+
+    public List<Map<String,Object>> getResultOfList(List<Map<String,Object>> list) {
+
         //处理返回值
         if (CommonUtil.isNotEmpty(list)) {
             for (Map temp : list) {
                 String wasType = temp.get("wasType").toString();
                 String wasSource = temp.get("wasSource").toString();
-                //查询对应币种的剩余预警值
-                /*Map<String,Object> wasConfig = sysConfigMapper.selectByTypeAndSource(wasType,wasSource);
-                if (CommonUtil.isNotEmpty(wasConfig)) {
-                    temp.put("wasWarnNum",wasConfig.get("wasNum"));
-                    temp.put("wasRemark",wasConfig.get("wasRemark"));
-                } else {
-                    temp.put("wasWarnNum","0");
-                    temp.put("wasRemark","");
-                }*/
                 //计算未使用数量和对应的使用比例
                 Map<String,Object> wasAddress = addressListMapper.queryCountByWasTypeAndSource(wasType,wasSource);
                 if (CommonUtil.isNotEmpty(wasAddress)) {
@@ -92,13 +91,11 @@ public class AddressListServiceImpl extends BaseServiceImpl implements AddressLi
                 } else {
                     temp.put("warnStatus",false);
                 }
-                temp.put("wasWarnNum",temp.get("wasNum")+"或者"+String.format("%.0f",Double.valueOf(temp.get("wasPercent").toString())*100)+"%");
+                temp.put("wasWarnNum",temp.get("wasNum")+"或者"+temp.get("wasPercent").toString()+"%");
             }
         }
-        map.put("result", list);//数据信息
-        map.put("pages", pages);//分页信息
 
-        return map;
+        return list;
     }
 
     /**
@@ -186,6 +183,22 @@ public class AddressListServiceImpl extends BaseServiceImpl implements AddressLi
         long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
         pages.setTotalPage(Integer.valueOf(totalPage + ""));
 
+        list = getResultOfDetail(list);
+
+        map.put("result", list);//数据信息
+        map.put("pages", pages);//分页信息
+
+        return map;
+    }
+
+    /**
+     * 处理明细数据
+     * @param list
+     * @return
+     * @throws ParseException
+     */
+    private List<Map<String,Object>> getResultOfDetail(List<Map<String,Object>> list) throws ParseException {
+
         if (CommonUtil.isNotEmpty(list)) {
             for (Map temp : list) {
                 String getTime = temp.get("wasCreateTime").toString();//获取时间
@@ -211,9 +224,105 @@ public class AddressListServiceImpl extends BaseServiceImpl implements AddressLi
             }
         }
 
-        map.put("result", list);//数据信息
-        map.put("pages", pages);//分页信息
+        return list;
+    }
 
-        return map;
+    /**
+     * 导出地址池管理 Excel汇总的信息
+     * @param params
+     * @return
+     */
+    @Override
+    public String findAll(Map<String, Object> params) {
+
+        String path = "";
+        String[] title = {"序号","币种类型","对应业务系统","地址总数","剩余未使用数量","使用比例","剩余预警值","预警状态","备注"};
+        String excelName = "地址池管理";
+        List<Map<String, Object>> list = addressListMapper.findAll(params);
+        list = getResultOfList(list);
+        if (CommonUtil.isNotEmpty(list)) {
+            String[][] content = new String[list.size()][title.length];
+            Map<String,Object> map = new HashMap<>();
+            map.put("time", DatesUtils.time());
+            //处理返回值
+            for(int i=0;i<list.size();i++){
+                Map<String,Object> temp = list.get(i);
+                content[i][0] = i+1+"";
+                content[i][1] = temp.get("wasType").toString();
+                content[i][2] = temp.get("wasSource").toString();
+                content[i][3] = temp.get("totalCount").toString();
+                content[i][4] = temp.get("surplusCount").toString();
+                content[i][5] = temp.get("rate").toString();
+                content[i][6] = temp.get("wasWarnNum").toString();
+                String warnStatus = temp.get("warnStatus").toString();
+                if ("true".equals(warnStatus)) {
+                    content[i][7] = "已预警";
+                } else if ("false".equals(warnStatus)) {
+                    content[i][7] = "未预警";
+                }
+                content[i][8] = temp.get("wasRemark").toString();
+            }
+            path = ExcelUtils.excel(map,title,excelName,content);
+
+
+            //记录日志
+            sysLogMapper.addSysLog(new SysLog(3,getUserName(),getUserName()+"在"+DatesUtils.time()+"导出地址池管理列表数据到Excel","导出Excel成功!"));
+
+        }
+        return path;
+    }
+
+    /**
+     * 导出 地址池详情界面  Excel
+     * @param params
+     * @return
+     */
+    @Override
+    public String findAllDetails(Map<String, Object> params) throws ParseException {
+
+        String path = "";
+        String[] title = {"序号","币种类型","对应业务系统","充值地址","地址有效期(天)","地址监控期(天)","获取时间","到期时间","监控到期时间","地址到账数量","状态"};
+        String excelName = "地址池明细列表";
+        List<Map<String, Object>> list = addressListMapper.findAllDetails(params);
+        list = getResultOfDetail(list);
+        if (CommonUtil.isNotEmpty(list)) {
+            String[][] content = new String[list.size()][title.length];
+            Map<String,Object> map = new HashMap<>();
+            map.put("time", DatesUtils.time());
+            //处理返回值
+            for(int i=0;i<list.size();i++){
+                Map<String,Object> temp = list.get(i);
+                content[i][0] = i+1+"";
+                content[i][1] = temp.get("wasType").toString();
+                content[i][2] = temp.get("wasSource").toString();
+                content[i][3] = temp.get("wasAddress").toString();
+                content[i][4] = temp.get("wasExpireTime").toString();
+                content[i][5] = temp.get("wasMonitorTime").toString();
+                content[i][6] = temp.get("wasCreateTime").toString();
+                content[i][7] = temp.get("expireTime").toString();
+                content[i][8] = temp.get("warnTime").toString();
+                content[i][9] = temp.get("acceptAmount").toString();
+                content[i][10] = temp.get("status").toString();
+            }
+            path = ExcelUtils.excel(map,title,excelName,content);
+
+            //记录日志
+            sysLogMapper.addSysLog(new SysLog(3,getUserName(),getUserName()+"在"+DatesUtils.time()+"导出地址池明细列表数据到Excel","导出Excel成功!"));
+
+        }
+        return path;
+    }
+
+    /**
+     * 查询需要预警的币种
+     * @param map
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> findWarnAddressList(Map<String, Object> map) {
+
+        List<Map<String, Object>> list = addressListMapper.findAll(map);
+
+        return getResultOfList(list);
     }
 }

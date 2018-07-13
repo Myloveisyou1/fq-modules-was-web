@@ -68,18 +68,14 @@
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label"><span class="x-red">*</span>提醒邮箱</label>
-                <div class="layui-input-inline">
-                    <textarea type="text" id="dwasEmail" required="" lay-verify="pass"
-                              autocomplete="off" class="layui-input" ></textarea>
+                <div class="layui-input-inline" id="demail">
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label"><span class="x-red">*</span>提醒手机号</label>
-                <div class="layui-input-inline">
-                    <textarea type="text" id="dwasTel" required="" lay-verify="pass"
-                              autocomplete="off" class="layui-input" ></textarea>
+                <div class="layui-input-inline" id="dphone">
                 </div>
             </div>
         </div>
@@ -95,7 +91,7 @@
     }}
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="findEmailAndTel('{{d.wasType}}','{{d.wasSource}}')">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="findEmailAndTel('{{d.wasId}}')">查看</a>
 </script>
 <script>
     var result = "";
@@ -197,8 +193,8 @@
         });
     }
 
-    function findEmailAndTel(wasType,wasSource) {
-        findById(wasType,wasSource);
+    function findEmailAndTel(wasId) {
+        findById(wasId);
         layer.open({
             type:1,
             title: '提醒用户详情',
@@ -207,19 +203,37 @@
         });
     }
 
-    function findById(wasType,wasSource) {
+    function findById(wasId) {
         $.ajax({
-            url:URL+"v1/warnrule/selectByTypeAndSource/"+wasType+"/"+wasSource,
+            url:URL+"v1/warnhistory/info/"+wasId,
             type:"get",
             dataType:"json",
             success:function(data){
                 console.log(data);
                 if(data.code == 200) {
-                    $("#dwasEmail").val(data.data.wasWarnEmail);
-                    $("#dwasTel").val(data.data.wasWarnTel);
-                    $("#dwasTypes").find("option[value='"+data.data.wasType+"']").attr("selected",true);
-                    $("#dwasSources").find("option[value='"+data.data.wasSource+"']").attr("selected",true);
-                    form.render("select","selFilter");
+                    // $("#dwasEmail").val(data.data.wasWarnEmail);
+                    // $("#dwasTel").val(data.data.wasWarnTel);
+
+                    //先移除存在的
+                    $(".email").parent().remove();
+                    $(".tel").parent().remove();
+                    //邮箱+电话
+                    var emails = data.data.wasWarnEmail.split(",");
+                    var tels = data.data.wasWarnTel.split(",");
+
+                    for (var i=0;i<emails.length;i++) {
+                        var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
+                            // '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
+                            '<div class="email" id="childEmail">'+emails[i]+'</div></div>';
+                        $("#demail").append(html);
+                    }
+                    for (var i=0;i<tels.length;i++) {
+                        var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
+                            // '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
+                            '<div class="tel" id="childTel">'+tels[i]+'</div></div>';
+                        $("#dphone").append(html);
+                    }
+
                 } else if (data.code == 209){
                     parent.layer.msg(data.msg,{icon:2});
                     top.location.href = URL+"login";

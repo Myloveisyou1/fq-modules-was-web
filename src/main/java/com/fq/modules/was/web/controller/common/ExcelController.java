@@ -1,7 +1,9 @@
 package com.fq.modules.was.web.controller.common;
 
 import com.fq.modules.was.web.entity.datadictionary.WasDataDictionary;
+import com.fq.modules.was.web.service.addresspool.AddressListService;
 import com.fq.modules.was.web.service.datadictionary.WasDataDictionaryService;
+import com.fq.modules.was.web.vo.AddressVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +26,15 @@ public class ExcelController {
 
     @Autowired
     private WasDataDictionaryService service;
+    @Autowired
+    private AddressListService addressListService;
 
+    /**
+     * 导出数字货币管理模块的Excel
+     * @param wasDataDictionary
+     * @return
+     * @throws IOException
+     */
     @RequestMapping("/toExcel")
     public ResponseEntity<InputStreamResource> toExcel(WasDataDictionary wasDataDictionary) throws IOException {
 
@@ -35,18 +46,18 @@ public class ExcelController {
 
     /**
      * 导出地址池列表的Excel
-     * @param addressList
+     * @param vo
      * @return
      * @throws IOException
      */
-//    @RequestMapping("/toExcelForAddressList")
-//    public ResponseEntity<InputStreamResource> toExcelForAddressList(AddressList addressList) throws IOException {
-//
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("bean",addressList);
-//        path = service.findAll(map);
-//        return downLoad();
-//    }
+    @RequestMapping("/toExcelForAddressList")
+    public ResponseEntity<InputStreamResource> toExcelForAddressList(AddressVo vo) throws IOException {
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("bean",vo);
+        path = addressListService.findAll(map);
+        return downLoad();
+    }
 
     /**
      * 导出地址池明细列表的Excel
@@ -54,14 +65,14 @@ public class ExcelController {
      * @return
      * @throws IOException
      */
-//    @RequestMapping("/toExcelForAddress")
-//    public ResponseEntity<InputStreamResource> toExcelForAddress(WasAddress wasAddress) throws IOException {
-//
-//        Map<String,Object> map = new HashMap<>();
-//        map.put("bean",wasAddress);
-//        path = service.findAll(map);
-//        return downLoad();
-//    }
+    @RequestMapping("/toExcelForAddressDetails")
+    public ResponseEntity<InputStreamResource> toExcelForAddress(AddressVo vo) throws IOException, ParseException {
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("bean",vo);
+        path = addressListService.findAllDetails(map);
+        return downLoad();
+    }
 
 
     public ResponseEntity<InputStreamResource> downLoad() throws IOException {

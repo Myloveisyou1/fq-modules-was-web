@@ -51,6 +51,15 @@ public class WarnHistory{
      */
     private Date wasWarnTime;
 
+    /**
+     * 提醒邮箱
+     */
+    private String wasWarnEmail;
+    /**
+     * 提醒电话
+     */
+    private String wasWarnTel;
+
     private String startTime;
 
     private String endTime;

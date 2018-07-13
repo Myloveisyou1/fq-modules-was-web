@@ -33,9 +33,9 @@ public class SysConfig{
 	 */
 	private Integer wasNum;
 	/**
-	 * 小数 例如0.31
+	 * 小数 例如31
 	 */
-	private BigDecimal wasPercent;
+	private Integer wasPercent;
 	/**
 	 * 来源系统，比如Pizza（P
 	 */

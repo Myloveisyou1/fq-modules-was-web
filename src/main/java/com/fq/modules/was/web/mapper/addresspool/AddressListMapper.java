@@ -38,4 +38,10 @@ public interface AddressListMapper {
     List<Map<String,Object>> queryPageDetailsList(Map<String,Object> params);
 
     Long queryPageDetailsCount(Map<String,Object> params);
+
+    /***导出地址池管理的Excel*/
+    List<Map<String,Object>> findAll(Map<String,Object> params);
+
+    /***导出地址池明细的Excel*/
+    List<Map<String,Object>> findAllDetails(Map<String,Object> params);
 }
