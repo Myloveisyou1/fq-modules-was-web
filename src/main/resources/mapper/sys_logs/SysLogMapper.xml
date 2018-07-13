@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.logs.SysLogMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.logs.SysLog" id="sysLogResultMap">
+        <result property="wasId" column="was_id"/>
+        <result property="wasLogType" column="was_log_type"/>
+        <result property="wasLogOperator" column="was_log_operator"/>
+        <result property="wasLogContent" column="was_log_content"/>
+        <result property="wasLogResult" column="was_log_result"/>
+        <result property="wasLogTime" column="was_log_time"/>
+    </resultMap>
+
+    <!--所有的查询字段,各自对应-->
+    <sql id="sql_for_all">
+        was_id,
+        was_log_type,
+        was_log_operator,
+        was_log_content,
+        was_log_result,
+        was_log_time
+    </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+        was_log_type,
+        was_log_operator,
+        was_log_content,
+        was_log_result,
+        was_log_time
+    </sql>
+
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addSysLog" parameterType="com.fq.modules.was.web.entity.logs.SysLog" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_sys_log(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+            #{wasLogType},
+            #{wasLogOperator},
+            #{wasLogContent},
+            #{wasLogResult},
+            #{wasLogTime}
+        )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdateSysLog" parameterType="com.fq.modules.was.web.entity.logs.SysLog">
+        update was_sys_log
+        <trim prefix="set" suffixOverrides=",">
+            <if test="wasLogType != null and wasLogType != ''">was_log_type = #{wasLogType},</if>
+            <if test="wasLogOperator != null and wasLogOperator != ''">was_log_operator = #{wasLogOperator},</if>
+            <if test="wasLogContent != null and wasLogContent != ''">was_log_content = #{wasLogContent},</if>
+            <if test="wasLogResult != null and wasLogResult != ''">was_log_result = #{wasLogResult},</if>
+            <if test="wasLogTime != null and wasLogTime != ''">was_log_time = #{wasLogTime}</if>
+        </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deleteSysLog" parameterType="java.lang.Long">
+        delete from was_sys_log where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="java.lang.Long" resultMap="sysLogResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_sys_log where was_id = #{wasId}
+    </select>
+
+    <select id="pageQueryList" parameterType="java.util.Map" resultMap="sysLogResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_sys_log
+        where 1=1
+            <if test="bean.wasId != null">
+                and was_id = #{bean.wasId}
+            </if>
+            <if test="bean.wasLogType != null">
+                and was_log_type = #{bean.wasLogType}
+            </if>
+            <if test="bean.wasLogOperator != null and bean.wasLogOperator.trim() != ''">
+                and was_log_operator = #{bean.wasLogOperator}
+            </if>
+            <if test="bean.wasLogContent != null and bean.wasLogContent.trim() != ''">
+                and was_log_content like concat('%', #{bean.wasLogContent}, '%')
+            </if>
+            <if test="bean.wasLogResult != null and bean.wasLogResult.trim() != ''">
+                and was_log_result like concat('%', #{bean.wasLogResult}, '%')
+            </if>
+            <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
+                and was_log_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_log_time &lt;= concat(#{bean.endTime},' 23:59:59')
+            </if>
+                order by was_id desc
+        <include refid="limited"/>
+    </select>
+
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from was_sys_log where 1=1
+            <if test="bean.wasId != null">
+                and was_id = #{bean.wasId}
+            </if>
+            <if test="bean.wasLogType != null">
+                and was_log_type = #{bean.wasLogType}
+            </if>
+            <if test="bean.wasLogOperator != null and bean.wasLogOperator.trim() != ''">
+                and was_log_operator = #{bean.wasLogOperator}
+            </if>
+            <if test="bean.wasLogContent != null and bean.wasLogContent.trim() != ''">
+                and was_log_content like concat('%', #{bean.wasLogContent}, '%')
+            </if>
+            <if test="bean.wasLogResult != null and bean.wasLogResult.trim() != ''">
+                and was_log_result like concat('%', #{bean.wasLogResult}, '%')
+            </if>
+            <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
+                and was_log_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_log_time &lt;= concat(#{bean.endTime},' 23:59:59')
+            </if>
+    </select>
+
+</mapper>

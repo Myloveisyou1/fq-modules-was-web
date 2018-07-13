@@ -1,8 +1,8 @@
 package com.fq.modules.was.web.utils;
 
 
-import com.fq.modules.was.web.entity.Menu;
-import com.fq.modules.was.web.entity.MenuList;
+import com.fq.modules.was.web.entity.setting.Menu;
+import com.fq.modules.was.web.entity.setting.MenuList;
 
 import java.util.ArrayList;
 import java.util.List;

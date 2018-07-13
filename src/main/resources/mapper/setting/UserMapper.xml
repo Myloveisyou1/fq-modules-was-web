@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.setting.UserMapper">
+
+    <!--返回结果集-->
+    <resultMap type="com.fq.modules.was.web.entity.setting.User" id="userResultMap">
+        <result property="gid" column="gid"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="tel" column="tel"/>
+        <result property="email" column="email"/>
+        <result property="roleId" column="role_id"/>
+        <result property="roleName" column="role_name"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="loginTime" column="login_time"/>
+        <result property="status" column="status"/>
+        <result property="version" column="version"/>
+    </resultMap>
+
+    <!--所有的查询字段,各自对应-->
+    <sql id="sql_for_all">
+        gid,user_name,password,tel,email,
+        role_id,role_name,create_time,update_time,login_time,
+        status,version
+    </sql>
+
+    <!--根据账号密码查询-->
+    <select id="findByUserNameAndPassword" resultMap="userResultMap">
+      select 
+        <include refid="sql_for_all"/>
+      from
+        was_sys_user
+      where user_name = #{userName}
+        AND password = #{password}
+    </select>
+
+    <!--根据登录名称查询信息-->
+    <select id="findByUserName" resultMap="userResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from
+          was_sys_user
+        where user_name = #{userName}
+    </select>
+
+    <!--查询所有账户,可以根据用户名查询-->
+    <select id="findAllUser" resultMap="userResultMap">
+        select
+        <include refid="sql_for_all"/>
+        from
+        was_sys_user
+        where 1=1
+          <if test="userName != null and userName.trim() != ''">
+              AND user_name like concat('%', #{userName}, '%')
+          </if>
+    </select>
+
+    <!--修改用户信息-->
+    <update id="optUpdateUser" parameterType="com.fq.modules.was.web.entity.setting.User">
+        update was_sys_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="password != null and password != ''">password = #{password},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="roleName != null and roleName != ''">role_name = #{roleId},</if>
+            <if test="updateTime != null and updateTime != ''">update_time = #{updateTime},</if>
+            <if test="loginTime != null and loginTime != ''">login_time = #{loginTime},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="version != null">version = #{version},</if>
+        </trim>
+        where gid = #{gid}
+    </update>
+
+    <!--新增用户-->
+    <insert id="addUser" parameterType="com.fq.modules.was.web.entity.setting.User">
+        insert into was_sys_user(
+        gid,user_name,password,tel,email,
+        role_id,role_name,create_time,update_time,login_time,status,version)
+        values (#{gid},#{userName},#{password},#{tel},#{email},#{roleId},#{roleName},#{createTime},#{updateTime},#{loginTime},#{status},#{version})
+    </insert>
+
+    <!--删除用户-->
+    <delete id="deleteUser" parameterType="java.lang.Long">
+        delete from was_sys_user where gid = #{gid}
+    </delete>
+</mapper>

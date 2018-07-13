@@ -1,15 +1,13 @@
 package com.fq.modules.was.web.interceptor;
 
-import com.fq.modules.was.web.entity.Menu;
-import com.fq.modules.was.web.entity.WasSysLog;
+import com.fq.modules.was.web.entity.setting.Menu;
+import com.fq.modules.was.web.entity.logs.SysLog;
 import com.fq.modules.was.web.enums.ResultEnum;
-import com.fq.modules.was.web.service.LoginService;
-import com.fq.modules.was.web.entity.User;
-import com.fq.modules.was.web.enums.ResultEnum;
+import com.fq.modules.was.web.entity.setting.User;
 import com.fq.modules.was.web.exception.WasWebException;
-import com.fq.modules.was.web.service.LoginService;
-import com.fq.modules.was.web.service.MenuService;
-import com.fq.modules.was.web.service.WasSysLogService;
+import com.fq.modules.was.web.service.login.LoginService;
+import com.fq.modules.was.web.service.logs.SysLogService;
+import com.fq.modules.was.web.service.setting.MenuService;
 import com.fq.modules.was.web.utils.CommonUtil;
 import com.fq.modules.was.web.utils.DatesUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +32,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
     private MenuService menuService;
     @Autowired
-    private WasSysLogService wasSysLogService;
+    private SysLogService sysLogService;
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
@@ -67,8 +65,8 @@ public class LoginInterceptor implements HandlerInterceptor {
                     String content = user.getUserName()+"在"+DatesUtils.time()+"尝试进行["+menu.getMenuName()+"]操作,因权限不足失败!";
                     String result = "操作失败,权限不足!";
 
-                    WasSysLog wasSysLog = new WasSysLog(2,user.getUserName(),content,result);
-                    wasSysLogService.insert(wasSysLog);
+                    SysLog wasSysLog = new SysLog(2,user.getUserName(),content,result);
+                    sysLogService.insert(wasSysLog);
                 }
                 throw new WasWebException(ResultEnum.NO_PERMISSION);
             }

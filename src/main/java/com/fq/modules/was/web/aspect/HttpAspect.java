@@ -1,5 +1,6 @@
 package com.fq.modules.was.web.aspect;
 
+import com.fq.modules.was.web.utils.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -8,6 +9,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.smartcardio.CommandAPDU;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
@@ -24,7 +26,7 @@ public class HttpAspect {
 //    @Autowired
 //    private LogService logService;
 
-    @Pointcut("execution(public * com.fq.modules.was.web.controller.*.*(..))")
+    @Pointcut("execution(public * com.fq.modules.was.web.controller.*.*.*(..))")
     public void log(){
 
     }
@@ -95,7 +97,11 @@ public class HttpAspect {
     @AfterReturning(returning = "object",pointcut = "log()")
     public void doAfterReturn( Object object){
 
-        String back = object.toString();
+        String back = "";
+        if (CommonUtil.isNotEmpty(object)) {
+           back = object.toString();
+        }
+
 //        Result result = (Result) object;
 //
 //        Logs logs = new Logs();

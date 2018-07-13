@@ -1,0 +1,916 @@
+2018-07-13 09:54:47,206 - Starting WasWebApplication on DESKTOP-8KVBGHI with PID 14296 (started by fengqun in D:\project\个人\fq-modules-was-web)
+2018-07-13 09:54:47,209 - No active profile set, falling back to default profiles: default
+2018-07-13 09:54:47,460 - HV000001: Hibernate Validator 5.3.6.Final
+2018-07-13 09:54:47,508 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 09:54:47 CST 2018]; root of context hierarchy
+2018-07-13 09:54:48,207 - Skipping MapperFactoryBean with name 'addressListMapper' and 'com.fq.modules.was.web.mapper.addresspool.AddressListMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'warnHistoryMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnHistoryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'warnRuleMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnRuleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'wasDataDictionaryMapper' and 'com.fq.modules.was.web.mapper.datadictionary.WasDataDictionaryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'sysLogMapper' and 'com.fq.modules.was.web.mapper.logs.SysLogMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'menuMapper' and 'com.fq.modules.was.web.mapper.setting.MenuMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'projectMapper' and 'com.fq.modules.was.web.mapper.setting.ProjectMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'roleMapper' and 'com.fq.modules.was.web.mapper.setting.RoleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'sysConfigMapper' and 'com.fq.modules.was.web.mapper.setting.SysConfigMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,208 - Skipping MapperFactoryBean with name 'userMapper' and 'com.fq.modules.was.web.mapper.setting.UserMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 09:54:48,209 - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2018-07-13 09:54:49,144 - Tomcat initialized with port(s): 8038 (http)
+2018-07-13 09:54:49,151 - Starting service [Tomcat]
+2018-07-13 09:54:49,152 - Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-07-13 09:54:49,267 - Initializing Spring embedded WebApplicationContext
+2018-07-13 09:54:49,267 - Root WebApplicationContext: initialization completed in 1759 ms
+2018-07-13 09:54:49,455 - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-13 09:54:49,459 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-13 09:54:49,460 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-13 09:54:49,460 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-13 09:54:49,460 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-13 09:54:50,420 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 09:54:47 CST 2018]; root of context hierarchy
+2018-07-13 09:54:50,488 - Mapped "{[/v1/addresslist/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.update(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 09:54:50,489 - Mapped "{[/v1/addresslist/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.list(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 09:54:50,489 - Mapped "{[/v1/addresslist/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.save(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 09:54:50,489 - Mapped "{[/v1/addresslist/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.info(java.lang.Integer)
+2018-07-13 09:54:50,490 - Mapped "{[/v1/addresslist/getDetails]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.getDetails(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages) throws java.text.ParseException
+2018-07-13 09:54:50,490 - Mapped "{[/v1/warnhistory/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.update(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 09:54:50,491 - Mapped "{[/v1/warnhistory/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.list(com.fq.modules.was.web.entity.addresspool.WarnHistory,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 09:54:50,491 - Mapped "{[/v1/warnhistory/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.save(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 09:54:50,491 - Mapped "{[/v1/warnhistory/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.info(java.lang.Integer)
+2018-07-13 09:54:50,492 - Mapped "{[/v1/warnrule/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.update(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 09:54:50,492 - Mapped "{[/v1/warnrule/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.list(com.fq.modules.was.web.entity.addresspool.WarnRule,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 09:54:50,492 - Mapped "{[/v1/warnrule/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.save(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 09:54:50,492 - Mapped "{[/v1/warnrule/selectByTypeAndSource/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.String,java.lang.String)
+2018-07-13 09:54:50,492 - Mapped "{[/v1/warnrule/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.Integer)
+2018-07-13 09:54:50,493 - Mapped "{[/excel/toExcel]}" onto public org.springframework.http.ResponseEntity<org.springframework.core.io.InputStreamResource> com.fq.modules.was.web.controller.common.ExcelController.toExcel(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary) throws java.io.IOException
+2018-07-13 09:54:50,500 - Mapped "{[/errorpage/500],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.error()
+2018-07-13 09:54:50,500 - Mapped "{[/was-sys-log],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.log()
+2018-07-13 09:54:50,500 - Mapped "{[/user-info],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userInfo()
+2018-07-13 09:54:50,500 - Mapped "{[/common/left],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.left()
+2018-07-13 09:54:50,500 - Mapped "{[/was-sys-config],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.config()
+2018-07-13 09:54:50,500 - Mapped "{[/common/top],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.top()
+2018-07-13 09:54:50,500 - Mapped "{[/user],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.user()
+2018-07-13 09:54:50,500 - Mapped "{[/common/footer],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.footer()
+2018-07-13 09:54:50,501 - Mapped "{[/role],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.role()
+2018-07-13 09:54:50,501 - Mapped "{[/home],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.home()
+2018-07-13 09:54:50,501 - Mapped "{[/generator],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.generator()
+2018-07-13 09:54:50,501 - Mapped "{[/address-pool],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPool()
+2018-07-13 09:54:50,501 - Mapped "{[/number-coin-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoinAdd()
+2018-07-13 09:54:50,501 - Mapped "{[/recharge-control],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.rechargeControl()
+2018-07-13 09:54:50,501 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.login()
+2018-07-13 09:54:50,501 - Mapped "{[/number-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoin(org.springframework.ui.Model)
+2018-07-13 09:54:50,501 - Mapped "{[/welcome],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.welcome()
+2018-07-13 09:54:50,501 - Mapped "{[/control-waring],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.controlWaring()
+2018-07-13 09:54:50,501 - Mapped "{[/withdraw-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.withdrawCoin()
+2018-07-13 09:54:50,502 - Mapped "{[/user-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userAdd()
+2018-07-13 09:54:50,502 - Mapped "{[/icon],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.icon()
+2018-07-13 09:54:50,502 - Mapped "{[/errorpage/404],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.notFound()
+2018-07-13 09:54:50,502 - Mapped "{[/menu],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.menu()
+2018-07-13 09:54:50,502 - Mapped "{[/role-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.roleAdd()
+2018-07-13 09:54:50,502 - Mapped "{[/address-warning-history],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningHistory()
+2018-07-13 09:54:50,502 - Mapped "{[/address-pool-details],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPooldetail()
+2018-07-13 09:54:50,505 - Mapped "{[/address-warning-rule],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningRule()
+2018-07-13 09:54:50,509 - Mapped "{[/generator/wasdatadictionary/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.update(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary)
+2018-07-13 09:54:50,511 - Mapped "{[/generator/wasdatadictionary/delete]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.delete(java.lang.Integer[])
+2018-07-13 09:54:50,511 - Mapped "{[/generator/wasdatadictionary/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.list(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 09:54:50,511 - Mapped "{[/generator/wasdatadictionary/saveOrUpdate]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.save(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,java.lang.String)
+2018-07-13 09:54:50,511 - Mapped "{[/generator/wasdatadictionary/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.info(java.lang.Integer)
+2018-07-13 09:54:50,513 - Mapped "{[/generator/wasdatadictionary/getNewHeight]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.getNewHeight(java.lang.String)
+2018-07-13 09:54:50,513 - Mapped "{[/generator/wasdatadictionary/disabledAll]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.disabledAll(java.lang.String)
+2018-07-13 09:54:50,516 - Mapped "{[/signIn],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.login(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String)
+2018-07-13 09:54:50,516 - Mapped "{[/signOut],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.loginOut(javax.servlet.http.HttpServletRequest)
+2018-07-13 09:54:50,517 - Mapped "{[/v1/syslog/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.update(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 09:54:50,517 - Mapped "{[/v1/syslog/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.list(com.fq.modules.was.web.entity.logs.SysLog,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 09:54:50,517 - Mapped "{[/v1/syslog/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.save(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 09:54:50,517 - Mapped "{[/v1/syslog/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.info(java.lang.Long)
+2018-07-13 09:54:50,520 - Mapped "{[/menu/findById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findById(java.lang.Long)
+2018-07-13 09:54:50,521 - Mapped "{[/menu/delMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.delMenu(java.lang.Long)
+2018-07-13 09:54:50,521 - Mapped "{[/menu/findMenuByRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole(java.lang.Long)
+2018-07-13 09:54:50,521 - Mapped "{[/menu/findAllMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findAllMenu()
+2018-07-13 09:54:50,522 - Mapped "{[/menu/addIcon],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addIcon(java.lang.String,java.lang.String)
+2018-07-13 09:54:50,522 - Mapped "{[/menu/findIconList],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findIconList()
+2018-07-13 09:54:50,522 - Mapped "{[/menu/addMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 09:54:50,522 - Mapped "{[/menu/editMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.editMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 09:54:50,523 - Mapped "{[/menu/findChildMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findChildMenu(java.lang.String)
+2018-07-13 09:54:50,524 - Mapped "{[/project/deleteProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.deleteProject(java.lang.Long)
+2018-07-13 09:54:50,524 - Mapped "{[/project/addProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.addProject(java.lang.String,java.lang.String)
+2018-07-13 09:54:50,524 - Mapped "{[/project/updateProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.updateProject(com.fq.modules.was.web.entity.setting.Project)
+2018-07-13 09:54:50,524 - Mapped "{[/project/findAllProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.findAllProject(java.lang.String)
+2018-07-13 09:54:50,526 - Mapped "{[/role/findAllRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findAllRole(java.lang.String)
+2018-07-13 09:54:50,526 - Mapped "{[/role/findRoleById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findRoleById(java.lang.Long)
+2018-07-13 09:54:50,526 - Mapped "{[/role/updateRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRole(com.fq.modules.was.web.entity.setting.Role)
+2018-07-13 09:54:50,526 - Mapped "{[/role/addRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.addRole(com.fq.modules.was.web.entity.setting.Role,java.lang.String)
+2018-07-13 09:54:50,527 - Mapped "{[/role/updateRoleMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRomeMenu(com.fq.modules.was.web.entity.setting.Role,java.lang.String,java.lang.String)
+2018-07-13 09:54:50,527 - Mapped "{[/role/deleteRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.deleteRole(java.lang.Long)
+2018-07-13 09:54:50,528 - Mapped "{[/v1/sysconfig/add]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.add(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 09:54:50,528 - Mapped "{[/v1/sysconfig/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.update(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 09:54:50,528 - Mapped "{[/v1/sysconfig/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.list(com.fq.modules.was.web.entity.setting.SysConfig,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 09:54:50,528 - Mapped "{[/v1/sysconfig/info/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.info(java.lang.String,java.lang.String)
+2018-07-13 09:54:50,529 - Mapped "{[/sys/generator/list]}" onto public com.fq.modules.was.web.utils.R com.fq.modules.was.web.controller.setting.SysGeneratorController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-13 09:54:50,529 - Mapped "{[/sys/generator/code]}" onto public void com.fq.modules.was.web.controller.setting.SysGeneratorController.code(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2018-07-13 09:54:50,531 - Mapped "{[/user/addUser],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.addUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 09:54:50,531 - Mapped "{[/user/updatePassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updatePassword(java.lang.String,java.lang.String)
+2018-07-13 09:54:50,531 - Mapped "{[/user/findUserByName],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findUserByName(java.lang.String)
+2018-07-13 09:54:50,531 - Mapped "{[/user/findAllUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findAllUser(java.lang.String)
+2018-07-13 09:54:50,532 - Mapped "{[/user/resetPassword],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.resetPassword(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 09:54:50,532 - Mapped "{[/user/checkPassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.checkPassword(java.lang.String,java.lang.String)
+2018-07-13 09:54:50,533 - Mapped "{[/user/deleteUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.deleteUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 09:54:50,533 - Mapped "{[/user/updateUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updateUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 09:54:50,535 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-13 09:54:50,535 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-13 09:54:50,578 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 09:54:50,578 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 09:54:50,597 - Detected @ExceptionHandler methods in exceptionHandle
+2018-07-13 09:54:50,620 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 09:54:51,254 - Registering beans for JMX exposure on startup
+2018-07-13 09:54:51,269 - Initializing ProtocolHandler ["http-nio-8038"]
+2018-07-13 09:54:51,279 - Starting ProtocolHandler ["http-nio-8038"]
+2018-07-13 09:54:51,290 - Using a shared selector for servlet write/read
+2018-07-13 09:54:51,305 - Tomcat started on port(s): 8038 (http)
+2018-07-13 09:54:51,309 - Started WasWebApplication in 4.95 seconds (JVM running for 6.026)
+2018-07-13 09:54:55,092 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-13 09:54:55,093 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-13 09:54:55,125 - FrameworkServlet 'dispatcherServlet': initialization completed in 32 ms
+2018-07-13 09:54:55,140 - ===========进入拦截器==============
+2018-07-13 09:54:55,187 - [THYMELEAF] INITIALIZING TEMPLATE ENGINE
+2018-07-13 09:54:55,236 - [THYMELEAF] INITIALIZING TEMPLATE RESOLVER: org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+2018-07-13 09:54:55,236 - [THYMELEAF] TEMPLATE RESOLVER INITIALIZED OK
+2018-07-13 09:54:55,236 - [THYMELEAF] INITIALIZING MESSAGE RESOLVER: org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+2018-07-13 09:54:55,236 - [THYMELEAF] MESSAGE RESOLVER INITIALIZED OK
+2018-07-13 09:54:55,239 - [THYMELEAF] TEMPLATE ENGINE CONFIGURATION:
+[THYMELEAF] * Cache Factory implementation: org.thymeleaf.cache.StandardCacheManager
+[THYMELEAF] * Template modes:
+[THYMELEAF]     * VALIDXHTML
+[THYMELEAF]     * XHTML
+[THYMELEAF]     * VALIDXML
+[THYMELEAF]     * LEGACYHTML5
+[THYMELEAF]     * HTML5
+[THYMELEAF]     * XML
+[THYMELEAF] * Template resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+[THYMELEAF] * Message resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+[THYMELEAF] * Dialect [1 of 2]: org.thymeleaf.spring4.dialect.SpringStandardDialect
+[THYMELEAF]     * Prefix: "th"
+[THYMELEAF] * Dialect [2 of 2]: nz.net.ultraq.thymeleaf.LayoutDialect
+[THYMELEAF]     * Prefix: "layout"
+[THYMELEAF] TEMPLATE ENGINE CONFIGURED OK
+2018-07-13 09:54:55,239 - [THYMELEAF] TEMPLATE ENGINE INITIALIZED
+2018-07-13 09:54:57,823 - ===========进入拦截器==============
+2018-07-13 09:54:57,823 - http://localhost:8038/home
+2018-07-13 09:54:57,832 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 09:54:57,878 - ===========进入拦截器==============
+2018-07-13 09:54:57,879 - http://localhost:8038/welcome
+2018-07-13 09:54:57,883 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 09:54:57,898 - ===========进入拦截器==============
+2018-07-13 09:54:57,898 - http://localhost:8038/common/top
+2018-07-13 09:54:57,900 - ===========进入拦截器==============
+2018-07-13 09:54:57,900 - http://localhost:8038/common/left
+2018-07-13 09:54:57,903 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 09:54:57,904 - ===========进入拦截器==============
+2018-07-13 09:54:57,904 - http://localhost:8038/common/footer
+2018-07-13 09:54:57,910 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 09:54:57,911 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 09:54:57,943 - ===========进入拦截器==============
+2018-07-13 09:54:57,943 - http://localhost:8038/menu/findMenuByRole
+2018-07-13 09:54:58,004 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:09,470 - Starting WasWebApplication on DESKTOP-8KVBGHI with PID 12500 (started by fengqun in D:\project\个人\fq-modules-was-web)
+2018-07-13 10:28:09,473 - No active profile set, falling back to default profiles: default
+2018-07-13 10:28:09,648 - HV000001: Hibernate Validator 5.3.6.Final
+2018-07-13 10:28:09,751 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 10:28:09 CST 2018]; root of context hierarchy
+2018-07-13 10:28:10,390 - Skipping MapperFactoryBean with name 'addressListMapper' and 'com.fq.modules.was.web.mapper.addresspool.AddressListMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,390 - Skipping MapperFactoryBean with name 'warnHistoryMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnHistoryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,390 - Skipping MapperFactoryBean with name 'warnRuleMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnRuleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,390 - Skipping MapperFactoryBean with name 'wasDataDictionaryMapper' and 'com.fq.modules.was.web.mapper.datadictionary.WasDataDictionaryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,390 - Skipping MapperFactoryBean with name 'sysLogMapper' and 'com.fq.modules.was.web.mapper.logs.SysLogMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,390 - Skipping MapperFactoryBean with name 'menuMapper' and 'com.fq.modules.was.web.mapper.setting.MenuMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,391 - Skipping MapperFactoryBean with name 'projectMapper' and 'com.fq.modules.was.web.mapper.setting.ProjectMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,391 - Skipping MapperFactoryBean with name 'roleMapper' and 'com.fq.modules.was.web.mapper.setting.RoleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,391 - Skipping MapperFactoryBean with name 'sysConfigMapper' and 'com.fq.modules.was.web.mapper.setting.SysConfigMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,391 - Skipping MapperFactoryBean with name 'userMapper' and 'com.fq.modules.was.web.mapper.setting.UserMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:10,391 - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2018-07-13 10:28:11,336 - Tomcat initialized with port(s): 8038 (http)
+2018-07-13 10:28:11,345 - Starting service [Tomcat]
+2018-07-13 10:28:11,345 - Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-07-13 10:28:11,446 - Initializing Spring embedded WebApplicationContext
+2018-07-13 10:28:11,446 - Root WebApplicationContext: initialization completed in 1695 ms
+2018-07-13 10:28:11,644 - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-13 10:28:11,648 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-13 10:28:11,649 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-13 10:28:11,649 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-13 10:28:11,649 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-13 10:28:12,534 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 10:28:09 CST 2018]; root of context hierarchy
+2018-07-13 10:28:12,596 - Mapped "{[/v1/addresslist/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.update(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 10:28:12,596 - Mapped "{[/v1/addresslist/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.list(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:28:12,597 - Mapped "{[/v1/addresslist/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.save(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 10:28:12,597 - Mapped "{[/v1/addresslist/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.info(java.lang.Integer)
+2018-07-13 10:28:12,597 - Mapped "{[/v1/addresslist/getDetails]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.getDetails(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages) throws java.text.ParseException
+2018-07-13 10:28:12,598 - Mapped "{[/v1/warnhistory/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.update(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 10:28:12,598 - Mapped "{[/v1/warnhistory/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.list(com.fq.modules.was.web.entity.addresspool.WarnHistory,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:28:12,598 - Mapped "{[/v1/warnhistory/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.save(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 10:28:12,598 - Mapped "{[/v1/warnhistory/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.info(java.lang.Integer)
+2018-07-13 10:28:12,599 - Mapped "{[/v1/warnrule/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.update(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 10:28:12,599 - Mapped "{[/v1/warnrule/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.list(com.fq.modules.was.web.entity.addresspool.WarnRule,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:28:12,600 - Mapped "{[/v1/warnrule/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.save(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 10:28:12,600 - Mapped "{[/v1/warnrule/selectByTypeAndSource/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.String,java.lang.String)
+2018-07-13 10:28:12,600 - Mapped "{[/v1/warnrule/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.Integer)
+2018-07-13 10:28:12,600 - Mapped "{[/excel/toExcel]}" onto public org.springframework.http.ResponseEntity<org.springframework.core.io.InputStreamResource> com.fq.modules.was.web.controller.common.ExcelController.toExcel(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary) throws java.io.IOException
+2018-07-13 10:28:12,606 - Mapped "{[/errorpage/500],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.error()
+2018-07-13 10:28:12,606 - Mapped "{[/was-sys-log],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.log()
+2018-07-13 10:28:12,606 - Mapped "{[/user-info],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userInfo()
+2018-07-13 10:28:12,606 - Mapped "{[/common/left],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.left()
+2018-07-13 10:28:12,606 - Mapped "{[/was-sys-config],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.config()
+2018-07-13 10:28:12,606 - Mapped "{[/common/top],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.top()
+2018-07-13 10:28:12,606 - Mapped "{[/user],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.user()
+2018-07-13 10:28:12,606 - Mapped "{[/common/footer],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.footer()
+2018-07-13 10:28:12,607 - Mapped "{[/menu],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.menu()
+2018-07-13 10:28:12,607 - Mapped "{[/role-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.roleAdd()
+2018-07-13 10:28:12,607 - Mapped "{[/generator],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.generator()
+2018-07-13 10:28:12,607 - Mapped "{[/role],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.role()
+2018-07-13 10:28:12,607 - Mapped "{[/home],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.home()
+2018-07-13 10:28:12,607 - Mapped "{[/user-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userAdd()
+2018-07-13 10:28:12,607 - Mapped "{[/number-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoin(org.springframework.ui.Model)
+2018-07-13 10:28:12,607 - Mapped "{[/number-coin-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoinAdd()
+2018-07-13 10:28:12,607 - Mapped "{[/control-waring],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.controlWaring()
+2018-07-13 10:28:12,608 - Mapped "{[/address-pool],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPool()
+2018-07-13 10:28:12,608 - Mapped "{[/recharge-control],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.rechargeControl()
+2018-07-13 10:28:12,608 - Mapped "{[/withdraw-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.withdrawCoin()
+2018-07-13 10:28:12,608 - Mapped "{[/errorpage/404],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.notFound()
+2018-07-13 10:28:12,608 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.login()
+2018-07-13 10:28:12,608 - Mapped "{[/welcome],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.welcome()
+2018-07-13 10:28:12,608 - Mapped "{[/address-pool-details],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPooldetail()
+2018-07-13 10:28:12,608 - Mapped "{[/address-warning-rule],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningRule()
+2018-07-13 10:28:12,608 - Mapped "{[/address-warning-history],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningHistory()
+2018-07-13 10:28:12,608 - Mapped "{[/icon],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.icon()
+2018-07-13 10:28:12,611 - Mapped "{[/generator/wasdatadictionary/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.update(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary)
+2018-07-13 10:28:12,611 - Mapped "{[/generator/wasdatadictionary/delete]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.delete(java.lang.Integer[])
+2018-07-13 10:28:12,611 - Mapped "{[/generator/wasdatadictionary/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.list(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:28:12,611 - Mapped "{[/generator/wasdatadictionary/saveOrUpdate]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.save(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,java.lang.String)
+2018-07-13 10:28:12,611 - Mapped "{[/generator/wasdatadictionary/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.info(java.lang.Integer)
+2018-07-13 10:28:12,612 - Mapped "{[/generator/wasdatadictionary/getNewHeight]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.getNewHeight(java.lang.String)
+2018-07-13 10:28:12,612 - Mapped "{[/generator/wasdatadictionary/disabledAll]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.disabledAll(java.lang.String)
+2018-07-13 10:28:12,613 - Mapped "{[/signIn],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.login(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String)
+2018-07-13 10:28:12,613 - Mapped "{[/signOut],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.loginOut(javax.servlet.http.HttpServletRequest)
+2018-07-13 10:28:12,614 - Mapped "{[/v1/syslog/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.update(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 10:28:12,614 - Mapped "{[/v1/syslog/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.list(com.fq.modules.was.web.entity.logs.SysLog,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:28:12,614 - Mapped "{[/v1/syslog/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.save(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 10:28:12,614 - Mapped "{[/v1/syslog/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.info(java.lang.Long)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/findAllMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findAllMenu()
+2018-07-13 10:28:12,616 - Mapped "{[/menu/delMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.delMenu(java.lang.Long)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/editMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.editMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/addIcon],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addIcon(java.lang.String,java.lang.String)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/findById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findById(java.lang.Long)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/findIconList],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findIconList()
+2018-07-13 10:28:12,616 - Mapped "{[/menu/findChildMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findChildMenu(java.lang.String)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/findMenuByRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole(java.lang.Long)
+2018-07-13 10:28:12,616 - Mapped "{[/menu/addMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 10:28:12,617 - Mapped "{[/project/addProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.addProject(java.lang.String,java.lang.String)
+2018-07-13 10:28:12,617 - Mapped "{[/project/findAllProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.findAllProject(java.lang.String)
+2018-07-13 10:28:12,618 - Mapped "{[/project/updateProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.updateProject(com.fq.modules.was.web.entity.setting.Project)
+2018-07-13 10:28:12,618 - Mapped "{[/project/deleteProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.deleteProject(java.lang.Long)
+2018-07-13 10:28:12,619 - Mapped "{[/role/addRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.addRole(com.fq.modules.was.web.entity.setting.Role,java.lang.String)
+2018-07-13 10:28:12,619 - Mapped "{[/role/findAllRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findAllRole(java.lang.String)
+2018-07-13 10:28:12,619 - Mapped "{[/role/findRoleById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findRoleById(java.lang.Long)
+2018-07-13 10:28:12,619 - Mapped "{[/role/updateRoleMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRomeMenu(com.fq.modules.was.web.entity.setting.Role,java.lang.String,java.lang.String)
+2018-07-13 10:28:12,619 - Mapped "{[/role/deleteRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.deleteRole(java.lang.Long)
+2018-07-13 10:28:12,619 - Mapped "{[/role/updateRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRole(com.fq.modules.was.web.entity.setting.Role)
+2018-07-13 10:28:12,621 - Mapped "{[/v1/sysconfig/add]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.add(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 10:28:12,622 - Mapped "{[/v1/sysconfig/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.update(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 10:28:12,622 - Mapped "{[/v1/sysconfig/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.list(com.fq.modules.was.web.entity.setting.SysConfig,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:28:12,622 - Mapped "{[/v1/sysconfig/info/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.info(java.lang.String,java.lang.String)
+2018-07-13 10:28:12,622 - Mapped "{[/sys/generator/list]}" onto public com.fq.modules.was.web.utils.R com.fq.modules.was.web.controller.setting.SysGeneratorController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-13 10:28:12,623 - Mapped "{[/sys/generator/code]}" onto public void com.fq.modules.was.web.controller.setting.SysGeneratorController.code(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2018-07-13 10:28:12,624 - Mapped "{[/user/addUser],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.addUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:28:12,624 - Mapped "{[/user/checkPassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.checkPassword(java.lang.String,java.lang.String)
+2018-07-13 10:28:12,624 - Mapped "{[/user/findUserByName],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findUserByName(java.lang.String)
+2018-07-13 10:28:12,624 - Mapped "{[/user/findAllUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findAllUser(java.lang.String)
+2018-07-13 10:28:12,624 - Mapped "{[/user/resetPassword],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.resetPassword(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:28:12,625 - Mapped "{[/user/updateUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updateUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:28:12,625 - Mapped "{[/user/updatePassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updatePassword(java.lang.String,java.lang.String)
+2018-07-13 10:28:12,625 - Mapped "{[/user/deleteUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.deleteUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:28:12,627 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-13 10:28:12,627 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-13 10:28:12,670 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:28:12,670 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:28:12,690 - Detected @ExceptionHandler methods in exceptionHandle
+2018-07-13 10:28:12,714 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:28:13,352 - Registering beans for JMX exposure on startup
+2018-07-13 10:28:13,365 - Initializing ProtocolHandler ["http-nio-8038"]
+2018-07-13 10:28:13,375 - Starting ProtocolHandler ["http-nio-8038"]
+2018-07-13 10:28:13,386 - Using a shared selector for servlet write/read
+2018-07-13 10:28:13,401 - Tomcat started on port(s): 8038 (http)
+2018-07-13 10:28:13,405 - Started WasWebApplication in 4.709 seconds (JVM running for 5.749)
+2018-07-13 10:28:20,363 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-13 10:28:20,364 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-13 10:28:20,398 - FrameworkServlet 'dispatcherServlet': initialization completed in 34 ms
+2018-07-13 10:28:20,412 - ===========进入拦截器==============
+2018-07-13 10:28:20,450 - [THYMELEAF] INITIALIZING TEMPLATE ENGINE
+2018-07-13 10:28:20,489 - [THYMELEAF] INITIALIZING TEMPLATE RESOLVER: org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+2018-07-13 10:28:20,489 - [THYMELEAF] TEMPLATE RESOLVER INITIALIZED OK
+2018-07-13 10:28:20,489 - [THYMELEAF] INITIALIZING MESSAGE RESOLVER: org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+2018-07-13 10:28:20,489 - [THYMELEAF] MESSAGE RESOLVER INITIALIZED OK
+2018-07-13 10:28:20,492 - [THYMELEAF] TEMPLATE ENGINE CONFIGURATION:
+[THYMELEAF] * Cache Factory implementation: org.thymeleaf.cache.StandardCacheManager
+[THYMELEAF] * Template modes:
+[THYMELEAF]     * LEGACYHTML5
+[THYMELEAF]     * VALIDXHTML
+[THYMELEAF]     * HTML5
+[THYMELEAF]     * VALIDXML
+[THYMELEAF]     * XML
+[THYMELEAF]     * XHTML
+[THYMELEAF] * Template resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+[THYMELEAF] * Message resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+[THYMELEAF] * Dialect [1 of 2]: org.thymeleaf.spring4.dialect.SpringStandardDialect
+[THYMELEAF]     * Prefix: "th"
+[THYMELEAF] * Dialect [2 of 2]: nz.net.ultraq.thymeleaf.LayoutDialect
+[THYMELEAF]     * Prefix: "layout"
+[THYMELEAF] TEMPLATE ENGINE CONFIGURED OK
+2018-07-13 10:28:20,492 - [THYMELEAF] TEMPLATE ENGINE INITIALIZED
+2018-07-13 10:28:23,081 - ===========进入拦截器==============
+2018-07-13 10:28:23,081 - http://localhost:8038/home
+2018-07-13 10:28:23,094 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:23,154 - ===========进入拦截器==============
+2018-07-13 10:28:23,154 - http://localhost:8038/welcome
+2018-07-13 10:28:23,161 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:23,180 - ===========进入拦截器==============
+2018-07-13 10:28:23,180 - http://localhost:8038/common/top
+2018-07-13 10:28:23,180 - ===========进入拦截器==============
+2018-07-13 10:28:23,180 - http://localhost:8038/common/left
+2018-07-13 10:28:23,180 - ===========进入拦截器==============
+2018-07-13 10:28:23,180 - http://localhost:8038/common/footer
+2018-07-13 10:28:23,185 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:23,186 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:23,186 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:23,210 - ===========进入拦截器==============
+2018-07-13 10:28:23,210 - http://localhost:8038/menu/findMenuByRole
+2018-07-13 10:28:23,265 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:28:56,747 - Starting WasWebApplication on DESKTOP-8KVBGHI with PID 2344 (started by fengqun in D:\project\个人\fq-modules-was-web)
+2018-07-13 10:28:56,749 - No active profile set, falling back to default profiles: default
+2018-07-13 10:28:56,984 - HV000001: Hibernate Validator 5.3.6.Final
+2018-07-13 10:28:57,042 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 10:28:57 CST 2018]; root of context hierarchy
+2018-07-13 10:28:57,658 - Skipping MapperFactoryBean with name 'addressListMapper' and 'com.fq.modules.was.web.mapper.addresspool.AddressListMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,658 - Skipping MapperFactoryBean with name 'warnHistoryMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnHistoryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,658 - Skipping MapperFactoryBean with name 'warnRuleMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnRuleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'wasDataDictionaryMapper' and 'com.fq.modules.was.web.mapper.datadictionary.WasDataDictionaryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'sysLogMapper' and 'com.fq.modules.was.web.mapper.logs.SysLogMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'menuMapper' and 'com.fq.modules.was.web.mapper.setting.MenuMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'projectMapper' and 'com.fq.modules.was.web.mapper.setting.ProjectMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'roleMapper' and 'com.fq.modules.was.web.mapper.setting.RoleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'sysConfigMapper' and 'com.fq.modules.was.web.mapper.setting.SysConfigMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Skipping MapperFactoryBean with name 'userMapper' and 'com.fq.modules.was.web.mapper.setting.UserMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:28:57,659 - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2018-07-13 10:28:58,657 - Tomcat initialized with port(s): 8038 (http)
+2018-07-13 10:28:58,667 - Starting service [Tomcat]
+2018-07-13 10:28:58,668 - Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-07-13 10:28:58,771 - Initializing Spring embedded WebApplicationContext
+2018-07-13 10:28:58,772 - Root WebApplicationContext: initialization completed in 1731 ms
+2018-07-13 10:28:58,969 - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-13 10:28:58,973 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-13 10:28:58,973 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-13 10:28:58,973 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-13 10:28:58,973 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-13 10:28:59,943 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 10:28:57 CST 2018]; root of context hierarchy
+2018-07-13 10:29:00,011 - Mapped "{[/v1/addresslist/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.update(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 10:29:00,012 - Mapped "{[/v1/addresslist/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.list(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:29:00,012 - Mapped "{[/v1/addresslist/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.save(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 10:29:00,013 - Mapped "{[/v1/addresslist/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.info(java.lang.Integer)
+2018-07-13 10:29:00,013 - Mapped "{[/v1/addresslist/getDetails]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.getDetails(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages) throws java.text.ParseException
+2018-07-13 10:29:00,014 - Mapped "{[/v1/warnhistory/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.update(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 10:29:00,014 - Mapped "{[/v1/warnhistory/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.list(com.fq.modules.was.web.entity.addresspool.WarnHistory,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:29:00,014 - Mapped "{[/v1/warnhistory/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.save(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 10:29:00,014 - Mapped "{[/v1/warnhistory/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.info(java.lang.Integer)
+2018-07-13 10:29:00,015 - Mapped "{[/v1/warnrule/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.update(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 10:29:00,015 - Mapped "{[/v1/warnrule/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.list(com.fq.modules.was.web.entity.addresspool.WarnRule,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:29:00,015 - Mapped "{[/v1/warnrule/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.save(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 10:29:00,016 - Mapped "{[/v1/warnrule/selectByTypeAndSource/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.String,java.lang.String)
+2018-07-13 10:29:00,016 - Mapped "{[/v1/warnrule/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.Integer)
+2018-07-13 10:29:00,016 - Mapped "{[/excel/toExcel]}" onto public org.springframework.http.ResponseEntity<org.springframework.core.io.InputStreamResource> com.fq.modules.was.web.controller.common.ExcelController.toExcel(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary) throws java.io.IOException
+2018-07-13 10:29:00,023 - Mapped "{[/errorpage/500],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.error()
+2018-07-13 10:29:00,023 - Mapped "{[/was-sys-log],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.log()
+2018-07-13 10:29:00,023 - Mapped "{[/user-info],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userInfo()
+2018-07-13 10:29:00,023 - Mapped "{[/common/left],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.left()
+2018-07-13 10:29:00,023 - Mapped "{[/was-sys-config],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.config()
+2018-07-13 10:29:00,023 - Mapped "{[/common/top],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.top()
+2018-07-13 10:29:00,024 - Mapped "{[/user],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.user()
+2018-07-13 10:29:00,024 - Mapped "{[/common/footer],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.footer()
+2018-07-13 10:29:00,024 - Mapped "{[/generator],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.generator()
+2018-07-13 10:29:00,024 - Mapped "{[/role],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.role()
+2018-07-13 10:29:00,024 - Mapped "{[/home],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.home()
+2018-07-13 10:29:00,024 - Mapped "{[/number-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoin(org.springframework.ui.Model)
+2018-07-13 10:29:00,024 - Mapped "{[/number-coin-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoinAdd()
+2018-07-13 10:29:00,024 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.login()
+2018-07-13 10:29:00,024 - Mapped "{[/welcome],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.welcome()
+2018-07-13 10:29:00,025 - Mapped "{[/control-waring],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.controlWaring()
+2018-07-13 10:29:00,025 - Mapped "{[/withdraw-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.withdrawCoin()
+2018-07-13 10:29:00,025 - Mapped "{[/errorpage/404],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.notFound()
+2018-07-13 10:29:00,025 - Mapped "{[/icon],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.icon()
+2018-07-13 10:29:00,025 - Mapped "{[/recharge-control],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.rechargeControl()
+2018-07-13 10:29:00,025 - Mapped "{[/user-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userAdd()
+2018-07-13 10:29:00,025 - Mapped "{[/role-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.roleAdd()
+2018-07-13 10:29:00,025 - Mapped "{[/address-pool],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPool()
+2018-07-13 10:29:00,025 - Mapped "{[/menu],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.menu()
+2018-07-13 10:29:00,025 - Mapped "{[/address-warning-rule],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningRule()
+2018-07-13 10:29:00,026 - Mapped "{[/address-pool-details],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPooldetail()
+2018-07-13 10:29:00,028 - Mapped "{[/address-warning-history],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningHistory()
+2018-07-13 10:29:00,032 - Mapped "{[/generator/wasdatadictionary/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.update(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary)
+2018-07-13 10:29:00,033 - Mapped "{[/generator/wasdatadictionary/delete]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.delete(java.lang.Integer[])
+2018-07-13 10:29:00,035 - Mapped "{[/generator/wasdatadictionary/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.list(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:29:00,035 - Mapped "{[/generator/wasdatadictionary/saveOrUpdate]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.save(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,java.lang.String)
+2018-07-13 10:29:00,036 - Mapped "{[/generator/wasdatadictionary/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.info(java.lang.Integer)
+2018-07-13 10:29:00,036 - Mapped "{[/generator/wasdatadictionary/getNewHeight]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.getNewHeight(java.lang.String)
+2018-07-13 10:29:00,036 - Mapped "{[/generator/wasdatadictionary/disabledAll]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.disabledAll(java.lang.String)
+2018-07-13 10:29:00,039 - Mapped "{[/signIn],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.login(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String)
+2018-07-13 10:29:00,039 - Mapped "{[/signOut],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.loginOut(javax.servlet.http.HttpServletRequest)
+2018-07-13 10:29:00,040 - Mapped "{[/v1/syslog/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.update(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 10:29:00,040 - Mapped "{[/v1/syslog/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.list(com.fq.modules.was.web.entity.logs.SysLog,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:29:00,040 - Mapped "{[/v1/syslog/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.save(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 10:29:00,041 - Mapped "{[/v1/syslog/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.info(java.lang.Long)
+2018-07-13 10:29:00,043 - Mapped "{[/menu/addMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 10:29:00,043 - Mapped "{[/menu/addIcon],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addIcon(java.lang.String,java.lang.String)
+2018-07-13 10:29:00,043 - Mapped "{[/menu/delMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.delMenu(java.lang.Long)
+2018-07-13 10:29:00,043 - Mapped "{[/menu/findById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findById(java.lang.Long)
+2018-07-13 10:29:00,044 - Mapped "{[/menu/findChildMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findChildMenu(java.lang.String)
+2018-07-13 10:29:00,044 - Mapped "{[/menu/editMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.editMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 10:29:00,044 - Mapped "{[/menu/findMenuByRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole(java.lang.Long)
+2018-07-13 10:29:00,044 - Mapped "{[/menu/findAllMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findAllMenu()
+2018-07-13 10:29:00,045 - Mapped "{[/menu/findIconList],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findIconList()
+2018-07-13 10:29:00,047 - Mapped "{[/project/findAllProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.findAllProject(java.lang.String)
+2018-07-13 10:29:00,048 - Mapped "{[/project/updateProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.updateProject(com.fq.modules.was.web.entity.setting.Project)
+2018-07-13 10:29:00,048 - Mapped "{[/project/addProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.addProject(java.lang.String,java.lang.String)
+2018-07-13 10:29:00,048 - Mapped "{[/project/deleteProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.deleteProject(java.lang.Long)
+2018-07-13 10:29:00,050 - Mapped "{[/role/addRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.addRole(com.fq.modules.was.web.entity.setting.Role,java.lang.String)
+2018-07-13 10:29:00,051 - Mapped "{[/role/updateRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRole(com.fq.modules.was.web.entity.setting.Role)
+2018-07-13 10:29:00,051 - Mapped "{[/role/findRoleById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findRoleById(java.lang.Long)
+2018-07-13 10:29:00,051 - Mapped "{[/role/findAllRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findAllRole(java.lang.String)
+2018-07-13 10:29:00,051 - Mapped "{[/role/updateRoleMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRomeMenu(com.fq.modules.was.web.entity.setting.Role,java.lang.String,java.lang.String)
+2018-07-13 10:29:00,051 - Mapped "{[/role/deleteRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.deleteRole(java.lang.Long)
+2018-07-13 10:29:00,052 - Mapped "{[/v1/sysconfig/add]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.add(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 10:29:00,053 - Mapped "{[/v1/sysconfig/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.update(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 10:29:00,053 - Mapped "{[/v1/sysconfig/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.list(com.fq.modules.was.web.entity.setting.SysConfig,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:29:00,053 - Mapped "{[/v1/sysconfig/info/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.info(java.lang.String,java.lang.String)
+2018-07-13 10:29:00,054 - Mapped "{[/sys/generator/list]}" onto public com.fq.modules.was.web.utils.R com.fq.modules.was.web.controller.setting.SysGeneratorController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-13 10:29:00,054 - Mapped "{[/sys/generator/code]}" onto public void com.fq.modules.was.web.controller.setting.SysGeneratorController.code(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2018-07-13 10:29:00,055 - Mapped "{[/user/addUser],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.addUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:29:00,056 - Mapped "{[/user/checkPassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.checkPassword(java.lang.String,java.lang.String)
+2018-07-13 10:29:00,056 - Mapped "{[/user/updatePassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updatePassword(java.lang.String,java.lang.String)
+2018-07-13 10:29:00,056 - Mapped "{[/user/findAllUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findAllUser(java.lang.String)
+2018-07-13 10:29:00,056 - Mapped "{[/user/resetPassword],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.resetPassword(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:29:00,056 - Mapped "{[/user/findUserByName],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findUserByName(java.lang.String)
+2018-07-13 10:29:00,056 - Mapped "{[/user/updateUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updateUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:29:00,056 - Mapped "{[/user/deleteUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.deleteUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:29:00,058 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-13 10:29:00,058 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-13 10:29:00,100 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:29:00,100 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:29:00,119 - Detected @ExceptionHandler methods in exceptionHandle
+2018-07-13 10:29:00,142 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:29:00,792 - Registering beans for JMX exposure on startup
+2018-07-13 10:29:00,807 - Initializing ProtocolHandler ["http-nio-8038"]
+2018-07-13 10:29:00,817 - Starting ProtocolHandler ["http-nio-8038"]
+2018-07-13 10:29:00,829 - Using a shared selector for servlet write/read
+2018-07-13 10:29:00,846 - Tomcat started on port(s): 8038 (http)
+2018-07-13 10:29:00,850 - Started WasWebApplication in 4.877 seconds (JVM running for 6.019)
+2018-07-13 10:29:04,699 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-13 10:29:04,700 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-13 10:29:04,731 - FrameworkServlet 'dispatcherServlet': initialization completed in 31 ms
+2018-07-13 10:29:04,746 - ===========进入拦截器==============
+2018-07-13 10:29:04,769 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.login============
+2018-07-13 10:29:04,769 - ===========请求时间:2018-07-13 10:29:04==========================
+2018-07-13 10:29:04,769 - url=http://localhost:8038/login
+2018-07-13 10:29:04,769 - method=GET
+2018-07-13 10:29:04,769 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:04,769 - class_method=com.fq.modules.was.web.controller.common.IndexController.login
+2018-07-13 10:29:04,769 - args:
+2018-07-13 10:29:04,773 - =============结束请求时间:2018-07-13 10:29:04,耗时:0s======================
+2018-07-13 10:29:04,773 - response=/login
+2018-07-13 10:29:04,796 - [THYMELEAF] INITIALIZING TEMPLATE ENGINE
+2018-07-13 10:29:04,830 - [THYMELEAF] INITIALIZING TEMPLATE RESOLVER: org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+2018-07-13 10:29:04,831 - [THYMELEAF] TEMPLATE RESOLVER INITIALIZED OK
+2018-07-13 10:29:04,831 - [THYMELEAF] INITIALIZING MESSAGE RESOLVER: org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+2018-07-13 10:29:04,831 - [THYMELEAF] MESSAGE RESOLVER INITIALIZED OK
+2018-07-13 10:29:04,833 - [THYMELEAF] TEMPLATE ENGINE CONFIGURATION:
+[THYMELEAF] * Cache Factory implementation: org.thymeleaf.cache.StandardCacheManager
+[THYMELEAF] * Template modes:
+[THYMELEAF]     * LEGACYHTML5
+[THYMELEAF]     * VALIDXML
+[THYMELEAF]     * XHTML
+[THYMELEAF]     * HTML5
+[THYMELEAF]     * XML
+[THYMELEAF]     * VALIDXHTML
+[THYMELEAF] * Template resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+[THYMELEAF] * Message resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+[THYMELEAF] * Dialect [1 of 2]: org.thymeleaf.spring4.dialect.SpringStandardDialect
+[THYMELEAF]     * Prefix: "th"
+[THYMELEAF] * Dialect [2 of 2]: nz.net.ultraq.thymeleaf.LayoutDialect
+[THYMELEAF]     * Prefix: "layout"
+[THYMELEAF] TEMPLATE ENGINE CONFIGURED OK
+2018-07-13 10:29:04,834 - [THYMELEAF] TEMPLATE ENGINE INITIALIZED
+2018-07-13 10:29:05,378 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.login============
+2018-07-13 10:29:05,378 - ===========请求时间:2018-07-13 10:29:05==========================
+2018-07-13 10:29:05,378 - url=http://localhost:8038/login
+2018-07-13 10:29:05,378 - method=GET
+2018-07-13 10:29:05,378 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:05,378 - class_method=com.fq.modules.was.web.controller.common.IndexController.login
+2018-07-13 10:29:05,378 - args:
+2018-07-13 10:29:05,379 - =============结束请求时间:2018-07-13 10:29:05,耗时:0s======================
+2018-07-13 10:29:05,379 - response=/login
+2018-07-13 10:29:06,299 - ===========开始请求com.fq.modules.was.web.controller.login.LoginController.login============
+2018-07-13 10:29:06,299 - ===========请求时间:2018-07-13 10:29:06==========================
+2018-07-13 10:29:06,299 - url=http://localhost:8038/signIn
+2018-07-13 10:29:06,299 - method=POST
+2018-07-13 10:29:06,299 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:06,299 - class_method=com.fq.modules.was.web.controller.login.LoginController.login
+2018-07-13 10:29:06,300 - args:userName=admin,password=123456,
+2018-07-13 10:29:07,718 - =============结束请求时间:2018-07-13 10:29:07,耗时:1s======================
+2018-07-13 10:29:07,719 - response=Result(code=200, msg=成功, data={user=User(gid=1, userName=admin, password=98F6FAD709E28617CF0421CC885C484F, tel=15215215963, email=liuyingjie@fengqun.ltd, roleId=1, roleName=1, loginTime=2018-07-13 10:29:07, version=12, createTime=2018-07-03 19:02:31.0, updateTime=2018-07-11 16:28:06.0, status=0)}, page=null, totalCount=null)
+2018-07-13 10:29:07,786 - ===========进入拦截器==============
+2018-07-13 10:29:07,787 - http://localhost:8038/home
+2018-07-13 10:29:07,792 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.home============
+2018-07-13 10:29:07,793 - ===========请求时间:2018-07-13 10:29:07==========================
+2018-07-13 10:29:07,793 - url=http://localhost:8038/home
+2018-07-13 10:29:07,793 - method=GET
+2018-07-13 10:29:07,793 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:07,793 - class_method=com.fq.modules.was.web.controller.common.IndexController.home
+2018-07-13 10:29:07,793 - args:
+2018-07-13 10:29:07,793 - =============结束请求时间:2018-07-13 10:29:07,耗时:0s======================
+2018-07-13 10:29:07,794 - response=/home
+2018-07-13 10:29:07,794 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:29:07,831 - ===========进入拦截器==============
+2018-07-13 10:29:07,831 - http://localhost:8038/welcome
+2018-07-13 10:29:07,839 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.welcome============
+2018-07-13 10:29:07,839 - ===========请求时间:2018-07-13 10:29:07==========================
+2018-07-13 10:29:07,839 - url=http://localhost:8038/welcome
+2018-07-13 10:29:07,839 - method=GET
+2018-07-13 10:29:07,840 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:07,840 - class_method=com.fq.modules.was.web.controller.common.IndexController.welcome
+2018-07-13 10:29:07,840 - args:
+2018-07-13 10:29:07,840 - =============结束请求时间:2018-07-13 10:29:07,耗时:0s======================
+2018-07-13 10:29:07,840 - response=/welcome
+2018-07-13 10:29:07,840 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:29:07,857 - ===========进入拦截器==============
+2018-07-13 10:29:07,857 - http://localhost:8038/common/top
+2018-07-13 10:29:07,862 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.top============
+2018-07-13 10:29:07,862 - ===========请求时间:2018-07-13 10:29:07==========================
+2018-07-13 10:29:07,862 - url=http://localhost:8038/common/top
+2018-07-13 10:29:07,862 - method=GET
+2018-07-13 10:29:07,862 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:07,862 - class_method=com.fq.modules.was.web.controller.common.IndexController.top
+2018-07-13 10:29:07,862 - args:
+2018-07-13 10:29:07,862 - =============结束请求时间:2018-07-13 10:29:07,耗时:0s======================
+2018-07-13 10:29:07,863 - response=/common/top
+2018-07-13 10:29:07,863 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:29:07,864 - ===========进入拦截器==============
+2018-07-13 10:29:07,864 - http://localhost:8038/common/left
+2018-07-13 10:29:07,868 - ===========进入拦截器==============
+2018-07-13 10:29:07,868 - http://localhost:8038/common/footer
+2018-07-13 10:29:07,869 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.left============
+2018-07-13 10:29:07,870 - ===========请求时间:2018-07-13 10:29:07==========================
+2018-07-13 10:29:07,870 - url=http://localhost:8038/common/left
+2018-07-13 10:29:07,870 - method=GET
+2018-07-13 10:29:07,870 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:07,870 - class_method=com.fq.modules.was.web.controller.common.IndexController.left
+2018-07-13 10:29:07,870 - args:
+2018-07-13 10:29:07,870 - =============结束请求时间:2018-07-13 10:29:07,耗时:0s======================
+2018-07-13 10:29:07,870 - response=/common/left
+2018-07-13 10:29:07,870 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:29:07,873 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.footer============
+2018-07-13 10:29:07,873 - ===========请求时间:2018-07-13 10:29:07==========================
+2018-07-13 10:29:07,873 - url=http://localhost:8038/common/footer
+2018-07-13 10:29:07,874 - method=GET
+2018-07-13 10:29:07,874 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:07,874 - class_method=com.fq.modules.was.web.controller.common.IndexController.footer
+2018-07-13 10:29:07,874 - args:
+2018-07-13 10:29:07,874 - =============结束请求时间:2018-07-13 10:29:07,耗时:0s======================
+2018-07-13 10:29:07,874 - response=/common/footer
+2018-07-13 10:29:07,874 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:29:07,900 - ===========进入拦截器==============
+2018-07-13 10:29:07,900 - http://localhost:8038/menu/findMenuByRole
+2018-07-13 10:29:07,907 - ===========开始请求com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole============
+2018-07-13 10:29:07,908 - ===========请求时间:2018-07-13 10:29:07==========================
+2018-07-13 10:29:07,908 - url=http://localhost:8038/menu/findMenuByRole
+2018-07-13 10:29:07,908 - method=GET
+2018-07-13 10:29:07,908 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:29:07,908 - class_method=com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole
+2018-07-13 10:29:07,908 - args:roleId=1,
+2018-07-13 10:29:07,927 - =============结束请求时间:2018-07-13 10:29:07,耗时:0s======================
+2018-07-13 10:29:07,927 - response=Result(code=200, msg=成功, data=[MenuList(gid=1, icon=, menuName=数字货币管理, url=--, menuList=[MenuList(gid=25, icon=, menuName=数字货币管理;0, url=/number-coin.html, menuList=null), MenuList(gid=61, icon=, menuName=获取最新区块高度;1, url=generator/wasdatadictionary/getNewHeight, menuList=null), MenuList(gid=64, icon=, menuName=导出数字货币到Excel;1, url=excel/toExcel, menuList=null), MenuList(gid=66, icon=, menuName=添加或编辑数字货币;1, url=generator/wasdatadictionary/saveOrUpdate, menuList=null)]), MenuList(gid=3, icon=, menuName=数字货币监控及预警, url=--, menuList=[MenuList(gid=4, icon=, menuName=数字货币监控及预警;0, url=/control-waring.html, menuList=null)]), MenuList(gid=5, icon=, menuName=地址池管理, url=--, menuList=[MenuList(gid=24, icon=, menuName=地址池管理;0, url=/address-pool.html, menuList=null), MenuList(gid=57, icon=, menuName=预警提醒历史记录;0, url=/address-warning-history.html, menuList=null), MenuList(gid=67, icon=, menuName=地址池详情列表;1, url=v1/wasaddresslist/getDetails, menuList=null), MenuList(gid=70, icon=, menuName=预警提醒规则配置;0, url=/address-warning-rule.html, menuList=null)]), MenuList(gid=6, icon=, menuName=平台充值管理, url=--, menuList=[MenuList(gid=14, icon=, menuName=平台充值管理;0, url=/recharge-control.html, menuList=null)]), MenuList(gid=7, icon=, menuName=平台提币管理, url=--, menuList=[MenuList(gid=23, icon=, menuName=平台提币管理;0, url=/withdraw-coin.html, menuList=null)]), MenuList(gid=8, icon=, menuName=系统管理, url=--, menuList=[MenuList(gid=9, icon=, menuName=用户管理;0, url=/user.html, menuList=null), MenuList(gid=10, icon=, menuName=角色管理;0, url=/role.html, menuList=null), MenuList(gid=11, icon=, menuName=菜单管理;0, url=/menu.html, menuList=null), MenuList(gid=12, icon=, menuName=图标管理;0, url=/icon.html, menuList=null), MenuList(gid=26, icon=, menuName=新增用户;1, url=user/addUser, menuList=null), MenuList(gid=43, icon=, menuName=删除用户;1, url=user/deleteUser, menuList=null), MenuList(gid=44, icon=, menuName=编辑用户;1, url=user/updateUser, menuList=null), MenuList(gid=45, icon=, menuName=查询用户;1, url=user/findAllUser, menuList=null), MenuList(gid=46, icon=, menuName=添加角色;1, url=role/addRole, menuList=null), MenuList(gid=47, icon=, menuName=删除角色;1, url=role/deleteRole, menuList=null), MenuList(gid=48, icon=, menuName=编辑角色;1, url=role/updateRole, menuList=null), MenuList(gid=49, icon=, menuName=编辑权限;1, url=role/updateRoleMenu, menuList=null), MenuList(gid=50, icon=, menuName=查询角色;1, url=role/findAllRole, menuList=null), MenuList(gid=51, icon=, menuName=添加菜单;1, url=menu/addMenu, menuList=null), MenuList(gid=52, icon=, menuName=编辑菜单;1, url=menu/editMenu, menuList=null), MenuList(gid=53, icon=, menuName=删除菜单;1, url=menu/delMenu, menuList=null), MenuList(gid=54, icon=, menuName=菜单列表;1, url=menu/findAllMenu, menuList=null), MenuList(gid=55, icon=, menuName=添加图标;1, url=menu/addIcon, menuList=null), MenuList(gid=56, icon=, menuName=图标列表;1, url=menu/findIconList, menuList=null), MenuList(gid=58, icon=, menuName=参数配置;0, url=/was-sys-config.html, menuList=null)]), MenuList(gid=59, icon=, menuName=日志管理, url=--, menuList=[MenuList(gid=60, icon=, menuName=日志列表;0, url=/was-sys-log.html, menuList=null)]), MenuList(gid=68, icon=, menuName=代码生成器, url=--, menuList=[MenuList(gid=69, icon=, menuName=代码生成器;0, url=/generator.html, menuList=null)])], page=null, totalCount=null)
+2018-07-13 10:29:07,934 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:12,852 - Starting WasWebApplication on DESKTOP-8KVBGHI with PID 9704 (started by fengqun in D:\project\个人\fq-modules-was-web)
+2018-07-13 10:40:12,855 - No active profile set, falling back to default profiles: default
+2018-07-13 10:40:13,032 - HV000001: Hibernate Validator 5.3.6.Final
+2018-07-13 10:40:13,066 - Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 10:40:13 CST 2018]; root of context hierarchy
+2018-07-13 10:40:13,680 - Skipping MapperFactoryBean with name 'addressListMapper' and 'com.fq.modules.was.web.mapper.addresspool.AddressListMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,680 - Skipping MapperFactoryBean with name 'warnHistoryMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnHistoryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,680 - Skipping MapperFactoryBean with name 'warnRuleMapper' and 'com.fq.modules.was.web.mapper.addresspool.WarnRuleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,680 - Skipping MapperFactoryBean with name 'wasDataDictionaryMapper' and 'com.fq.modules.was.web.mapper.datadictionary.WasDataDictionaryMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,680 - Skipping MapperFactoryBean with name 'sysLogMapper' and 'com.fq.modules.was.web.mapper.logs.SysLogMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,680 - Skipping MapperFactoryBean with name 'menuMapper' and 'com.fq.modules.was.web.mapper.setting.MenuMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,681 - Skipping MapperFactoryBean with name 'projectMapper' and 'com.fq.modules.was.web.mapper.setting.ProjectMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,681 - Skipping MapperFactoryBean with name 'roleMapper' and 'com.fq.modules.was.web.mapper.setting.RoleMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,681 - Skipping MapperFactoryBean with name 'sysConfigMapper' and 'com.fq.modules.was.web.mapper.setting.SysConfigMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,681 - Skipping MapperFactoryBean with name 'userMapper' and 'com.fq.modules.was.web.mapper.setting.UserMapper' mapperInterface. Bean already defined with the same name!
+2018-07-13 10:40:13,681 - Cannot enhance @Configuration bean definition 'myBatisMapperScannerConfig' since its singleton instance has been created too early. The typical cause is a non-static @Bean method with a BeanDefinitionRegistryPostProcessor return type: Consider declaring such methods as 'static'.
+2018-07-13 10:40:14,634 - Tomcat initialized with port(s): 8038 (http)
+2018-07-13 10:40:14,642 - Starting service [Tomcat]
+2018-07-13 10:40:14,643 - Starting Servlet Engine: Apache Tomcat/8.5.27
+2018-07-13 10:40:14,749 - Initializing Spring embedded WebApplicationContext
+2018-07-13 10:40:14,749 - Root WebApplicationContext: initialization completed in 1683 ms
+2018-07-13 10:40:14,950 - Mapping servlet: 'dispatcherServlet' to [/]
+2018-07-13 10:40:14,954 - Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-07-13 10:40:14,955 - Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-07-13 10:40:14,955 - Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-07-13 10:40:14,955 - Mapping filter: 'requestContextFilter' to: [/*]
+2018-07-13 10:40:15,947 - Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@1a45193b: startup date [Fri Jul 13 10:40:13 CST 2018]; root of context hierarchy
+2018-07-13 10:40:16,008 - Mapped "{[/v1/addresslist/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.update(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 10:40:16,008 - Mapped "{[/v1/addresslist/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.list(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:40:16,009 - Mapped "{[/v1/addresslist/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.save(com.fq.modules.was.web.entity.addresspool.AddressList)
+2018-07-13 10:40:16,009 - Mapped "{[/v1/addresslist/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.info(java.lang.Integer)
+2018-07-13 10:40:16,009 - Mapped "{[/v1/addresslist/getDetails]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.AddressListController.getDetails(com.fq.modules.was.web.vo.AddressVo,com.fq.modules.was.web.entity.common.Pages) throws java.text.ParseException
+2018-07-13 10:40:16,010 - Mapped "{[/v1/warnhistory/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.update(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 10:40:16,010 - Mapped "{[/v1/warnhistory/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.list(com.fq.modules.was.web.entity.addresspool.WarnHistory,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:40:16,010 - Mapped "{[/v1/warnhistory/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.save(com.fq.modules.was.web.entity.addresspool.WarnHistory)
+2018-07-13 10:40:16,010 - Mapped "{[/v1/warnhistory/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnHistoryController.info(java.lang.Integer)
+2018-07-13 10:40:16,011 - Mapped "{[/v1/warnrule/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.update(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 10:40:16,011 - Mapped "{[/v1/warnrule/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.list(com.fq.modules.was.web.entity.addresspool.WarnRule,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:40:16,011 - Mapped "{[/v1/warnrule/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.save(com.fq.modules.was.web.entity.addresspool.WarnRule)
+2018-07-13 10:40:16,011 - Mapped "{[/v1/warnrule/selectByTypeAndSource/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.String,java.lang.String)
+2018-07-13 10:40:16,012 - Mapped "{[/v1/warnrule/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.addresspool.WarnRuleController.info(java.lang.Integer)
+2018-07-13 10:40:16,013 - Mapped "{[/excel/toExcel]}" onto public org.springframework.http.ResponseEntity<org.springframework.core.io.InputStreamResource> com.fq.modules.was.web.controller.common.ExcelController.toExcel(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary) throws java.io.IOException
+2018-07-13 10:40:16,019 - Mapped "{[/errorpage/500],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.error()
+2018-07-13 10:40:16,019 - Mapped "{[/was-sys-log],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.log()
+2018-07-13 10:40:16,019 - Mapped "{[/user-info],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userInfo()
+2018-07-13 10:40:16,020 - Mapped "{[/common/left],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.left()
+2018-07-13 10:40:16,020 - Mapped "{[/was-sys-config],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.config()
+2018-07-13 10:40:16,020 - Mapped "{[/user],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.user()
+2018-07-13 10:40:16,020 - Mapped "{[/common/top],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.top()
+2018-07-13 10:40:16,020 - Mapped "{[/common/footer],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.footer()
+2018-07-13 10:40:16,020 - Mapped "{[/generator],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.generator()
+2018-07-13 10:40:16,020 - Mapped "{[/role],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.role()
+2018-07-13 10:40:16,020 - Mapped "{[/home],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.home()
+2018-07-13 10:40:16,020 - Mapped "{[/address-warning-history],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningHistory()
+2018-07-13 10:40:16,020 - Mapped "{[/address-pool-details],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPooldetail()
+2018-07-13 10:40:16,021 - Mapped "{[/address-warning-rule],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressWarningRule()
+2018-07-13 10:40:16,021 - Mapped "{[/icon],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.icon()
+2018-07-13 10:40:16,021 - Mapped "{[/welcome],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.welcome()
+2018-07-13 10:40:16,021 - Mapped "{[/number-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoin(org.springframework.ui.Model)
+2018-07-13 10:40:16,021 - Mapped "{[/number-coin-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.numberCoinAdd()
+2018-07-13 10:40:16,021 - Mapped "{[/errorpage/404],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.notFound()
+2018-07-13 10:40:16,021 - Mapped "{[/control-waring],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.controlWaring()
+2018-07-13 10:40:16,021 - Mapped "{[/user-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.userAdd()
+2018-07-13 10:40:16,021 - Mapped "{[/withdraw-coin],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.withdrawCoin()
+2018-07-13 10:40:16,021 - Mapped "{[/menu],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.menu()
+2018-07-13 10:40:16,021 - Mapped "{[/login],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.login()
+2018-07-13 10:40:16,022 - Mapped "{[/role-add],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.roleAdd()
+2018-07-13 10:40:16,022 - Mapped "{[/address-pool],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.addressPool()
+2018-07-13 10:40:16,022 - Mapped "{[/recharge-control],methods=[GET]}" onto public java.lang.String com.fq.modules.was.web.controller.common.IndexController.rechargeControl()
+2018-07-13 10:40:16,023 - Mapped "{[/generator/wasdatadictionary/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.update(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary)
+2018-07-13 10:40:16,023 - Mapped "{[/generator/wasdatadictionary/delete]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.delete(java.lang.Integer[])
+2018-07-13 10:40:16,024 - Mapped "{[/generator/wasdatadictionary/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.list(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:40:16,024 - Mapped "{[/generator/wasdatadictionary/saveOrUpdate]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.save(com.fq.modules.was.web.entity.datadictionary.WasDataDictionary,java.lang.String)
+2018-07-13 10:40:16,024 - Mapped "{[/generator/wasdatadictionary/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.info(java.lang.Integer)
+2018-07-13 10:40:16,024 - Mapped "{[/generator/wasdatadictionary/getNewHeight]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.getNewHeight(java.lang.String)
+2018-07-13 10:40:16,024 - Mapped "{[/generator/wasdatadictionary/disabledAll]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.disabledAll(java.lang.String)
+2018-07-13 10:40:16,025 - Mapped "{[/signIn],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.login(javax.servlet.http.HttpServletRequest,java.lang.String,java.lang.String)
+2018-07-13 10:40:16,026 - Mapped "{[/signOut],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.login.LoginController.loginOut(javax.servlet.http.HttpServletRequest)
+2018-07-13 10:40:16,026 - Mapped "{[/v1/syslog/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.update(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 10:40:16,026 - Mapped "{[/v1/syslog/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.list(com.fq.modules.was.web.entity.logs.SysLog,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:40:16,026 - Mapped "{[/v1/syslog/save]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.save(com.fq.modules.was.web.entity.logs.SysLog)
+2018-07-13 10:40:16,026 - Mapped "{[/v1/syslog/info/{wasId}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.logs.SysLogController.info(java.lang.Long)
+2018-07-13 10:40:16,029 - Mapped "{[/menu/findMenuByRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole(java.lang.Long)
+2018-07-13 10:40:16,029 - Mapped "{[/menu/findById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findById(java.lang.Long)
+2018-07-13 10:40:16,029 - Mapped "{[/menu/addIcon],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addIcon(java.lang.String,java.lang.String)
+2018-07-13 10:40:16,029 - Mapped "{[/menu/findIconList],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findIconList()
+2018-07-13 10:40:16,030 - Mapped "{[/menu/editMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.editMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 10:40:16,030 - Mapped "{[/menu/findChildMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findChildMenu(java.lang.String)
+2018-07-13 10:40:16,030 - Mapped "{[/menu/delMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.delMenu(java.lang.Long)
+2018-07-13 10:40:16,030 - Mapped "{[/menu/findAllMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.findAllMenu()
+2018-07-13 10:40:16,030 - Mapped "{[/menu/addMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.MenuController.addMenu(com.fq.modules.was.web.entity.setting.Menu)
+2018-07-13 10:40:16,031 - Mapped "{[/project/deleteProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.deleteProject(java.lang.Long)
+2018-07-13 10:40:16,031 - Mapped "{[/project/findAllProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.findAllProject(java.lang.String)
+2018-07-13 10:40:16,031 - Mapped "{[/project/updateProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.updateProject(com.fq.modules.was.web.entity.setting.Project)
+2018-07-13 10:40:16,031 - Mapped "{[/project/addProject],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.ProjectController.addProject(java.lang.String,java.lang.String)
+2018-07-13 10:40:16,032 - Mapped "{[/role/addRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.addRole(com.fq.modules.was.web.entity.setting.Role,java.lang.String)
+2018-07-13 10:40:16,032 - Mapped "{[/role/deleteRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.deleteRole(java.lang.Long)
+2018-07-13 10:40:16,032 - Mapped "{[/role/findRoleById],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findRoleById(java.lang.Long)
+2018-07-13 10:40:16,033 - Mapped "{[/role/findAllRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.findAllRole(java.lang.String)
+2018-07-13 10:40:16,033 - Mapped "{[/role/updateRoleMenu],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRomeMenu(com.fq.modules.was.web.entity.setting.Role,java.lang.String,java.lang.String)
+2018-07-13 10:40:16,033 - Mapped "{[/role/updateRole],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.RoleController.updateRole(com.fq.modules.was.web.entity.setting.Role)
+2018-07-13 10:40:16,034 - Mapped "{[/v1/sysconfig/add]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.add(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 10:40:16,034 - Mapped "{[/v1/sysconfig/update]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.update(com.fq.modules.was.web.entity.setting.SysConfig)
+2018-07-13 10:40:16,034 - Mapped "{[/v1/sysconfig/list]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.list(com.fq.modules.was.web.entity.setting.SysConfig,com.fq.modules.was.web.entity.common.Pages)
+2018-07-13 10:40:16,034 - Mapped "{[/v1/sysconfig/info/{wasType}/{wasSource}]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.SysConfigController.info(java.lang.String,java.lang.String)
+2018-07-13 10:40:16,035 - Mapped "{[/sys/generator/list]}" onto public com.fq.modules.was.web.utils.R com.fq.modules.was.web.controller.setting.SysGeneratorController.list(java.util.Map<java.lang.String, java.lang.Object>)
+2018-07-13 10:40:16,035 - Mapped "{[/sys/generator/code]}" onto public void com.fq.modules.was.web.controller.setting.SysGeneratorController.code(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse) throws java.io.IOException
+2018-07-13 10:40:16,036 - Mapped "{[/user/addUser],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.addUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:40:16,036 - Mapped "{[/user/findAllUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findAllUser(java.lang.String)
+2018-07-13 10:40:16,036 - Mapped "{[/user/resetPassword],methods=[POST]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.resetPassword(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:40:16,036 - Mapped "{[/user/checkPassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.checkPassword(java.lang.String,java.lang.String)
+2018-07-13 10:40:16,036 - Mapped "{[/user/updatePassword],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updatePassword(java.lang.String,java.lang.String)
+2018-07-13 10:40:16,037 - Mapped "{[/user/updateUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.updateUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:40:16,037 - Mapped "{[/user/findUserByName],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.findUserByName(java.lang.String)
+2018-07-13 10:40:16,037 - Mapped "{[/user/deleteUser],methods=[GET]}" onto public com.fq.modules.was.web.entity.common.Result com.fq.modules.was.web.controller.setting.UserController.deleteUser(com.fq.modules.was.web.entity.setting.User)
+2018-07-13 10:40:16,038 - Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-07-13 10:40:16,039 - Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-07-13 10:40:16,081 - Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:40:16,081 - Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:40:16,100 - Detected @ExceptionHandler methods in exceptionHandle
+2018-07-13 10:40:16,124 - Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-07-13 10:40:16,781 - Registering beans for JMX exposure on startup
+2018-07-13 10:40:16,795 - Initializing ProtocolHandler ["http-nio-8038"]
+2018-07-13 10:40:16,806 - Starting ProtocolHandler ["http-nio-8038"]
+2018-07-13 10:40:16,820 - Using a shared selector for servlet write/read
+2018-07-13 10:40:16,840 - Tomcat started on port(s): 8038 (http)
+2018-07-13 10:40:16,845 - Started WasWebApplication in 4.852 seconds (JVM running for 6.174)
+2018-07-13 10:40:24,313 - Initializing Spring FrameworkServlet 'dispatcherServlet'
+2018-07-13 10:40:24,313 - FrameworkServlet 'dispatcherServlet': initialization started
+2018-07-13 10:40:24,348 - FrameworkServlet 'dispatcherServlet': initialization completed in 35 ms
+2018-07-13 10:40:24,364 - ===========进入拦截器==============
+2018-07-13 10:40:24,388 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.login============
+2018-07-13 10:40:24,389 - ===========请求时间:2018-07-13 10:40:24==========================
+2018-07-13 10:40:24,389 - url=http://localhost:8038/login
+2018-07-13 10:40:24,389 - method=GET
+2018-07-13 10:40:24,389 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:24,389 - class_method=com.fq.modules.was.web.controller.common.IndexController.login
+2018-07-13 10:40:24,389 - args:
+2018-07-13 10:40:24,392 - =============结束请求时间:2018-07-13 10:40:24,耗时:0s======================
+2018-07-13 10:40:24,392 - response=/login
+2018-07-13 10:40:24,415 - [THYMELEAF] INITIALIZING TEMPLATE ENGINE
+2018-07-13 10:40:24,454 - [THYMELEAF] INITIALIZING TEMPLATE RESOLVER: org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+2018-07-13 10:40:24,454 - [THYMELEAF] TEMPLATE RESOLVER INITIALIZED OK
+2018-07-13 10:40:24,454 - [THYMELEAF] INITIALIZING MESSAGE RESOLVER: org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+2018-07-13 10:40:24,454 - [THYMELEAF] MESSAGE RESOLVER INITIALIZED OK
+2018-07-13 10:40:24,457 - [THYMELEAF] TEMPLATE ENGINE CONFIGURATION:
+[THYMELEAF] * Cache Factory implementation: org.thymeleaf.cache.StandardCacheManager
+[THYMELEAF] * Template modes:
+[THYMELEAF]     * VALIDXML
+[THYMELEAF]     * HTML5
+[THYMELEAF]     * XHTML
+[THYMELEAF]     * VALIDXHTML
+[THYMELEAF]     * LEGACYHTML5
+[THYMELEAF]     * XML
+[THYMELEAF] * Template resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver
+[THYMELEAF] * Message resolvers (in order):
+[THYMELEAF]     * org.thymeleaf.spring4.messageresolver.SpringMessageResolver
+[THYMELEAF] * Dialect [1 of 2]: org.thymeleaf.spring4.dialect.SpringStandardDialect
+[THYMELEAF]     * Prefix: "th"
+[THYMELEAF] * Dialect [2 of 2]: nz.net.ultraq.thymeleaf.LayoutDialect
+[THYMELEAF]     * Prefix: "layout"
+[THYMELEAF] TEMPLATE ENGINE CONFIGURED OK
+2018-07-13 10:40:24,457 - [THYMELEAF] TEMPLATE ENGINE INITIALIZED
+2018-07-13 10:40:24,728 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.login============
+2018-07-13 10:40:24,728 - ===========请求时间:2018-07-13 10:40:24==========================
+2018-07-13 10:40:24,728 - url=http://localhost:8038/login
+2018-07-13 10:40:24,728 - method=GET
+2018-07-13 10:40:24,728 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:24,728 - class_method=com.fq.modules.was.web.controller.common.IndexController.login
+2018-07-13 10:40:24,728 - args:
+2018-07-13 10:40:24,728 - =============结束请求时间:2018-07-13 10:40:24,耗时:0s======================
+2018-07-13 10:40:24,728 - response=/login
+2018-07-13 10:40:26,034 - ===========开始请求com.fq.modules.was.web.controller.login.LoginController.login============
+2018-07-13 10:40:26,035 - ===========请求时间:2018-07-13 10:40:26==========================
+2018-07-13 10:40:26,035 - url=http://localhost:8038/signIn
+2018-07-13 10:40:26,036 - method=POST
+2018-07-13 10:40:26,036 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:26,036 - class_method=com.fq.modules.was.web.controller.login.LoginController.login
+2018-07-13 10:40:26,036 - args:userName=admin,password=123456,
+2018-07-13 10:40:27,492 - =============结束请求时间:2018-07-13 10:40:27,耗时:1s======================
+2018-07-13 10:40:27,492 - response=Result(code=200, msg=成功, data={user=User(gid=1, userName=admin, password=98F6FAD709E28617CF0421CC885C484F, tel=15215215963, email=liuyingjie@fengqun.ltd, roleId=1, roleName=1, loginTime=2018-07-13 10:40:27, version=12, createTime=2018-07-03 19:02:31.0, updateTime=2018-07-11 16:28:06.0, status=0)}, page=null, totalCount=null)
+2018-07-13 10:40:27,555 - ===========进入拦截器==============
+2018-07-13 10:40:27,556 - http://localhost:8038/home
+2018-07-13 10:40:27,567 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.home============
+2018-07-13 10:40:27,567 - ===========请求时间:2018-07-13 10:40:27==========================
+2018-07-13 10:40:27,567 - url=http://localhost:8038/home
+2018-07-13 10:40:27,567 - method=GET
+2018-07-13 10:40:27,567 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:27,567 - class_method=com.fq.modules.was.web.controller.common.IndexController.home
+2018-07-13 10:40:27,567 - args:
+2018-07-13 10:40:27,567 - =============结束请求时间:2018-07-13 10:40:27,耗时:0s======================
+2018-07-13 10:40:27,567 - response=/home
+2018-07-13 10:40:27,568 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:27,605 - ===========进入拦截器==============
+2018-07-13 10:40:27,606 - http://localhost:8038/welcome
+2018-07-13 10:40:27,614 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.welcome============
+2018-07-13 10:40:27,614 - ===========请求时间:2018-07-13 10:40:27==========================
+2018-07-13 10:40:27,614 - url=http://localhost:8038/welcome
+2018-07-13 10:40:27,614 - method=GET
+2018-07-13 10:40:27,614 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:27,614 - class_method=com.fq.modules.was.web.controller.common.IndexController.welcome
+2018-07-13 10:40:27,614 - args:
+2018-07-13 10:40:27,614 - =============结束请求时间:2018-07-13 10:40:27,耗时:0s======================
+2018-07-13 10:40:27,614 - response=/welcome
+2018-07-13 10:40:27,615 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:27,629 - ===========进入拦截器==============
+2018-07-13 10:40:27,630 - http://localhost:8038/common/top
+2018-07-13 10:40:27,633 - ===========进入拦截器==============
+2018-07-13 10:40:27,633 - ===========进入拦截器==============
+2018-07-13 10:40:27,634 - http://localhost:8038/common/footer
+2018-07-13 10:40:27,634 - http://localhost:8038/common/left
+2018-07-13 10:40:27,634 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.top============
+2018-07-13 10:40:27,634 - ===========请求时间:2018-07-13 10:40:27==========================
+2018-07-13 10:40:27,634 - url=http://localhost:8038/common/top
+2018-07-13 10:40:27,634 - method=GET
+2018-07-13 10:40:27,634 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:27,635 - class_method=com.fq.modules.was.web.controller.common.IndexController.top
+2018-07-13 10:40:27,635 - args:
+2018-07-13 10:40:27,635 - =============结束请求时间:2018-07-13 10:40:27,耗时:0s======================
+2018-07-13 10:40:27,635 - response=/common/top
+2018-07-13 10:40:27,635 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:27,640 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.footer============
+2018-07-13 10:40:27,640 - ===========请求时间:2018-07-13 10:40:27==========================
+2018-07-13 10:40:27,640 - url=http://localhost:8038/common/footer
+2018-07-13 10:40:27,640 - method=GET
+2018-07-13 10:40:27,640 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:27,640 - class_method=com.fq.modules.was.web.controller.common.IndexController.footer
+2018-07-13 10:40:27,640 - args:
+2018-07-13 10:40:27,640 - =============结束请求时间:2018-07-13 10:40:27,耗时:0s======================
+2018-07-13 10:40:27,640 - response=/common/footer
+2018-07-13 10:40:27,640 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:27,645 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.left============
+2018-07-13 10:40:27,645 - ===========请求时间:2018-07-13 10:40:27==========================
+2018-07-13 10:40:27,645 - url=http://localhost:8038/common/left
+2018-07-13 10:40:27,645 - method=GET
+2018-07-13 10:40:27,645 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:27,645 - class_method=com.fq.modules.was.web.controller.common.IndexController.left
+2018-07-13 10:40:27,645 - args:
+2018-07-13 10:40:27,645 - =============结束请求时间:2018-07-13 10:40:27,耗时:0s======================
+2018-07-13 10:40:27,645 - response=/common/left
+2018-07-13 10:40:27,645 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:27,669 - ===========进入拦截器==============
+2018-07-13 10:40:27,669 - http://localhost:8038/menu/findMenuByRole
+2018-07-13 10:40:27,676 - ===========开始请求com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole============
+2018-07-13 10:40:27,676 - ===========请求时间:2018-07-13 10:40:27==========================
+2018-07-13 10:40:27,676 - url=http://localhost:8038/menu/findMenuByRole
+2018-07-13 10:40:27,676 - method=GET
+2018-07-13 10:40:27,676 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:27,676 - class_method=com.fq.modules.was.web.controller.setting.MenuController.findMenuByRole
+2018-07-13 10:40:27,676 - args:roleId=1,
+2018-07-13 10:40:27,696 - =============结束请求时间:2018-07-13 10:40:27,耗时:0s======================
+2018-07-13 10:40:27,697 - response=Result(code=200, msg=成功, data=[MenuList(gid=1, icon=, menuName=数字货币管理, url=--, menuList=[MenuList(gid=25, icon=, menuName=数字货币管理;0, url=/number-coin.html, menuList=null), MenuList(gid=61, icon=, menuName=获取最新区块高度;1, url=generator/wasdatadictionary/getNewHeight, menuList=null), MenuList(gid=64, icon=, menuName=导出数字货币到Excel;1, url=excel/toExcel, menuList=null), MenuList(gid=66, icon=, menuName=添加或编辑数字货币;1, url=generator/wasdatadictionary/saveOrUpdate, menuList=null)]), MenuList(gid=3, icon=, menuName=数字货币监控及预警, url=--, menuList=[MenuList(gid=4, icon=, menuName=数字货币监控及预警;0, url=/control-waring.html, menuList=null)]), MenuList(gid=5, icon=, menuName=地址池管理, url=--, menuList=[MenuList(gid=24, icon=, menuName=地址池管理;0, url=/address-pool.html, menuList=null), MenuList(gid=57, icon=, menuName=预警提醒历史记录;0, url=/address-warning-history.html, menuList=null), MenuList(gid=67, icon=, menuName=地址池详情列表;1, url=v1/wasaddresslist/getDetails, menuList=null), MenuList(gid=70, icon=, menuName=预警提醒规则配置;0, url=/address-warning-rule.html, menuList=null)]), MenuList(gid=6, icon=, menuName=平台充值管理, url=--, menuList=[MenuList(gid=14, icon=, menuName=平台充值管理;0, url=/recharge-control.html, menuList=null)]), MenuList(gid=7, icon=, menuName=平台提币管理, url=--, menuList=[MenuList(gid=23, icon=, menuName=平台提币管理;0, url=/withdraw-coin.html, menuList=null)]), MenuList(gid=8, icon=, menuName=系统管理, url=--, menuList=[MenuList(gid=9, icon=, menuName=用户管理;0, url=/user.html, menuList=null), MenuList(gid=10, icon=, menuName=角色管理;0, url=/role.html, menuList=null), MenuList(gid=11, icon=, menuName=菜单管理;0, url=/menu.html, menuList=null), MenuList(gid=12, icon=, menuName=图标管理;0, url=/icon.html, menuList=null), MenuList(gid=26, icon=, menuName=新增用户;1, url=user/addUser, menuList=null), MenuList(gid=43, icon=, menuName=删除用户;1, url=user/deleteUser, menuList=null), MenuList(gid=44, icon=, menuName=编辑用户;1, url=user/updateUser, menuList=null), MenuList(gid=45, icon=, menuName=查询用户;1, url=user/findAllUser, menuList=null), MenuList(gid=46, icon=, menuName=添加角色;1, url=role/addRole, menuList=null), MenuList(gid=47, icon=, menuName=删除角色;1, url=role/deleteRole, menuList=null), MenuList(gid=48, icon=, menuName=编辑角色;1, url=role/updateRole, menuList=null), MenuList(gid=49, icon=, menuName=编辑权限;1, url=role/updateRoleMenu, menuList=null), MenuList(gid=50, icon=, menuName=查询角色;1, url=role/findAllRole, menuList=null), MenuList(gid=51, icon=, menuName=添加菜单;1, url=menu/addMenu, menuList=null), MenuList(gid=52, icon=, menuName=编辑菜单;1, url=menu/editMenu, menuList=null), MenuList(gid=53, icon=, menuName=删除菜单;1, url=menu/delMenu, menuList=null), MenuList(gid=54, icon=, menuName=菜单列表;1, url=menu/findAllMenu, menuList=null), MenuList(gid=55, icon=, menuName=添加图标;1, url=menu/addIcon, menuList=null), MenuList(gid=56, icon=, menuName=图标列表;1, url=menu/findIconList, menuList=null), MenuList(gid=58, icon=, menuName=参数配置;0, url=/was-sys-config.html, menuList=null)]), MenuList(gid=59, icon=, menuName=日志管理, url=--, menuList=[MenuList(gid=60, icon=, menuName=日志列表;0, url=/was-sys-log.html, menuList=null)]), MenuList(gid=68, icon=, menuName=代码生成器, url=--, menuList=[MenuList(gid=69, icon=, menuName=代码生成器;0, url=/generator.html, menuList=null)])], page=null, totalCount=null)
+2018-07-13 10:40:27,705 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:29,524 - ===========进入拦截器==============
+2018-07-13 10:40:29,524 - http://localhost:8038/control-waring.html
+2018-07-13 10:40:29,529 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.controlWaring============
+2018-07-13 10:40:29,529 - ===========请求时间:2018-07-13 10:40:29==========================
+2018-07-13 10:40:29,529 - url=http://localhost:8038/control-waring.html
+2018-07-13 10:40:29,529 - method=GET
+2018-07-13 10:40:29,529 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:29,529 - class_method=com.fq.modules.was.web.controller.common.IndexController.controlWaring
+2018-07-13 10:40:29,529 - args:
+2018-07-13 10:40:29,529 - =============结束请求时间:2018-07-13 10:40:29,耗时:0s======================
+2018-07-13 10:40:29,529 - response=/control-waring
+2018-07-13 10:40:29,529 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:29,551 - ===========进入拦截器==============
+2018-07-13 10:40:29,551 - ===========进入拦截器==============
+2018-07-13 10:40:29,551 - http://localhost:8038/error
+2018-07-13 10:40:29,551 - http://localhost:8038/error
+2018-07-13 10:40:29,567 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:29,567 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:31,619 - ===========进入拦截器==============
+2018-07-13 10:40:31,620 - http://localhost:8038/number-coin.html
+2018-07-13 10:40:31,631 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.numberCoin============
+2018-07-13 10:40:31,631 - ===========请求时间:2018-07-13 10:40:31==========================
+2018-07-13 10:40:31,631 - url=http://localhost:8038/number-coin.html
+2018-07-13 10:40:31,631 - method=GET
+2018-07-13 10:40:31,631 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:31,631 - class_method=com.fq.modules.was.web.controller.common.IndexController.numberCoin
+2018-07-13 10:40:31,631 - args:
+2018-07-13 10:40:31,631 - =============结束请求时间:2018-07-13 10:40:31,耗时:0s======================
+2018-07-13 10:40:31,631 - response=/number-coin
+2018-07-13 10:40:31,632 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:31,793 - ===========进入拦截器==============
+2018-07-13 10:40:31,793 - http://localhost:8038/generator/wasdatadictionary/list
+2018-07-13 10:40:31,812 - ===========开始请求com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.list============
+2018-07-13 10:40:31,812 - ===========请求时间:2018-07-13 10:40:31==========================
+2018-07-13 10:40:31,812 - url=http://localhost:8038/generator/wasdatadictionary/list
+2018-07-13 10:40:31,812 - method=GET
+2018-07-13 10:40:31,812 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:31,812 - class_method=com.fq.modules.was.web.controller.datadictionary.WasDataDictionaryController.list
+2018-07-13 10:40:31,812 - args:pageNumber=1,pageSize=10,wasId=,wasType=,
+2018-07-13 10:40:31,828 - =============结束请求时间:2018-07-13 10:40:31,耗时:0s======================
+2018-07-13 10:40:31,829 - response=Result(code=200, msg=成功, data=[WasDataDictionary(wasId=16, wasBaseCurrency=BASE_BTC_, wasType=ADA, wasBeginBlock=0, wasBlockNum=100, wasGateWay=ADA, wasTokenAddress=null, wasMinConfirm=9, wasStatus=0, wasPrecision=38, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Mon Jun 11 10:56:07 CST 2018, wasLastTime=Mon Jun 11 10:56:09 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=19, wasBaseCurrency=ETH/token, wasType=AION, wasBeginBlock=1100, wasBlockNum=100, wasGateWay=ETH/token, wasTokenAddress=0x4CEdA7906a5Ed2179785Cd3A40A69ee8bc99C466, wasMinConfirm=10, wasStatus=0, wasPrecision=8, wasZeroGasPrice=50, wasZeroGasLimit=210000, wasTransferGasPrice=null, wasTransferGasLimit=50, wasRemark=update v20180709 was_precision, wasCreateTime=Thu Jun 14 02:20:34 CST 2018, wasLastTime=Fri Jun 15 09:21:00 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=20, wasBaseCurrency=ETH/token, wasType=BAT, wasBeginBlock=1100, wasBlockNum=100, wasGateWay=ETH/token, wasTokenAddress=0x0d8775f648430679a709e98d2b0cb6250d2887ef, wasMinConfirm=10, wasStatus=0, wasPrecision=18, wasZeroGasPrice=50, wasZeroGasLimit=210000, wasTransferGasPrice=null, wasTransferGasLimit=50, wasRemark=update v20180709 was_precision, wasCreateTime=Thu Jun 14 02:20:34 CST 2018, wasLastTime=Fri Jun 15 09:21:00 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=1, wasBaseCurrency=BTC, wasType=BTC, wasBeginBlock=424, wasBlockNum=100, wasGateWay=BTC, wasTokenAddress=, wasMinConfirm=1, wasStatus=1, wasPrecision=8, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Mon Jun 11 10:56:07 CST 2018, wasLastTime=Mon Jun 11 10:56:09 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=17, wasBaseCurrency=BASE_BTS_, wasType=BTS, wasBeginBlock=0, wasBlockNum=100, wasGateWay=BTS, wasTokenAddress=null, wasMinConfirm=1, wasStatus=0, wasPrecision=5, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Mon Jun 11 10:56:07 CST 2018, wasLastTime=Mon Jun 11 10:56:09 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=30, wasBaseCurrency=BUC, wasType=BUC, wasBeginBlock=0, wasBlockNum=100, wasGateWay=BUC, wasTokenAddress=null, wasMinConfirm=1, wasStatus=1, wasPrecision=8, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Thu Jul 05 11:17:37 CST 2018, wasLastTime=Thu Jul 05 11:17:38 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=6, wasBaseCurrency=BTC, wasType=DCR, wasBeginBlock=323553, wasBlockNum=100, wasGateWay=DCR, wasTokenAddress=, wasMinConfirm=9, wasStatus=1, wasPrecision=8, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Mon Jun 11 10:56:07 CST 2018, wasLastTime=Fri Jun 15 02:21:31 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=21, wasBaseCurrency=ETH/token, wasType=ELF, wasBeginBlock=1100, wasBlockNum=100, wasGateWay=ETH/token, wasTokenAddress=0xbf2179859fc6d5bee9bf9158632dc51678a4100e, wasMinConfirm=10, wasStatus=0, wasPrecision=18, wasZeroGasPrice=50, wasZeroGasLimit=210000, wasTransferGasPrice=null, wasTransferGasLimit=50, wasRemark=update v20180709 was_precision, wasCreateTime=Thu Jun 14 02:20:34 CST 2018, wasLastTime=Fri Jun 15 09:21:00 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=14, wasBaseCurrency=BASE_BTC_, wasType=EOS, wasBeginBlock=0, wasBlockNum=100, wasGateWay=EOS, wasTokenAddress=null, wasMinConfirm=10, wasStatus=0, wasPrecision=4, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Mon Jun 11 10:56:07 CST 2018, wasLastTime=Mon Jun 11 10:56:09 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null), WasDataDictionary(wasId=7, wasBaseCurrency=ETH, wasType=ETC, wasBeginBlock=2279518, wasBlockNum=100, wasGateWay=ETC, wasTokenAddress=, wasMinConfirm=58, wasStatus=1, wasPrecision=18, wasZeroGasPrice=null, wasZeroGasLimit=null, wasTransferGasPrice=null, wasTransferGasLimit=null, wasRemark=update v20180709 was_precision, wasCreateTime=Mon Jun 11 10:56:07 CST 2018, wasLastTime=Tue Jun 19 08:30:00 CST 2018, wasCoinIntroduceUrl=, wasBlockBrowsersUrl=, wasSpare=null)], page=Pages(first=false, last=false, pageSize=10, pageNumber=1, totalCount=30, totalPage=3), totalCount=30)
+2018-07-13 10:40:31,837 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:44,507 - ===========进入拦截器==============
+2018-07-13 10:40:44,508 - http://localhost:8038/address-pool.html
+2018-07-13 10:40:44,518 - ===========开始请求com.fq.modules.was.web.controller.common.IndexController.addressPool============
+2018-07-13 10:40:44,518 - ===========请求时间:2018-07-13 10:40:44==========================
+2018-07-13 10:40:44,518 - url=http://localhost:8038/address-pool.html
+2018-07-13 10:40:44,519 - method=GET
+2018-07-13 10:40:44,519 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:44,519 - class_method=com.fq.modules.was.web.controller.common.IndexController.addressPool
+2018-07-13 10:40:44,519 - args:
+2018-07-13 10:40:44,519 - =============结束请求时间:2018-07-13 10:40:44,耗时:0s======================
+2018-07-13 10:40:44,519 - response=/addresspool/address-pool
+2018-07-13 10:40:44,519 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）
+2018-07-13 10:40:44,607 - ===========进入拦截器==============
+2018-07-13 10:40:44,607 - http://localhost:8038/v1/addresslist/list
+2018-07-13 10:40:44,619 - ===========开始请求com.fq.modules.was.web.controller.addresspool.AddressListController.list============
+2018-07-13 10:40:44,619 - ===========请求时间:2018-07-13 10:40:44==========================
+2018-07-13 10:40:44,619 - url=http://localhost:8038/v1/addresslist/list
+2018-07-13 10:40:44,619 - method=GET
+2018-07-13 10:40:44,619 - ip=0:0:0:0:0:0:0:1
+2018-07-13 10:40:44,619 - class_method=com.fq.modules.was.web.controller.addresspool.AddressListController.list
+2018-07-13 10:40:44,619 - args:pageNumber=1,pageSize=10,wasSource=,wasType=,wasConfigNum=,
+2018-07-13 10:40:44,659 - =============结束请求时间:2018-07-13 10:40:44,耗时:0s======================
+2018-07-13 10:40:44,659 - response=Result(code=200, msg=成功, data=[{wasNum=3, wasWarnNum=3或者15%, wasRemark=测试配置剩余预警值l, surplusCount=2, wasPercent=0.15, rate=33.33%, wasSource=pizza, wasType=BTC, totalCount=3, warnStatus=true}, {wasNum=3, wasWarnNum=3或者11%, wasRemark=测试配置剩余预警值, surplusCount=3, wasPercent=0.11, rate=25.00%, wasSource=bita, wasType=BTC, totalCount=4, warnStatus=true}], page=Pages(first=false, last=false, pageSize=10, pageNumber=0, totalCount=2, totalPage=1), totalCount=2)
+2018-07-13 10:40:44,661 - >>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）

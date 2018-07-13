@@ -16,9 +16,3 @@ spring:
       servlet:
         content-type: text/html
       cache: false
-
-
-# Mybatis≈‰÷√
-mybatis:
-    type-aliases-package: com.fq.modules.was.web.mapper
-    mapper-locations: classpath:mybatis/**/*.xml

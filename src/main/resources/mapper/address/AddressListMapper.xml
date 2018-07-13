@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.addresspool.AddressListMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.addresspool.AddressList" id="addressListResultMap">
+        <result property="wasId" column="was_id"/>
+        <result property="wasType" column="was_type"/>
+        <result property="wasAddress" column="was_address"/>
+        <result property="wasAccount" column="was_account"/>
+        <result property="wasExpireTime" column="was_expire_time"/>
+        <result property="wasSource" column="was_source"/>
+        <result property="wasRemark" column="was_remark"/>
+        <result property="wasCreateTime" column="was_create_time"/>
+    </resultMap>
+
+    <!--所有的查询字段,各自对应-->
+    <sql id="sql_for_all">
+        was_id,
+        was_type,
+        was_address,
+        was_account,
+        was_expire_time,
+        was_source,
+        was_remark,
+        was_create_time
+    </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+        was_type,
+        was_address,
+        was_account,
+        was_expire_time,
+        was_source,
+        was_remark,
+        was_create_time
+    </sql>
+
+    <!---->
+    <sql id="pageQueryListParam">
+        d.wasType,
+        d.wasSource,
+        count(1) totalCount
+    </sql>
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addAddressList" parameterType="com.fq.modules.was.web.entity.addresspool.AddressList" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_address_list(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+            #{wasId},
+            #{wasType},
+            #{wasAddress},
+            #{wasAccount},
+            #{wasExpireTime},
+            #{wasSource},
+            #{wasRemark},
+            #{wasCreateTime}
+        )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdateAddressList" parameterType="com.fq.modules.was.web.entity.addresspool.AddressList">
+        update was_address_list
+        <trim prefix="set" suffixOverrides=",">
+            <if test="wasType != null and wasType != ''">was_type = #{wasType},</if>
+            <if test="wasAddress != null and wasAddress != ''">was_address = #{wasAddress},</if>
+            <if test="wasAccount != null and wasAccount != ''">was_account = #{wasAccount},</if>
+            <if test="wasExpireTime != null and wasExpireTime != ''">was_expire_time = #{wasExpireTime},</if>
+            <if test="wasSource != null and wasSource != ''">was_source = #{wasSource},</if>
+            <if test="wasRemark != null and wasRemark != ''">was_remark = #{wasRemark},</if>
+            <if test="wasCreateTime != null and wasCreateTime != ''">was_create_time = #{wasCreateTime}</if>
+        </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deleteAddressList" parameterType="java.lang.Long">
+        delete from was_address_list where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="java.lang.Long" resultMap="addressListResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_address_list where was_id = #{wasId}
+    </select>
+
+    <!-- 分页查询信息 列表-->
+    <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        f.*, ifnull(g.was_num,0) wasNum,ifnull(g.was_percent,0) wasPercent,g.was_remark wasRemark
+        FROM
+        (
+        select
+          <include refid="pageQueryListParam"/>
+        from (
+            SELECT
+                was_type wasType,
+                was_source wasSource
+            FROM
+              was_address AS a
+            UNION ALL
+            SELECT
+                was_type wasType,
+                was_source wasSource
+            FROM
+              was_address_list AS b
+            UNION ALL
+            SELECT
+                was_type wasType,
+                was_source wasSource
+            FROM
+              was_address_history AS c
+            ) AS d
+        where 1=1
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and d.wasType = #{bean.wasType}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and d.wasSource = #{bean.wasSource}
+        </if>
+        GROUP BY
+        d.wasType,d.wasSource) f
+        INNER JOIN was_sys_config g ON f.wasType = g.was_type
+        AND f.wasSource = g.was_source
+        <if test="bean.wasConfigNum != null and bean.wasConfigNum.trim() != ''">
+            and g.was_num = #{bean.wasConfigNum}
+        </if>
+          AND g.was_config_type = '剩余预警值'
+        <include refid="limited"/>
+    </select>
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        SELECT count(0) FROM(
+        SELECT
+        f.*, ifnull(g.was_num,0) wasNum,ifnull(g.was_percent,0) wasPercent,g.was_remark wasRemark
+        FROM
+        (
+        select
+        <include refid="pageQueryListParam"/>
+        from (
+        SELECT
+        was_type wasType,
+        was_source wasSource
+        FROM
+        was_address AS a
+        UNION ALL
+        SELECT
+        was_type wasType,
+        was_source wasSource
+        FROM
+        was_address_list AS b
+        UNION ALL
+        SELECT
+        was_type wasType,
+        was_source wasSource
+        FROM
+        was_address_history AS c
+        ) AS d
+        where 1=1
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and d.wasType = #{bean.wasType}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and d.wasSource = #{bean.wasSource}
+        </if>
+        GROUP BY
+        d.wasType,d.wasSource) f
+        INNER JOIN was_sys_config g ON f.wasType = g.was_type
+        AND f.wasSource = g.was_source
+        <if test="bean.wasConfigNum != null and bean.wasConfigNum.trim() != ''">
+            and g.was_num = #{bean.wasConfigNum}
+        </if>
+          AND g.was_config_type = '剩余预警值'
+        )e
+    </select>
+
+    <!--地址池明细列表  -->
+    <select id="queryPageDetailsList" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT * FROM (
+          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用' status from was_address a
+        UNION ALL
+          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status from was_address_list b
+        UNION ALL
+          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期' status from was_address_history c
+        )d WHERE 1=1
+        <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
+            and d.wasAddress like concat('%',#{bean.wasAddress},'%')
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and d.wasType = #{bean.wasType}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and d.wasSource = #{bean.wasSource}
+        </if>
+        ORDER BY d.wasType,d.wasSource,d.wasExpireTime
+        <include refid="limited"/>
+    </select>
+    <!--总数-->
+    <select id="queryPageDetailsCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from (
+          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_init_time wasCreateTime,was_remark,'1' fromT,'已使用' status from was_address a
+        UNION ALL
+          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status from was_address_list b
+        UNION ALL
+          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_init_time wasCreateTime,was_remark,'3' fromT,'已过期' status from was_address_history c
+        )d WHERE 1=1
+        <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
+            and d.wasAddress like concat('%',#{bean.wasAddress},'%')
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and d.wasType = #{bean.wasType}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and d.wasSource = #{bean.wasSource}
+        </if>
+    </select>
+
+    <!-- 根据wasType+wasSource 查询信息 -->
+    <select id="queryCountByWasTypeAndSource" parameterType="java.util.Map" resultType="java.util.Map">
+        select count(1) surplusCount from was_address_list where was_type = #{wasType} and was_source = #{wasSource}
+    </select>
+</mapper>

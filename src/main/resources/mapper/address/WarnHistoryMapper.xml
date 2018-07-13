@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.addresspool.WarnHistoryMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.addresspool.WarnHistory" id="warnHistoryResultMap">
+                    <result property="wasId" column="was_id"/>
+                    <result property="wasTypeName" column="was_type_name"/>
+                    <result property="wasType" column="was_type"/>
+                    <result property="wasSource" column="was_source"/>
+                    <result property="wasAddressTotalCount" column="was_address_total_count"/>
+                    <result property="wasAddressSurplusCount" column="was_address_surplus_count"/>
+                    <result property="wasAddressRate" column="was_address_rate"/>
+                    <result property="wasWarnNum" column="was_warn_num"/>
+                    <result property="wasWarnTime" column="was_warn_time"/>
+            </resultMap>
+
+    <!--所有的查询字段,各自对应-->
+    <sql id="sql_for_all">
+                was_id,
+                was_type_name,
+                was_type,
+                was_source,
+                was_address_total_count,
+                was_address_surplus_count,
+                was_address_rate,
+                was_warn_num,
+                was_warn_time
+            </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+                was_type_name,
+                was_type,
+                was_source,
+                was_address_total_count,
+                was_address_surplus_count,
+                was_address_rate,
+                was_warn_num,
+                was_warn_time
+            </sql>
+
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addWarnHistory" parameterType="com.fq.modules.was.web.entity.addresspool.WarnHistory" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_warn_history(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+                        #{wasTypeName},
+                        #{wasType},
+                        #{wasSource},
+                        #{wasAddressTotalCount},
+                        #{wasAddressSurplusCount},
+                        #{wasAddressRate},
+                        #{wasWarnNum},
+                        #{wasWarnTime}
+                  )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdateWarnHistory" parameterType="com.fq.modules.was.web.entity.addresspool.WarnHistory">
+        update was_warn_history
+        <trim prefix="set" suffixOverrides=",">
+                            <if test="wasTypeName != null and wasTypeName != ''">was_type_name = #{wasTypeName},</if>
+                            <if test="wasType != null and wasType != ''">was_type = #{wasType},</if>
+                            <if test="wasSource != null and wasSource != ''">was_source = #{wasSource},</if>
+                            <if test="wasAddressTotalCount != null and wasAddressTotalCount != ''">was_address_total_count = #{wasAddressTotalCount},</if>
+                            <if test="wasAddressSurplusCount != null and wasAddressSurplusCount != ''">was_address_surplus_count = #{wasAddressSurplusCount},</if>
+                            <if test="wasAddressRate != null and wasAddressRate != ''">was_address_rate = #{wasAddressRate},</if>
+                            <if test="wasWarnNum != null and wasWarnNum != ''">was_warn_num = #{wasWarnNum},</if>
+                            <if test="wasWarnTime != null and wasWarnTime != ''">was_warn_time = #{wasWarnTime}</if>
+                    </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deleteWarnHistory" parameterType="java.lang.Long">
+        delete from was_warn_history where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="Integer" resultMap="warnHistoryResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_warn_history where was_id = #{wasId}
+    </select>
+
+    <!-- 分页查询信息 列表-->
+    <select id="pageQueryList" parameterType="java.util.Map" resultMap="warnHistoryResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_warn_history
+        where 1=1
+        <if test="bean.wasId != null">
+            and was_id = #{bean.wasId}
+        </if>
+        <if test="bean.wasTypeName != null and bean.wasTypeName.trim() != ''">
+            and was_type_name = #{bean.wasTypeName}
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and was_source = #{bean.wasSource}
+        </if>
+        <if test="bean.wasAddressTotalCount != null and bean.wasAddressTotalCount.trim() != ''">
+            and was_address_total_count = #{bean.wasAddressTotalCount}
+        </if>
+        <if test="bean.wasAddressSurplusCount != null and bean.wasAddressSurplusCount.trim() != ''">
+            and was_address_surplus_count = #{bean.wasAddressSurplusCount}
+        </if>
+        <if test="bean.wasAddressRate != null and bean.wasAddressRate.trim() != ''">
+            and was_address_rate = #{bean.wasAddressRate}
+        </if>
+        <if test="bean.wasWarnNum != null and bean.wasWarnNum.trim() != ''">
+            and was_warn_num = #{bean.wasWarnNum}
+        </if>
+        <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
+            and was_warn_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_warn_time &lt;= concat(#{bean.endTime},' 23:59:59')
+        </if>
+                order by was_id desc
+        <include refid="limited"/>
+    </select>
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from was_warn_history where 1=1
+                <if test="bean.wasId != null and bean.wasId.trim() != ''">
+            and was_id = #{bean.wasId}
+        </if>
+                <if test="bean.wasTypeName != null and bean.wasTypeName.trim() != ''">
+            and was_type_name = #{bean.wasTypeName}
+        </if>
+                <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+                <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and was_source = #{bean.wasSource}
+        </if>
+                <if test="bean.wasAddressTotalCount != null and bean.wasAddressTotalCount.trim() != ''">
+            and was_address_total_count = #{bean.wasAddressTotalCount}
+        </if>
+                <if test="bean.wasAddressSurplusCount != null and bean.wasAddressSurplusCount.trim() != ''">
+            and was_address_surplus_count = #{bean.wasAddressSurplusCount}
+        </if>
+                <if test="bean.wasAddressRate != null and bean.wasAddressRate.trim() != ''">
+            and was_address_rate = #{bean.wasAddressRate}
+        </if>
+                <if test="bean.wasWarnNum != null and bean.wasWarnNum.trim() != ''">
+            and was_warn_num = #{bean.wasWarnNum}
+        </if>
+        <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
+            and was_warn_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_warn_time &lt;= concat(#{bean.endTime},' 23:59:59')
+        </if>
+            </select>
+</mapper>

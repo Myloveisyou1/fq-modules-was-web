@@ -1,0 +1,33 @@
+package ${package}.mapper;
+
+import ${package}.entity.${className};
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
+
+import java.util.Map;
+import java.util.List;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Component
+@Mapper
+public interface ${className}Mapper {
+
+    List<${className}> pageQueryList(Map<String, Object> params);
+
+    Long pageQueryCount(Map<String, Object> params);
+
+    ${className} selectById(${pk.attrType} ${pk.attrname});
+
+    boolean add${className}(${className} ${classname});
+
+    boolean optUpdate${className}(${className} ${classname});
+
+    int deleteById(${pk.attrType} ${pk.attrname});
+
+}

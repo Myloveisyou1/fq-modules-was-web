@@ -47,6 +47,9 @@ public class ResultUtil {
 
         Map<String,Object> params = new HashMap<>();
         params.put("bean",o);
+
+        //设置分页信息
+        pages.setPageNumber((pages.getPageNumber()-1)*pages.getPageSize());
         params.put("pages",pages);
 
         return params;

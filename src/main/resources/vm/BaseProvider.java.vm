@@ -1,0 +1,52 @@
+package
+
+    ${package}.${moduleName}.provider;
+
+import ${package}.${moduleName}.utils.CommonUtil;
+import ${package}.${moduleName}.domain.common.Pages;
+import ${package}.${moduleName}.domain.${className};
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public class BaseProvider {
+
+    public String pageQuery${className}List(Map<String, Object> params) {
+
+        StringBuffer sql = new StringBuffer("");
+
+        ${className} bean = (${className}) params.get("bean");
+        Pages pages = (Pages) params.get("pages");
+
+        //这里写查询条件
+        #foreach($column in $columns)
+            if (CommonUtil.isNotEmpty(bean.get$column.attrname())) {
+                sql.append("$column.columnName = " + bean.get$column.attrname());
+            }
+        #end
+
+        sql.append(" LIMIT " + pages.getPageSize() * (pages.getPageNumber() - 1) + "," + pages.getPageSize());
+        return sql.toString();
+    }
+
+    public String pageQuery${className}Count(Map<String, Object> params) {
+
+        StringBuffer sql = new StringBuffer("select count(0) from ${tableName} where 1=1");
+
+        ${className} bean = (${className}) params.get("bean");
+
+        //这里写查询条件
+        #foreach($column in $columns)
+            if (CommonUtil.isNotEmpty(bean.get$column.attrname())) {
+                sql.append("$column.columnName = " + bean.get$column.attrname());
+            }
+        #end
+
+        return sql.toString();
+    }
+}

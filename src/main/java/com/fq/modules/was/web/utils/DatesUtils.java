@@ -194,4 +194,20 @@ public class DatesUtils {
 		System.out.println(getSundayOfLastWeek());
 		System.out.println(getDateByTime(1515371796000L));
 	}
+
+	/**
+	 * 获取毫秒
+	 * @param getTime
+	 * @return
+	 */
+	public static long getTimesByString(String getTime) throws ParseException {
+
+		if (CommonUtil.isNotEmpty(getTime)) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(sdf2.parse(getTime));
+			return calendar.getTimeInMillis();
+		} else {
+			return 0L;
+		}
+	}
 }

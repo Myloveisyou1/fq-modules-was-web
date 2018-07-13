@@ -1,0 +1,119 @@
+package ${package}.service.impl;
+
+import ${package}.entity.SysLog;
+import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
+
+import ${package}.utils.DatesUtils;
+
+import ${package}.entity.${className};
+import ${package}.service.${className}Service;
+import ${package}.entity.common.Pages;
+import ${package}.mapper.${className}Mapper;
+import ${package}.mapper.SysLogMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
+
+@Service
+public class ${className}ServiceImpl extends BaseServiceImpl implements ${className}Service {
+
+    @Autowired
+    private ${className}Mapper ${classname}Mapper;
+
+    @Autowired
+    private SysLogMapper sysLogMapper;
+
+    /**
+    * 分页查询数据
+    * @param params
+    * @return
+    */
+    public Map<String, Object> queryPage(Map<String, Object> params) {
+
+        Map<String, Object> map = new HashMap<>();
+
+        //这里开始写具体的业务逻辑
+        List<${className}> list = ${classname}Mapper.pageQueryList(params);
+        Long count = ${classname}Mapper.pageQueryCount(params);
+
+        Pages pages = (Pages) params.get("pages");
+        pages.setTotalCount(count);
+        long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
+        pages.setTotalPage(Integer.valueOf(totalPage + ""));
+
+        map.put("result", list);//数据信息
+        map.put("pages", pages);//分页信息
+
+        return map;
+    }
+
+    /**
+    * 根据主键查询信息
+    */
+    public ${className} selectById(${pk.attrType} ${pk.attrname}) {
+
+        return ${classname}Mapper.selectById(${pk.attrname});
+    }
+
+    /**
+     * 保存信息
+     * @param ${classname} 需要保存的对象
+     * @return
+     */
+    public boolean insert(${className} ${classname}) {
+
+        boolean flag = ${classname}Mapper.add${className}(${classname});
+        //记录日志信息
+        String content = getUserName()+"在"+DatesUtils.time()+"新增了【】的信息";
+        String result = "新增成功";
+        if (!flag) {
+            result = "新增失败";
+        }
+        SysLog sysLog = new SysLog(1,getUserName(),content,result);
+        sysLogMapper.addSysLog(sysLog);
+
+        return flag;
+    }
+
+    /**
+     * 修改信息
+     * @param ${classname} 需要修改的对象
+     * @return
+     */
+    public boolean updateById(${className} ${classname}) {
+
+        boolean flag = ${classname}Mapper.optUpdate${className}(${classname});
+        //记录日志信息
+        String content = getUserName()+"在"+DatesUtils.time()+"修改了【】的信息";
+        String result = "修改成功";
+        if (!flag) {
+            result = "修改失败";
+        }
+        SysLog sysLog = new SysLog(2,getUserName(),content,result);
+        sysLogMapper.addSysLog(sysLog);
+        return flag;
+    }
+
+    /**
+    * 根据id删除信息
+    * @return
+    */
+    public int deleteById(${pk.attrType} ${pk.attrname}) {
+
+        int ret = ${classname}Mapper.deleteById(${pk.attrname});
+
+        //记录日志信息
+        String content = getUserName()+"在"+DatesUtils.time()+"删除了id=【${pk.attrname}】的信息";
+        String result = "删除成功";
+        if (ret == 0) {
+            result = "删除失败";
+        }
+        SysLog sysLog = new SysLog(4,getUserName(),content,result);
+        sysLogMapper.addSysLog(sysLog);
+
+        return ret;
+    }
+}

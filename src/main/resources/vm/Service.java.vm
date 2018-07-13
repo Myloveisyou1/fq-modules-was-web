@@ -1,0 +1,27 @@
+package ${package}.service;
+
+import ${package}.entity.${className};
+
+import java.util.Map;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+public interface  ${className}Service {
+
+    Map<String, Object> queryPage(Map<String, Object> params);
+
+    ${className} selectById(${pk.attrType} ${pk.attrname});
+
+    boolean insert(${className} ${classname});
+
+    boolean updateById(${className} ${classname});
+
+    int deleteById(${pk.attrType} ${pk.attrname});
+
+}
+
