@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.payrecord.PayRecordMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.payrecord.PayRecord" id="payRecordResultMap">
+                    <result property="wasId" column="was_id"/>
+                    <result property="wasSource" column="was_source"/>
+                    <result property="wasTxid" column="was_txid"/>
+                    <result property="wasType" column="was_type"/>
+                    <result property="wasAddress" column="was_address"/>
+                    <result property="wasPaymentId" column="was_payment_id"/>
+                    <result property="wasSerialNumber" column="was_serial_number"/>
+                    <result property="wasAmount" column="was_amount"/>
+                    <result property="wasRemark" column="was_remark"/>
+                    <result property="wasCreateTime" column="was_create_time"/>
+            </resultMap>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all_map">
+                was_id wasId,
+                was_source wasSource,
+                was_txid wasTxid,
+                was_type wasType,
+                was_address wasAddress,
+                was_payment_id wasPaymentId,
+                was_serial_number wasSerialNumber,
+                was_amount wasAmount,
+                was_remark wasRemark,
+                was_create_time wasCreateTime
+            </sql>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all">
+                was_id,
+                was_source,
+                was_txid,
+                was_type,
+                was_address,
+                was_payment_id,
+                was_serial_number,
+                was_amount,
+                was_remark,
+                was_create_time
+            </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+                was_source,
+                was_txid,
+                was_type,
+                was_address,
+                was_payment_id,
+                was_serial_number,
+                was_amount,
+                was_remark,
+                was_create_time
+            </sql>
+
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addPayRecord" parameterType="com.fq.modules.was.web.entity.payrecord.PayRecord" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_pay_record(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+            #{wasSource},
+            #{wasTxid},
+            #{wasType},
+            #{wasAddress},
+            #{wasPaymentId},
+            #{wasSerialNumber},
+            #{wasAmount},
+            #{wasRemark},
+            #{wasCreateTime}
+        )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdatePayRecord" parameterType="com.fq.modules.was.web.entity.payrecord.PayRecord">
+        update was_pay_record
+        <trim prefix="set" suffixOverrides=",">
+            <if test="wasSource != null and wasSource != ''">was_source = #{wasSource},</if>
+            <if test="wasTxid != null and wasTxid != ''">was_txid = #{wasTxid},</if>
+            <if test="wasType != null and wasType != ''">was_type = #{wasType},</if>
+            <if test="wasAddress != null and wasAddress != ''">was_address = #{wasAddress},</if>
+            <if test="wasPaymentId != null and wasPaymentId != ''">was_payment_id = #{wasPaymentId},</if>
+            <if test="wasSerialNumber != null and wasSerialNumber != ''">was_serial_number = #{wasSerialNumber},</if>
+            <if test="wasAmount != null and wasAmount != ''">was_amount = #{wasAmount},</if>
+            <if test="wasRemark != null and wasRemark != ''">was_remark = #{wasRemark},</if>
+            <if test="wasCreateTime != null and wasCreateTime != ''">was_create_time = #{wasCreateTime}</if>
+      </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deletePayRecord" parameterType="java.lang.Long">
+        delete from was_pay_record where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="Integer" resultMap="payRecordResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_pay_record where was_id = #{wasId}
+    </select>
+
+    <!-- 分页查询信息 列表-->
+    <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+          <include refid="sql_for_all_map"/>
+        from was_pay_record
+        where 1=1
+                <if test="bean.wasId != null and bean.wasId.trim() != ''">
+            and was_id = #{bean.wasId}
+        </if>
+                <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and was_source = #{bean.wasSource}
+        </if>
+                <if test="bean.wasTxid != null and bean.wasTxid.trim() != ''">
+            and was_txid = #{bean.wasTxid}
+        </if>
+                <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+                <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
+            and was_address = #{bean.wasAddress}
+        </if>
+                <if test="bean.wasPaymentId != null and bean.wasPaymentId.trim() != ''">
+            and was_payment_id = #{bean.wasPaymentId}
+        </if>
+                <if test="bean.wasSerialNumber != null and bean.wasSerialNumber.trim() != ''">
+            and was_serial_number = #{bean.wasSerialNumber}
+        </if>
+                <if test="bean.wasAmount != null and bean.wasAmount.trim() != ''">
+            and was_amount = #{bean.wasAmount}
+        </if>
+                <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+                <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+                order by was_id desc
+        <include refid="limited"/>
+    </select>
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from was_pay_record where 1=1
+                <if test="bean.wasId != null and bean.wasId.trim() != ''">
+            and was_id = #{bean.wasId}
+        </if>
+                <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and was_source = #{bean.wasSource}
+        </if>
+                <if test="bean.wasTxid != null and bean.wasTxid.trim() != ''">
+            and was_txid = #{bean.wasTxid}
+        </if>
+                <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+                <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
+            and was_address = #{bean.wasAddress}
+        </if>
+                <if test="bean.wasPaymentId != null and bean.wasPaymentId.trim() != ''">
+            and was_payment_id = #{bean.wasPaymentId}
+        </if>
+                <if test="bean.wasSerialNumber != null and bean.wasSerialNumber.trim() != ''">
+            and was_serial_number = #{bean.wasSerialNumber}
+        </if>
+                <if test="bean.wasAmount != null and bean.wasAmount.trim() != ''">
+            and was_amount = #{bean.wasAmount}
+        </if>
+                <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+                <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+            </select>
+</mapper>

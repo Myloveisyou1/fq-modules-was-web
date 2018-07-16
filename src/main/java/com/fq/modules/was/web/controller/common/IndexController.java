@@ -154,8 +154,11 @@ public class IndexController {
      * @return
      */
     @GetMapping(value = "/withdraw-coin")
-    public String withdrawCoin() {
-        return "/withdraw-coin";
+    public String withdrawCoin(Model model) {
+        //获取币种和平台
+        model.addAttribute("currencyList",sysCurrencyService.findAll());
+        model.addAttribute("sourceList",sysSourceService.findAll());
+        return "/payrecord/withdraw-coin";
     }
 
     /**

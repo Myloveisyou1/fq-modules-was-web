@@ -73,7 +73,7 @@
     </select>
 
     <!-- 分页查询信息 列表-->
-    <select id="pageQueryList" parameterType="java.util.Map" resultMap="java.util.Map">
+    <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
         select
           <include refid="sql_for_all_map"/>
         from ${tableName}
