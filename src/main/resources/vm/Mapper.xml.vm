@@ -10,17 +10,24 @@
         #end
     </resultMap>
 
-    <!--所有的查询字段,各自对应-->
-    <sql id="sql_for_all">
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all_map">
         #foreach($column in $columns)
         ${column.columnName} ${column.attrname},
+        #end
+    </sql>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all">
+        #foreach($column in $columns)
+        ${column.columnName},
         #end
     </sql>
 
     <!-- 保存需要的字段 -->
     <sql id="sql_for_all_except_p">
         #foreach($column in $columns)
-        ${column.columnName} ${column.attrname},
+        ${column.columnName},
         #end
     </sql>
 
@@ -66,9 +73,9 @@
     </select>
 
     <!-- 分页查询信息 列表-->
-    <select id="pageQueryList" parameterType="java.util.Map" resultMap="${classname}ResultMap">
+    <select id="pageQueryList" parameterType="java.util.Map" resultMap="java.util.Map">
         select
-          <include refid="sql_for_all"/>
+          <include refid="sql_for_all_map"/>
         from ${tableName}
         where 1=1
         #foreach($column in $columns)

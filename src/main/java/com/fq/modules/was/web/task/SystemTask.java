@@ -90,6 +90,8 @@ public class SystemTask {
                 }
             }
 
+        } else {
+            log.info("==============没有需要预警的币种地址==============");
         }
 
 

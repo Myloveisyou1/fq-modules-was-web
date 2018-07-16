@@ -18,7 +18,7 @@ import java.util.List;
 @Mapper
 public interface ${className}Mapper {
 
-    List<${className}> pageQueryList(Map<String, Object> params);
+    List<Map<String, Object>> pageQueryList(Map<String, Object> params);
 
     Long pageQueryCount(Map<String, Object> params);
 

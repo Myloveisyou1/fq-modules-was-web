@@ -31,8 +31,7 @@
                     <div class="layui-input-inline">
                         <select id="wasType" lay-filter="aihao" name="wasType">
                             <option value="" selected>全部</option>
-                            <option value="btc">btc</option>
-                            <option value="eth">eth</option>
+                            <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
                         </select>
                     </div>
                 </div>
@@ -41,8 +40,7 @@
                     <div class="layui-input-inline">
                         <select id="wasSource" lay-filter="aihao" name="wasSource">
                             <option value="" selected>全部</option>
-                            <option value="pizza">pizza</option>
-                            <option value="bita">bita</option>
+                            <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
                         </select>
                     </div>
                 </div>
@@ -77,8 +75,7 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select id="wasTypes" lay-filter="aihao">
-                    <option value="btc">btc</option>
-                    <option value="eth">eth</option>
+                    <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
                 </select>
             </div>
         </div>
@@ -88,8 +85,7 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select id="wasSources" lay-filter="aihao">
-                    <option value="pizza">pizza</option>
-                    <option value="bita">bita</option>
+                    <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
                 </select>
             </div>
         </div>
@@ -127,8 +123,7 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select id="uwasTypes" lay-filter="aihao" disabled>
-                    <option value="btc">btc</option>
-                    <option value="eth">eth</option>
+                    <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
                 </select>
             </div>
         </div>
@@ -138,8 +133,7 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select id="uwasSources" lay-filter="aihao" disabled>
-                    <option value="pizza">pizza</option>
-                    <option value="bita">bita</option>
+                    <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
                 </select>
             </div>
         </div>

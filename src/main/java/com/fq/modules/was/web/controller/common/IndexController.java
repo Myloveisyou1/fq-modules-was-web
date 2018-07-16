@@ -1,7 +1,11 @@
 package com.fq.modules.was.web.controller.common;
 
+import com.fq.modules.was.web.entity.basic.SysCurrency;
 import com.fq.modules.was.web.entity.common.Constant;
 import com.fq.modules.was.web.entity.common.Constant;
+import com.fq.modules.was.web.service.basic.SysCurrencyService;
+import com.fq.modules.was.web.service.basic.SysSourceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class IndexController {
+
+    @Autowired
+    private SysCurrencyService sysCurrencyService;
+    @Autowired
+    private SysSourceService sysSourceService;
 
     /**
      * 跳转到登陆页面
@@ -97,6 +106,10 @@ public class IndexController {
     @GetMapping(value = "/address-pool")
     public String addressPool(Model model) {
         model.addAttribute("url",Constant.URL_ADDRESS_LIST);
+
+        //获取币种和平台
+        model.addAttribute("currencyList",sysCurrencyService.findAll());
+        model.addAttribute("sourceList",sysSourceService.findAll());
         return "/addresspool/address-pool";
     }
     /**
@@ -240,5 +253,21 @@ public class IndexController {
     @GetMapping(value = "/was-sys-config")
     public String config() {
         return "/addresspool/was-sys-config";
+    }
+    /**
+     * 币种管理
+     * @return
+     */
+    @GetMapping(value = "/was-sys-currency")
+    public String currency() {
+        return "/basic/was-sys-currency";
+    }
+    /**
+     * 业务平台管理
+     * @return
+     */
+    @GetMapping(value = "/was-sys-source")
+    public String source() {
+        return "/basic/was-sys-source";
     }
 }
