@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.datadictionary.DataDictionaryMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.datadictionary.DataDictionary" id="dataDictionaryResultMap">
+        <result property="wasId" column="was_id"/>
+        <result property="wasBaseCurrency" column="was_base_currency"/>
+        <result property="wasType" column="was_type"/>
+        <result property="wasBeginBlock" column="was_begin_block"/>
+        <result property="wasBlockNum" column="was_block_num"/>
+        <result property="wasGateWay" column="was_gate_way"/>
+        <result property="wasTokenAddress" column="was_token_address"/>
+        <result property="wasMinAmount" column="was_min_amount"/>
+        <result property="wasMinConfirm" column="was_min_confirm"/>
+        <result property="wasStatus" column="was_status"/>
+        <result property="wasPrecision" column="was_precision"/>
+        <result property="wasZeroGasPrice" column="was_zero_gas_price"/>
+        <result property="wasZeroGasLimit" column="was_zero_gas_limit"/>
+        <result property="wasTransferGasPrice" column="was_transfer_gas_price"/>
+        <result property="wasTransferGasLimit" column="was_transfer_gas_limit"/>
+        <result property="wasCoinIntroduceUrl" column="was_coin_introduce_url"/>
+        <result property="wasBlockBrowsersUrl" column="was_block_browsers_url"/>
+        <result property="wasRemark" column="was_remark"/>
+        <result property="wasSpare" column="was_spare"/>
+        <result property="wasCreateTime" column="was_create_time"/>
+        <result property="wasLastTime" column="was_last_time"/>
+    </resultMap>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all_map">
+        was_id wasId,
+        was_base_currency wasBaseCurrency,
+        was_type wasType,
+        was_begin_block wasBeginBlock,
+        was_block_num wasBlockNum,
+        was_gate_way wasGateWay,
+        was_token_address wasTokenAddress,
+        was_min_amount wasMinAmount,
+        was_min_confirm wasMinConfirm,
+        was_status wasStatus,
+        was_precision wasPrecision,
+        was_zero_gas_price wasZeroGasPrice,
+        was_zero_gas_limit wasZeroGasLimit,
+        was_transfer_gas_price wasTransferGasPrice,
+        was_transfer_gas_limit wasTransferGasLimit,
+        was_coin_introduce_url wasCoinIntroduceUrl,
+        was_block_browsers_url wasBlockBrowsersUrl,
+        was_remark wasRemark,
+        was_spare wasSpare,
+        was_create_time wasCreateTime,
+        was_last_time wasLastTime
+    </sql>
+
+    <!--所有的查询字段,各自对应   for obj-->
+    <sql id="sql_for_all">
+        was_id,
+        was_base_currency,
+        was_type,
+        was_begin_block,
+        was_block_num,
+        was_gate_way,
+        was_token_address,
+        was_min_amount,
+        was_min_confirm,
+        was_status,
+        was_precision,
+        was_zero_gas_price,
+        was_zero_gas_limit,
+        was_transfer_gas_price,
+        was_transfer_gas_limit,
+        was_coin_introduce_url,
+        was_block_browsers_url,
+        was_remark,
+        was_spare,
+        was_create_time,
+        was_last_time
+    </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+        was_base_currency,
+        was_type,
+        was_begin_block,
+        was_block_num,
+        was_gate_way,
+        was_token_address,
+        was_min_amount,
+        was_min_confirm,
+        was_status,
+        was_precision,
+        was_zero_gas_price,
+        was_zero_gas_limit,
+        was_transfer_gas_price,
+        was_transfer_gas_limit,
+        was_coin_introduce_url,
+        was_block_browsers_url,
+        was_remark,
+        was_spare,
+        was_create_time,
+        was_last_time
+    </sql>
+
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addDataDictionary" parameterType="com.fq.modules.was.web.entity.datadictionary.DataDictionary" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_data_dictionary(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+            #{wasBaseCurrency},
+            #{wasType},
+            #{wasBeginBlock},
+            #{wasBlockNum},
+            #{wasGateWay},
+            #{wasTokenAddress},
+            #{wasMinAmount},
+            #{wasMinConfirm},
+            #{wasStatus},
+            #{wasPrecision},
+            #{wasZeroGasPrice},
+            #{wasZeroGasLimit},
+            #{wasTransferGasPrice},
+            #{wasTransferGasLimit},
+            #{wasCoinIntroduceUrl},
+            #{wasBlockBrowsersUrl},
+            #{wasRemark},
+            #{wasSpare},
+            #{wasCreateTime},
+            #{wasLastTime}
+        )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdateDataDictionary" parameterType="com.fq.modules.was.web.entity.datadictionary.DataDictionary">
+        update was_data_dictionary
+        <trim prefix="set" suffixOverrides=",">
+            <if test="wasBaseCurrency != null and wasBaseCurrency != ''">was_base_currency = #{wasBaseCurrency},</if>
+            <if test="wasType != null and wasType != ''">was_type = #{wasType},</if>
+            <if test="wasBeginBlock != null and wasBeginBlock != ''">was_begin_block = #{wasBeginBlock},</if>
+            <if test="wasBlockNum != null and wasBlockNum != ''">was_block_num = #{wasBlockNum},</if>
+            <if test="wasGateWay != null and wasGateWay != ''">was_gate_way = #{wasGateWay},</if>
+            <if test="wasTokenAddress != null and wasTokenAddress != ''">was_token_address = #{wasTokenAddress},</if>
+            <if test="wasMinAmount != null and wasMinAmount != ''">was_min_amount = #{wasMinAmount},</if>
+            <if test="wasMinConfirm != null and wasMinConfirm != ''">was_min_confirm = #{wasMinConfirm},</if>
+            <if test="wasStatus != null and wasStatus != ''">was_status = #{wasStatus},</if>
+            <if test="wasPrecision != null and wasPrecision != ''">was_precision = #{wasPrecision},</if>
+            <if test="wasZeroGasPrice != null and wasZeroGasPrice != ''">was_zero_gas_price = #{wasZeroGasPrice},</if>
+            <if test="wasZeroGasLimit != null and wasZeroGasLimit != ''">was_zero_gas_limit = #{wasZeroGasLimit},</if>
+            <if test="wasTransferGasPrice != null and wasTransferGasPrice != ''">was_transfer_gas_price = #{wasTransferGasPrice},</if>
+            <if test="wasTransferGasLimit != null and wasTransferGasLimit != ''">was_transfer_gas_limit = #{wasTransferGasLimit},</if>
+            <if test="wasCoinIntroduceUrl != null and wasCoinIntroduceUrl != ''">was_coin_introduce_url = #{wasCoinIntroduceUrl},</if>
+            <if test="wasBlockBrowsersUrl != null and wasBlockBrowsersUrl != ''">was_block_browsers_url = #{wasBlockBrowsersUrl},</if>
+            <if test="wasRemark != null and wasRemark != ''">was_remark = #{wasRemark},</if>
+            <if test="wasSpare != null and wasSpare != ''">was_spare = #{wasSpare},</if>
+            <if test="wasCreateTime != null and wasCreateTime != ''">was_create_time = #{wasCreateTime},</if>
+            <if test="wasLastTime != null and wasLastTime != ''">was_last_time = #{wasLastTime}</if>
+        </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deleteDataDictionary" parameterType="java.lang.Long">
+        delete from was_data_dictionary where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="Integer" resultMap="dataDictionaryResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_data_dictionary where was_id = #{wasId}
+    </select>
+
+    <!-- 分页查询信息 列表-->
+    <select id="pageQueryList" parameterType="java.util.Map" resultMap="dataDictionaryResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_data_dictionary
+        where 1=1
+        <if test="bean.wasId != null">
+            and was_id = #{bean.wasId}
+        </if>
+        <if test="bean.wasBaseCurrency != null and bean.wasBaseCurrency.trim() != ''">
+            and was_base_currency = #{bean.wasBaseCurrency}
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+        <if test="bean.wasBeginBlock != null and bean.wasBeginBlock.trim() != ''">
+            and was_begin_block = #{bean.wasBeginBlock}
+        </if>
+        <if test="bean.wasBlockNum != null and bean.wasBlockNum.trim() != ''">
+            and was_block_num = #{bean.wasBlockNum}
+        </if>
+        <if test="bean.wasGateWay != null and bean.wasGateWay.trim() != ''">
+            and was_gate_way = #{bean.wasGateWay}
+        </if>
+        <if test="bean.wasTokenAddress != null and bean.wasTokenAddress.trim() != ''">
+            and was_token_address = #{bean.wasTokenAddress}
+        </if>
+        <if test="bean.wasMinAmount != null">
+            and was_min_amount = #{bean.wasMinAmount}
+        </if>
+        <if test="bean.wasMinConfirm != null">
+            and was_min_confirm = #{bean.wasMinConfirm}
+        </if>
+        <if test="bean.wasStatus != null">
+            and was_status = #{bean.wasStatus}
+        </if>
+        <if test="bean.wasPrecision != null">
+            and was_precision = #{bean.wasPrecision}
+        </if>
+        <if test="bean.wasZeroGasPrice != null and bean.wasZeroGasPrice.trim() != ''">
+            and was_zero_gas_price = #{bean.wasZeroGasPrice}
+        </if>
+        <if test="bean.wasZeroGasLimit != null and bean.wasZeroGasLimit.trim() != ''">
+            and was_zero_gas_limit = #{bean.wasZeroGasLimit}
+        </if>
+        <if test="bean.wasTransferGasPrice != null and bean.wasTransferGasPrice.trim() != ''">
+            and was_transfer_gas_price = #{bean.wasTransferGasPrice}
+        </if>
+        <if test="bean.wasTransferGasLimit != null and bean.wasTransferGasLimit.trim() != ''">
+            and was_transfer_gas_limit = #{bean.wasTransferGasLimit}
+        </if>
+        <if test="bean.wasCoinIntroduceUrl != null and bean.wasCoinIntroduceUrl.trim() != ''">
+            and was_coin_introduce_url = #{bean.wasCoinIntroduceUrl}
+        </if>
+        <if test="bean.wasBlockBrowsersUrl != null and bean.wasBlockBrowsersUrl.trim() != ''">
+            and was_block_browsers_url = #{bean.wasBlockBrowsersUrl}
+        </if>
+        <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+        <if test="bean.wasSpare != null and bean.wasSpare.trim() != ''">
+            and was_spare = #{bean.wasSpare}
+        </if>
+        <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+        <if test="bean.wasLastTime != null and bean.wasLastTime.trim() != ''">
+            and was_last_time = #{bean.wasLastTime}
+        </if>
+                order by was_id desc
+        <include refid="limited"/>
+    </select>
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from was_data_dictionary where 1=1
+        <if test="bean.wasId != null">
+            and was_id = #{bean.wasId}
+        </if>
+        <if test="bean.wasBaseCurrency != null and bean.wasBaseCurrency.trim() != ''">
+            and was_base_currency = #{bean.wasBaseCurrency}
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+        <if test="bean.wasBeginBlock != null and bean.wasBeginBlock.trim() != ''">
+            and was_begin_block = #{bean.wasBeginBlock}
+        </if>
+        <if test="bean.wasBlockNum != null and bean.wasBlockNum.trim() != ''">
+            and was_block_num = #{bean.wasBlockNum}
+        </if>
+        <if test="bean.wasGateWay != null and bean.wasGateWay.trim() != ''">
+            and was_gate_way = #{bean.wasGateWay}
+        </if>
+        <if test="bean.wasTokenAddress != null and bean.wasTokenAddress.trim() != ''">
+            and was_token_address = #{bean.wasTokenAddress}
+        </if>
+        <if test="bean.wasMinAmount != null">
+            and was_min_amount = #{bean.wasMinAmount}
+        </if>
+        <if test="bean.wasMinConfirm != null">
+            and was_min_confirm = #{bean.wasMinConfirm}
+        </if>
+        <if test="bean.wasStatus != null">
+            and was_status = #{bean.wasStatus}
+        </if>
+        <if test="bean.wasPrecision != null">
+            and was_precision = #{bean.wasPrecision}
+        </if>
+        <if test="bean.wasZeroGasPrice != null and bean.wasZeroGasPrice.trim() != ''">
+            and was_zero_gas_price = #{bean.wasZeroGasPrice}
+        </if>
+        <if test="bean.wasZeroGasLimit != null and bean.wasZeroGasLimit.trim() != ''">
+            and was_zero_gas_limit = #{bean.wasZeroGasLimit}
+        </if>
+        <if test="bean.wasTransferGasPrice != null and bean.wasTransferGasPrice.trim() != ''">
+            and was_transfer_gas_price = #{bean.wasTransferGasPrice}
+        </if>
+        <if test="bean.wasTransferGasLimit != null and bean.wasTransferGasLimit.trim() != ''">
+            and was_transfer_gas_limit = #{bean.wasTransferGasLimit}
+        </if>
+        <if test="bean.wasCoinIntroduceUrl != null and bean.wasCoinIntroduceUrl.trim() != ''">
+            and was_coin_introduce_url = #{bean.wasCoinIntroduceUrl}
+        </if>
+        <if test="bean.wasBlockBrowsersUrl != null and bean.wasBlockBrowsersUrl.trim() != ''">
+            and was_block_browsers_url = #{bean.wasBlockBrowsersUrl}
+        </if>
+        <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+        <if test="bean.wasSpare != null and bean.wasSpare.trim() != ''">
+            and was_spare = #{bean.wasSpare}
+        </if>
+        <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+        <if test="bean.wasLastTime != null and bean.wasLastTime.trim() != ''">
+            and was_last_time = #{bean.wasLastTime}
+        </if>
+    </select>
+
+    <!--一键禁用-->
+    <update id="disabledAll" parameterType="java.lang.String">
+        update was_data_dictionary set was_status = #{way}
+    </update>
+
+    <!--更新区块高度-->
+    <update id="updateBlockNumByWasType">
+        update was_data_dictionary set was_begin_block = #{blockNum} where was_type = #{wasType}
+    </update>
+
+    <!--查询所有数据,不分页-->
+    <select id="findAll" parameterType="java.util.Map" resultMap="dataDictionaryResultMap">
+        select
+        <include refid="sql_for_all"/>
+        from was_data_dictionary
+        where 1=1
+        <if test="bean.wasId != null">
+            and was_id = #{bean.wasId}
+        </if>
+        <if test="bean.wasBaseCurrency != null and bean.wasBaseCurrency.trim() != ''">
+            and was_base_currency = #{bean.wasBaseCurrency}
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+        <if test="bean.wasBeginBlock != null and bean.wasBeginBlock.trim() != ''">
+            and was_begin_block = #{bean.wasBeginBlock}
+        </if>
+        <if test="bean.wasBlockNum != null and bean.wasBlockNum.trim() != ''">
+            and was_block_num = #{bean.wasBlockNum}
+        </if>
+        <if test="bean.wasGateWay != null and bean.wasGateWay.trim() != ''">
+            and was_gate_way = #{bean.wasGateWay}
+        </if>
+        <if test="bean.wasTokenAddress != null and bean.wasTokenAddress.trim() != ''">
+            and was_token_address = #{bean.wasTokenAddress}
+        </if>
+        <if test="bean.wasMinAmount != null">
+            and was_min_amount = #{bean.wasMinAmount}
+        </if>
+        <if test="bean.wasMinConfirm != null">
+            and was_min_confirm = #{bean.wasMinConfirm}
+        </if>
+        <if test="bean.wasStatus != null">
+            and was_status = #{bean.wasStatus}
+        </if>
+        <if test="bean.wasPrecision != null">
+            and was_precision = #{bean.wasPrecision}
+        </if>
+        <if test="bean.wasZeroGasPrice != null and bean.wasZeroGasPrice.trim() != ''">
+            and was_zero_gas_price = #{bean.wasZeroGasPrice}
+        </if>
+        <if test="bean.wasZeroGasLimit != null and bean.wasZeroGasLimit.trim() != ''">
+            and was_zero_gas_limit = #{bean.wasZeroGasLimit}
+        </if>
+        <if test="bean.wasTransferGasPrice != null and bean.wasTransferGasPrice.trim() != ''">
+            and was_transfer_gas_price = #{bean.wasTransferGasPrice}
+        </if>
+        <if test="bean.wasTransferGasLimit != null and bean.wasTransferGasLimit.trim() != ''">
+            and was_transfer_gas_limit = #{bean.wasTransferGasLimit}
+        </if>
+        <if test="bean.wasCoinIntroduceUrl != null and bean.wasCoinIntroduceUrl.trim() != ''">
+            and was_coin_introduce_url = #{bean.wasCoinIntroduceUrl}
+        </if>
+        <if test="bean.wasBlockBrowsersUrl != null and bean.wasBlockBrowsersUrl.trim() != ''">
+            and was_block_browsers_url = #{bean.wasBlockBrowsersUrl}
+        </if>
+        <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+        <if test="bean.wasSpare != null and bean.wasSpare.trim() != ''">
+            and was_spare = #{bean.wasSpare}
+        </if>
+        <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+        <if test="bean.wasLastTime != null and bean.wasLastTime.trim() != ''">
+            and was_last_time = #{bean.wasLastTime}
+        </if>
+        order by was_id desc
+    </select>
+</mapper>

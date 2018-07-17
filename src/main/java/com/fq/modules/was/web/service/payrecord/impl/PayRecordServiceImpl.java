@@ -1,12 +1,17 @@
 package com.fq.modules.was.web.service.payrecord.impl;
+import com.alibaba.fastjson.JSONObject;
 import com.fq.modules.was.web.entity.logs.SysLog;
+import com.fq.modules.was.web.entity.payrecord.PayOperatorHistory;
 import com.fq.modules.was.web.entity.payrecord.PayRecord;
 import com.fq.modules.was.web.mapper.logs.SysLogMapper;
+import com.fq.modules.was.web.mapper.payrecord.PayOperatorHistoryMapper;
 import com.fq.modules.was.web.mapper.payrecord.PayRecordMapper;
 import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
 import com.fq.modules.was.web.service.payrecord.PayRecordService;
+import com.fq.modules.was.web.utils.CommonUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
@@ -15,6 +20,7 @@ import com.fq.modules.was.web.utils.DatesUtils;
 
 import com.fq.modules.was.web.entity.common.Pages;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -22,6 +28,9 @@ public class PayRecordServiceImpl extends BaseServiceImpl implements PayRecordSe
 
     @Autowired
     private PayRecordMapper payRecordMapper;
+
+    @Autowired
+    private PayOperatorHistoryMapper payOperatorHistoryMapper;
 
     @Autowired
     private SysLogMapper sysLogMapper;
@@ -115,5 +124,72 @@ public class PayRecordServiceImpl extends BaseServiceImpl implements PayRecordSe
         sysLogMapper.addSysLog(sysLog);
 
         return ret;
+    }
+
+    /**
+     * 再次执行    从而获得交易hash或者重新请求到对应的钱包客户端
+     * @param wasId
+     * @param oType 1.未收到hash的情况;2.请求发送失败的情况
+     * @return
+     */
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public boolean doAgain(Integer wasId, String oType) {
+
+        boolean flag = false;
+        if (CommonUtil.isNotEmpty(wasId) && CommonUtil.isNotEmpty(oType)) {
+            //根据id获取交易信息
+            PayRecord bean = payRecordMapper.selectById(wasId);
+            if (CommonUtil.isNotEmpty(bean)) {
+                Map<String,Object> map = new HashMap<>();
+                if ("1".equals(oType)) {
+                    //未收到hash的情况 相比于 请求发送失败的情况多了两个参数,其他都一样
+                    map.put("was_txid",bean.getWasTxid());
+                    map.put("was_number",1);
+                    map.put("was_method","callback");
+                } else if ("2".equals(oType)) {
+                    map.put("was_method","transfer");//标识转账
+                }
+                //请求发送失败的情况,
+                map.put("was_type",bean.getWasType());
+                map.put("was_address",bean.getWasAddress());
+                map.put("was_acount",bean.getWasPaymentId());
+                map.put("was_serial_number",bean.getWasSerialNumber());
+                map.put("was_source",bean.getWasSource());
+                map.put("was_txfee",0);
+                map.put("was_amount",bean.getWasAmount());
+                map.put("was_remark",bean.getWasRemark());
+
+                String str = JSONObject.toJSONString(map);
+                System.out.println(str);
+
+                //请求要请求的服务
+
+
+                //记录操作历史
+                PayOperatorHistory history = new PayOperatorHistory(wasId,Integer.valueOf(oType),new Date(),getUserName());
+                flag = payOperatorHistoryMapper.addPayOperatorHistory(history);
+                //记录系统日志
+                String content = getUserName()+"在"+DatesUtils.time()+"重新执行"+oType+"的请求";
+                String result = "请求成功";
+                if (!flag) {
+                    result = "请求失败";
+                }
+                SysLog sysLog = new SysLog(2,getUserName(),content,result);
+                sysLogMapper.addSysLog(sysLog);
+            }
+        }
+        return flag;
+    }
+
+    /**
+     * 根据wasId查询操作历史记录
+     * @param wasId
+     * @return
+     */
+    @Override
+    public List<PayOperatorHistory> findHistoryByWasId(Integer wasId) {
+
+        return payOperatorHistoryMapper.findHistoryByWasId(wasId,getUserName());
     }
 }

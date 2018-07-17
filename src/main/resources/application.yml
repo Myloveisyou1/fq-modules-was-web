@@ -16,3 +16,9 @@ spring:
       servlet:
         content-type: text/html
       cache: false
+
+#统一配置feign
+fq:
+  modules:
+    was:
+      serviceId:

@@ -66,6 +66,20 @@
 
     </table>
 </div>
+<!--操作历史列表-->
+<div style="display: none;" id="history">
+    <table class="layui-table layui-form" id="childMenu">
+        <thead>
+        <tr>
+            <th>执行事件</th>
+            <th>操作时间</th>
+            <th>操作人</th>
+        </thead>
+        <tbody class="x-cate" id="myHistory">
+
+        </tbody>
+    </table>
+</div>
 
 <script type="text/javascript" th:src="@{/js/common/base-code.js}"></script>
 <script type="text/html" id="formatDate2">
@@ -76,10 +90,10 @@
     }}
 </script>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="showDetails()">查看</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="showDetails('{{d.wasId}}')">查看</a>
 </script>
 <script type="text/html" id="barDemo2">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="doAgain()">再次执行</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="doAgain('{{d.status}}','{{d.wasId}}')">再次执行</a>
 </script>
 </body>
 
@@ -118,8 +132,8 @@
                     ,{field: 'wasSource', title: '业务系统',sort: true}
                     ,{field: 'wasSerialNumber', title: '业务流水号',sort: true}
                     ,{field: 'totalCount', title: '手续费',sort:true,event:'totalCount'}
-                    ,{field: 'surplusCount', title: '提币状态',sort:true,event:'surplusCount'}
-                    ,{field: 'rate', title: '提币数量', sort: true}
+                    ,{field: 'status', title: '提币状态',sort:true,event:'surplusCount'}
+                    ,{field: 'wasAmount', title: '提币数量', sort: true}
                     ,{field: 'wasWarnNum', title: '操作历史',toolbar:'#barDemo',align:'center'}
                     ,{field: 'repData', title: '操作',toolbar:'#barDemo2',align:'center'}
                 ]]
@@ -162,6 +176,74 @@
                 curr: 1 //重新从第 1 页开始
             }
         });
+    }
+
+    /**
+     * 再次执行请求
+     * @param obj
+     * @param wasId
+     */
+    function doAgain(obj,wasId) {
+        obj = 1;
+        layer.confirm('确认要再次执行吗？',function(index){
+           if (index) {
+               //obj 1.未收到hash的情况;2.请求发送失败的情况
+               $.ajax({
+                   type:"post",
+                   url:URL+"v1/payrecord/doAgain",
+                   dataType:"json",
+                   data:{
+                       wasId:wasId,
+                       oType:obj
+                   },success:function (data) {
+                       if (data.code == 200) {
+                           layer.msg("操作成功",{icon:6});
+                       }
+                   }
+               })
+           }
+        });
+    }
+
+    function showDetails(wasId) {
+        $.ajax({
+            type:"post",
+            url:URL+"v1/payrecord/findHistoryByWasId",
+            dataType:"json",
+            data:{
+                wasId:wasId
+            },success:function (data) {
+                console.log(data);
+                if (data.code == 200) {
+                    //绑定数据
+                    var html = "";
+                    var ret = data.data;
+                    if (ret != null && ret.length > 0) {
+                        for (var i = 0; i < ret.length; i++) {
+                            var date = new Date();
+                            date.setTime(ret[i].wasCreateTime);
+                            var cdate = dateFtt("yyyy-MM-dd hh:mm:ss",date);
+                            html += '<tr><td>'
+                                        +ret[i].wasAction+
+                                    '</td><td>'
+                                        +cdate+
+                                    '</td><td>'
+                                        +ret[i].wasCreateUser+
+                                    '</td></tr>';
+                        }
+                    } else {
+                        html = '<tr><td colspan="100" align="center">暂无操作记录</td></tr>';
+                    }
+                    $("#myHistory").html(html);
+                    layer.open({
+                        type:1,
+                        title: '操作历史',
+                        content: $("#history"),
+                        area: ['400px', '500px']
+                    });
+                }
+            }
+        })
     }
 </script>
 </html>

@@ -1,7 +1,9 @@
 package com.fq.modules.was.web.service.payrecord;
 
+import com.fq.modules.was.web.entity.payrecord.PayOperatorHistory;
 import com.fq.modules.was.web.entity.payrecord.PayRecord;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,5 +25,8 @@ public interface  PayRecordService {
 
     int deleteById(Integer wasId);
 
+    boolean doAgain(Integer wasId, String oType);
+
+    List<PayOperatorHistory> findHistoryByWasId(Integer wasId);
 }
 

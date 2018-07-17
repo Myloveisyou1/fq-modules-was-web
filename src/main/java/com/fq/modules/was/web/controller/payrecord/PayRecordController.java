@@ -5,9 +5,7 @@ import java.util.Map;
 import com.fq.modules.was.web.entity.payrecord.PayRecord;
 import com.fq.modules.was.web.service.payrecord.PayRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.fq.modules.was.web.entity.common.Pages;
 import com.fq.modules.was.web.entity.common.Result;
@@ -78,5 +76,28 @@ public class PayRecordController {
 
         return ResultUtil.success(payRecordService.deleteBatchIds(Arrays.asList(wasIds)), null);
     }*/
+
+    /**
+     * 再次执行    从而获得交易hash或者重新请求到对应的钱包客户端
+     * @param wasId
+     * @param oType    1.未收到hash的情况;2.请求发送失败的情况
+     * @return
+     */
+    @PostMapping(value = "/doAgain")
+    public Result doAgain(@RequestParam("wasId") Integer wasId, @RequestParam("oType") String oType) {
+
+        return ResultUtil.success(payRecordService.doAgain(wasId,oType),null);
+    }
+
+    /**
+     * 根据wasId查询操作历史记录
+     * @param wasId
+     * @return
+     */
+    @PostMapping(value = "/findHistoryByWasId")
+    public Result findHistoryByWasId(@RequestParam("wasId") Integer wasId) {
+
+        return ResultUtil.success(payRecordService.findHistoryByWasId(wasId),null);
+    }
 
 }

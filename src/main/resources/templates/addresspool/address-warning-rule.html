@@ -284,7 +284,8 @@
                 var phone = document.getElementsByClassName("tel");
                 var strTel = "";
                 for(var i=0;i<phone.length;i++){
-                    var v = phone[i].innerHTML;
+                    //给电话号码加上国家前缀
+                    var v = "86"+phone[i].innerHTML;
                     if (i == phone.length-1) {
                         strTel+= v;
                     } else {

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.payrecord.PayOperatorHistoryMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.payrecord.PayOperatorHistory" id="payOperatorHistoryResultMap">
+        <result property="wasId" column="was_id"/>
+        <result property="wasPayRecordId" column="was_pay_record_id"/>
+        <result property="wasAction" column="was_action"/>
+        <result property="wasCreateTime" column="was_create_time"/>
+        <result property="wasCreateUser" column="was_create_user"/>
+    </resultMap>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all_map">
+        was_id wasId,
+        was_pay_record_id wasPayRecordId,
+        was_action wasAction,
+        was_create_time wasCreateTime,
+        was_create_user wasCreateUser
+    </sql>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all">
+        was_id,
+        was_pay_record_id,
+        was_action,
+        was_create_time,
+        was_create_user
+    </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+        was_pay_record_id,
+        was_action,
+        was_create_time,
+        was_create_user
+    </sql>
+
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addPayOperatorHistory" parameterType="com.fq.modules.was.web.entity.payrecord.PayOperatorHistory" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_pay_operator_history(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+            #{wasPayRecordId},
+            #{wasAction},
+            #{wasCreateTime},
+            #{wasCreateUser}
+        )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdatePayOperatorHistory" parameterType="com.fq.modules.was.web.entity.payrecord.PayOperatorHistory">
+        update was_pay_operator_history
+        <trim prefix="set" suffixOverrides=",">
+            <if test="wasPayRecordId != null and wasPayRecordId != ''">was_pay_record_id = #{wasPayRecordId},</if>
+            <if test="wasAction != null and wasAction != ''">was_action = #{wasAction},</if>
+            <if test="wasCreateTime != null and wasCreateTime != ''">was_create_time = #{wasCreateTime},</if>
+            <if test="wasCreateUser != null and wasCreateUser != ''">was_create_user = #{wasCreateUser}</if>
+        </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deletePayOperatorHistory" parameterType="java.lang.Long">
+        delete from was_pay_operator_history where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="Integer" resultMap="payOperatorHistoryResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_pay_operator_history where was_id = #{wasId}
+    </select>
+
+    <!-- 分页查询信息 列表-->
+    <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+          <include refid="sql_for_all_map"/>
+        from was_pay_operator_history
+        where 1=1
+                <if test="bean.wasId != null and bean.wasId.trim() != ''">
+            and was_id = #{bean.wasId}
+        </if>
+                <if test="bean.wasPayRecordId != null and bean.wasPayRecordId.trim() != ''">
+            and was_pay_record_id = #{bean.wasPayRecordId}
+        </if>
+                <if test="bean.wasAction != null and bean.wasAction.trim() != ''">
+            and was_action = #{bean.wasAction}
+        </if>
+                <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+                <if test="bean.wasCreateUser != null and bean.wasCreateUser.trim() != ''">
+            and was_create_user = #{bean.wasCreateUser}
+        </if>
+                order by was_id desc
+        <include refid="limited"/>
+    </select>
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from was_pay_operator_history where 1=1
+                <if test="bean.wasId != null and bean.wasId.trim() != ''">
+            and was_id = #{bean.wasId}
+        </if>
+                <if test="bean.wasPayRecordId != null and bean.wasPayRecordId.trim() != ''">
+            and was_pay_record_id = #{bean.wasPayRecordId}
+        </if>
+                <if test="bean.wasAction != null and bean.wasAction.trim() != ''">
+            and was_action = #{bean.wasAction}
+        </if>
+                <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+                <if test="bean.wasCreateUser != null and bean.wasCreateUser.trim() != ''">
+            and was_create_user = #{bean.wasCreateUser}
+        </if>
+            </select>
+
+    <!-- 根据wasId查询操作历史  -->
+    <select id="findHistoryByWasId" resultMap="payOperatorHistoryResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from
+          was_pay_operator_history
+        where
+          was_pay_record_id = #{wasId}
+        and
+          was_create_user = #{userName}
+        order by
+          was_id
+        desc
+    </select>
+</mapper>

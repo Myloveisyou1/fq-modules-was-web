@@ -98,7 +98,7 @@
             result= table.render({
                 elem: '#demo'
                 ,height: 515
-                ,url: URL+"generator/wasdatadictionary/list" //数据接口
+                ,url: URL+"v1/datadictionary/list" //数据接口
                 ,request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
                     ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
@@ -153,11 +153,12 @@
         });
         parent.layer.closeAll("loading");
 
-        $("#myForm").ajaxForm(function (data) {
+        /*$("#myForm").ajaxForm(function (data) {
+            console.log(data);
             if (data.code != 200) {
                 layer.msg(data.msg,{icon:2});
             }
-        })
+        })*/
     })
 
     /**
@@ -186,7 +187,7 @@
         layer.confirm('确认要禁用吗？',function(index){
             if (index) {
                 $.ajax({
-                    url: URL + "generator/wasdatadictionary/disabledAll",
+                    url: URL + "v1/datadictionary/disabledAll",
                     type: "get",
                     dataType: "json",
                     data: {
@@ -226,7 +227,7 @@
 
     function getNewBlock(wasType) {
         $.ajax({
-            url:URL+"generator/wasdatadictionary/getNewHeight",
+            url:URL+"v1/datadictionary/getNewHeight",
             type:"get",
             data:{
                 wasType:wasType

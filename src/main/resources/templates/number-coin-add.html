@@ -129,7 +129,7 @@
             <label for="wasStatuss" class="layui-form-label self-label">
                 <span class="x-red">*</span>状态
             </label>
-            <div class="layui-input-block">
+            <div class="layui-input-block layui-form" lay-filter="selFilter">
                 <select name="wasStatuss" id="wasStatuss" lay-verify="required">
                     <option value="0" >禁用</option>
                     <option value="1" >启用</option>
@@ -172,7 +172,12 @@
 </div>
 <script type="text/javascript" src="js/common/base-code.js"></script>
 <script type="text/javascript">
-    var wasId = "";
+    var wasId = "",form = "";
+
+    layui.use('form', function(){
+        form = layui.form;
+    });
+
     $(function () {
         wasId = getRequest().wasId;
         if (wasId != undefined) {
@@ -186,7 +191,7 @@
     function findInfoById(wasId) {
 
         $.ajax({
-            url:URL+"generator/wasdatadictionary/info/"+wasId,
+            url:URL+"v1/datadictionary/info/"+wasId,
             type:"get",
             dataType:"json",
             success:function (data) {
@@ -208,7 +213,8 @@
                     $("#wasTransferGasLimit").val(bean.wasTransferGasLimit);
                     $("#iconIntroduceUrl").val(bean.wasCoinIntroduceUrl);
                     $("#blockBrowsersUrl").val(bean.wasBlockBrowsersUrl);
-                    $("#wasStatuss").val(bean.wasStatus);
+                    $("#wasStatuss").find("option[value='1']").attr("selected",true);
+                    form.render("select","selFilter");
                     $("#wasRemark").val(bean.wasRemark);
                     $("#wasSpare").val(bean.wasSpare);
                 }else if (data.code == 209){
@@ -248,7 +254,7 @@
         var wasRemark = $("#wasRemark").val();
         var wasSpare = $("#wasSpare").val();
         $.ajax({
-            url:URL+"generator/wasdatadictionary/saveOrUpdate",
+            url:URL+"v1/datadictionary/saveOrUpdate",
             type:"get",
             dataType:"json",
             data:{

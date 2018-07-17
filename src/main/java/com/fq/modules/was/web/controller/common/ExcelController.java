@@ -1,8 +1,8 @@
 package com.fq.modules.was.web.controller.common;
 
-import com.fq.modules.was.web.entity.datadictionary.WasDataDictionary;
+import com.fq.modules.was.web.entity.datadictionary.DataDictionary;
 import com.fq.modules.was.web.service.addresspool.AddressListService;
-import com.fq.modules.was.web.service.datadictionary.WasDataDictionaryService;
+import com.fq.modules.was.web.service.datadictionary.DataDictionaryService;
 import com.fq.modules.was.web.vo.AddressVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -25,7 +25,7 @@ public class ExcelController {
     private String path ;
 
     @Autowired
-    private WasDataDictionaryService service;
+    private DataDictionaryService service;
     @Autowired
     private AddressListService addressListService;
 
@@ -36,7 +36,7 @@ public class ExcelController {
      * @throws IOException
      */
     @RequestMapping("/toExcel")
-    public ResponseEntity<InputStreamResource> toExcel(WasDataDictionary wasDataDictionary) throws IOException {
+    public ResponseEntity<InputStreamResource> toExcel(DataDictionary wasDataDictionary) throws IOException {
 
         Map<String,Object> map = new HashMap<>();
         map.put("bean",wasDataDictionary);
