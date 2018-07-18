@@ -1,15 +1,15 @@
 package com.fq.modules.was.web.controller.common;
 
-import com.fq.modules.was.web.entity.basic.SysCurrency;
-import com.fq.modules.was.web.entity.common.Constant;
 import com.fq.modules.was.web.entity.common.Constant;
 import com.fq.modules.was.web.service.basic.SysCurrencyService;
 import com.fq.modules.was.web.service.basic.SysSourceService;
+import com.fq.modules.was.web.task.SystemTask;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -254,8 +254,12 @@ public class IndexController {
      * @return
      */
     @GetMapping(value = "/was-sys-config")
-    public String config() {
-        return "/addresspool/was-sys-config";
+    public String config(Model model) {
+
+        //获取币种和平台
+        model.addAttribute("currencyList",sysCurrencyService.findAll());
+        model.addAttribute("sourceList",sysSourceService.findAll());
+        return "/basic/was-sys-config";
     }
     /**
      * 币种管理
@@ -272,5 +276,12 @@ public class IndexController {
     @GetMapping(value = "/was-sys-source")
     public String source() {
         return "/basic/was-sys-source";
+    }
+
+    @RequestMapping(value = "/test")
+    @ResponseBody
+    public String test() {
+        new SystemTask().warnForEmailAndPhone();
+        return "发送了...";
     }
 }

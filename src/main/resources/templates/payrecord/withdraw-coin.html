@@ -51,11 +51,16 @@
                     </div>
                 </div>
                 <div class="layui-inline">
+                    <label class="layui-form-label">提币时间:</label>
+                    <input type="text" id="startTime" class="layui-input test-item" placeholder="请输入开始时间">-
+                    <input type="text" id="endTime" class="layui-input test-item" placeholder="请输入结束时间">
+                </div>
+                <div class="layui-inline">
                     <div class="layui-input-inline">
                         <button type="button" class="layui-btn layui-btn-normal" onclick="queryInfo()">搜索</button>
                     </div>
                 </div>
-                <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>
+                <!--<span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>-->
             </div>
         </form>
     </div>
@@ -103,6 +108,15 @@
     layui.use(['layer'],function(){
         layer = layui.layer;
     });
+    layui.use('laydate',function () {
+        var laydate = layui.laydate;
+        lay('.test-item').each(function(){
+            laydate.render({
+                elem: this
+                ,trigger: 'click'
+            });
+        });
+    });
 
     $(function () {
         parent.layer.load(2,{shade:0.3});
@@ -120,7 +134,9 @@
                 ,where:{
                     wasSource:$("#wasSource").val(),
                     wasType:$("#wasType").val(),
-                    wasSerialNumber:$("#serialNumber").val()
+                    wasSerialNumber:$("#serialNumber").val(),
+                    startTime:$("#startTime").val(),
+                    endTime:$("#endTime").val()
                 }
                 ,page: true //开启分页
                 ,cols: [[ //表头
@@ -165,12 +181,29 @@
      * 条件查询提币记录信息
      * */
     function queryInfo() {
+        var startTime = $("#startTime").val();
+        var endTime = $("#endTime").val();
+        if (startTime == null || startTime == "") {
+            if (endTime != null && endTime != "") {
+                startTime = '1970-01-01';
+            }
+        } else {
+            if (endTime == null || endTime == "") {
+                endTime = new Date().toLocaleDateString();
+            }
+        }
+        if (new Date(startTime).getTime() > new Date(endTime).getTime()) {
+            layer.msg("结束时间不能小于开始时间",{icon: 5});
+            return;
+        }
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
                 wasSource:$("#wasSource").val(),
                 wasType:$("#wasType").val(),
-                wasSerialNumber:$("#serialNumber").val()
+                wasSerialNumber:$("#serialNumber").val(),
+                startTime:startTime,
+                endTime:endTime
             }
             ,page: {
                 curr: 1 //重新从第 1 页开始
@@ -184,7 +217,7 @@
      * @param wasId
      */
     function doAgain(obj,wasId) {
-        obj = 1;
+        obj = 2;
         layer.confirm('确认要再次执行吗？',function(index){
            if (index) {
                //obj 1.未收到hash的情况;2.请求发送失败的情况

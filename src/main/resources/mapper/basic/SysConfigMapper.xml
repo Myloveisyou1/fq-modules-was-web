@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fq.modules.was.web.mapper.basic.SysConfigMapper">
+
+    <!-- 返回结果集 -->
+    <resultMap type="com.fq.modules.was.web.entity.basic.SysConfig" id="sysConfigResultMap">
+        <result property="wasId" column="was_id"/>
+        <result property="wasType" column="was_type"/>
+        <result property="wasConfigType" column="was_config_type"/>
+        <result property="wasNum" column="was_num"/>
+        <result property="wasPercent" column="was_percent"/>
+        <result property="wasSource" column="was_source"/>
+        <result property="wasStaus" column="was_staus"/>
+        <result property="wasRemark" column="was_remark"/>
+        <result property="wasCreateTime" column="was_create_time"/>
+    </resultMap>
+
+    <!--所有的查询字段,各自对应   for map-->
+    <sql id="sql_for_all_map">
+        was_id wasId,
+        was_type wasType,
+        was_config_type wasConfigType,
+        was_num wasNum,
+        was_percent wasPercent,
+        was_source wasSource,
+        was_staus wasStaus,
+        was_remark wasRemark,
+        was_create_time wasCreateTime
+    </sql>
+
+    <!--所有的查询字段,各自对应   for obj-->
+    <sql id="sql_for_all">
+        was_type,
+        was_config_type,
+        was_num,
+        was_percent,
+        was_source,
+        was_staus,
+        was_remark,
+        was_create_time
+    </sql>
+
+    <!-- 保存需要的字段 -->
+    <sql id="sql_for_all_except_p">
+        was_type,
+        was_config_type,
+        was_num,
+        was_percent,
+        was_source,
+        was_staus,
+        was_remark,
+        was_create_time
+    </sql>
+
+    <!-- 分页信息 -->
+    <sql id="limited">
+        <if test="pages.pageNumber != null and pages.pageSize != null">
+            limit #{pages.pageNumber}, #{pages.pageSize}
+        </if>
+    </sql>
+
+    <!--新增信息-->
+    <insert id="addSysConfig" parameterType="com.fq.modules.was.web.entity.basic.SysConfig" useGeneratedKeys="true" keyProperty="wasId">
+        insert into was_sys_config(
+        <include refid="sql_for_all_except_p"/>
+        )values (
+            #{wasType},
+            #{wasConfigType},
+            #{wasNum},
+            #{wasPercent},
+            #{wasSource},
+            #{wasStaus},
+            #{wasRemark},
+            #{wasCreateTime}
+          )
+    </insert>
+
+    <!--修改信息-->
+    <update id="optUpdateSysConfig" parameterType="com.fq.modules.was.web.entity.basic.SysConfig">
+        update was_sys_config
+        <trim prefix="set" suffixOverrides=",">
+            <if test="wasType != null and wasType != ''">was_type = #{wasType},</if>
+            <if test="wasConfigType != null and wasConfigType != ''">was_config_type = #{wasConfigType},</if>
+            <if test="wasNum != null and wasNum != ''">was_num = #{wasNum},</if>
+            <if test="wasPercent != null and wasPercent != ''">was_percent = #{wasPercent},</if>
+            <if test="wasSource != null and wasSource != ''">was_source = #{wasSource},</if>
+            <if test="wasStaus != null and wasStaus != ''">was_staus = #{wasStaus},</if>
+            <if test="wasRemark != null and wasRemark != ''">was_remark = #{wasRemark},</if>
+            <if test="wasCreateTime != null and wasCreateTime != ''">was_create_time = #{wasCreateTime}</if>
+        </trim>
+        where was_id = #{wasId}
+    </update>
+
+    <!--删除信息-->
+    <delete id="deleteSysConfig" parameterType="java.lang.Long">
+        delete from was_sys_config where was_id = #{wasId}
+    </delete>
+
+    <!--根据主键查询单条信息-->
+    <select id="selectById" parameterType="Long" resultMap="sysConfigResultMap">
+        select
+          <include refid="sql_for_all"/>
+        from was_sys_config where was_id = #{wasId}
+    </select>
+
+    <!-- 分页查询信息 列表-->
+    <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+          <include refid="sql_for_all_map"/>
+        from was_sys_config
+        where 1=1
+        <if test="bean.wasId != null">
+            and was_id = #{bean.wasId}
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+        <if test="bean.wasConfigType != null and bean.wasConfigType.trim() != ''">
+            and was_config_type = #{bean.wasConfigType}
+        </if>
+        <if test="bean.wasNum != null">
+            and was_num = #{bean.wasNum}
+        </if>
+        <if test="bean.wasPercent != null">
+            and was_percent = #{bean.wasPercent}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and was_source = #{bean.wasSource}
+        </if>
+        <if test="bean.wasStaus != null and bean.wasStaus.trim() != ''">
+            and was_staus = #{bean.wasStaus}
+        </if>
+        <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+        <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+        order by was_id desc
+        <include refid="limited"/>
+    </select>
+    <!-- 总数 -->
+    <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
+        select count(1) from was_sys_config where 1=1
+        <if test="bean.wasId != null">
+            and was_id = #{bean.wasId}
+        </if>
+        <if test="bean.wasType != null and bean.wasType.trim() != ''">
+            and was_type = #{bean.wasType}
+        </if>
+        <if test="bean.wasConfigType != null and bean.wasConfigType.trim() != ''">
+            and was_config_type = #{bean.wasConfigType}
+        </if>
+        <if test="bean.wasNum != null">
+            and was_num = #{bean.wasNum}
+        </if>
+        <if test="bean.wasPercent != null">
+            and was_percent = #{bean.wasPercent}
+        </if>
+        <if test="bean.wasSource != null and bean.wasSource.trim() != ''">
+            and was_source = #{bean.wasSource}
+        </if>
+        <if test="bean.wasStaus != null and bean.wasStaus.trim() != ''">
+            and was_staus = #{bean.wasStaus}
+        </if>
+        <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
+            and was_remark = #{bean.wasRemark}
+        </if>
+        <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
+            and was_create_time = #{bean.wasCreateTime}
+        </if>
+    </select>
+
+    <!--精确查询-->
+    <select id="selectByThree" resultMap="sysConfigResultMap">
+        select <include refid="sql_for_all"/>
+        from was_sys_config where was_type = #{wasType} and was_source = #{wasSource} and was_config_type = #{wasConfigType}
+    </select>
+</mapper>

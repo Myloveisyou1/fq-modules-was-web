@@ -1,12 +1,12 @@
 package com.fq.modules.was.web.service.setting.impl;
 
+import com.fq.modules.was.web.entity.setting.Menu;
+import com.fq.modules.was.web.entity.setting.Project;
 import com.fq.modules.was.web.mapper.setting.MenuMapper;
 import com.fq.modules.was.web.mapper.setting.ProjectMapper;
 import com.fq.modules.was.web.service.setting.ProjectService;
 import com.fq.modules.was.web.utils.CommonUtil;
 import com.fq.modules.was.web.utils.DatesUtils;
-import com.fq.modules.was.web.entity.setting.Menu;
-import com.fq.modules.was.web.entity.setting.Project;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

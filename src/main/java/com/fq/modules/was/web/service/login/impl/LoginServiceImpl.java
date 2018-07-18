@@ -7,8 +7,8 @@ import com.fq.modules.was.web.entity.setting.Role;
 import com.fq.modules.was.web.entity.setting.User;
 import com.fq.modules.was.web.enums.ResultEnum;
 import com.fq.modules.was.web.exception.WasWebException;
-import com.fq.modules.was.web.mapper.setting.MenuMapper;
 import com.fq.modules.was.web.mapper.logs.SysLogMapper;
+import com.fq.modules.was.web.mapper.setting.MenuMapper;
 import com.fq.modules.was.web.mapper.setting.RoleMapper;
 import com.fq.modules.was.web.mapper.setting.UserMapper;
 import com.fq.modules.was.web.service.login.LoginService;
@@ -136,7 +136,7 @@ public class LoginServiceImpl implements LoginService {
      * @param user
      * @return
      */
-    public boolean checkPermission(User user,String url) {
+    public boolean checkPermission(User user, String url) {
 
         log.info(url);//http://localhost:8081/consume/findConsume
         //检验权限

@@ -27,6 +27,6 @@ public interface  DataDictionaryService {
 
     Map<String,Object> getNewHeight(String wasType);
 
-    String findAll(Map<String,Object> map);
+    String findAll(Map<String, Object> map);
 }
 

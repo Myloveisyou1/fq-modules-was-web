@@ -17,8 +17,28 @@ spring:
         content-type: text/html
       cache: false
 
-#统一配置feign
+eureka:
+  client:
+    healthcheck:
+      enabled: true                           # 开启健康检查（依赖spring-boot-starter-actuator）
+    registry-fetch-interval-seconds: 5 # 默认为30秒
+    serviceUrl:
+        defaultZone: http://10.45.0.54:8761/eureka/
+
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+
+#统一配置feign,动态读取
 fq:
   modules:
-    was:
-      serviceId:
+     was-api:
+      serviceId: fq-modules-was-api
+

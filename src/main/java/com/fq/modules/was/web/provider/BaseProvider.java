@@ -1,9 +1,6 @@
 package com.fq.modules.was.web.provider;
 
 import com.fq.modules.was.web.utils.CommonUtil;
-import com.fq.modules.was.web.entity.common.Pages;
-
-import java.util.Map;
 
 /**
  * @Descript:

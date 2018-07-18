@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>系统参数配置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <!-- 公共css+js -->
+    <script src="js/common/base-css.js"></script>
+    <script src="js/common/base-js.js"></script>
+
+</head>
+
+<body>
+<div class="x-nav">
+      <span class="layui-breadcrumb" lay-separator="-">
+        <a href="">首页</a>
+        <a href="">基础配置</a>
+        <a href="">参数配置</a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="queryInfo()" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row self-back">
+        <form class="layui-form layui-col-md12 x-so form-sel" th:action="${url}">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">币种简称:</label>
+                    <div class="layui-input-inline">
+                        <select id="wasType" lay-filter="aihao" name="wasType">
+                            <option value="" selected>全部</option>
+                            <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">业务系统:</label>
+                    <div class="layui-input-inline">
+                        <select id="wasSource" lay-filter="aihao" name="wasSource">
+                            <option value="" selected>全部</option>
+                            <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">配置类型:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="wasConfigType" id="wasConfigType" autocomplete="off" class="layui-input" placeholder="请输入配置类型">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <div class="layui-input-inline">
+                        <button type="button" class="layui-btn layui-btn-normal" onclick="queryInfo()">搜索</button>
+                    </div>
+                </div>
+                <!--<span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>-->
+            </div>
+        </form>
+    </div>
+    <xblock>
+        <button class="layui-btn" onclick="add(0,'')"><i class="layui-icon"></i>增加配置</button>
+    </xblock>
+    <table class="layui-table" id="demo" lay-filter="demo">
+
+    </table>
+</div>
+<!--添加/编辑配置-->
+<div id="addAddress" style="display: none;">
+    <form class="layui-form" id="myForm">
+        <div class="layui-form-item">
+            <label for="awasType" class="layui-form-label">
+                <span class="x-red">*</span>币种简称
+            </label>
+            <div class="layui-input-inline layui-form" lay-filter="selFilter">
+                <select id="awasType" lay-filter="aihao">
+                    <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="awasSource" class="layui-form-label">
+                <span class="x-red">*</span>平台名称
+            </label>
+            <div class="layui-input-inline layui-form" lay-filter="selFilter">
+                <select id="awasSource" lay-filter="aihao">
+                    <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>配置类型</label>
+                <div class="layui-input-inline input-add">
+                    <input type="text" id="awasConfigType" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input" placeholder="请输入配置类型">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>配置数值</label>
+                <div class="layui-input-inline input-add">
+                    <input type="text" id="awasNum" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input" placeholder="请输入配置数值">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>配置百分比</label>
+                <div class="layui-input-inline input-add">
+                    <input type="text" id="awasPercent" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input" placeholder="请输入配置百分比">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>状态</label>
+                <div class="layui-input-inline layui-form" lay-filter="selFilter">
+                    <select id="awasStatus">
+                        <option value="0">禁用</option>
+                        <option value="1">启用</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>备注</label>
+                <div class="layui-input-inline input-add" id="email">
+                    <input type="text" id="awasRemark" required="" lay-verify="pass"
+                           autocomplete="off" class="layui-input" placeholder="请输入备注">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="js/common/base-code.js"></script>
+<!--操作-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="add(1,'{{d.wasId}}')">编辑</a>
+</script>
+<!--状态处理-->
+<script type="text/html" id="wasStatus">
+    {{#  if(d.wasStaus == 0){ }}
+    <span style="color: red">禁用</span>
+    {{# } else if(d.wasStaus == 1){ }}
+    <span style="color: green">启用</span>
+    {{# } else if(d.wasStaus == 2){ }}
+    <span style="color: red">禁止提币</span>
+    {{# }} else if(d.wasStaus == 3){ }}
+    <span style="color: green">开放提币</span>
+    {{#  } }}
+</script>
+<!--格式化时间-->
+<script type="text/html" id="formatDate2">
+    {{#
+    var date = new Date();
+    date.setTime(d.wasCreateTime);
+    return dateFtt("yyyy-MM-dd hh:mm:ss",date);
+    }}
+</script>
+<!--格式化百分比-->
+<script type="text/html" id="p">
+    {{#
+        return d.wasPercent+'%';
+    }}
+</script>
+<script>
+    var result = "";
+    var wasId = "";
+    var wasType = "";
+    var layer = "",form = "";
+    layui.use(['layer'],function(){
+        layer = layui.layer;
+    });
+    layui.use('form', function(){
+        form = layui.form;
+    });
+    layui.use('table', function(){
+        var table = layui.table;
+        //监听工具条
+        table.on('tool(demo)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                // layer.msg('ID：'+ data.id + ' 的查看操作');
+                layer.load(2,{shade:0.3});
+                getNewBlock(data.wasType);
+            }
+        });
+    });
+
+    $(function () {
+        parent.layer.load(2,{shade:0.3});
+        layui.use('table', function(){
+            var table = layui.table;
+
+            result= table.render({
+                elem: '#demo'
+                ,height: 515
+                ,url: URL+"v1/sysconfig/list" //数据接口
+                ,request: {
+                    pageName: 'pageNumber' //页码的参数名称，默认：page
+                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                }
+                ,where:{
+                    wasSource:$("#wasSource").val(),
+                    wasType:$("#wasType").val(),
+                    wasConfigType:$("#wasConfigType").val()
+                }
+                ,page: true //开启分页
+                ,cols: [[ //表头
+                    {field: 'wasId', title: 'ID', width:50, sort: true, fixed: 'left'}
+                    ,{field: 'wasType', title: '币种类型', sort: true}
+                    ,{field: 'wasSource', title: '平台名称'}
+                    ,{field: 'wasConfigType', title: '配置类型',sort:true}
+                    ,{field: 'wasNum', title: '配数置值'}
+                    ,{field: 'wasPercent', title: '配置百分比', sort: true,templet:'#p'}
+                    ,{field: 'wasRemark', title: '备注',width:200}
+                    ,{field: 'wasStatus', title: '状态',templet:'#wasStatus',sort:true}
+                    ,{field: 'wasCreateTime', title: '创建时间',sort: true,templet:'#formatDate2'}
+                    ,{field: 'repData', title: '操作',toolbar:'#barDemo',align:'center'}
+                ]]
+                ,response: {
+                    statusName: 'code' //数据状态的字段名称，默认：code
+                    ,statusCode: 200 //成功的状态码，默认：0
+                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
+                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
+                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                }
+                ,done: function(res, curr, count){
+                    //如果是异步请求数据方式，res即为你接口返回的信息。
+                    //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
+                    console.log(res);
+
+                    //得到当前页码
+                    console.log(curr);
+
+                    //得到数据总量
+                    console.log(count);
+                }
+            });
+
+        });
+        parent.layer.closeAll("loading");
+    })
+
+    /**
+     * 条件查询币种信息
+     * */
+    function queryInfo() {
+        //第一个实例
+        result.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                wasSource:$("#wasSource").val(),
+                wasType:$("#wasType").val(),
+                wasConfigType:$("#wasConfigType").val()
+            }
+            ,page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        });
+    }
+
+    function add(obj,wasId) {
+        var title = "";
+        if (obj == 0) {//增加
+            title = "新增配置";
+            $("#awasConfigType").val("");
+            $("#awasNum").val("");
+            $("#awasPercent").val("");
+            $("#awasRemark").val("");
+        } else if (obj == 1) {//编辑
+            title = "编辑配置";
+            //获取要编辑的信息
+            selectById(wasId);
+        }
+
+        layer.open({
+            type:1,
+            title: title,
+            content: $("#addAddress"),
+            area: ['450px', '550px'],
+            offset: '100px',
+            btn:['保存','取消'],
+            yes: function (index,layero) {
+
+                var wasType = $("#awasType").val();
+                var wasSource = $("#awasSource").val();
+                var wasConfigType = $("#awasConfigType").val();
+                var wasStatus = $("#awasStatus").val();
+                var wasNum = $("#awasNum").val();
+                var wasPercent = $("#awasPercent").val();
+                var wasRemark = $("#awasRemark").val();
+
+                //校验数据
+                if (wasConfigType == null || wasConfigType == "" || wasConfigType == undefined) {
+                    layer.msg("请输入配置类型",{icon:2});
+                    return;
+                }
+                if (wasNum == null || wasNum == "" || wasNum == undefined) {
+                    layer.msg("请输入数值",{icon:2});
+                    return;
+                }
+                var regu = /^[1-9]\d*$/;
+                if (!regu.test(wasNum)) {
+                    layer.msg("请输入正确的数字",{icon:2});
+                    return;
+                }
+                var reg = /^\d{1,2}$/;
+                if (wasPercent == null || wasPercent == "" || wasPercent == undefined) {
+                    layer.msg("请输入百分比",{icon:2});
+                    return;
+                }
+                if (!reg.test(wasPercent)) {
+                    layer.msg("百分比范围1%-99%",{icon:2});
+                    return;
+                }
+
+                layer.load(2,{shade:0.3});
+                $.ajax({
+                    url:URL+"v1/sysconfig/saveOrUpdate",
+                    type:"get",
+                    dataType:"json",
+                    data:{
+                        obj:obj,
+                        wasId:wasId,
+                        wasType:wasType,
+                        wasSource:wasSource,
+                        wasConfigType:wasConfigType,
+                        wasNum:wasNum,
+                        wasPercent:wasPercent,
+                        wasRemark:wasRemark,
+                        wasStaus:wasStatus
+                    },
+                    success:function(data){
+                        layer.closeAll("loading");
+                        console.log(data);
+                        if(data.code == 200) {
+                            parent.layer.msg("操作成功",{icon:6,time:2000},function(){
+                                location.reload();
+                            });
+                        } else if (data.code == 209){
+                            parent.layer.msg(data.msg,{icon:2});
+                            top.location.href = URL+"login";
+                        } else {
+                            parent.layer.msg(data.msg,{icon:2});
+                        }
+
+                    },error:function(jqXHR, textStatus, errorThrown) {
+                        var data = jqXHR.responseText;
+                        if(jqXHR.status == 404){
+                            top.location.href = URL+"errorpage/404";
+                        } else if(jqXHR.status == 500){
+                            top.location.href = URL+"errorpage/500";
+                        } else {
+                            layer.msg(data.msg,{icon:2});
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    function selectById(wasId) {
+
+        $.ajax({
+            type:"get",
+            url:URL+"v1/sysconfig/info/"+wasId,
+            dataType:"json",
+            success:function (data) {
+                console.log(data);
+                if (data.code == 200) {
+                    var ret = data.data;
+                    $("#awasType").find("option[value='"+ret.wasType+"']").attr("selected",true);
+                    $("#awasSource").find("option[value='"+ret.wasSource+"']").attr("selected",true);
+                    $("#awasConfigType").val(ret.wasConfigType);
+                    $("#awasNum").val(ret.wasNum);
+                    $("#awasPercent").val(ret.wasPercent);
+                    $("#awasStatus").find("option[value='"+ret.wasStaus+"']").attr("selected",true);
+                    $("#awasRemark").val(ret.wasRemark);
+                    form.render("select","selFilter");
+                }
+            }
+        })
+    }
+</script>
+</body>
+
+</html>

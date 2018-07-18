@@ -1,18 +1,18 @@
 package com.fq.modules.was.web.service.setting.impl;
 
 import com.fq.modules.was.web.entity.logs.SysLog;
-import com.fq.modules.was.web.mapper.logs.SysLogMapper;
-import com.fq.modules.was.web.mapper.setting.UserMapper;
-import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
-import com.fq.modules.was.web.utils.MD5Util;
 import com.fq.modules.was.web.entity.setting.Role;
 import com.fq.modules.was.web.entity.setting.User;
 import com.fq.modules.was.web.enums.ResultEnum;
 import com.fq.modules.was.web.exception.WasWebException;
+import com.fq.modules.was.web.mapper.logs.SysLogMapper;
 import com.fq.modules.was.web.mapper.setting.RoleMapper;
+import com.fq.modules.was.web.mapper.setting.UserMapper;
+import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
 import com.fq.modules.was.web.service.setting.UserService;
 import com.fq.modules.was.web.utils.CommonUtil;
 import com.fq.modules.was.web.utils.DatesUtils;
+import com.fq.modules.was.web.utils.MD5Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

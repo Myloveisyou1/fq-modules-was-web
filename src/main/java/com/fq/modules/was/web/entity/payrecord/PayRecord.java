@@ -13,7 +13,7 @@ import java.util.Date;
  * @date 2018-07-16 15:53:09
  */
 @Data
-public class PayRecord{
+public class PayRecord {
 
 /**
  * auto id
@@ -55,4 +55,8 @@ public class PayRecord{
  * create time
  */
     private Date wasCreateTime;
+
+    private String startTime;
+
+    private String endTime;
 }

@@ -31,8 +31,7 @@
                     <div class="layui-input-inline">
                         <select id="wasType" lay-filter="aihao">
                             <option value="" selected>全部</option>
-                            <option value="btc">btc</option>
-                            <option value="eth">eth</option>
+                            <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
                         </select>
                     </div>
                 </div>
@@ -41,8 +40,7 @@
                     <div class="layui-input-inline">
                         <select id="wasSource" lay-filter="aihao">
                             <option value="" selected>全部</option>
-                            <option value="pizza">pizza</option>
-                            <option value="bita">bita</option>
+                            <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
                         </select>
                     </div>
                 </div>
@@ -284,8 +282,7 @@
                 var phone = document.getElementsByClassName("tel");
                 var strTel = "";
                 for(var i=0;i<phone.length;i++){
-                    //给电话号码加上国家前缀
-                    var v = "86"+phone[i].innerHTML;
+                    var v = phone[i].innerHTML;
                     if (i == phone.length-1) {
                         strTel+= v;
                     } else {

@@ -1,30 +1,32 @@
 package com.fq.modules.was.web.service.basic.impl;
 
-import com.fq.modules.was.web.entity.basic.SysSource;
-import com.fq.modules.was.web.entity.common.Pages;
 import com.fq.modules.was.web.entity.logs.SysLog;
 import com.fq.modules.was.web.enums.ResultEnum;
 import com.fq.modules.was.web.exception.WasWebException;
-import com.fq.modules.was.web.mapper.basic.SysSourceMapper;
 import com.fq.modules.was.web.mapper.logs.SysLogMapper;
-import com.fq.modules.was.web.service.basic.SysSourceService;
 import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
 import com.fq.modules.was.web.utils.CommonUtil;
-import com.fq.modules.was.web.utils.DatesUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
+
+import com.fq.modules.was.web.utils.DatesUtils;
+
+import com.fq.modules.was.web.entity.basic.SysConfig;
+import com.fq.modules.was.web.service.basic.SysConfigService;
+import com.fq.modules.was.web.entity.common.Pages;
+import com.fq.modules.was.web.mapper.basic.SysConfigMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 
 @Service
-public class SysSourceServiceImpl extends BaseServiceImpl implements SysSourceService {
+public class SysConfigServiceImpl extends BaseServiceImpl implements SysConfigService {
 
     @Autowired
-    private SysSourceMapper sysSourceMapper;
+    private SysConfigMapper sysConfigMapper;
 
     @Autowired
     private SysLogMapper sysLogMapper;
@@ -39,8 +41,8 @@ public class SysSourceServiceImpl extends BaseServiceImpl implements SysSourceSe
         Map<String, Object> map = new HashMap<>();
 
         //这里开始写具体的业务逻辑
-        List<SysSource> list = sysSourceMapper.pageQueryList(params);
-        Long count = sysSourceMapper.pageQueryCount(params);
+        List<Map<String, Object>> list = sysConfigMapper.pageQueryList(params);
+        Long count = sysConfigMapper.pageQueryCount(params);
 
         Pages pages = (Pages) params.get("pages");
         pages.setTotalCount(count);
@@ -56,28 +58,26 @@ public class SysSourceServiceImpl extends BaseServiceImpl implements SysSourceSe
     /**
     * 根据主键查询信息
     */
-    public SysSource selectById(Integer wasId) {
+    public SysConfig selectById(Long wasId) {
 
-        return sysSourceMapper.selectById(wasId);
+        return sysConfigMapper.selectById(wasId);
     }
 
     /**
      * 保存信息
-     * @param sysSource 需要保存的对象
+     * @param sysConfig 需要保存的对象
      * @return
      */
-    public boolean insert(SysSource sysSource) {
-
-        SysSource bean = sysSourceMapper.selectByWasSource(sysSource.getWasSource());
+    public boolean insert(SysConfig sysConfig) {
+        //校验重复
+        SysConfig bean = sysConfigMapper.selectByThree(sysConfig.getWasType(),sysConfig.getWasSource(),sysConfig.getWasConfigType());
         if (CommonUtil.isNotEmpty(bean)) {
             throw new WasWebException(ResultEnum.SAME_DATA);
         }
-        Date date = new Date();
-        sysSource.setWasCreateTime(date);
-        sysSource.setWasUpdateTime(date);
-        boolean flag = sysSourceMapper.addSysSource(sysSource);
+        sysConfig.setWasCreateTime(new Date());
+        boolean flag = sysConfigMapper.addSysConfig(sysConfig);
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"新增了【平台名称为"+sysSource.getWasSource()+"】的信息";
+        String content = getUserName()+"在"+DatesUtils.time()+"新增了名为【"+sysConfig.getWasConfigType()+"】的配置信息";
         String result = "新增成功";
         if (!flag) {
             result = "新增失败";
@@ -90,14 +90,14 @@ public class SysSourceServiceImpl extends BaseServiceImpl implements SysSourceSe
 
     /**
      * 修改信息
-     * @param sysSource 需要修改的对象
+     * @param sysConfig 需要修改的对象
      * @return
      */
-    public boolean updateById(SysSource sysSource) {
+    public boolean updateById(SysConfig sysConfig) {
 
-        boolean flag = sysSourceMapper.optUpdateSysSource(sysSource);
+        boolean flag = sysConfigMapper.optUpdateSysConfig(sysConfig);
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"修改了【平台名称为"+sysSource.getWasSource()+"】的信息";
+        String content = getUserName()+"在"+DatesUtils.time()+"修改了名为【"+sysConfig.getWasConfigType()+"】的配置信息";
         String result = "修改成功";
         if (!flag) {
             result = "修改失败";
@@ -111,9 +111,9 @@ public class SysSourceServiceImpl extends BaseServiceImpl implements SysSourceSe
     * 根据id删除信息
     * @return
     */
-    public int deleteById(Integer wasId) {
+    public int deleteById(Long wasId) {
 
-        int ret = sysSourceMapper.deleteById(wasId);
+        int ret = sysConfigMapper.deleteById(wasId);
 
         //记录日志信息
         String content = getUserName()+"在"+DatesUtils.time()+"删除了id=【wasId】的信息";
@@ -125,15 +125,5 @@ public class SysSourceServiceImpl extends BaseServiceImpl implements SysSourceSe
         sysLogMapper.addSysLog(sysLog);
 
         return ret;
-    }
-
-    /**
-     * 查询所有平台
-     * @return
-     */
-    @Override
-    public List<SysSource> findAll() {
-
-        return sysSourceMapper.findAll();
     }
 }

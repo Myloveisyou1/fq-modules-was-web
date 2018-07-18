@@ -144,8 +144,8 @@
                 <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
             and was_remark = #{bean.wasRemark}
         </if>
-                <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
-            and was_create_time = #{bean.wasCreateTime}
+        <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
+            and was_create_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_create_time &lt;= concat(#{bean.endTime},' 23:59:59')
         </if>
                 order by was_id desc
         <include refid="limited"/>
@@ -180,8 +180,8 @@
                 <if test="bean.wasRemark != null and bean.wasRemark.trim() != ''">
             and was_remark = #{bean.wasRemark}
         </if>
-                <if test="bean.wasCreateTime != null and bean.wasCreateTime.trim() != ''">
-            and was_create_time = #{bean.wasCreateTime}
+        <if test="bean.startTime != null and bean.startTime.trim() != '' and bean.endTime != null and bean.endTime.trim() != ''">
+            and was_create_time &gt;= concat(#{bean.startTime},' 00:00:00') and was_create_time &lt;= concat(#{bean.endTime},' 23:59:59')
         </if>
             </select>
 </mapper>

@@ -5,9 +5,9 @@ import com.fq.modules.was.web.entity.setting.Icon;
 import com.fq.modules.was.web.entity.setting.Menu;
 import com.fq.modules.was.web.entity.setting.MenuList;
 import com.fq.modules.was.web.enums.ResultEnum;
-import com.fq.modules.was.web.mapper.setting.MenuMapper;
 import com.fq.modules.was.web.exception.WasWebException;
 import com.fq.modules.was.web.mapper.logs.SysLogMapper;
+import com.fq.modules.was.web.mapper.setting.MenuMapper;
 import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
 import com.fq.modules.was.web.service.setting.MenuService;
 import com.fq.modules.was.web.utils.BaseUtils;
@@ -206,6 +206,10 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
             if (CommonUtil.isNotEmpty(menu.getBelong())) {
                 content += "belong="+menu.getBelong();
                 saveBean.setBelong(menu.getBelong());
+            }
+            if (CommonUtil.isNotEmpty(menu.getSort())) {
+                content += "sort="+menu.getSort();
+                saveBean.setSort(menu.getSort());
             }
 
             saveBean.setUpdateTime(DatesUtils.time());

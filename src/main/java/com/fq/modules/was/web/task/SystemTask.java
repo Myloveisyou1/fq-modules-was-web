@@ -1,5 +1,11 @@
 package com.fq.modules.was.web.task;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fq.core.result.Result;
+import com.fq.core.vo.EmailBean;
+import com.fq.core.vo.SmsBean;
+import com.fq.modules.client.mail.MailClient;
+import com.fq.modules.client.sms.SMSClient;
 import com.fq.modules.was.web.entity.addresspool.WarnHistory;
 import com.fq.modules.was.web.entity.addresspool.WarnRule;
 import com.fq.modules.was.web.service.addresspool.AddressListService;
@@ -31,6 +37,10 @@ public class SystemTask {
     private WarnRuleService warnRuleService;
     @Autowired
     private WarnHistoryService warnHistoryService;
+    @Autowired
+    private SMSClient smsClient;
+    @Autowired
+    private MailClient mailClient;
 
     /**
      * 定时任务,每一小时去检测是否存在需要预警的币种
@@ -66,6 +76,12 @@ public class SystemTask {
                         log.info("=======开始发送第"+(i+1)+"条短信=========");
                         log.info("=======短信内容:"+message+",短信接收人:"+phone[i]+"=========");
                     }
+                    SmsBean bean = new SmsBean();
+                    bean.setSource(2);
+                    bean.setMobile(warnRule.getWasWarnTel());
+                    bean.setContent(message);
+                    Result result = smsClient.send(bean);
+                    System.out.println("发送短信返回值:"+JSONObject.toJSON(result));
                     //邮件内容
                     String theme = "【预警|was运营支持后台】"+wasSource+"-"+wasType+"地址池中未使用地址剩余不足请尽快处理";
                     String content = wasSource+"-"+wasType+"未使用地址剩余不足请尽快处理，当前剩余"+surplusCount;
@@ -73,6 +89,13 @@ public class SystemTask {
                         log.info("=======开始发送第"+(i+1)+"封邮件=========");
                         log.info("=======邮件主题:"+theme+",邮件内容:"+content+",邮件接收人:"+email[i]+"=========");
                     }
+                    EmailBean emailBean = new EmailBean();
+                    emailBean.setSource(2);
+                    emailBean.setEmail(warnRule.getWasWarnEmail());
+                    emailBean.setTitle(theme);
+                    emailBean.setContent(content);
+                    Result emailResult = mailClient.sendMail(emailBean);
+                    System.out.println("发送邮件返回值:"+JSONObject.toJSON(emailResult));
                     //2.记录邮件和短信记录
                     WarnHistory warnHistory = new WarnHistory();
                     warnHistory.setWasTypeName(wasType);

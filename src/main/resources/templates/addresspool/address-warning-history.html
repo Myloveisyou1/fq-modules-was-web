@@ -175,6 +175,15 @@
     function queryInfo() {
         var startTime = $("#startTime").val();
         var endTime = $("#endTime").val();
+        if (startTime == null || startTime == "") {
+            if (endTime != null && endTime != "") {
+                startTime = '1970-01-01';
+            }
+        } else {
+            if (endTime == null || endTime == "") {
+                endTime = new Date().toLocaleDateString();
+            }
+        }
         if (new Date(startTime).getTime() > new Date(endTime).getTime()) {
             layer.msg("结束时间不能小于开始时间",{icon: 5});
             return;
@@ -184,8 +193,8 @@
             where: { //设定异步数据接口的额外参数，任意设
                 wasSource:$("#wasSource").val(),
                 wasType:$("#wasType").val(),
-                startTime:$("#startTime").val(),
-                endTime:$("#endTime").val()
+                startTime:startTime,
+                endTime:endTime
             }
             ,page: {
                 curr: 1 //重新从第 1 页开始

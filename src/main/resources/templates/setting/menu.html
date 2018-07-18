@@ -49,6 +49,7 @@
             <th>菜单路径</th>
             <th>菜单图标</th>
             <th>所属项目</th>
+            <th>菜单排序</th>
             <th>创建时间</th>
             <th>修改时间</th>
             <th>操作</th>
@@ -106,12 +107,16 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select name="menu_project" id="menu_project" lay-verify="required">
-                    <!--<option value="1" >1</option>-->
-                    <!--<option value="2" selected>2</option>-->
-                    <!--<option value="3" >3</option>-->
-                    <!--<option value="4" >4</option>-->
-                    <!--<option value="5" >5</option>-->
                 </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="menu_sort" class="layui-form-label">
+                <span class="x-red">*</span>菜单排序
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="menu_sort" required="" lay-verify="pass"
+                       autocomplete="off" class="layui-input">
             </div>
         </div>
         <input type="reset" style="display:none;" />
@@ -144,6 +149,7 @@
             <th>菜单路径</th>
             <th>菜单图标</th>
             <th>所属项目</th>
+            <th>菜单排序</th>
             <th>创建时间</th>
             <th>修改时间</th>
             <th>操作</th>
@@ -303,6 +309,7 @@
                                         '<td>'+data[i].url+'</td>' +
                                         '<td><i class="iconfont">'+data[i].icon+'</i></td>' +
                                         '<td>'+data[i].projectName+'</td>' +
+                                        '<td>'+data[i].sort+'</td>' +
                                         '<td>'+data[i].createTime+'</td>' +
                                         '<td>'+data[i].updateTime+'</td>'+
                                         '<td class="td-manage">'+
@@ -359,8 +366,9 @@
 
                 var menu_name = $("#menu_name").val();
                 var menu_url = $("#menu_url").val();
+                var menu_sort = $("#menu_sort").val();
 
-                if(menu_name == "" || menu_url == "") {
+                if(menu_name == "" || menu_url == "" || menu_sort == "") {
                     layer.msg("信息未填写完整",{icon:5});
                     return;
                 }
@@ -378,7 +386,8 @@
                         belong:$("#menu_project").val(),
                         icon:icon,
                         parentCode:parentCode,
-                        menuType:parseInt(menuType)
+                        menuType:parseInt(menuType),
+                        sort:menu_sort
                     },
                     success:function(data){
                         layer.closeAll("loading");
@@ -480,6 +489,7 @@
                     $("#menu_name").val(data.data.menuName);
                     $("#menu_url").val(data.data.url);
                     $("#menu_icon").val(data.data.icon);
+                    $("#menu_sort").val(data.data.sort);
                     $("#menu_project").find("option[value='"+data.data.belong+"']").attr("selected",true);
                     form.render("select","selFilter");
                     layer.open({
@@ -491,8 +501,9 @@
                         yes: function (index,layero) {
                              var menu_name = $("#menu_name").val();
                              var menu_url = $("#menu_url").val();
+                            var menu_sort = $("#menu_sort").val();
 
-                             if(menu_name == "" || menu_url == "") {
+                             if(menu_name == "" || menu_url == "" || menu_sort == "") {
                                  layer.msg("信息未填写完整",{icon:5});
                                     return;
                              }
@@ -508,6 +519,7 @@
                                     url:menu_url,
                                     belong:$("#menu_project").val(),
                                     icon:icon,
+                                    sort:menu_sort,
                                     gid:id
                                 },
                                 success:function(data){
@@ -515,7 +527,7 @@
                                     console.log(data);
                                     if(data.code == 200) {
                                         layer.msg("修改成功",{icon:6,time:2000},function(){
-                                            location.reload();
+                                            // location.reload();
                                         });
                                     } else if (data.code == 209){
                                         layer.msg(data.msg,{icon:2});
@@ -560,7 +572,7 @@
             type:1,
             title: '子菜单列表',
             content: $("#childMenuDiv"),
-            area: ['1200px', '500px']
+            area: ['1420px', '500px']
         });
         //查询子菜单信息
         parentCode = id;
@@ -598,6 +610,10 @@
                                 e = "功能";
                             }
                             var str = "";
+                            var sort = data[i].sort;
+                            if (sort == null) {
+                                sort = "-";
+                            }
                             html += '<tr cate-id="'+data[i].gid+'" fid="'+data[i].parentCode+'" >' +
                                     '<td>'+data[i].gid+'</td>' +
                                     '<td>'+e+'</td>' +
@@ -605,6 +621,7 @@
                                     '<td>'+data[i].url+'</td>' +
                                     '<td><i class="iconfont">'+data[i].icon+'</i></td>' +
                                     '<td>'+data[i].projectName+'</td>' +
+                                    '<td>'+sort+'</td>' +
                                     '<td>'+data[i].createTime+'</td>' +
                                     '<td>'+data[i].updateTime+'</td>'+
                                     '<td class="td-manage">'+

@@ -1,5 +1,9 @@
 package com.fq.modules.was.web.service.payrecord.impl;
+
 import com.alibaba.fastjson.JSONObject;
+import com.fq.core.result.Result;
+import com.fq.modules.was.web.client.WasApiClient;
+import com.fq.modules.was.web.entity.common.Pages;
 import com.fq.modules.was.web.entity.logs.SysLog;
 import com.fq.modules.was.web.entity.payrecord.PayOperatorHistory;
 import com.fq.modules.was.web.entity.payrecord.PayRecord;
@@ -9,21 +13,20 @@ import com.fq.modules.was.web.mapper.payrecord.PayRecordMapper;
 import com.fq.modules.was.web.service.common.impl.BaseServiceImpl;
 import com.fq.modules.was.web.service.payrecord.PayRecordService;
 import com.fq.modules.was.web.utils.CommonUtil;
+import com.fq.modules.was.web.utils.DatesUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-
-import com.fq.modules.was.web.utils.DatesUtils;
-
-import com.fq.modules.was.web.entity.common.Pages;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.Map;
 
 
 @Service
+@Slf4j
 public class PayRecordServiceImpl extends BaseServiceImpl implements PayRecordService {
 
     @Autowired
@@ -34,6 +37,9 @@ public class PayRecordServiceImpl extends BaseServiceImpl implements PayRecordSe
 
     @Autowired
     private SysLogMapper sysLogMapper;
+
+    @Autowired
+    private WasApiClient wasApiClient;
 
     /**
     * 分页查询数据
@@ -141,13 +147,15 @@ public class PayRecordServiceImpl extends BaseServiceImpl implements PayRecordSe
             //根据id获取交易信息
             PayRecord bean = payRecordMapper.selectById(wasId);
             if (CommonUtil.isNotEmpty(bean)) {
+                //查询看是否需要重新发送请求
+
                 Map<String,Object> map = new HashMap<>();
                 if ("1".equals(oType)) {
                     //未收到hash的情况 相比于 请求发送失败的情况多了两个参数,其他都一样
                     map.put("was_txid",bean.getWasTxid());
                     map.put("was_number",1);
                     map.put("was_method","callback");
-                } else if ("2".equals(oType)) {
+                } else if ("2".equals(oType)) {    //转账获取交易hash值
                     map.put("was_method","transfer");//标识转账
                 }
                 //请求发送失败的情况,
@@ -163,9 +171,23 @@ public class PayRecordServiceImpl extends BaseServiceImpl implements PayRecordSe
                 String str = JSONObject.toJSONString(map);
                 System.out.println(str);
 
-                //请求要请求的服务
-
-
+                Result back = null;
+                //请求要请求的服务,数据中的wasSource属于哪个就发送到那个服务||||||根据不同的平台调用不同的请求
+                if (CommonUtil.isNotEmpty(bean.getWasSource())) {
+                    if (bean.getWasSource().equals("bita")) {
+                        back = wasApiClient.originalTransferPizza(str);
+                    } else if (bean.getWasSource().equals("pie")) {
+                        back = wasApiClient.originalTransferPie(str);
+                    } else if (bean.getWasSource().equals("xbrick")) {
+                        back = wasApiClient.originalTransferXbrick(str);
+                    } else if (bean.getWasSource().equals("x/net")) {
+                        back = wasApiClient.originalTransferXnet(str);
+                    }
+                }
+                log.info("=========操作返回值:"+JSONObject.toJSONString(back));
+                if (back.getCode().equals("200")) {
+                    flag = true;
+                }
                 //记录操作历史
                 PayOperatorHistory history = new PayOperatorHistory(wasId,Integer.valueOf(oType),new Date(),getUserName());
                 flag = payOperatorHistoryMapper.addPayOperatorHistory(history);

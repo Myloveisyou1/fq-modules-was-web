@@ -13,7 +13,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-12 10:06:21
  */
-public interface  AddressListService {
+public interface AddressListService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 
@@ -25,17 +25,17 @@ public interface  AddressListService {
 
     int deleteById(Integer wasId);
 
-    Map<String,Object> queryPageDetails(Map<String,Object> stringObjectMap) throws ParseException;
+    Map<String,Object> queryPageDetails(Map<String, Object> stringObjectMap) throws ParseException;
 
-    String findAll(Map<String,Object> map);
+    String findAll(Map<String, Object> map);
 
-    String findAllDetails(Map<String,Object> map) throws ParseException;
+    String findAllDetails(Map<String, Object> map) throws ParseException;
 
     /**
      * 查询需要预警的币种
      * @param map
      * @return
      */
-    List<Map<String,Object>> findWarnAddressList(Map<String,Object> map);
+    List<Map<String,Object>> findWarnAddressList(Map<String, Object> map);
 }
 
