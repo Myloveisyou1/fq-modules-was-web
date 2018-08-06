@@ -14,7 +14,7 @@ public class BaseServiceImpl {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user" );
 
         return user.getUserName();
     }

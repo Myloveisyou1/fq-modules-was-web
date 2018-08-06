@@ -40,22 +40,23 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 账户密码加密规则   MD5(账号+MD5(密码))
+     *
      * @param userName
      * @param password
      * @return
      */
-    public Map<String,Object> findUser(String userName, String password) {
+    public Map<String, Object> findUser(String userName, String password) {
 
         //加密
-        password = MD5Util.getMD5(userName+password);
+        password = MD5Util.getMD5(userName + password);
 
-        User user = mapper.findByUserNameAndPassword(userName,password);
-        Map<String,Object> map = new HashMap<>();
-        String content = userName+"在"+DatesUtils.time()+"登录系统";
-        if(mapper.findByUserName(userName) != null){
-            if(user != null){
+        User user = mapper.findByUserNameAndPassword(userName, password);
+        Map<String, Object> map = new HashMap<>();
+        String content = userName + "在" + DatesUtils.time() + "登录系统";
+        if (mapper.findByUserName(userName) != null) {
+            if (user != null) {
                 if (user.getStatus() == 0) {
-                    map.put("user",user);
+                    map.put("user", user);
                     //获取权限信息
                     Long roleId = user.getRoleId();
                     //判断角色是否可用
@@ -64,7 +65,7 @@ public class LoginServiceImpl implements LoginService {
                         if (role.getStatus() == 1) {
                             //记录系统日志
                             String result = "登录失败,用户所属角色被禁用!";
-                            sysLogMapper.addSysLog(new SysLog(5,userName,content,result));
+                            sysLogMapper.addSysLog(new SysLog(5, userName, content, result));
                             throw new WasWebException(ResultEnum.ROLE_DISABLED);
                         }
                     }
@@ -74,27 +75,27 @@ public class LoginServiceImpl implements LoginService {
 
                     //记录系统日志
                     String result = "登录成功";
-                    sysLogMapper.addSysLog(new SysLog(5,userName,content,result));
+                    sysLogMapper.addSysLog(new SysLog(5, userName, content, result));
 
                     return map;
                 } else {
                     //记录系统日志
                     String result = "登录失败,用户被禁用!";
-                    sysLogMapper.addSysLog(new SysLog(5,userName,content,result));
+                    sysLogMapper.addSysLog(new SysLog(5, userName, content, result));
                     throw new WasWebException(ResultEnum.USER_DISABLED);
                 }
 
-            }else{
+            } else {
                 //记录系统日志
                 String result = "登录失败,用户密码错误!";
-                sysLogMapper.addSysLog(new SysLog(5,userName,content,result));
+                sysLogMapper.addSysLog(new SysLog(5, userName, content, result));
                 throw new WasWebException(ResultEnum.ERROR_PASSWORD);
             }
-        }else{
+        } else {
             //记录系统日志
             String result = "登录失败,账户不存在!";
-            sysLogMapper.addSysLog(new SysLog(5,userName,content,result));
-            throw  new WasWebException(ResultEnum.UNKNOW_ACCOUNT);
+            sysLogMapper.addSysLog(new SysLog(5, userName, content, result));
+            throw new WasWebException(ResultEnum.UNKNOW_ACCOUNT);
         }
     }
 
@@ -118,21 +119,23 @@ public class LoginServiceImpl implements LoginService {
 
     /**
      * 退出登录
+     *
      * @param user
      * @return
      */
     public boolean loginOut(User user) {
 
         //记录系统日志
-        String content = user.getUserName()+"在"+DatesUtils.time()+"登出系统";
+        String content = user.getUserName() + "在" + DatesUtils.time() + "登出系统";
         String result = "登出成功";
-        SysLog bean = new SysLog(6,user.getUserName(),content,result);
+        SysLog bean = new SysLog(6, user.getUserName(), content, result);
         sysLogMapper.addSysLog(bean);
         return true;
     }
 
     /**
      * \校验权限,后期权限写入数据库
+     *
      * @param user
      * @return
      */
@@ -140,12 +143,12 @@ public class LoginServiceImpl implements LoginService {
 
         log.info(url);//http://localhost:8081/consume/findConsume
         //检验权限
-        String[] str = url.split(":")[2].split("/");//   8081/consume/findConsume
+        String[] str = url.split(":" )[2].split("/" );//   8081/consume/findConsume
         String checkUrl = "";
-        for (int i=0;i<str.length;i++) {
+        for (int i = 0; i < str.length; i++) {
             if (i != 0) {
-                if (i != str.length -1) {
-                    checkUrl += str[i]+"/";
+                if (i != str.length - 1) {
+                    checkUrl += str[i] + "/";
                 } else {
                     checkUrl += str[i];
                 }
@@ -156,7 +159,7 @@ public class LoginServiceImpl implements LoginService {
         //先判断权限存在不.然后判断是否拥有权限
         Menu menu = menuMapper.findMenuByUrl(checkUrl);
         if (CommonUtil.isNotEmpty(menu)) {
-            MenuRole menuRole = menuMapper.findInfoByRoleAndMenu(Long.parseLong(user.getRoleId().toString()),menu.getGid());
+            MenuRole menuRole = menuMapper.findInfoByRoleAndMenu(Long.parseLong(user.getRoleId().toString()), menu.getGid());
             if (CommonUtil.isNotEmpty(menuRole)) {
                 return true;
             } else {

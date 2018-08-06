@@ -8,7 +8,7 @@ import lombok.Data;
  * @Date: create in 2018/5/24 0024 16:51
  */
 @Data
-public class User{
+public class User {
 
     private Long gid;
 

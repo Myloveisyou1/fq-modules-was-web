@@ -11,7 +11,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-17 09:44:07
  */
-public interface  PayOperatorHistoryService {
+public interface PayOperatorHistoryService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 

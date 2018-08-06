@@ -19,16 +19,19 @@
         <a href="">首页</a>
         <a href="">地址池详情</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row self-back">
         <form class="layui-form layui-col-md12 x-so form-sel" th:action="${url}">
-            <a class="layui-btn layui-btn-small" style="margin-right:10px;margin-left: -50px;background-color: #1E9FFF;" href="javascript:location.replace('/address-pool.html');">返回</a>
+            <a class="layui-btn layui-btn-small" style="margin-right:10px;margin-left: -50px;background-color: #1E9FFF;"
+               href="javascript:location.replace('/address-pool.html');">返回</a>
             <input type="hidden" name="wasType" id="wasType" th:value="${wasType}">
             <input type="hidden" name="wasSource" id="wasSource" th:value="${wasSource}">
-            <input type="text" name="wasAddress" id="wasAddress"  placeholder="请输入区块链地址" autocomplete="off" class="layui-input">
+            <input type="text" name="wasAddress" id="wasAddress" placeholder="请输入区块链地址" autocomplete="off"
+                   class="layui-input">
             <button type="button" class="layui-btn layui-btn-normal" onclick="queryInfo()">搜索</button>
             <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>
         </form>
@@ -49,7 +52,7 @@
     var wasType = "";
     var layer = "";
     var identify = "";
-    layui.use(['layer'],function(){
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
 
@@ -61,51 +64,51 @@
         if (identify == undefined) {
             identify = "1";
         }
-        parent.layer.load(2,{shade:0.3});
-        layui.use('table', function(){
+        parent.layer.load(2, {shade: 0.3});
+        layui.use('table', function () {
             var table = layui.table;
 
-            result= table.render({
+            result = table.render({
                 elem: '#demo'
-                ,height: 515
-                ,url: URL+"v1/addresslist/getDetails" //数据接口
-                ,request: {
+                , height: 515
+                , url: URL + "v1/addresslist/getDetails" //数据接口
+                , request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
-                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
                 }
-                ,where:{
-                    wasAddress:$("#wasAddress").val(),
-                    wasType:wasType,
-                    wasSource:wasSource,
-                    identify:identify
+                , where: {
+                    wasAddress: $("#wasAddress").val(),
+                    wasType: wasType,
+                    wasSource: wasSource,
+                    identify: identify
                 }
-                ,page: true //开启分页
-                ,cols: [[ //表头
-                    {field: 'id', title: 'ID', width:50, sort: true, fixed: 'left',templet:'#indexTpl'}
-                    ,{field: 'wasType', title: '币种类型', sort: true}
-                    ,{field: 'wasSource', title: '对应业务系统',sort: true}
-                    ,{field: 'wasAddress', title: '区块链地址',sort: true}
-                    ,{field: 'wasExpireTime', title: '地址有效期(天)',sort: true}
-                    ,{field: 'wasMonitorTime', title: '地址监控期(天)',sort: true}
-                    ,{field: 'wasCreateTime', title: '获取时间',sort:true,width:170}
-                    ,{field: 'expireTime', title: '到期时间',sort:true,width:170}
-                    ,{field: 'warnTime', title: '监控到期时间',sort:true,width:170}
-                    ,{field: 'acceptAmount', title: '充值到账数量', sort: true}
-                    ,{field: 'status', title: '状态',sort: true}
+                , page: true //开启分页
+                , cols: [[ //表头
+                    {field: 'id', title: 'ID', width: 50, sort: true, fixed: 'left', templet: '#indexTpl'}
+                    , {field: 'wasType', title: '币种类型', sort: true}
+                    , {field: 'wasSource', title: '对应业务系统', sort: true}
+                    , {field: 'wasAddress', title: '区块链地址', sort: true}
+                    , {field: 'wasExpireTime', title: '地址有效期(天)', sort: true}
+                    , {field: 'wasMonitorTime', title: '地址监控期(天)', sort: true}
+                    , {field: 'wasCreateTime', title: '获取时间', sort: true, width: 170}
+                    , {field: 'expireTime', title: '到期时间', sort: true, width: 170}
+                    , {field: 'warnTime', title: '监控到期时间', sort: true, width: 170}
+                    , {field: 'acceptAmount', title: '充值到账数量', sort: true}
+                    , {field: 'status', title: '状态', sort: true}
                 ]]
-                ,response: {
+                , response: {
                     statusName: 'code' //数据状态的字段名称，默认：code
-                    ,statusCode: 200 //成功的状态码，默认：0
-                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
-                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
-                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                    , statusCode: 200 //成功的状态码，默认：0
+                    , msgName: 'hint' //状态信息的字段名称，默认：msg
+                    , countName: 'totalCount' //数据总数的字段名称，默认：count
+                    , dataName: 'data' //数据列表的字段名称，默认：data
                 }
-                ,done: function(res, curr, count){
+                , done: function (res, curr, count) {
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                     //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                     console.log(res);
                     if (res.code != 200) {
-                        layer.msg(res.msg,{icon:2});
+                        layer.msg(res.msg, {icon: 2});
                     }
                     //得到当前页码
                     console.log(curr);
@@ -128,9 +131,9 @@
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                wasAddress:$("#wasAddress").val()
+                wasAddress: $("#wasAddress").val()
             }
-            ,page: {
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });

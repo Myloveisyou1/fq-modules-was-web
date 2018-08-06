@@ -24,38 +24,40 @@ public class LoginController {
 
     /**
      * 登陆
+     *
      * @param userName
      * @param password
      * @return
      */
-    @PostMapping(value = "/signIn")
-    public Result login(HttpServletRequest request, @RequestParam(value = "userName") String userName, @RequestParam(value = "password") String password){
+    @PostMapping(value = "/signIn" )
+    public Result login(HttpServletRequest request, @RequestParam(value = "userName" ) String userName, @RequestParam(value = "password" ) String password) {
 
         //校验登陆
-        Map<String,Object> map = service.findUser(userName, MD5Util.getMD5(password));
+        Map<String, Object> map = service.findUser(userName, MD5Util.getMD5(password));
         HttpSession session = request.getSession();
-        User user = (User)map.get("user");
-        if(CommonUtil.isNotEmpty(user)){
-            session.setAttribute("user",user);
-            return ResultUtil.success(map,null);
-        }else{
+        User user = (User) map.get("user" );
+        if (CommonUtil.isNotEmpty(user)) {
+            session.setAttribute("user", user);
+            return ResultUtil.success(map, null);
+        } else {
             return null;
         }
     }
 
     /**
      * 退出登陆
+     *
      * @param request
      * @return
      */
-    @GetMapping(value = "/signOut")
-    public Result loginOut(HttpServletRequest request){
+    @GetMapping(value = "/signOut" )
+    public Result loginOut(HttpServletRequest request) {
 
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user" );
         boolean flag = service.loginOut(user);
-        session.removeAttribute("user");
-        return ResultUtil.success(flag,null);
+        session.removeAttribute("user" );
+        return ResultUtil.success(flag, null);
 
     }
 }

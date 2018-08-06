@@ -19,21 +19,24 @@
         <a href="">首页</a>
         <a href="">数字货币管理</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="queryInfo()" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="queryInfo()"
+       title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
     <div class="layui-row self-back">
-        <form class="layui-form layui-col-md12 x-so form-sel"  id="myForm" th:action="${url}">
-            <input type="text" name="wasId" id="wasId"  placeholder="请输入货币ID" autocomplete="off" class="layui-input">
-            <input type="text" name="wasType" id="wasType"  placeholder="请输入币种类型" autocomplete="off" class="layui-input">
+        <form class="layui-form layui-col-md12 x-so form-sel" id="myForm" th:action="${url}">
+            <input type="text" name="wasId" id="wasId" placeholder="请输入货币ID" autocomplete="off" class="layui-input">
+            <input type="text" name="wasType" id="wasType" placeholder="请输入币种类型" autocomplete="off" class="layui-input">
             <button type="button" class="layui-btn layui-btn-normal" onclick="queryInfo()">搜索</button>
             <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-normal">导出</button></span>
         </form>
     </div>
     <xblock>
-        <button class="layui-btn" onclick="x_admin_show('添加币种','number-coin-add.html')"><i class="layui-icon"></i>添加币种</button>
-        <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-danger" onclick="disabledAll()">一键禁用</button></span>
+        <button class="layui-btn" onclick="x_admin_show('添加币种','number-coin-add.html')"><i class="layui-icon"></i>添加币种
+        </button>
+        <span class="x-right" style="line-height:40px"><button class="layui-btn layui-btn-danger"
+                                                               onclick="disabledAll()">一键禁用</button></span>
     </xblock>
     <table class="layui-table" id="demo" lay-filter="demo">
 
@@ -44,7 +47,8 @@
 <script type="text/javascript" src="js/common/jquery-form.js"></script>
 <!--操作-->
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="edit" onclick="x_admin_show('编辑','number-coin-add.html?wasId={{d.wasId}}')">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit"
+       onclick="x_admin_show('编辑','number-coin-add.html?wasId={{d.wasId}}')">编辑</a>
 </script>
 <!--获取最新区块高度-->
 <script type="text/html" id="getNewBlock">
@@ -67,77 +71,86 @@
     var wasId = "";
     var wasType = "";
     var layer = "";
-    layui.use(['layer'],function(){
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
-    layui.use('table', function(){
+    layui.use('table', function () {
         var table = layui.table;
         //监听工具条
-        table.on('tool(demo)', function(obj){
+        table.on('tool(demo)', function (obj) {
             var data = obj.data;
-            if(obj.event === 'detail'){
+            if (obj.event === 'detail') {
                 // layer.msg('ID：'+ data.id + ' 的查看操作');
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 getNewBlock(data.wasType);
-            } /*else if(obj.event === 'del'){
-                layer.confirm('真的删除行么', function(index){
-                    obj.del();
-                    layer.close(index);
-                });
-            } else if(obj.event === 'edit'){
-                layer.alert('编辑行：<br>'+ JSON.stringify(data));
-            }*/
+            }
+            /*else if(obj.event === 'del'){
+                           layer.confirm('真的删除行么', function(index){
+                               obj.del();
+                               layer.close(index);
+                           });
+                       } else if(obj.event === 'edit'){
+                           layer.alert('编辑行：<br>'+ JSON.stringify(data));
+                       }*/
         });
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
-        layui.use('table', function(){
+        parent.layer.load(2, {shade: 0.3});
+        layui.use('table', function () {
             var table = layui.table;
 
-            result= table.render({
+            result = table.render({
                 elem: '#demo'
-                ,height: 515
-                ,url: URL+"v1/datadictionary/list" //数据接口
-                ,request: {
+                , height: 515
+                , url: URL + "v1/datadictionary/list" //数据接口
+                , request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
-                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
                 }
-                ,where:{
-                    wasId:$("#wasId").val(),
-                    wasType:$("#wasType").val()
+                , where: {
+                    wasId: $("#wasId").val(),
+                    wasType: $("#wasType").val()
                 }
-                ,page: true //开启分页
-                ,cols: [[ //表头
-                    {field: 'wasId', title: 'ID', width:50, sort: true, fixed: 'left'}
-                    ,{field: 'wasBaseCurrency', title: '执行方法',width:120}
-                    ,{field: 'wasType', title: '币种类型', width:100,sort: true}
-                    ,{field: 'wasTokenAddress', title: '代币合约地址',width:350}
-                    ,{field: 'wasMinConfirm', title: '最小确认数',sort:true,width:110}
-                    ,{field: 'xx', title: '最新区块高度', toolbar: '#getNewBlock',width:120}
-                    ,{field: 'wasBeginBlock', title: '区块高度', sort: true,width:100}
-                    ,{field: 'wasBlockNum', title: '轮询位数',sort: true,width:100}
-                    ,{field: 'wasGateWay', title: '网关',width:110}
-                    ,{field: 'wasPrecision', title: '精度',sort: true,width:80}
-                    ,{field: 'wasZeroGasPrice', title: '归零价格',sort: true,width:100}
-                    ,{field: 'wasZeroGasLimit', title: '归零限制',width:100}
-                    ,{field: 'wasTransferGasPrice', title: '转账价格',sort: true,width:100}
-                    ,{field: 'wasTransferGasLimit', title: '转账限制',width:100}
-                    ,{field: 'wasCoinIntroduceUrl', title: '货币介绍URL',templet: '<div><a href="{{d.wasCoinIntroduceUrl}}" class="layui-table-link" target="_blank">{{d.wasCoinIntroduceUrl}}</a></div>'}
-                    ,{field: 'wasBlockBrowsersUrl', title: '区块浏览器URL',templet: '<div><a href="{{d.wasBlockBrowsersUrl}}" class="layui-table-link" target="_blank">{{d.wasBlockBrowsersUrl}}</a></div>'}
-                    ,{field: 'wasStatus', title: '状态',width:80,templet:'#wasStatus',sort:true}
-                    ,{field: 'wasRemark', title: '备注',width:200}
-                    ,{field: 'wasSpare', title: '备用标签'}
-                    ,{field: 'repData', title: '操作',toolbar:'#barDemo',width:100,align:'center'}
+                , page: true //开启分页
+                , cols: [[ //表头
+                    {field: 'wasId', title: 'ID', width: 50, sort: true, fixed: 'left'}
+                    , {field: 'wasBaseCurrency', title: '执行方法', width: 120}
+                    , {field: 'wasType', title: '币种类型', width: 100, sort: true}
+                    , {field: 'wasTokenAddress', title: '代币合约地址', width: 350}
+                    , {field: 'wasMinConfirm', title: '最小确认数', sort: true, width: 110}
+                    , {field: 'xx', title: '最新区块高度', toolbar: '#getNewBlock', width: 120}
+                    , {field: 'wasBeginBlock', title: '区块高度', sort: true, width: 100}
+                    , {field: 'wasBlockNum', title: '轮询位数', sort: true, width: 100}
+                    , {field: 'wasGateWay', title: '网关', width: 110}
+                    , {field: 'wasPrecision', title: '精度', sort: true, width: 80}
+                    , {field: 'wasZeroGasPrice', title: '归零价格', sort: true, width: 100}
+                    , {field: 'wasZeroGasLimit', title: '归零限制', width: 100}
+                    , {field: 'wasTransferGasPrice', title: '转账价格', sort: true, width: 100}
+                    , {field: 'wasTransferGasLimit', title: '转账限制', width: 100}
+                    , {
+                        field: 'wasCoinIntroduceUrl',
+                        title: '货币介绍URL',
+                        templet: '<div><a href="{{d.wasCoinIntroduceUrl}}" class="layui-table-link" target="_blank">{{d.wasCoinIntroduceUrl}}</a></div>'
+                    }
+                    , {
+                        field: 'wasBlockBrowsersUrl',
+                        title: '区块浏览器URL',
+                        templet: '<div><a href="{{d.wasBlockBrowsersUrl}}" class="layui-table-link" target="_blank">{{d.wasBlockBrowsersUrl}}</a></div>'
+                    }
+                    , {field: 'wasStatus', title: '状态', width: 80, templet: '#wasStatus', sort: true}
+                    , {field: 'wasRemark', title: '备注', width: 200}
+                    , {field: 'wasSpare', title: '备用标签'}
+                    , {field: 'repData', title: '操作', toolbar: '#barDemo', width: 100, align: 'center'}
                 ]]
-                ,response: {
+                , response: {
                     statusName: 'code' //数据状态的字段名称，默认：code
-                    ,statusCode: 200 //成功的状态码，默认：0
-                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
-                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
-                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                    , statusCode: 200 //成功的状态码，默认：0
+                    , msgName: 'hint' //状态信息的字段名称，默认：msg
+                    , countName: 'totalCount' //数据总数的字段名称，默认：count
+                    , dataName: 'data' //数据列表的字段名称，默认：data
                 }
-                ,done: function(res, curr, count){
+                , done: function (res, curr, count) {
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                     //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                     console.log(res);
@@ -170,10 +183,10 @@
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                wasId:$("#wasId").val(),
-                wasType:$("#wasType").val()
+                wasId: $("#wasId").val(),
+                wasType: $("#wasType").val()
             }
-            ,page: {
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });
@@ -184,7 +197,7 @@
      */
     function disabledAll() {
         var obj = "0";
-        layer.confirm('确认要禁用吗？',function(index){
+        layer.confirm('确认要禁用吗？', function (index) {
             if (index) {
                 $.ajax({
                     url: URL + "v1/datadictionary/disabledAll",
@@ -227,24 +240,24 @@
 
     function getNewBlock(wasType) {
         $.ajax({
-            url:URL+"v1/datadictionary/getNewHeight",
-            type:"get",
-            data:{
-                wasType:wasType
+            url: URL + "v1/datadictionary/getNewHeight",
+            type: "get",
+            data: {
+                wasType: wasType
             },
-            success:function(data){
+            success: function (data) {
                 layer.closeAll("loading");
                 console.log(data);
                 if (data.code == 200) {
-                    layer.msg(data.data.msg+"区块高度为:"+data.data.blockNumber);
+                    layer.msg(data.data.msg + "区块高度为:" + data.data.blockNumber);
                     queryInfo();
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
 
-            },error: function (jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 layer.closeAll("loading");
-             }
+            }
         });
     }
 </script>

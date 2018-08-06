@@ -33,12 +33,13 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
     /**
      * 查询所有角色
+     *
      * @return
      */
     public List<Role> findAllRole(String roleName) {
 
         if (CommonUtil.isNotEmpty(roleName)) {
-            roleName = "%"+roleName+"%";
+            roleName = "%" + roleName + "%";
             return mapper.findRoleByName(roleName);
         } else {
             return mapper.findAllRole();
@@ -47,6 +48,7 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
     /**
      * 修改角色
+     *
      * @param role
      * @return
      */
@@ -55,14 +57,14 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
         Role bean = new Role();
         if (CommonUtil.isNotEmpty(role)) {
             bean = mapper.findById(role.getGid());
-            String content = getUserName()+"在"+DatesUtils.time()+"修改角色"+bean.getRoleName()+"的信息,如下:";
+            String content = getUserName() + "在" + DatesUtils.time() + "修改角色" + bean.getRoleName() + "的信息,如下:";
             if (CommonUtil.isNotEmpty(bean)) {
                 if (CommonUtil.isNotEmpty(role.getRoleName())) {
-                    content += "roleName="+role.getRoleName();
+                    content += "roleName=" + role.getRoleName();
                     bean.setRoleName(role.getRoleName());
                 }
                 if (CommonUtil.isNotEmpty(role.getRoleNameEn())) {
-                    content += "roleEnName="+role.getRoleNameEn();
+                    content += "roleEnName=" + role.getRoleNameEn();
                     bean.setRoleNameEn(role.getRoleNameEn());
                 }
                 if (CommonUtil.isNotEmpty(role.getStatus())) {
@@ -74,11 +76,11 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
                     bean.setStatus(role.getStatus());
                 }
                 bean.setUpdateTime(DatesUtils.time());
-                bean.setVersion(bean.getVersion()+1);
+                bean.setVersion(bean.getVersion() + 1);
 
                 //记录系统日志
                 String result = "修改成功";
-                sysLogMapper.addSysLog(new SysLog(2,getUserName(),content,result));
+                sysLogMapper.addSysLog(new SysLog(2, getUserName(), content, result));
             }
         }
 
@@ -88,6 +90,7 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
     /**
      * 添加角色
+     *
      * @param role
      * @param menus
      * @return
@@ -96,14 +99,14 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
     public boolean addRole(Role role, String menus) {
 
         List<Role> r = mapper.findRoleByName(role.getRoleName());
-        String content = getUserName()+"在"+DatesUtils.time()+"新增角色"+role.getRoleName();
+        String content = getUserName() + "在" + DatesUtils.time() + "新增角色" + role.getRoleName();
         if (CommonUtil.isNotEmpty(r)) {
             throw new WasWebException(ResultEnum.SAME_ROLE);
         }
         String[] menu = {};
         if (CommonUtil.isNotEmpty(menus)) {
-            content += "权限信息如下:"+menus;
-            menu = menus.split(",");
+            content += "权限信息如下:" + menus;
+            menu = menus.split("," );
         }
         //保存角色
         role.setVersion(1l);
@@ -113,7 +116,7 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
         mapper.addRole(role);
 
-        for (int i=0;i<menu.length;i++) {
+        for (int i = 0; i < menu.length; i++) {
             MenuRole menuRole = new MenuRole();
             menuRole.setRoleId(role.getGid());
             if (CommonUtil.isNotEmpty(menu[i])) {
@@ -128,13 +131,14 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
         //记录系统日志
         String result = "新增成功";
-        sysLogMapper.addSysLog(new SysLog(1,getUserName(),content,result));
+        sysLogMapper.addSysLog(new SysLog(1, getUserName(), content, result));
 
         return true;
     }
 
     /**
      * 修改角色权限
+     *
      * @param role
      * @param ymenus
      * @param nmenus
@@ -149,22 +153,22 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
             //修改角色
             bean.setRoleName(role.getRoleName());
             bean.setRoleNameEn(role.getRoleNameEn());
-            bean.setVersion(bean.getVersion()+1);
+            bean.setVersion(bean.getVersion() + 1);
 
             mapper.updateRole(bean);
 
             //修改权限
             List<Menu> list = menuMapper.findMenuByRole(bean.getGid());
-            String[] ymenu = ymenus.split(",");
-            String[] nmenu = nmenus.split(",");
+            String[] ymenu = ymenus.split("," );
+            String[] nmenu = nmenus.split("," );
             if (CommonUtil.isNotEmpty(nmenu)) {
                 //校验要保存的权限
                 boolean flag = false;
-                for(int j=0;j<ymenu.length;j++) {//1,3,4
+                for (int j = 0; j < ymenu.length; j++) {//1,3,4
                     //如果添加的权限原来不存在,则添加该权限3,4
                     if (CommonUtil.isNotEmpty(list)) {
-                        for (int i=0;i<list.size();i++) {
-                            if(CommonUtil.isNotEmpty(ymenu[j])) {
+                        for (int i = 0; i < list.size(); i++) {
+                            if (CommonUtil.isNotEmpty(ymenu[j])) {
                                 if (!list.get(i).getGid().equals(Long.parseLong(ymenu[j]))) {
                                     flag = true;
                                 } else {
@@ -189,14 +193,14 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
                 }
 
                 //校验要删除的权限1,2,3
-                for(int m=0;m<nmenu.length;m++) {
+                for (int m = 0; m < nmenu.length; m++) {
                     //如果原来存在该权限,则删除2,3,4
-                    if(CommonUtil.isNotEmpty(nmenu[m])) {
-                        for (int i=0;i<list.size();i++) {
+                    if (CommonUtil.isNotEmpty(nmenu[m])) {
+                        for (int i = 0; i < list.size(); i++) {
                             if (list.get(i).getGid().equals(Long.parseLong(nmenu[m]))) {
                                 //根据权限和角色查询menu_role的信息
 
-                                MenuRole menuRole = menuMapper.findInfoByRoleAndMenu(bean.getGid(),list.get(i).getGid());
+                                MenuRole menuRole = menuMapper.findInfoByRoleAndMenu(bean.getGid(), list.get(i).getGid());
 
                                 menuMapper.deleteMenuRole(menuRole);
                             }
@@ -206,10 +210,10 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
                 }
             }
 
-            String content = getUserName()+"在"+DatesUtils.time()+"修改角色和权限信息,修改后权限为:【"+ymenus+"】";
+            String content = getUserName() + "在" + DatesUtils.time() + "修改角色和权限信息,修改后权限为:【" + ymenus + "】";
             //记录系统日志
             String result = "修改成功";
-            sysLogMapper.addSysLog(new SysLog(2,getUserName(),content,result));
+            sysLogMapper.addSysLog(new SysLog(2, getUserName(), content, result));
         }
 
         return true;
@@ -217,6 +221,7 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
     /**
      * 查询角色权限
+     *
      * @param roleId
      * @return
      */
@@ -226,6 +231,7 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
 
     /**
      * 删除角色
+     *
      * @param gid
      * @return
      */
@@ -244,7 +250,7 @@ public class RoleServiceImpl extends BaseServiceImpl implements RoleService {
         } else {
             result = "删除失败";
         }
-        sysLogMapper.addSysLog(new SysLog(1,getUserName(),getUserName()+"在"+DatesUtils.time()+"修改角色信息,id="+gid,result));
+        sysLogMapper.addSysLog(new SysLog(1, getUserName(), getUserName() + "在" + DatesUtils.time() + "修改角色信息,id=" + gid, result));
 
         return flag;
     }

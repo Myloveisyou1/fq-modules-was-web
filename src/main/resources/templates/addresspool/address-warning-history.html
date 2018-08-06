@@ -19,7 +19,8 @@
         <a href="">首页</a>
         <a href="">预警提醒历史记录</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
@@ -99,60 +100,60 @@
     var wasType = "";
     var layer = "";
     var form = "";
-    layui.use(['layer'],function(){
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
-    layui.use('form', function(){
+    layui.use('form', function () {
         form = layui.form;
     });
-    layui.use('laydate',function () {
+    layui.use('laydate', function () {
         var laydate = layui.laydate;
-        lay('.test-item').each(function(){
+        lay('.test-item').each(function () {
             laydate.render({
                 elem: this
-                ,trigger: 'click'
+                , trigger: 'click'
             });
         });
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
-        layui.use('table', function(){
+        parent.layer.load(2, {shade: 0.3});
+        layui.use('table', function () {
             var table = layui.table;
 
-            result= table.render({
+            result = table.render({
                 elem: '#demo'
-                ,height: 515
-                ,url: URL+"v1/warnhistory/list" //数据接口
-                ,request: {
+                , height: 515
+                , url: URL + "v1/warnhistory/list" //数据接口
+                , request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
-                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
                 }
-                ,where:{
-                    wasSource:$("#wasSource").val(),
-                    wasType:$("#wasType").val(),
-                    startTime:$("#startTime").val(),
-                    endTime:$("#endTime").val()
+                , where: {
+                    wasSource: $("#wasSource").val(),
+                    wasType: $("#wasType").val(),
+                    startTime: $("#startTime").val(),
+                    endTime: $("#endTime").val()
                 }
-                ,page: true //开启分页
-                ,cols: [[ //表头
+                , page: true //开启分页
+                , cols: [[ //表头
                     {field: 'wasType', title: '币种类型', sort: true}
-                    ,{field: 'wasSource', title: '对应业务系统',sort: true}
-                    ,{field: 'wasAddressTotalCount', title: '地址总数',sort:true,event:'totalCount'}
-                    ,{field: 'wasAddressSurplusCount', title: '剩余未使用数量',sort:true,event:'surplusCount'}
-                    ,{field: 'wasAddressRate', title: '使用比例', sort: true}
-                    ,{field: 'wasWarnNum', title: '剩余预警值',sort: true}
-                    ,{field: 'wasWarnTime', title: '预警时间',sort:true,templet:'#formatDate2'}
-                    ,{field: 'repData', title: '提醒用户',toolbar:'#barDemo',align:'center'}
+                    , {field: 'wasSource', title: '对应业务系统', sort: true}
+                    , {field: 'wasAddressTotalCount', title: '地址总数', sort: true, event: 'totalCount'}
+                    , {field: 'wasAddressSurplusCount', title: '剩余未使用数量', sort: true, event: 'surplusCount'}
+                    , {field: 'wasAddressRate', title: '使用比例', sort: true}
+                    , {field: 'wasWarnNum', title: '剩余预警值', sort: true}
+                    , {field: 'wasWarnTime', title: '预警时间', sort: true, templet: '#formatDate2'}
+                    , {field: 'repData', title: '提醒用户', toolbar: '#barDemo', align: 'center'}
                 ]]
-                ,response: {
+                , response: {
                     statusName: 'code' //数据状态的字段名称，默认：code
-                    ,statusCode: 200 //成功的状态码，默认：0
-                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
-                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
-                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                    , statusCode: 200 //成功的状态码，默认：0
+                    , msgName: 'hint' //状态信息的字段名称，默认：msg
+                    , countName: 'totalCount' //数据总数的字段名称，默认：count
+                    , dataName: 'data' //数据列表的字段名称，默认：data
                 }
-                ,done: function(res, curr, count){
+                , done: function (res, curr, count) {
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                     //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                     console.log(res);
@@ -185,18 +186,18 @@
             }
         }
         if (new Date(startTime).getTime() > new Date(endTime).getTime()) {
-            layer.msg("结束时间不能小于开始时间",{icon: 5});
+            layer.msg("结束时间不能小于开始时间", {icon: 5});
             return;
         }
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                wasSource:$("#wasSource").val(),
-                wasType:$("#wasType").val(),
-                startTime:startTime,
-                endTime:endTime
+                wasSource: $("#wasSource").val(),
+                wasType: $("#wasType").val(),
+                startTime: startTime,
+                endTime: endTime
             }
-            ,page: {
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });
@@ -205,7 +206,7 @@
     function findEmailAndTel(wasId) {
         findById(wasId);
         layer.open({
-            type:1,
+            type: 1,
             title: '提醒用户详情',
             content: $("#updateAddress"),
             area: ['450px', '350px'],
@@ -214,12 +215,12 @@
 
     function findById(wasId) {
         $.ajax({
-            url:URL+"v1/warnhistory/info/"+wasId,
-            type:"get",
-            dataType:"json",
-            success:function(data){
+            url: URL + "v1/warnhistory/info/" + wasId,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     // $("#dwasEmail").val(data.data.wasWarnEmail);
                     // $("#dwasTel").val(data.data.wasWarnTel);
 
@@ -230,34 +231,34 @@
                     var emails = data.data.wasWarnEmail.split(",");
                     var tels = data.data.wasWarnTel.split(",");
 
-                    for (var i=0;i<emails.length;i++) {
+                    for (var i = 0; i < emails.length; i++) {
                         var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
                             // '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
-                            '<div class="email" id="childEmail">'+emails[i]+'</div></div>';
+                            '<div class="email" id="childEmail">' + emails[i] + '</div></div>';
                         $("#demail").append(html);
                     }
-                    for (var i=0;i<tels.length;i++) {
+                    for (var i = 0; i < tels.length; i++) {
                         var html = '<div class="layui-form-mid layui-word-aux" style="border: #a6e1ec solid 1px;line-height: 0px;width: 190px;margin-top: 10px;">' +
                             // '<div onclick="removeDiv(this)" style="padding-left:180px;cursor: pointer;">X</div>' +
-                            '<div class="tel" id="childTel">'+tels[i]+'</div></div>';
+                            '<div class="tel" id="childTel">' + tels[i] + '</div></div>';
                         $("#dphone").append(html);
                     }
 
-                } else if (data.code == 209){
-                    parent.layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    parent.layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });

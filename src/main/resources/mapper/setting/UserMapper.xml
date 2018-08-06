@@ -28,20 +28,20 @@
 
     <!--根据账号密码查询-->
     <select id="findByUserNameAndPassword" resultMap="userResultMap">
-      select 
+        select
         <include refid="sql_for_all"/>
-      from
+        from
         was_sys_user
-      where user_name = #{userName}
+        where user_name = #{userName}
         AND password = #{password}
     </select>
 
     <!--根据登录名称查询信息-->
     <select id="findByUserName" resultMap="userResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from
-          was_sys_user
+        was_sys_user
         where user_name = #{userName}
     </select>
 
@@ -52,9 +52,9 @@
         from
         was_sys_user
         where 1=1
-          <if test="userName != null and userName.trim() != ''">
-              AND user_name like concat('%', #{userName}, '%')
-          </if>
+        <if test="userName != null and userName.trim() != ''">
+            AND user_name like concat('%', #{userName}, '%')
+        </if>
     </select>
 
     <!--修改用户信息-->
@@ -79,7 +79,8 @@
         insert into was_sys_user(
         gid,user_name,password,tel,email,
         role_id,role_name,create_time,update_time,login_time,status,version)
-        values (#{gid},#{userName},#{password},#{tel},#{email},#{roleId},#{roleName},#{createTime},#{updateTime},#{loginTime},#{status},#{version})
+        values
+        (#{gid},#{userName},#{password},#{tel},#{email},#{roleId},#{roleName},#{createTime},#{updateTime},#{loginTime},#{status},#{version})
     </insert>
 
     <!--删除用户-->

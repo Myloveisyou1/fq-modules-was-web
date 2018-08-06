@@ -36,7 +36,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "sqlSessionFactory")
+    @Bean(name = "sqlSessionFactory" )
     public SqlSessionFactory sqlSessionFactoryBean() throws IOException {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
@@ -45,7 +45,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
 
         // 配置mapper的扫描，找到所有的mapper.xml映射文件
         Resource[] resources = new PathMatchingResourcePatternResolver()
-                .getResources("classpath:mapper/**/*.xml");
+                .getResources("classpath:mapper/**/*.xml" );
         bean.setMapperLocations(resources);
         try {
             return bean.getObject();

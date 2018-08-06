@@ -17,14 +17,16 @@ public interface UserMapper {
 
     /**
      * 根据登录名查询
+     *
      * @param userName
      * @return
      */
 //    @Select("select gid,user_name userName,password,tel,email,role_id roleId,role_name roleName,create_time createTime,update_time updateTime,login_time loginTime,status,version from was_sys_user where user_name = #{userName}")
-    User findByUserName(@Param("userName") String userName);
+    User findByUserName(@Param("userName" ) String userName);
 
     /**
      * 账号密码查询
+     *
      * @param userName
      * @param password
      * @return
@@ -34,13 +36,15 @@ public interface UserMapper {
 
     /**
      * 查询所有用户
+     *
      * @return
      */
 //    @SelectProvider(type = BaseProvider.class,method = "findAllUser")
-    List<User> findAllUser(@Param("userName") String userName);
+    List<User> findAllUser(@Param("userName" ) String userName);
 
     /**
      * 修改信息
+     *
      * @param user
      */
 //    @Update("update was_sys_user (#{user}) where gid = #{gid}")
@@ -49,6 +53,7 @@ public interface UserMapper {
 
     /**
      * 删除用户
+     *
      * @param gid
      */
 //    @Delete("delete from was_sys_user where gid = #{gid}")
@@ -56,6 +61,7 @@ public interface UserMapper {
 
     /**
      * 新增用户
+     *
      * @param user
      * @return
      */

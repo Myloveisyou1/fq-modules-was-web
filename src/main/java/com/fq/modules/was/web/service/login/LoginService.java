@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public interface LoginService {
 
-    Map<String,Object> findUser(String userName, String password);
+    Map<String, Object> findUser(String userName, String password);
 
     boolean loginOut(User user);
 

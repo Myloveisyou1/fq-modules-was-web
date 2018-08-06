@@ -35,5 +35,5 @@ public interface DataDictionaryMapper {
 
     int disabledAll(@Param("way" ) String way);
 
-    List<DataDictionary> findAll(Map<String,Object> params);
+    List<DataDictionary> findAll(Map<String, Object> params);
 }

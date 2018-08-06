@@ -12,7 +12,7 @@ import java.util.Date;
  * @date 2018-07-12 18:18:34
  */
 @Data
-public class WarnHistory{
+public class WarnHistory {
 
     /**
      * 主键

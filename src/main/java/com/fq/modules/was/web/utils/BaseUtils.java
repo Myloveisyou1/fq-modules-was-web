@@ -16,24 +16,25 @@ public class BaseUtils {
 
     /**
      * 统一处理登陆的时候返回的权限列表
+     *
      * @param menuList
      * @return
      */
     public static List<MenuList> getMenuListForLogin(List<Menu> menuList) {
 
         List<MenuList> backList = new ArrayList<>();
-        for (int i=0;i<menuList.size();i++) {
+        for (int i = 0; i < menuList.size(); i++) {
             MenuList bean = new MenuList();
             Menu mi = menuList.get(i);
             if (mi.getParentCode() == 0) {
                 List<MenuList> list = new ArrayList<>();
-                for (int j=0;j<menuList.size();j++) {
+                for (int j = 0; j < menuList.size(); j++) {
                     Menu mj = menuList.get(j);
                     MenuList beanj = new MenuList();
                     if (mj.getParentCode() != 0) {
                         if (mi.getCode() == mj.getParentCode()) {
                             beanj.setGid(mj.getGid());
-                            beanj.setMenuName(mj.getMenuName()+";"+mj.getMenuType());
+                            beanj.setMenuName(mj.getMenuName() + ";" + mj.getMenuType());
                             beanj.setIcon(mj.getIcon());
                             beanj.setUrl(mj.getUrl());
                             list.add(beanj);
@@ -56,17 +57,18 @@ public class BaseUtils {
 
     /**
      * 菜单列表
+     *
      * @param menuList
      * @return
      */
     public static List<Menu> getMenuList(List<Menu> menuList) {
 
         List<Menu> backList = new ArrayList<>();
-        for (int i=0;i<menuList.size();i++) {
+        for (int i = 0; i < menuList.size(); i++) {
             Menu mi = menuList.get(i);
             if (mi.getParentCode() == 0) {
                 List<Menu> list = new ArrayList<>();
-                for (int j=0;j<menuList.size();j++) {
+                for (int j = 0; j < menuList.size(); j++) {
                     Menu mj = menuList.get(j);
                     if (mj.getParentCode() != 0) {
                         if (mi.getCode() == mj.getParentCode()) {

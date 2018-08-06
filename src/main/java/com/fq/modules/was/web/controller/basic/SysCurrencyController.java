@@ -22,7 +22,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-16 09:54:44
  */
 @RestController
-@RequestMapping("v1/syscurrency")
+@RequestMapping("v1/syscurrency" )
 public class SysCurrencyController {
 
     @Autowired
@@ -31,29 +31,29 @@ public class SysCurrencyController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(SysCurrency sysCurrency, Pages pages) {
 
-        Map<String, Object> map = sysCurrencyService.queryPage(ResultUtil.initParams(sysCurrency,pages));
+        Map<String, Object> map = sysCurrencyService.queryPage(ResultUtil.initParams(sysCurrency, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        SysCurrency sysCurrency =sysCurrencyService.selectById(wasId);
+        SysCurrency sysCurrency = sysCurrencyService.selectById(wasId);
         return ResultUtil.success(sysCurrency, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(SysCurrency sysCurrency) {
 
         return ResultUtil.success(sysCurrencyService.insert(sysCurrency), null);
@@ -62,7 +62,7 @@ public class SysCurrencyController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(SysCurrency sysCurrency) {
 
         return ResultUtil.success(sysCurrencyService.updateById(sysCurrency), null);
@@ -81,12 +81,13 @@ public class SysCurrencyController {
 
     /**
      * 查询所有币种
+     *
      * @return
      */
-    @RequestMapping(value = "/findAll")
+    @RequestMapping(value = "/findAll" )
     public Result findAll() {
 
-        return ResultUtil.success(sysCurrencyService.findAll(),null);
+        return ResultUtil.success(sysCurrencyService.findAll(), null);
     }
 
 }

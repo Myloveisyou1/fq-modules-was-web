@@ -5,7 +5,7 @@ import com.fq.modules.was.web.enums.ResultEnum;
 import lombok.Data;
 
 @Data
-public class WasWebException extends RuntimeException{
+public class WasWebException extends RuntimeException {
     private Integer code;
 
 

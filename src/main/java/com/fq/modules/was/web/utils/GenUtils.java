@@ -28,14 +28,14 @@ import java.util.zip.ZipOutputStream;
  */
 public class GenUtils {
 
-    public static List<String> getTemplates(){
+    public static List<String> getTemplates() {
         List<String> templates = new ArrayList<String>();
-        templates.add("vm/Entity.java.vm");
-        templates.add("vm/Mapper.java.vm");
-        templates.add("vm/Mapper.xml.vm");
-        templates.add("vm/Service.java.vm");
-        templates.add("vm/ServiceImpl.java.vm");
-        templates.add("vm/Controller.java.vm");
+        templates.add("vm/Entity.java.vm" );
+        templates.add("vm/Mapper.java.vm" );
+        templates.add("vm/Mapper.xml.vm" );
+        templates.add("vm/Service.java.vm" );
+        templates.add("vm/ServiceImpl.java.vm" );
+        templates.add("vm/Controller.java.vm" );
 
 //        templates.add("vm/menu.sql.vm");
 //        templates.add("vm/index.vue.vm");
@@ -63,7 +63,7 @@ public class GenUtils {
 
         //列信息
         List<ColumnEntity> columsList = new ArrayList<>();
-        for(Map<String, String> column : columns){
+        for (Map<String, String> column : columns) {
             ColumnEntity columnEntity = new ColumnEntity();
             columnEntity.setColumnName(column.get("columnName" ));
             columnEntity.setDataType(column.get("dataType" ));

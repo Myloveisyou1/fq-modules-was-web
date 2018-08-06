@@ -1,4 +1,6 @@
-package ${package}.service.impl;
+package
+
+    ${package}.service.impl;
 
 import ${package}.entity.SysLog;
 import org.springframework.stereotype.Service;
@@ -39,10 +41,10 @@ public class ${className}ServiceImpl extends BaseServiceImpl implements ${classN
         List<Map<String, Object>> list = ${classname}Mapper.pageQueryList(params);
         Long count = ${classname}Mapper.pageQueryCount(params);
 
-        Pages pages = (Pages) params.get("pages");
+        Pages pages = (Pages) params.get("pages" );
         pages.setTotalCount(count);
         long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
-        pages.setTotalPage(Integer.valueOf(totalPage + ""));
+        pages.setTotalPage(Integer.valueOf(totalPage + "" ));
 
         map.put("result", list);//数据信息
         map.put("pages", pages);//分页信息
@@ -67,12 +69,12 @@ public class ${className}ServiceImpl extends BaseServiceImpl implements ${classN
 
         boolean flag = ${classname}Mapper.add${className}(${classname});
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"新增了【】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "新增了【】的信息";
         String result = "新增成功";
         if (!flag) {
             result = "新增失败";
         }
-        SysLog sysLog = new SysLog(1,getUserName(),content,result);
+        SysLog sysLog = new SysLog(1, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
 
         return flag;
@@ -87,12 +89,12 @@ public class ${className}ServiceImpl extends BaseServiceImpl implements ${classN
 
         boolean flag = ${classname}Mapper.optUpdate${className}(${classname});
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"修改了【】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "修改了【】的信息";
         String result = "修改成功";
         if (!flag) {
             result = "修改失败";
         }
-        SysLog sysLog = new SysLog(2,getUserName(),content,result);
+        SysLog sysLog = new SysLog(2, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
         return flag;
     }
@@ -106,12 +108,12 @@ public class ${className}ServiceImpl extends BaseServiceImpl implements ${classN
         int ret = ${classname}Mapper.deleteById(${pk.attrname});
 
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"删除了id=【${pk.attrname}】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "删除了id=【${pk.attrname}】的信息";
         String result = "删除成功";
         if (ret == 0) {
             result = "删除失败";
         }
-        SysLog sysLog = new SysLog(4,getUserName(),content,result);
+        SysLog sysLog = new SysLog(4, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
 
         return ret;

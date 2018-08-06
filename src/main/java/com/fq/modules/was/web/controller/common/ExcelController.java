@@ -19,10 +19,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/excel")
+@RequestMapping(value = "/excel" )
 public class ExcelController {
 
-    private String path ;
+    private String path;
 
     @Autowired
     private DataDictionaryService service;
@@ -31,45 +31,48 @@ public class ExcelController {
 
     /**
      * 导出数字货币管理模块的Excel
+     *
      * @param wasDataDictionary
      * @return
      * @throws IOException
      */
-    @RequestMapping("/toExcel")
+    @RequestMapping("/toExcel" )
     public ResponseEntity<InputStreamResource> toExcel(DataDictionary wasDataDictionary) throws IOException {
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("bean",wasDataDictionary);
-       path = service.findAll(map);
+        Map<String, Object> map = new HashMap<>();
+        map.put("bean", wasDataDictionary);
+        path = service.findAll(map);
         return downLoad();
     }
 
     /**
      * 导出地址池列表的Excel
+     *
      * @param vo
      * @return
      * @throws IOException
      */
-    @RequestMapping("/toExcelForAddressList")
+    @RequestMapping("/toExcelForAddressList" )
     public ResponseEntity<InputStreamResource> toExcelForAddressList(AddressVo vo) throws IOException {
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("bean",vo);
+        Map<String, Object> map = new HashMap<>();
+        map.put("bean", vo);
         path = addressListService.findAll(map);
         return downLoad();
     }
 
     /**
      * 导出地址池明细列表的Excel
+     *
      * @param
      * @return
      * @throws IOException
      */
-    @RequestMapping("/toExcelForAddressDetails")
+    @RequestMapping("/toExcelForAddressDetails" )
     public ResponseEntity<InputStreamResource> toExcelForAddress(AddressVo vo) throws IOException, ParseException {
 
-        Map<String,Object> map = new HashMap<>();
-        map.put("bean",vo);
+        Map<String, Object> map = new HashMap<>();
+        map.put("bean", vo);
         path = addressListService.findAllDetails(map);
         return downLoad();
     }
@@ -79,15 +82,15 @@ public class ExcelController {
         FileSystemResource fileSystemResource = new FileSystemResource(path);
         if (fileSystemResource.exists()) {
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+            headers.add("Cache-Control", "no-cache, no-store, must-revalidate" );
             headers.add("Content-Disposition", String.format("attachment; filename=%s", fileSystemResource.getFilename()));
-            headers.add("Pragma", "no-cache");
-            headers.add("Expires", "0");
+            headers.add("Pragma", "no-cache" );
+            headers.add("Expires", "0" );
             return ResponseEntity
                     .ok()
                     .headers(headers)
                     .contentLength(fileSystemResource.contentLength())
-                    .contentType(MediaType.parseMediaType("application/octet-stream"))
+                    .contentType(MediaType.parseMediaType("application/octet-stream" ))
                     .body(new InputStreamResource(fileSystemResource.getInputStream()));
         }
         return null;

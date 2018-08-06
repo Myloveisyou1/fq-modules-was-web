@@ -15,7 +15,7 @@
 </ul>
 <!--<script type="text/javascript" src="../static/lib/layui/layui.js"></script>-->
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         if (USER != null && USER != "") {
             $("#userName").html(USER.userName);
         } else {
@@ -25,40 +25,40 @@
             }, function(){
                 window.location.href = "login.html";
             });*/
-            window.location.href = URL+"login";
+            window.location.href = URL + "login";
         }
 
     })
 
     function loginOut() {
         $.ajax({
-            url:URL+"signOut",
-            type:"get",
-            dataType:"json",
-            success:function(data){
+            url: URL + "signOut",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     //清除cookie
                     clearCookie("SESSIONID");
                     clearCookie("USER");
                     clearCookie("AA");
-                    window.location.href = URL+"login";
-                } else if(data.code == 404){
+                    window.location.href = URL + "login";
+                } else if (data.code == 404) {
                     window.location.href = "404.html";
-                } else if(data.code == 500){
+                } else if (data.code == 500) {
                     window.location.href = "500.html";
                 } else {
-                    layer.msg(data.msg,{icon:5});
-                    window.location.href = URL+"login";
+                    layer.msg(data.msg, {icon: 5});
+                    window.location.href = URL + "login";
                 }
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });

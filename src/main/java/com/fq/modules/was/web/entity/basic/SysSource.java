@@ -12,26 +12,26 @@ import java.util.Date;
  * @date 2018-07-16 09:54:44
  */
 @Data
-public class SysSource{
+public class SysSource {
 
-/**
- * 主键
- */
-        private Integer wasId;
-/**
- * 平台名称
- */
+    /**
+     * 主键
+     */
+    private Integer wasId;
+    /**
+     * 平台名称
+     */
     private String wasSource;
-/**
- * 平台地址
- */
+    /**
+     * 平台地址
+     */
     private String wasUrl;
-/**
- * 创建时间
- */
+    /**
+     * 创建时间
+     */
     private Date wasCreateTime;
-/**
- * 修改时间
- */
+    /**
+     * 修改时间
+     */
     private Date wasUpdateTime;
 }

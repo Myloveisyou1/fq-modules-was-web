@@ -11,7 +11,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-12 17:15:52
  */
-public interface  WarnRuleService {
+public interface WarnRuleService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 

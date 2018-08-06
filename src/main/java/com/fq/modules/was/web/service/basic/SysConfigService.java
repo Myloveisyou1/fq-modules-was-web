@@ -11,7 +11,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-18 14:18:40
  */
-public interface  SysConfigService {
+public interface SysConfigService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 
@@ -23,5 +23,6 @@ public interface  SysConfigService {
 
     int deleteById(Long wasId);
 
+    Map<String, Object> selectByTypeAndSource(String wasType, String wasSource);
 }
 

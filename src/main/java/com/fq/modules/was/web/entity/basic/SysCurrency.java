@@ -12,26 +12,26 @@ import java.util.Date;
  * @date 2018-07-16 09:54:44
  */
 @Data
-public class SysCurrency{
+public class SysCurrency {
 
-/**
- * 主键
- */
+    /**
+     * 主键
+     */
     private Integer wasId;
-/**
- * 币种名称
- */
+    /**
+     * 币种名称
+     */
     private String wasName;
-/**
- * 币种简称
- */
+    /**
+     * 币种简称
+     */
     private String wasShortName;
-/**
- * 创建时间
- */
+    /**
+     * 创建时间
+     */
     private Date wasCreateTime;
-/**
- * 
- */
+    /**
+     *
+     */
     private Date wasUpdateTime;
 }

@@ -24,41 +24,41 @@ public class HttpClientUtils {
      * @param map
      * @return
      */
-    public static String doPost(String url, Map<String,Object> map){
-        if (CommonUtil.isEmpty(map)){
-            map=new HashMap<>();
+    public static String doPost(String url, Map<String, Object> map) {
+        if (CommonUtil.isEmpty(map)) {
+            map = new HashMap<>();
         }
-        String charset="UTF-8";
+        String charset = "UTF-8";
         CloseableHttpClient httpClient = null;
         HttpPost httpPost = null;
         String result = null;
-        try{
+        try {
             httpClient = HttpClients.createDefault();
             httpPost = new HttpPost(url);
             //设置参数
             List<NameValuePair> list = new ArrayList<NameValuePair>();
             Iterator iterator = map.entrySet().iterator();
-            while(iterator.hasNext()){
-                Map.Entry<String,Object> elem = (Map.Entry<String, Object>) iterator.next();
-                list.add(new BasicNameValuePair(elem.getKey(),elem.getValue()+""));
+            while (iterator.hasNext()) {
+                Map.Entry<String, Object> elem = (Map.Entry<String, Object>) iterator.next();
+                list.add(new BasicNameValuePair(elem.getKey(), elem.getValue() + "" ));
             }
-            if(list.size() > 0){
-                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list,charset);
+            if (list.size() > 0) {
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(list, charset);
                 httpPost.setEntity(entity);
             }
             HttpResponse response = httpClient.execute(httpPost);
-            if(response != null){
+            if (response != null) {
                 HttpEntity resEntity = response.getEntity();
-                if(resEntity != null){
-                    result = EntityUtils.toString(resEntity,charset);
+                if (resEntity != null) {
+                    result = EntityUtils.toString(resEntity, charset);
                 }
             }
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }finally {
+        } finally {
             // 关闭连接,释放资源
             try {
-                if(!CommonUtil.isEmpty(httpClient)){
+                if (!CommonUtil.isEmpty(httpClient)) {
                     httpClient.close();
                 }
             } catch (IOException e) {
@@ -69,13 +69,11 @@ public class HttpClientUtils {
     }
 
 
-
-
     public static void main(String[] args) {
-        Map<String,Object> param= new HashMap<>(1);
-        param.put("password", "BTC");
-        param.put("account", "2N4Dg92NwH4Lp1CWuU9m6ehP4TXuJ6f7Xu3");
-        System.out.println(doPost("http://10.45.0.43:89/Coin/testpostparameter",param));
+        Map<String, Object> param = new HashMap<>(1);
+        param.put("password", "BTC" );
+        param.put("account", "2N4Dg92NwH4Lp1CWuU9m6ehP4TXuJ6f7Xu3" );
+        System.out.println(doPost("http://10.45.0.43:89/Coin/testpostparameter", param));
     }
 
 

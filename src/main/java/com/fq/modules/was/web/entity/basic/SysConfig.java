@@ -14,40 +14,40 @@ import java.util.Date;
 @Data
 public class SysConfig {
 
-/**
- * 
- */
-        private Long wasId;
-/**
- * 币种类型，如BTC、ETH等等
- */
+    /**
+     *
+     */
+    private Long wasId;
+    /**
+     * 币种类型，如BTC、ETH等等
+     */
     private String wasType;
-/**
- * 配置类型 比如剩余预警值
- */
+    /**
+     * 配置类型 比如剩余预警值
+     */
     private String wasConfigType;
-/**
- * 数值,例如 3
- */
+    /**
+     * 数值,例如 3
+     */
     private Integer wasNum;
-/**
- * 百分比的整数部分 例如20
- */
+    /**
+     * 百分比的整数部分 例如20
+     */
     private Integer wasPercent;
-/**
- * 来源系统，比如Pizza（P
- */
+    /**
+     * 来源系统，比如Pizza（P
+     */
     private String wasSource;
-/**
- * 状态 0.禁用 1.启用
- */
+    /**
+     * 状态 0.禁用 1.启用
+     */
     private Integer wasStaus;
-/**
- * 备注
- */
+    /**
+     * 备注
+     */
     private String wasRemark;
-/**
- * 创建时间
- */
+    /**
+     * 创建时间
+     */
     private Date wasCreateTime;
 }

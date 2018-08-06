@@ -46,14 +46,15 @@
     </sql>
 
     <!--新增信息-->
-    <insert id="addSysCurrency" parameterType="com.fq.modules.was.web.entity.basic.SysCurrency" useGeneratedKeys="true" keyProperty="wasId">
+    <insert id="addSysCurrency" parameterType="com.fq.modules.was.web.entity.basic.SysCurrency" useGeneratedKeys="true"
+            keyProperty="wasId">
         insert into was_sys_currency(
         <include refid="sql_for_all_except_p"/>
         )values (
-            #{wasName},
-            #{wasShortName},
-            #{wasCreateTime},
-            #{wasUpdateTime}
+        #{wasName},
+        #{wasShortName},
+        #{wasCreateTime},
+        #{wasUpdateTime}
         )
     </insert>
 
@@ -77,14 +78,14 @@
     <!--根据主键查询单条信息-->
     <select id="selectById" parameterType="Integer" resultMap="sysCurrencyResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_sys_currency where was_id = #{wasId}
     </select>
 
     <!-- 分页查询信息 列表-->
     <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
         select
-          <include refid="sql_for_all_map"/>
+        <include refid="sql_for_all_map"/>
         from was_sys_currency
         where 1=1
         <if test="bean.wasId != null and bean.wasId.trim() != ''">

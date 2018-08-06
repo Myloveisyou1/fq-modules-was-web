@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class SimpleSelectLangDriver extends XMLLanguageDriver implements LanguageDriver {
 
-    private final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)");
+    private final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)" );
 
     @Override
     public SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType) {
@@ -23,7 +23,7 @@ public class SimpleSelectLangDriver extends XMLLanguageDriver implements Languag
         Matcher matcher = inPattern.matcher(script);
         if (matcher.find()) {
             StringBuilder sb = new StringBuilder();
-            sb.append("<where>");
+            sb.append("<where>" );
 
             for (Field field : parameterType.getDeclaredFields()) {
                 String tmp = "<if test=\"_field != null\">AND _column=#{_field}</if>";
@@ -31,7 +31,7 @@ public class SimpleSelectLangDriver extends XMLLanguageDriver implements Languag
                         CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName())));
             }
 
-            sb.append("</where>");
+            sb.append("</where>" );
 
             script = matcher.replaceAll(sb.toString());
             script = "<script>" + script + "</script>";

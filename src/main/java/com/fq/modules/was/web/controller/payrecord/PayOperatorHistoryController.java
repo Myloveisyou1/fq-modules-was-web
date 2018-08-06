@@ -23,7 +23,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-17 09:44:07
  */
 @RestController
-@RequestMapping("v1/payoperatorhistory")
+@RequestMapping("v1/payoperatorhistory" )
 public class PayOperatorHistoryController {
 
     @Autowired
@@ -32,29 +32,29 @@ public class PayOperatorHistoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(PayOperatorHistory payOperatorHistory, Pages pages) {
 
-        Map<String, Object> map = payOperatorHistoryService.queryPage(ResultUtil.initParams(payOperatorHistory,pages));
+        Map<String, Object> map = payOperatorHistoryService.queryPage(ResultUtil.initParams(payOperatorHistory, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        PayOperatorHistory payOperatorHistory =payOperatorHistoryService.selectById(wasId);
+        PayOperatorHistory payOperatorHistory = payOperatorHistoryService.selectById(wasId);
         return ResultUtil.success(payOperatorHistory, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(PayOperatorHistory payOperatorHistory) {
 
         return ResultUtil.success(payOperatorHistoryService.insert(payOperatorHistory), null);
@@ -63,7 +63,7 @@ public class PayOperatorHistoryController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(PayOperatorHistory payOperatorHistory) {
 
         return ResultUtil.success(payOperatorHistoryService.updateById(payOperatorHistory), null);

@@ -6,7 +6,8 @@
     <title>个人信息</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
 
     <!-- 公共css+js -->
     <script src="js/common/base-css.js"></script>
@@ -16,7 +17,7 @@
 
 <body>
 <div class="x-body">
-   <form class="layui-form">
+    <form class="layui-form">
         <div class="layui-form-item">
             <label for="username" class="layui-form-label">
                 <span class="x-red">*</span>登录名
@@ -85,7 +86,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">
             </label>
-            <button type="button"  class="layui-btn" lay-filter="add" onclick="updateUser()">
+            <button type="button" class="layui-btn" lay-filter="add" onclick="updateUser()">
                 修改信息
             </button>
             <button type="button" class="layui-btn" lay-filter="add" onclick="updatePassWord()">
@@ -128,15 +129,16 @@
 <script type="text/javascript" src="js/common/base-code.js"></script>
 <script>
     var layer = "";
-    layui.use(['layer'],function(){
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
     $(function () {
-        parent.layer.load(2,{shade:0.3});
+        parent.layer.load(2, {shade: 0.3});
         findUser();
         findAllRole();
         parent.layer.closeAll("loading");
     });
+
     /**
      * 查询用户信息
      */
@@ -144,15 +146,15 @@
 
         var userName = USER.userName;
         $.ajax({
-            url:URL+"user/findUserByName",
-            type:"get",
-            dataType:"json",
-            data:{
-                userName:userName
+            url: URL + "user/findUserByName",
+            type: "get",
+            dataType: "json",
+            data: {
+                userName: userName
             },
-            success:function(data){
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var user = data.data;
                     var email = user.email;
                     var loginTime = user.loginTime;
@@ -161,7 +163,8 @@
                     var phone = user.tel;
                     if (phone == null || "" == phone) {
                         phone = "";
-                    }if (email == null || "" == email) {
+                    }
+                    if (email == null || "" == email) {
                         email = "";
                     }
                     if (loginTime == null || "" == loginTime) {
@@ -176,7 +179,7 @@
                         if (status == 0) {
 
                             status = '<span class="layui-btn layui-btn-normal layui-btn-mini">启用</span>';
-                        } else if(status == 1) {
+                        } else if (status == 1) {
                             status = '<span class="layui-btn layui-btn-danger layui-btn-mini">禁用</span>';
                         }
                     }
@@ -187,21 +190,21 @@
                     $("#L_email").val(email);
                     $("#login_time").val(loginTime);
                     $("#create_time").val(createTime);
-                } else if (data.code == 209){
-                    parent.layer.msg(data.msg,{icon:2});
+                } else if (data.code == 209) {
+                    parent.layer.msg(data.msg, {icon: 2});
                     top.location.href = "../login.html";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -213,40 +216,40 @@
     function findAllRole() {
 
         $.ajax({
-            url:URL+"role/findAllRole",
-            type:"get",
-            async:false,
-            dataType:"json",
-            success:function(data){
+            url: URL + "role/findAllRole",
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var str = "";
                     var list = data.data;
-                    if(list != null && list.length > 0) {
-                        for(var i=0;i<list.length;i++) {
+                    if (list != null && list.length > 0) {
+                        for (var i = 0; i < list.length; i++) {
                             var xuanzhong = "";
-                            if(USER.roleId == list[i].gid) {
+                            if (USER.roleId == list[i].gid) {
                                 xuanzhong = 'checked=""';
                             }
-                            str += '<input type="checkbox" name="like1[write]" value="'+list[i].gid+'" lay-skin="primary" title="'+list[i].roleName+'" '+xuanzhong+'>';
+                            str += '<input type="checkbox" name="like1[write]" value="' + list[i].gid + '" lay-skin="primary" title="' + list[i].roleName + '" ' + xuanzhong + '>';
                         }
                     }
                     $("#roles").html(str);
-                } else if (data.code == 209){
-                    parent.layer.msg(data.msg,{icon:2});
+                } else if (data.code == 209) {
+                    parent.layer.msg(data.msg, {icon: 2});
                     top.location.href = "../login.html";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -256,49 +259,49 @@
     /**
      * 修改用户信息
      */
-    function updateUser(){
+    function updateUser() {
 
         //校验参数
         var userName = USER.userName;
         var tel = $("#phone").val();
         var email = $("#L_email").val();
-        if(tel == "" || email == "") {
+        if (tel == "" || email == "") {
             return;
         }
 
         $.ajax({
-            url:URL+"user/updateUser",
-            type:"get",
-            dataType:"json",
-            data:{
-                userName:userName,
-                tel:tel,
-                email:email
+            url: URL + "user/updateUser",
+            type: "get",
+            dataType: "json",
+            data: {
+                userName: userName,
+                tel: tel,
+                email: email
             },
-            success:function(data){
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
-                    layer.msg(data.msg,{
-                        icon:6,
-                        time:2000
+                if (data.code == 200) {
+                    layer.msg(data.msg, {
+                        icon: 6,
+                        time: 2000
                     }, function () {
                         window.location.reload();
                     });
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
                     top.location.href = "../login.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -308,62 +311,62 @@
     /**
      * 校验原始密码
      */
-    function checkPass(password,newPassword) {
+    function checkPass(password, newPassword) {
 
         $.ajax({
-            url:URL+"user/checkPassword",
-            type:"get",
-            dataType:"json",
-            data:{
-                userName:USER.userName,
-                password:password
+            url: URL + "user/checkPassword",
+            type: "get",
+            dataType: "json",
+            data: {
+                userName: USER.userName,
+                password: password
             },
-            success:function(data){
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
 
                     //修改密码
                     $.ajax({
-                        url:URL+"user/updatePassword",
-                        type:"get",
-                        dataType:"json",
-                        data:{
-                            userName:USER.userName,
-                            password:newPassword
+                        url: URL + "user/updatePassword",
+                        type: "get",
+                        dataType: "json",
+                        data: {
+                            userName: USER.userName,
+                            password: newPassword
                         },
-                        success:function(data){
+                        success: function (data) {
                             console.log(data);
-                            if(data.code == 200) {
-                                layer.msg("修改成功,请重新登录",{
-                                    icon:6,
-                                    time:1000
-                                },function() {
+                            if (data.code == 200) {
+                                layer.msg("修改成功,请重新登录", {
+                                    icon: 6,
+                                    time: 1000
+                                }, function () {
                                     top.location.href = "../login.html";
                                 });
-                            } else if (data.code == 209){
-                                layer.msg(data.msg,{icon:2});
+                            } else if (data.code == 209) {
+                                layer.msg(data.msg, {icon: 2});
                                 top.location.href = "../login.html";
                             } else {
-                                layer.msg(data.msg,{icon:2});
+                                layer.msg(data.msg, {icon: 2});
                             }
                         }
                     });
 
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
                     top.location.href = "../login.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -375,26 +378,26 @@
     function updatePassWord() {
 
         layer.open({
-            type:1,
+            type: 1,
             title: '修改密码',
             content: $("#updatePass"),
-            btn:['修改','取消'],
-            yes: function (index,layero) {
+            btn: ['修改', '取消'],
+            yes: function (index, layero) {
 
                 var oldPass = $("#old_pass").val();
                 var newPass = $("#L_pass").val();
                 var newRPass = $("#L_repass").val();
-                console.log(oldPass+" "+newPass+" "+newRPass);
-                if(oldPass == "" || newPass == "" || newRPass == "") {
-                    layer.msg("密码必填",{icon:5});
+                console.log(oldPass + " " + newPass + " " + newRPass);
+                if (oldPass == "" || newPass == "" || newRPass == "") {
+                    layer.msg("密码必填", {icon: 5});
                     return;
                 }
                 if (newPass != newRPass) {
-                    layer.msg("前后密码不一致",{icon:5});
+                    layer.msg("前后密码不一致", {icon: 5});
                     return;
                 }
                 //校验原始密码
-                checkPass(oldPass,newPass);
+                checkPass(oldPass, newPass);
             }
         });
     }

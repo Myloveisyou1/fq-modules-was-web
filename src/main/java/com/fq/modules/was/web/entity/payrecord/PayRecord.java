@@ -15,45 +15,45 @@ import java.util.Date;
 @Data
 public class PayRecord {
 
-/**
- * auto id
- */
+    /**
+     * auto id
+     */
     private Integer wasId;
-/**
- * source system
- */
+    /**
+     * source system
+     */
     private String wasSource;
-/**
- * transfer txid
- */
+    /**
+     * transfer txid
+     */
     private String wasTxid;
-/**
- * currency type
- */
+    /**
+     * currency type
+     */
     private String wasType;
-/**
- * transfer address
- */
+    /**
+     * transfer address
+     */
     private String wasAddress;
-/**
- * transfer account(BTS/XRM/XRP/BUC)
- */
+    /**
+     * transfer account(BTS/XRM/XRP/BUC)
+     */
     private String wasPaymentId;
-/**
- * transfer serial number
- */
+    /**
+     * transfer serial number
+     */
     private String wasSerialNumber;
-/**
- * transfer amount
- */
+    /**
+     * transfer amount
+     */
     private BigDecimal wasAmount;
-/**
- * remark
- */
+    /**
+     * remark
+     */
     private String wasRemark;
-/**
- * create time
- */
+    /**
+     * create time
+     */
     private Date wasCreateTime;
 
     private String startTime;

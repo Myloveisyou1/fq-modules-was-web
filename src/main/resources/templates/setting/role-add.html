@@ -6,7 +6,8 @@
     <title>欢迎页面-X-admin2.0</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
 
     <!-- 公共css+js -->
     <script src="js/common/base-css.js"></script>
@@ -38,7 +39,7 @@
             <label class="layui-form-label">
                 拥有权限
             </label>
-            <table  class="layui-table layui-input-block">
+            <table class="layui-table layui-input-block">
                 <tbody id="myTable">
 
                 </tbody>
@@ -55,19 +56,19 @@
 
 <script type="text/javascript" src="js/common/base-code.js"></script>
 <script>
-    var roleName = "",roleId = "",roleNameEn = "",menusList = "",layer = "";
-    layui.use(['layer'],function(){
+    var roleName = "", roleId = "", roleNameEn = "", menusList = "", layer = "";
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
+        parent.layer.load(2, {shade: 0.3});
         findAllMenu();
         //获取参数
-        roleName= getRequest().roleName;
-        roleNameEn= getRequest().roleNameEn;
-        roleId= getRequest().roleId;
-        if(roleName != undefined) {
+        roleName = getRequest().roleName;
+        roleNameEn = getRequest().roleNameEn;
+        roleId = getRequest().roleId;
+        if (roleName != undefined) {
             if (roleName.length > 0) {
                 //修改操作
                 $("#add").hide();
@@ -85,16 +86,16 @@
     function findRoleMenu(roleId) {
 
         $.ajax({
-            url:URL+"role/findRoleById",
-            type:"get",
-            dataType:"json",
-            async:false,
-            data:{
-                roleId:roleId
+            url: URL + "role/findRoleById",
+            type: "get",
+            dataType: "json",
+            async: false,
+            data: {
+                roleId: roleId
             },
-            success:function(data){
+            success: function (data) {
                 //console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     menusList = data.data;
                     $("#roleName").val(roleName);
                     $("#roleNameEn").val(roleNameEn);
@@ -102,10 +103,10 @@
                         //选中拥有的权限
                         var menus = document.getElementsByName("menu");
                         console.log(menusList);
-                        if(menusList.length > 0) {
-                            for(var i=0;i<menusList.length;i++) {
-                                for(var j=0;j<menus.length;j++) {
-                                    if(menusList[i].gid == menus[j].value) {
+                        if (menusList.length > 0) {
+                            for (var i = 0; i < menusList.length; i++) {
+                                for (var j = 0; j < menus.length; j++) {
+                                    if (menusList[i].gid == menus[j].value) {
                                         menus[j].checked = true;
                                         break;
                                     }
@@ -113,21 +114,21 @@
                             }
                         }
                     }
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
                     top.location.href = "../login.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -140,54 +141,54 @@
     function findAllMenu() {
 
         $.ajax({
-            url:URL+"menu/findAllMenu",
-            type:"get",
-            async:false,
-            dataType:"json",
-            success:function(data){
+            url: URL + "menu/findAllMenu",
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var menu = data.data;
                     var html = "";
-                    if(menu != null && menu.length > 0) {
-                        for(var i=0;i<menu.length;i++) {
+                    if (menu != null && menu.length > 0) {
+                        for (var i = 0; i < menu.length; i++) {
                             var menuList = menu[i].menuList;
-                            if(menu[i].status == 0) {
+                            if (menu[i].status == 0) {
 
                                 html += '<tr><td>' +
-                                        '<input type="checkbox" name="menu" lay-skin="primary" title="'+menu[i].menuName+'" value="'+menu[i].gid+'">' +
-                                        '</td><td><div class="layui-input-block">';
+                                    '<input type="checkbox" name="menu" lay-skin="primary" title="' + menu[i].menuName + '" value="' + menu[i].gid + '">' +
+                                    '</td><td><div class="layui-input-block">';
                             }
                             var str = "";
                             if (menuList.length > 0) {
-                                for(var j=0;j<menuList.length;j++) {
-                                    if(menuList[j].status == 0) {
+                                for (var j = 0; j < menuList.length; j++) {
+                                    if (menuList[j].status == 0) {
 
-                                        str += '<input name="menu" lay-skin="primary" type="checkbox" title="'+menuList[j].menuName+'" value="'+menuList[j].gid+'">';
+                                        str += '<input name="menu" lay-skin="primary" type="checkbox" title="' + menuList[j].menuName + '" value="' + menuList[j].gid + '">';
                                     }
                                 }
                             }
-                            html += str+'</div></td></tr>';
+                            html += str + '</div></td></tr>';
                         }
                     }
                     console.log(html);
                     $("#myTable").html(html);
 
-                } else if (data.code == 209){
-                    parent.layer.msg(data.msg,{icon:2});
+                } else if (data.code == 209) {
+                    parent.layer.msg(data.msg, {icon: 2});
                     top.location.href = "../login.html";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
+                if (jqXHR.status == 404) {
                     top.location.href = "404.html";
-                } else if(jqXHR.status == 500){
+                } else if (jqXHR.status == 500) {
                     top.location.href = "500.html";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -201,98 +202,98 @@
 
         var roleNames = $("#roleName").val();
         var roleNameEn = $("#roleNameEn").val();
-        if(roleNames == "" || roleNameEn == "") {
-            layer.msg("请填写角色名称",{icon:5});
+        if (roleNames == "" || roleNameEn == "") {
+            layer.msg("请填写角色名称", {icon: 5});
             return;
         }
         //获取选中的权限
         var role = document.getElementsByName("menu");
-        if(role.length == 0) {
-            layer.msg("请选择权限",{icon:5});
+        if (role.length == 0) {
+            layer.msg("请选择权限", {icon: 5});
             return;
         }
-        var menus = "",nmenus = "";
-        for(var i=0;i<role.length;i++) {
-            if(role[i].checked) {
-               menus += role[i].value+",";
+        var menus = "", nmenus = "";
+        for (var i = 0; i < role.length; i++) {
+            if (role[i].checked) {
+                menus += role[i].value + ",";
             } else {
-                nmenus += role[i].value+",";
+                nmenus += role[i].value + ",";
             }
         }
-        if(menus.length == 0) {
-            layer.msg("请选择权限",{icon:5});
+        if (menus.length == 0) {
+            layer.msg("请选择权限", {icon: 5});
             return;
         }
 
-        layer.load(2,{shade:0.3});
+        layer.load(2, {shade: 0.3});
         if (roleName != undefined && roleName != "") {
             $.ajax({
-                url:URL+"role/updateRoleMenu",
-                type:"get",
-                dataType:"json",
-                data:{
-                    roleName:roleNames,
-                    roleNameEn:roleNameEn,
-                    ymenus:menus,
-                    nmenus:nmenus
+                url: URL + "role/updateRoleMenu",
+                type: "get",
+                dataType: "json",
+                data: {
+                    roleName: roleNames,
+                    roleNameEn: roleNameEn,
+                    ymenus: menus,
+                    nmenus: nmenus
                 },
-                success:function(data){
+                success: function (data) {
                     console.log(data);
-                    if(data.code == 200) {
-                        layer.msg("修改成功,请在角色列表查看",{icon:6,time:2000},function(){
-                           parent.location.reload();
+                    if (data.code == 200) {
+                        layer.msg("修改成功,请在角色列表查看", {icon: 6, time: 2000}, function () {
+                            parent.location.reload();
                         });
-                    } else if (data.code == 209){
-                        layer.msg(data.msg,{icon:2});
+                    } else if (data.code == 209) {
+                        layer.msg(data.msg, {icon: 2});
                         top.location.href = "../login.html";
                     } else {
-                        layer.msg(data.msg,{icon:2});
+                        layer.msg(data.msg, {icon: 2});
                     }
                     layer.closeAll("loading");
-                },error:function(jqXHR, textStatus, errorThrown) {
+                }, error: function (jqXHR, textStatus, errorThrown) {
                     layer.closeAll("loading");
                     var data = jqXHR.responseText;
-                    if(jqXHR.status == 404){
+                    if (jqXHR.status == 404) {
                         top.location.href = "404.html";
-                    } else if(jqXHR.status == 500){
+                    } else if (jqXHR.status == 500) {
                         top.location.href = "500.html";
                     } else {
-                        layer.msg(data.msg,{icon:2});
+                        layer.msg(data.msg, {icon: 2});
                     }
                 }
             });
         } else {
             $.ajax({
-                url:URL+"role/addRole",
-                type:"get",
-                dataType:"json",
-                data:{
-                    roleName:roleNames,
-                    roleNameEn:roleNameEn,
-                    menus:menus
+                url: URL + "role/addRole",
+                type: "get",
+                dataType: "json",
+                data: {
+                    roleName: roleNames,
+                    roleNameEn: roleNameEn,
+                    menus: menus
                 },
-                success:function(data){
+                success: function (data) {
                     console.log(data);
-                    if(data.code == 200) {
-                        layer.msg("添加成功,请在角色列表查看",{icon:6,time:2000},function(){
+                    if (data.code == 200) {
+                        layer.msg("添加成功,请在角色列表查看", {icon: 6, time: 2000}, function () {
                             location.reload();
                         });
-                    } else if (data.code == 209){
-                        layer.msg(data.msg,{icon:2});
+                    } else if (data.code == 209) {
+                        layer.msg(data.msg, {icon: 2});
                         top.location.href = "../login.html";
                     } else {
-                        layer.msg(data.msg,{icon:2});
+                        layer.msg(data.msg, {icon: 2});
                     }
-                layer.closeAll("loading");
-                },error:function(jqXHR, textStatus, errorThrown) {
+                    layer.closeAll("loading");
+                }, error: function (jqXHR, textStatus, errorThrown) {
                     layer.closeAll("loading");
                     var data = jqXHR.responseText;
-                    if(jqXHR.status == 404){
+                    if (jqXHR.status == 404) {
                         top.location.href = "404.html";
-                    } else if(jqXHR.status == 500){
+                    } else if (jqXHR.status == 500) {
                         top.location.href = "500.html";
                     } else {
-                        layer.msg(data.msg,{icon:2});
+                        layer.msg(data.msg, {icon: 2});
                     }
                 }
             });

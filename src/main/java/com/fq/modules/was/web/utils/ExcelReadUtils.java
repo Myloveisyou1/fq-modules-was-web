@@ -64,18 +64,18 @@ public class ExcelReadUtils {
     }
 
 
-
     /**
      * 写入excel
+     *
      * @param path
      * @param wb
      */
-    public static void excelWrite(String path, HSSFWorkbook wb){
-        try{
+    public static void excelWrite(String path, HSSFWorkbook wb) {
+        try {
             FileOutputStream fout1 = new FileOutputStream(path);
             wb.write(fout1);
             fout1.close();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

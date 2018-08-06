@@ -28,10 +28,11 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
     private SysLogMapper sysLogMapper;
 
     /**
-    * 分页查询数据
-    * @param params
-    * @return
-    */
+     * 分页查询数据
+     *
+     * @param params
+     * @return
+     */
     public Map<String, Object> queryPage(Map<String, Object> params) {
 
         Map<String, Object> map = new HashMap<>();
@@ -40,10 +41,10 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
         List<Map<String, Object>> list = payOperatorHistoryMapper.pageQueryList(params);
         Long count = payOperatorHistoryMapper.pageQueryCount(params);
 
-        Pages pages = (Pages) params.get("pages");
+        Pages pages = (Pages) params.get("pages" );
         pages.setTotalCount(count);
         long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
-        pages.setTotalPage(Integer.valueOf(totalPage + ""));
+        pages.setTotalPage(Integer.valueOf(totalPage + "" ));
 
         map.put("result", list);//数据信息
         map.put("pages", pages);//分页信息
@@ -52,8 +53,8 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
     }
 
     /**
-    * 根据主键查询信息
-    */
+     * 根据主键查询信息
+     */
     public PayOperatorHistory selectById(Integer wasId) {
 
         return payOperatorHistoryMapper.selectById(wasId);
@@ -61,6 +62,7 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
 
     /**
      * 保存信息
+     *
      * @param payOperatorHistory 需要保存的对象
      * @return
      */
@@ -68,12 +70,12 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
 
         boolean flag = payOperatorHistoryMapper.addPayOperatorHistory(payOperatorHistory);
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"新增了【】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "新增了【】的信息";
         String result = "新增成功";
         if (!flag) {
             result = "新增失败";
         }
-        SysLog sysLog = new SysLog(1,getUserName(),content,result);
+        SysLog sysLog = new SysLog(1, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
 
         return flag;
@@ -81,6 +83,7 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
 
     /**
      * 修改信息
+     *
      * @param payOperatorHistory 需要修改的对象
      * @return
      */
@@ -88,31 +91,32 @@ public class PayOperatorHistoryServiceImpl extends BaseServiceImpl implements Pa
 
         boolean flag = payOperatorHistoryMapper.optUpdatePayOperatorHistory(payOperatorHistory);
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"修改了【】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "修改了【】的信息";
         String result = "修改成功";
         if (!flag) {
             result = "修改失败";
         }
-        SysLog sysLog = new SysLog(2,getUserName(),content,result);
+        SysLog sysLog = new SysLog(2, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
         return flag;
     }
 
     /**
-    * 根据id删除信息
-    * @return
-    */
+     * 根据id删除信息
+     *
+     * @return
+     */
     public int deleteById(Integer wasId) {
 
         int ret = payOperatorHistoryMapper.deleteById(wasId);
 
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"删除了id=【wasId】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "删除了id=【wasId】的信息";
         String result = "删除成功";
         if (ret == 0) {
             result = "删除失败";
         }
-        SysLog sysLog = new SysLog(4,getUserName(),content,result);
+        SysLog sysLog = new SysLog(4, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
 
         return ret;

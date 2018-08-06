@@ -20,8 +20,8 @@ public class WasBackstageWebMvcAdapter extends WebMvcConfigurerAdapter {
 
         InterceptorRegistration registration = registry.addInterceptor(loginInterceptor());
         //排除的url
-        registration.excludePathPatterns("/login");
-        registration.excludePathPatterns("/signIn");
-        registration.addPathPatterns("/**");
+        registration.excludePathPatterns("/login" );
+        registration.excludePathPatterns("/signIn" );
+        registration.addPathPatterns("/**" );
     }
 }

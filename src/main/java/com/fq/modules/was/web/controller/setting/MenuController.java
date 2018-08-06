@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date: create in 2018/5/31 0031 10:31
  */
 @RestController
-@RequestMapping(value = "/menu")
+@RequestMapping(value = "/menu" )
 public class MenuController {
 
     @Autowired
@@ -24,94 +24,104 @@ public class MenuController {
 
     /**
      * 查询所有权限菜单
+     *
      * @return
      */
-    @GetMapping(value = "/findAllMenu")
+    @GetMapping(value = "/findAllMenu" )
     public Result findAllMenu() {
 
-        return ResultUtil.success(service.findAllMenu(),null);
+        return ResultUtil.success(service.findAllMenu(), null);
     }
 
     /**
      * 查询所有图标
+     *
      * @return
      */
-    @GetMapping(value = "/findIconList")
+    @GetMapping(value = "/findIconList" )
     public Result findIconList() {
 
-        return ResultUtil.success(service.findIconList(),null);
+        return ResultUtil.success(service.findIconList(), null);
     }
+
     /**
      * 添加图标
+     *
      * @return
      */
-    @GetMapping(value = "/addIcon")
-    public Result addIcon(@RequestParam(value = "name") String name, @RequestParam(value = "url") String url) {
+    @GetMapping(value = "/addIcon" )
+    public Result addIcon(@RequestParam(value = "name" ) String name, @RequestParam(value = "url" ) String url) {
 
-        return ResultUtil.success(service.addIcon(name,url),null);
+        return ResultUtil.success(service.addIcon(name, url), null);
     }
 
     /**
      * 添加菜单
+     *
      * @return
      */
-    @GetMapping(value = "/addMenu")
+    @GetMapping(value = "/addMenu" )
     public Result addMenu(Menu menu) {
 
-        return ResultUtil.success(service.addMenu(menu),null);
+        return ResultUtil.success(service.addMenu(menu), null);
     }
 
     /**
      * 删除菜单
+     *
      * @return
      */
-    @GetMapping(value = "/delMenu")
+    @GetMapping(value = "/delMenu" )
     public Result delMenu(Long gid) {
 
-        return ResultUtil.success(service.delMenu(gid),null);
+        return ResultUtil.success(service.delMenu(gid), null);
     }
 
     /**
      * 根据id查询菜单信息
+     *
      * @param gid
      * @return
      */
-    @GetMapping(value = "/findById")
-    public Result findById(@RequestParam(value = "id") Long gid) {
+    @GetMapping(value = "/findById" )
+    public Result findById(@RequestParam(value = "id" ) Long gid) {
 
-        return ResultUtil.success(service.findById(gid),null);
+        return ResultUtil.success(service.findById(gid), null);
     }
 
     /**
      * 修改菜单
+     *
      * @param menu
      * @return
      */
-    @GetMapping(value = "/editMenu")
+    @GetMapping(value = "/editMenu" )
     public Result editMenu(Menu menu) {
 
-        return ResultUtil.success(service.editMenu(menu),null);
+        return ResultUtil.success(service.editMenu(menu), null);
     }
 
     /**
      * 查询子菜单
+     *
      * @param parentCode
      * @return
      */
-    @GetMapping(value = "/findChildMenu")
-    public Result findChildMenu(@RequestParam(value = "parentCode") String parentCode) {
+    @GetMapping(value = "/findChildMenu" )
+    public Result findChildMenu(@RequestParam(value = "parentCode" ) String parentCode) {
 
-        return ResultUtil.success(service.findChildMenu(parentCode),null);
+        return ResultUtil.success(service.findChildMenu(parentCode), null);
     }
 
     /**
      * 查询角色的权限
+     *
      * @return
      */
-    @GetMapping(value = "/findMenuByRole")
+    @GetMapping(value = "/findMenuByRole" )
     public Result findMenuByRole(Long roleId) {
 
-        return ResultUtil.success(service.findMenuByRole(roleId),null);
+        return ResultUtil.success(service.findMenuByRole(roleId), null);
     }
 
 }

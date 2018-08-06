@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
  */
 public class SimpleSelectInLangDriver extends XMLLanguageDriver implements LanguageDriver {
 
-    private static final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)");
+    private static final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)" );
 
     @Override
     public SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType) {
@@ -21,7 +21,7 @@ public class SimpleSelectInLangDriver extends XMLLanguageDriver implements Langu
         Matcher matcher = inPattern.matcher(script);
         if (matcher.find()) {
             script = matcher.replaceAll("<foreach collection=\"$1\" item=\"_item\" open=\"(\" " +
-                    "separator=\",\" close=\")\" >#{_item}</foreach>");
+                    "separator=\",\" close=\")\" >#{_item}</foreach>" );
         }
 
         script = "<script>" + script + "</script>";

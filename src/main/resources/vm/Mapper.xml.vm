@@ -13,21 +13,21 @@
     <!--所有的查询字段,各自对应   for map-->
     <sql id="sql_for_all_map">
         #foreach($column in $columns)
-        ${column.columnName} ${column.attrname},
+            ${column.columnName} ${column.attrname},
         #end
     </sql>
 
     <!--所有的查询字段,各自对应   for map-->
     <sql id="sql_for_all">
         #foreach($column in $columns)
-        ${column.columnName},
+            ${column.columnName},
         #end
     </sql>
 
     <!-- 保存需要的字段 -->
     <sql id="sql_for_all_except_p">
         #foreach($column in $columns)
-        ${column.columnName},
+            ${column.columnName},
         #end
     </sql>
 
@@ -39,13 +39,14 @@
     </sql>
 
     <!--新增信息-->
-    <insert id="add${className}" parameterType="${package}.entity.${className}" useGeneratedKeys="true" keyProperty="${pk.attrname}">
+    <insert id="add${className}" parameterType="${package}.entity.${className}" useGeneratedKeys="true"
+            keyProperty="${pk.attrname}">
         insert into ${tableName}(
         <include refid="sql_for_all_except_p"/>
         )values (
-          #foreach($column in $columns)
-              #{${column.attrname}},
-          #end
+        #foreach($column in $columns)
+            #{${column.attrname}},
+        #end
         )
     </insert>
 
@@ -54,7 +55,9 @@
         update ${tableName}
         <trim prefix="set" suffixOverrides=",">
             #foreach($column in $columns)
-                <if test="${column.attrname} != null and ${column.attrname} != ''">${column.columnName} = #{${column.attrname}},</if>
+                <if test="${column.attrname} != null and ${column.attrname} != ''">${column.columnName} =
+                    #{${column.attrname}},
+                </if>
             #end
         </trim>
         where ${pk.columnName} = #{${pk.attrname}}
@@ -68,20 +71,20 @@
     <!--根据主键查询单条信息-->
     <select id="selectById" parameterType="${pk.attrType}" resultMap="${classname}ResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from ${tableName} where ${pk.columnName} = #{${pk.attrname}}
     </select>
 
     <!-- 分页查询信息 列表-->
     <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
         select
-          <include refid="sql_for_all_map"/>
+        <include refid="sql_for_all_map"/>
         from ${tableName}
         where 1=1
         #foreach($column in $columns)
-        <if test="bean.${column.attrname} != null and bean.${column.attrname}.trim() != ''">
-            and ${column.columnName} = #{bean.${column.attrname}}
-        </if>
+            <if test="bean.${column.attrname} != null and bean.${column.attrname}.trim() != ''">
+                and ${column.columnName} = #{bean.${column.attrname}}
+            </if>
         #end
         order by ${pk.columnName} desc
         <include refid="limited"/>
@@ -90,9 +93,9 @@
     <select id="pageQueryCount" parameterType="java.util.Map" resultType="java.lang.Long">
         select count(1) from ${tableName} where 1=1
         #foreach($column in $columns)
-        <if test="bean.${column.attrname} != null and bean.${column.attrname}.trim() != ''">
-            and ${column.columnName} = #{bean.${column.attrname}}
-        </if>
+            <if test="bean.${column.attrname} != null and bean.${column.attrname}.trim() != ''">
+                and ${column.columnName} = #{bean.${column.attrname}}
+            </if>
         #end
     </select>
 </mapper>

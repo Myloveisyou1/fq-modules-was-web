@@ -52,18 +52,19 @@
     </sql>
 
     <!--新增信息-->
-    <insert id="addAddressList" parameterType="com.fq.modules.was.web.entity.addresspool.AddressList" useGeneratedKeys="true" keyProperty="wasId">
+    <insert id="addAddressList" parameterType="com.fq.modules.was.web.entity.addresspool.AddressList"
+            useGeneratedKeys="true" keyProperty="wasId">
         insert into was_address_list(
         <include refid="sql_for_all_except_p"/>
         )values (
-            #{wasId},
-            #{wasType},
-            #{wasAddress},
-            #{wasAccount},
-            #{wasExpireTime},
-            #{wasSource},
-            #{wasRemark},
-            #{wasCreateTime}
+        #{wasId},
+        #{wasType},
+        #{wasAddress},
+        #{wasAccount},
+        #{wasExpireTime},
+        #{wasSource},
+        #{wasRemark},
+        #{wasCreateTime}
         )
     </insert>
 
@@ -90,7 +91,7 @@
     <!--根据主键查询单条信息-->
     <select id="selectById" parameterType="java.lang.Long" resultMap="addressListResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_address_list where was_id = #{wasId}
     </select>
 
@@ -101,26 +102,26 @@
         FROM
         (
         select
-          <include refid="pageQueryListParam"/>
+        <include refid="pageQueryListParam"/>
         from (
-            SELECT
-                was_type wasType,
-                was_source wasSource
-            FROM
-              was_address AS a
-            UNION ALL
-            SELECT
-                was_type wasType,
-                was_source wasSource
-            FROM
-              was_address_list AS b
-            UNION ALL
-            SELECT
-                was_type wasType,
-                was_source wasSource
-            FROM
-              was_address_history AS c
-            ) AS d
+        SELECT
+        was_type wasType,
+        was_source wasSource
+        FROM
+        was_address AS a
+        UNION ALL
+        SELECT
+        was_type wasType,
+        was_source wasSource
+        FROM
+        was_address_list AS b
+        UNION ALL
+        SELECT
+        was_type wasType,
+        was_source wasSource
+        FROM
+        was_address_history AS c
+        ) AS d
         where 1=1
         <if test="bean.wasType != null and bean.wasType.trim() != ''">
             and d.wasType = #{bean.wasType}
@@ -135,7 +136,7 @@
         <if test="bean.wasConfigNum != null and bean.wasConfigNum.trim() != ''">
             and (g.was_num = #{bean.wasConfigNum} or g.was_percent = #{bean.wasConfigNum})
         </if>
-          AND g.was_config_type = '剩余预警值'
+        AND g.was_config_type = '剩余预警值'
         <include refid="limited"/>
     </select>
     <!-- 总数 -->
@@ -180,18 +181,24 @@
         <if test="bean.wasConfigNum != null and bean.wasConfigNum.trim() != ''">
             and (g.was_num = #{bean.wasConfigNum} or g.was_percent = #{bean.wasConfigNum})
         </if>
-          AND g.was_config_type = '剩余预警值'
+        AND g.was_config_type = '剩余预警值'
         )e
     </select>
 
     <!--地址池明细列表  -->
     <select id="queryPageDetailsList" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT * FROM (
-          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用' status,was_accept_amount acceptAmount from was_address a
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用'
+        status,was_accept_amount acceptAmount from was_address a
         UNION ALL
-          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status, '-' acceptAmount from was_address_list b
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status, '-' acceptAmount from
+        was_address_list b
         UNION ALL
-          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期' status,was_accept_amount acceptAmount from was_address_history c
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期'
+        status,was_accept_amount acceptAmount from was_address_history c
         )d WHERE 1=1
         <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
             and d.wasAddress like concat('%',#{bean.wasAddress},'%')
@@ -208,11 +215,17 @@
     <!--总数-->
     <select id="queryPageDetailsCount" parameterType="java.util.Map" resultType="java.lang.Long">
         select count(1) from (
-          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用' status,was_accept_amount acceptAmount from was_address a
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用'
+        status,was_accept_amount acceptAmount from was_address a
         UNION ALL
-          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status, '-' acceptAmount from was_address_list b
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status, '-' acceptAmount from
+        was_address_list b
         UNION ALL
-          SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期' status,was_accept_amount acceptAmount from was_address_history c
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期'
+        status,was_accept_amount acceptAmount from was_address_history c
         )d WHERE 1=1
         <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
             and d.wasAddress like concat('%',#{bean.wasAddress},'%')
@@ -277,11 +290,17 @@
     <!-- 地址池明细  导出Excel -->
     <select id="findAllDetails" parameterType="java.util.Map" resultType="java.util.Map">
         SELECT * FROM (
-        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用' status,was_accept_amount acceptAmount from was_address a
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'1' fromT,'已使用'
+        status,was_accept_amount acceptAmount from was_address a
         UNION ALL
-        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status, '-' acceptAmount from was_address_list b
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,'-' wasMonitorTime,'-' wasCreateTime,was_remark,'2' fromT,'未使用' status, '-' acceptAmount from
+        was_address_list b
         UNION ALL
-        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期' status,was_accept_amount acceptAmount from was_address_history c
+        SELECT was_id wasId,was_type wasType,was_source wasSource,was_address wasAddress,was_expire_time
+        wasExpireTime,was_monitor_time wasMonitorTime,was_create_time wasCreateTime,was_remark,'3' fromT,'已过期'
+        status,was_accept_amount acceptAmount from was_address_history c
         )d WHERE 1=1
         <if test="bean.wasAddress != null and bean.wasAddress.trim() != ''">
             and d.wasAddress like concat('%',#{bean.wasAddress},'%')

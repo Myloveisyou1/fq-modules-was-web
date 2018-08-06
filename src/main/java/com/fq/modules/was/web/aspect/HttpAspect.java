@@ -26,35 +26,35 @@ public class HttpAspect {
 //    @Autowired
 //    private LogService logService;
 
-    @Pointcut("execution(public * com.fq.modules.was.web.controller.*.*.*(..))")
-    public void log(){
+    @Pointcut("execution(public * com.fq.modules.was.web.controller.*.*.*(..))" )
+    public void log() {
 
     }
 
-    @Before("log()")
-    public void doBefore(JoinPoint joinPoint){
+    @Before("log()" )
+    public void doBefore(JoinPoint joinPoint) {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        log.info("===========开始请求"+joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName()+"============");
+        log.info("===========开始请求" + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + "============" );
         Date date = new Date();
         start = date.getTime();
-        String stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
-        log.info("===========请求时间:"+stime+"==========================");
+        String stime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" ).format(date);
+        log.info("===========请求时间:" + stime + "==========================" );
         //获取url
         String url = request.getRequestURL().toString();
-        log.info("url={}",url);
+        log.info("url={}", url);
 
         //获取method
         String method = request.getMethod().toString();
-        log.info("method={}",method);
+        log.info("method={}", method);
 
         //获取ip
         String ip = request.getRemoteAddr().toString();
-        log.info("ip={}",ip);
+        log.info("ip={}", ip);
 
         //获取类方法
-        String classMethod = joinPoint.getSignature().getDeclaringTypeName()+"."+joinPoint.getSignature().getName();
-        log.info("class_method={}",classMethod);
+        String classMethod = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
+        log.info("class_method={}", classMethod);
 
         //获取类参数
         //log.info("args={}",joinPoint.getArgs());
@@ -63,9 +63,9 @@ public class HttpAspect {
         while (em.hasMoreElements()) {
             String name = (String) em.nextElement();
             String value = request.getParameter(name);
-            names += name+"="+value+",";
+            names += name + "=" + value + ",";
         }
-        log.info("args:{}",names);
+        log.info("args:{}", names);
 //        Logs logs = new Logs();
 //        logs.setUrl(url);
 //        logs.setMethod(method);
@@ -78,28 +78,31 @@ public class HttpAspect {
 //        gid = logs.getGid();
 
     }
-    @After("log()")
-    public void doAfter(){
+
+    @After("log()" )
+    public void doAfter() {
         Date end = new Date();
-        String etime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(end);
-        long time = (end.getTime()-start)/1000;
+        String etime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss" ).format(end);
+        long time = (end.getTime() - start) / 1000;
 //        Logs logs = new Logs();
 //        logs.setGid(gid);
 //        logs.setEndTime(etime);
 //        logs.setTime(time);
 //        logService.optUpdateLogs(logs);
-        log.info("=============结束请求时间:"+etime+",耗时:"+time+"s======================");
+        log.info("=============结束请求时间:" + etime + ",耗时:" + time + "s======================" );
     }
+
     /**
      * 获取返回的结果集
+     *
      * @param object
      */
-    @AfterReturning(returning = "object",pointcut = "log()")
-    public void doAfterReturn( Object object){
+    @AfterReturning(returning = "object", pointcut = "log()" )
+    public void doAfterReturn(Object object) {
 
         String back = "";
         if (CommonUtil.isNotEmpty(object)) {
-           back = object.toString();
+            back = object.toString();
         }
 
 //        Result result = (Result) object;
@@ -108,7 +111,7 @@ public class HttpAspect {
 //        logs.setGid(gid);
 //        logs.setRepData(JSONObject.toJSONString(result.getCode()+result.getMsg()));
 //        logService.optUpdateLogs(logs);
-        log.info("response={}",back);
+        log.info("response={}", back);
     }
 
 }

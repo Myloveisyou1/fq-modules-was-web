@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @Date: create in 2018/1/6 0006 14:31
  */
 @Data
-public class Pages implements Serializable{
+public class Pages implements Serializable {
 
     private boolean first;
 

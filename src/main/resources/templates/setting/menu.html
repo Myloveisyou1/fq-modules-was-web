@@ -6,7 +6,8 @@
     <title>菜单配置</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
 
 
     <!-- 公共css+js -->
@@ -23,7 +24,8 @@
         <a>
             <cite>菜单配置</cite></a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
@@ -41,7 +43,8 @@
         <thead>
         <tr>
             <th width="20">
-                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+                <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i
+                        class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
             <th>菜单类型</th>
@@ -69,8 +72,8 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select name="menu_type" id="menu_type" lay-verify="required">
-                    <option value="0" >菜单</option>
-                    <option value="1" >功能</option>
+                    <option value="0">菜单</option>
+                    <option value="1">功能</option>
                 </select>
             </div>
         </div>
@@ -119,7 +122,7 @@
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-        <input type="reset" style="display:none;" />
+        <input type="reset" style="display:none;"/>
     </form>
 </div>
 <!--图标列表-->
@@ -161,59 +164,60 @@
 </div>
 <script type="text/javascript" src="js/common/base-code.js"></script>
 <script>
-    var form = "",icon = "",parentCode = "",layer = "";
-    layui.use(['layer'],function(){
+    var form = "", icon = "", parentCode = "", layer = "";
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
-    layui.use('form', function(){
-         form = layui.form;
+    layui.use('form', function () {
+        form = layui.form;
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
+        parent.layer.load(2, {shade: 0.3});
         searchMenu();
         findAllProject();
     });
+
     /**
      * 查询图标
      * */
     function findIconList() {
         $.ajax({
-            url:URL+"menu/findIconList",
-            type:"get",
-            async:false,
-            dataType:"json",
-            success:function(data){
+            url: URL + "menu/findIconList",
+            type: "get",
+            async: false,
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var res = data.data;
-                    if(res.length > 0) {
+                    if (res.length > 0) {
                         var html = "";
-                        for(var i=0;i<res.length;i++) {
-                            var name = "'"+res[i].url+"',";
-                            html += '<tr onclick="getIcon('+name+res[i].gid+')">'+
-                                    '<td>'+res[i].name+'</td>' +
-                                    '<td><i class="iconfont">'+res[i].url+'</i></td></tr>';
+                        for (var i = 0; i < res.length; i++) {
+                            var name = "'" + res[i].url + "',";
+                            html += '<tr onclick="getIcon(' + name + res[i].gid + ')">' +
+                                '<td>' + res[i].name + '</td>' +
+                                '<td><i class="iconfont">' + res[i].url + '</i></td></tr>';
                         }
 
                     } else {
                         html += '<tr><td colspan="100" align="center">暂无数据</td></tr>';
                     }
                     $("#icon_table").html(html);
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
@@ -222,75 +226,76 @@
     function findAllProject() {
 
         $.ajax({
-            url:URL+"project/findAllProject",
-            type:"get",
-            dataType:"json",
-            success:function(data){
+            url: URL + "project/findAllProject",
+            type: "get",
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var res = data.data;
-                    if(res.length > 0) {
+                    if (res.length > 0) {
                         var html = "";
-                        for(var i=0;i<res.length;i++) {
-                            html += '<option value="'+res[i].gid+'">'+res[i].projectName+'</option>';
+                        for (var i = 0; i < res.length; i++) {
+                            html += '<option value="' + res[i].gid + '">' + res[i].projectName + '</option>';
                         }
                     }
                     console.log(html);
 //                    $(html).appendTo("#menu_project")//添加下拉框的option
                     $("#menu_project").html(html);
-                    form.render("select","selFilter");
+                    form.render("select", "selFilter");
                     //layer.closeAll("loading");
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
     }
 
-    function getIcon(name,url) {
+    function getIcon(name, url) {
 
         layer.close(layer.index);
         console.log(name);
         icon = name;
         $("#menu_icon").val(url);
     }
+
     /**
      * 查询菜单列表
      * */
     function searchMenu() {
         $.ajax({
-            url:URL+"menu/findAllMenu",
-            type:"get",
-            dataType:"json",
-            async:false,
-            success:function(data){
+            url: URL + "menu/findAllMenu",
+            type: "get",
+            dataType: "json",
+            async: false,
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var data = data.data;
                     var html = "";
                     if (data != null && data.length > 0) {
-                        for(var i = 0;i < data.length;i++) {
+                        for (var i = 0; i < data.length; i++) {
                             var childList = data[i].menuList;
-                            if(data[i].parentCode == 0) {
-                                var a = "",b = "",d = "'编辑'"+",'role-add.html",e = "";
-                                if(data[i].status == 0) {
+                            if (data[i].parentCode == 0) {
+                                var a = "", b = "", d = "'编辑'" + ",'role-add.html", e = "";
+                                if (data[i].status == 0) {
                                     a = '<span class="layui-btn layui-btn-normal layui-btn-mini">启用</span>';
-                                    b = '<a onclick="role_stop('+data[i].gid+')" href="javascript:;"  title="启用"><i class="layui-icon">&#xe601;</i></a>';
-                                } else if(data[i].status == 1) {
+                                    b = '<a onclick="role_stop(' + data[i].gid + ')" href="javascript:;"  title="启用"><i class="layui-icon">&#xe601;</i></a>';
+                                } else if (data[i].status == 1) {
                                     a = '<span class="layui-btn layui-btn-normal layui-btn-mini layui-btn-disabled">禁用</span>';
-                                    b = '<a onclick="role_stop('+data[i].gid+')" href="javascript:;"  title="停用"><i class="layui-icon">&#xe62f;</i></a>';
+                                    b = '<a onclick="role_stop(' + data[i].gid + ')" href="javascript:;"  title="停用"><i class="layui-icon">&#xe62f;</i></a>';
                                 }
                                 if (data[i].menuType == 0) {
                                     e = "菜单";
@@ -298,24 +303,24 @@
                                     e = "功能";
                                 }
                                 var str = "";
-                                if(childList != null && childList.length > 0) {
+                                if (childList != null && childList.length > 0) {
                                     str = '<i class="layui-icon x-show" status="true">&#xe623;</i>';
                                 }
-                                html += '<tr cate-id="'+data[i].gid+'" fid="'+data[i].parentCode+'" >' +
-                                        '<td><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div></td>' +
-                                        '<td>'+data[i].gid+'</td>' +
-                                        '<td>'+e+'</td>' +
-                                        '<td>'+data[i].menuName+'</td>' +
-                                        '<td>'+data[i].url+'</td>' +
-                                        '<td><i class="iconfont">'+data[i].icon+'</i></td>' +
-                                        '<td>'+data[i].projectName+'</td>' +
-                                        '<td>'+data[i].sort+'</td>' +
-                                        '<td>'+data[i].createTime+'</td>' +
-                                        '<td>'+data[i].updateTime+'</td>'+
-                                        '<td class="td-manage">'+
-                                        '<button class="layui-btn layui-btn layui-btn-xs"  onclick="editMenu('+data[i].gid+')" ><i class="layui-icon">&#xe642;</i>编辑</button>'+
-                                        '<button class="layui-btn layui-btn layui-btn-xs"  onclick="addChild('+data[i].gid+')" ><i class="layui-icon">&#xe642;</i>子栏目</button>'+
-                                        '<button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del('+data[i].gid+')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button></td></tr>';
+                                html += '<tr cate-id="' + data[i].gid + '" fid="' + data[i].parentCode + '" >' +
+                                    '<td><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div></td>' +
+                                    '<td>' + data[i].gid + '</td>' +
+                                    '<td>' + e + '</td>' +
+                                    '<td>' + data[i].menuName + '</td>' +
+                                    '<td>' + data[i].url + '</td>' +
+                                    '<td><i class="iconfont">' + data[i].icon + '</i></td>' +
+                                    '<td>' + data[i].projectName + '</td>' +
+                                    '<td>' + data[i].sort + '</td>' +
+                                    '<td>' + data[i].createTime + '</td>' +
+                                    '<td>' + data[i].updateTime + '</td>' +
+                                    '<td class="td-manage">' +
+                                    '<button class="layui-btn layui-btn layui-btn-xs"  onclick="editMenu(' + data[i].gid + ')" ><i class="layui-icon">&#xe642;</i>编辑</button>' +
+                                    '<button class="layui-btn layui-btn layui-btn-xs"  onclick="addChild(' + data[i].gid + ')" ><i class="layui-icon">&#xe642;</i>子栏目</button>' +
+                                    '<button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(' + data[i].gid + ')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button></td></tr>';
 
                             }
                         }
@@ -323,26 +328,27 @@
                         html += '<tr><td colspan="100" align="center">暂无数据</td></tr>';
                     }
                     $("#myTable").html(html);
-                } else if (data.code == 209){
-                    parent.layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    parent.layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
                 parent.layer.closeAll("loading");
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 parent.layer.closeAll("loading");
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
     }
+
     /**
      * 添加一级菜单
      * */
@@ -353,223 +359,226 @@
         if (obj == 1) {//添加父菜单
             $("#menuType").hide();
             parentCode = 0;
-        } else if(obj == 2){
+        } else if (obj == 2) {
             $("#menuType").show();
         }
         layer.open({
-            type:1,
+            type: 1,
             title: '添加菜单',
             content: $("#addMenu"),
             area: ['400px', '500px'],
-            btn:['添加','取消'],
-            yes: function (index,layero) {
+            btn: ['添加', '取消'],
+            yes: function (index, layero) {
 
                 var menu_name = $("#menu_name").val();
                 var menu_url = $("#menu_url").val();
                 var menu_sort = $("#menu_sort").val();
 
-                if(menu_name == "" || menu_url == "" || menu_sort == "") {
-                    layer.msg("信息未填写完整",{icon:5});
+                if (menu_name == "" || menu_url == "" || menu_sort == "") {
+                    layer.msg("信息未填写完整", {icon: 5});
                     return;
                 }
-                if(obj == 2) {
+                if (obj == 2) {
                     menuType = $("#menu_type").val();
                 }
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 $.ajax({
-                    url:URL+"menu/addMenu",
-                    type:"get",
-                    dataType:"json",
-                    data:{
-                        menuName:menu_name,
-                        url:menu_url,
-                        belong:$("#menu_project").val(),
-                        icon:icon,
-                        parentCode:parentCode,
-                        menuType:parseInt(menuType),
-                        sort:menu_sort
+                    url: URL + "menu/addMenu",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        menuName: menu_name,
+                        url: menu_url,
+                        belong: $("#menu_project").val(),
+                        icon: icon,
+                        parentCode: parentCode,
+                        menuType: parseInt(menuType),
+                        sort: menu_sort
                     },
-                    success:function(data){
+                    success: function (data) {
                         layer.closeAll("loading");
                         console.log(data);
-                        if(data.code == 200) {
-                            parent.layer.msg("添加成功,请在菜单列表查看",{icon:6,time:2000},function(){
+                        if (data.code == 200) {
+                            parent.layer.msg("添加成功,请在菜单列表查看", {icon: 6, time: 2000}, function () {
                                 location.reload();
                             });
-                        } else if (data.code == 209){
-                            parent.layer.msg(data.msg,{icon:2});
-                            top.location.href = URL+"login";
+                        } else if (data.code == 209) {
+                            parent.layer.msg(data.msg, {icon: 2});
+                            top.location.href = URL + "login";
                         } else {
-                            parent.layer.msg(data.msg,{icon:2});
+                            parent.layer.msg(data.msg, {icon: 2});
                         }
 
-                    },error:function(jqXHR, textStatus, errorThrown) {
+                    }, error: function (jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseText;
-                        if(jqXHR.status == 404){
-                            top.location.href = URL+"errorpage/404";
-                        } else if(jqXHR.status == 500){
-                            top.location.href = URL+"errorpage/500";
+                        if (jqXHR.status == 404) {
+                            top.location.href = URL + "errorpage/404";
+                        } else if (jqXHR.status == 500) {
+                            top.location.href = URL + "errorpage/500";
                         } else {
-                            layer.msg(data.msg,{icon:2});
+                            layer.msg(data.msg, {icon: 2});
                         }
                     }
                 });
             }
         });
     }
+
     /**查询图标**/
     function showIcon() {
         findIconList();
         layer.open({
-            type:1,
+            type: 1,
             title: '图标列表',
             content: $("#iconList"),
             area: ['500px', '300px'],
-            yes: function (index,layero) {
+            yes: function (index, layero) {
 
                 var projectName = $("#project_name").val();
                 var nameEn = $("#name_en").val();
 
-                if(projectName == "" || nameEn == "") {
-                    layer.msg("信息未填写完整",{icon:5});
+                if (projectName == "" || nameEn == "") {
+                    layer.msg("信息未填写完整", {icon: 5});
                     return;
                 }
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 $.ajax({
-                    url:URL+"project/addProject",
-                    type:"get",
-                    dataType:"json",
-                    data:{
-                        projectName:projectName,
-                        nameEn:nameEn
+                    url: URL + "project/addProject",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        projectName: projectName,
+                        nameEn: nameEn
                     },
-                    success:function(data){
+                    success: function (data) {
                         layer.closeAll("loading");
                         console.log(data);
-                        if(data.code == 200) {
-                            layer.msg("添加成功,请在项目列表查看",{icon:6,time:2000},function(){
+                        if (data.code == 200) {
+                            layer.msg("添加成功,请在项目列表查看", {icon: 6, time: 2000}, function () {
                                 location.reload();
                             });
-                        } else if (data.code == 209){
-                            layer.msg(data.msg,{icon:2});
-                            top.location.href = URL+"login";
+                        } else if (data.code == 209) {
+                            layer.msg(data.msg, {icon: 2});
+                            top.location.href = URL + "login";
                         } else {
-                            layer.msg(data.msg,{icon:2});
+                            layer.msg(data.msg, {icon: 2});
                         }
 
-                    },error:function(jqXHR, textStatus, errorThrown) {
+                    }, error: function (jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseText;
-                        if(jqXHR.status == 404){
-                            top.location.href = URL+"errorpage/404";
-                        } else if(jqXHR.status == 500){
-                            top.location.href = URL+"errorpage/500";
+                        if (jqXHR.status == 404) {
+                            top.location.href = URL + "errorpage/404";
+                        } else if (jqXHR.status == 500) {
+                            top.location.href = URL + "errorpage/500";
                         } else {
-                            layer.msg(data.msg,{icon:2});
+                            layer.msg(data.msg, {icon: 2});
                         }
                     }
                 });
             }
         });
     }
+
     /**修改菜单**/
     function editMenu(id) {
-        layer.load(2,{shade:0.3});
+        layer.load(2, {shade: 0.3});
         //查询菜单信息
         $.ajax({
-            url:URL+"menu/findById",
-            type:"get",
-            dataType:"json",
-            data:{
-                id:id
+            url: URL + "menu/findById",
+            type: "get",
+            dataType: "json",
+            data: {
+                id: id
             },
-            success:function(data){
+            success: function (data) {
                 layer.closeAll("loading");
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     $("#menu_name").val(data.data.menuName);
                     $("#menu_url").val(data.data.url);
                     $("#menu_icon").val(data.data.icon);
                     $("#menu_sort").val(data.data.sort);
-                    $("#menu_project").find("option[value='"+data.data.belong+"']").attr("selected",true);
-                    form.render("select","selFilter");
+                    $("#menu_project").find("option[value='" + data.data.belong + "']").attr("selected", true);
+                    form.render("select", "selFilter");
                     layer.open({
-                        type:1,
+                        type: 1,
                         title: '编辑菜单',
                         content: $("#addMenu"),
                         area: ['400px', '500px'],
-                        btn:['修改','取消'],
-                        yes: function (index,layero) {
-                             var menu_name = $("#menu_name").val();
-                             var menu_url = $("#menu_url").val();
+                        btn: ['修改', '取消'],
+                        yes: function (index, layero) {
+                            var menu_name = $("#menu_name").val();
+                            var menu_url = $("#menu_url").val();
                             var menu_sort = $("#menu_sort").val();
 
-                             if(menu_name == "" || menu_url == "" || menu_sort == "") {
-                                 layer.msg("信息未填写完整",{icon:5});
-                                    return;
-                             }
+                            if (menu_name == "" || menu_url == "" || menu_sort == "") {
+                                layer.msg("信息未填写完整", {icon: 5});
+                                return;
+                            }
 
                             //修改信息
-                             layer.load(2,{shade:0.3});
+                            layer.load(2, {shade: 0.3});
                             $.ajax({
-                                url:URL+"menu/editMenu",
-                                type:"get",
-                                dataType:"json",
-                                data:{
-                                    menuName:menu_name,
-                                    url:menu_url,
-                                    belong:$("#menu_project").val(),
-                                    icon:icon,
-                                    sort:menu_sort,
-                                    gid:id
+                                url: URL + "menu/editMenu",
+                                type: "get",
+                                dataType: "json",
+                                data: {
+                                    menuName: menu_name,
+                                    url: menu_url,
+                                    belong: $("#menu_project").val(),
+                                    icon: icon,
+                                    sort: menu_sort,
+                                    gid: id
                                 },
-                                success:function(data){
+                                success: function (data) {
                                     layer.closeAll("loading");
                                     console.log(data);
-                                    if(data.code == 200) {
-                                        layer.msg("修改成功",{icon:6,time:2000},function(){
+                                    if (data.code == 200) {
+                                        layer.msg("修改成功", {icon: 6, time: 2000}, function () {
                                             // location.reload();
                                         });
-                                    } else if (data.code == 209){
-                                        layer.msg(data.msg,{icon:2});
-                                        top.location.href = URL+"login";
+                                    } else if (data.code == 209) {
+                                        layer.msg(data.msg, {icon: 2});
+                                        top.location.href = URL + "login";
                                     } else {
-                                        layer.msg(data.msg,{icon:2});
+                                        layer.msg(data.msg, {icon: 2});
                                     }
-                                },error:function(jqXHR, textStatus, errorThrown) {
+                                }, error: function (jqXHR, textStatus, errorThrown) {
                                     var data = jqXHR.responseText;
-                                    if(jqXHR.status == 404){
+                                    if (jqXHR.status == 404) {
                                         top.location.href = "404.html";
-                                    } else if(jqXHR.status == 500){
+                                    } else if (jqXHR.status == 500) {
                                         top.location.href = "500.html";
                                     } else {
-                                        layer.msg(data.msg,{icon:2});
+                                        layer.msg(data.msg, {icon: 2});
                                     }
                                 }
                             });
                         }
                     });
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
     }
+
     /**添加子菜单**/
     function addChild(id) {
         layer.open({
-            type:1,
+            type: 1,
             title: '子菜单列表',
             content: $("#childMenuDiv"),
             area: ['1420px', '500px']
@@ -578,31 +587,32 @@
         parentCode = id;
         searchChildMenu(id);
     }
+
     /**查询子菜单**/
     function searchChildMenu(id) {
-        layer.load(2,{shade:0.3});
+        layer.load(2, {shade: 0.3});
         $.ajax({
-            url:URL+"menu/findChildMenu",
-            type:"get",
-            dataType:"json",
-            data:{
-                parentCode:id
+            url: URL + "menu/findChildMenu",
+            type: "get",
+            dataType: "json",
+            data: {
+                parentCode: id
             },
-            success:function(data){
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     var data = data.data;
                     console.log(data);
                     var html = "";
                     if (data != null && data.length > 0) {
-                        for(var i = 0;i < data.length;i++) {
-                            var a = "",b = "",d = "'编辑'"+",'role-add.html",e = "";
-                            if(data[i].status == 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            var a = "", b = "", d = "'编辑'" + ",'role-add.html", e = "";
+                            if (data[i].status == 0) {
                                 a = '<span class="layui-btn layui-btn-normal layui-btn-mini">启用</span>';
-                                b = '<a onclick="role_stop('+data[i].gid+')" href="javascript:;"  title="启用"><i class="layui-icon">&#xe601;</i></a>';
-                            } else if(data[i].status == 1) {
+                                b = '<a onclick="role_stop(' + data[i].gid + ')" href="javascript:;"  title="启用"><i class="layui-icon">&#xe601;</i></a>';
+                            } else if (data[i].status == 1) {
                                 a = '<span class="layui-btn layui-btn-normal layui-btn-mini layui-btn-disabled">禁用</span>';
-                                b = '<a onclick="role_stop('+data[i].gid+')" href="javascript:;"  title="停用"><i class="layui-icon">&#xe62f;</i></a>';
+                                b = '<a onclick="role_stop(' + data[i].gid + ')" href="javascript:;"  title="停用"><i class="layui-icon">&#xe62f;</i></a>';
                             }
                             if (data[i].menuType == 0) {
                                 e = "菜单";
@@ -614,19 +624,19 @@
                             if (sort == null) {
                                 sort = "-";
                             }
-                            html += '<tr cate-id="'+data[i].gid+'" fid="'+data[i].parentCode+'" >' +
-                                    '<td>'+data[i].gid+'</td>' +
-                                    '<td>'+e+'</td>' +
-                                    '<td>'+data[i].menuName+'</td>' +
-                                    '<td>'+data[i].url+'</td>' +
-                                    '<td><i class="iconfont">'+data[i].icon+'</i></td>' +
-                                    '<td>'+data[i].projectName+'</td>' +
-                                    '<td>'+sort+'</td>' +
-                                    '<td>'+data[i].createTime+'</td>' +
-                                    '<td>'+data[i].updateTime+'</td>'+
-                                    '<td class="td-manage">'+
-                                    '<button class="layui-btn layui-btn layui-btn-xs"  onclick="editMenu('+data[i].gid+')" ><i class="layui-icon">&#xe642;</i>编辑</button>'+
-                                    '<button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del('+data[i].gid+')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button></td></tr>';
+                            html += '<tr cate-id="' + data[i].gid + '" fid="' + data[i].parentCode + '" >' +
+                                '<td>' + data[i].gid + '</td>' +
+                                '<td>' + e + '</td>' +
+                                '<td>' + data[i].menuName + '</td>' +
+                                '<td>' + data[i].url + '</td>' +
+                                '<td><i class="iconfont">' + data[i].icon + '</i></td>' +
+                                '<td>' + data[i].projectName + '</td>' +
+                                '<td>' + sort + '</td>' +
+                                '<td>' + data[i].createTime + '</td>' +
+                                '<td>' + data[i].updateTime + '</td>' +
+                                '<td class="td-manage">' +
+                                '<button class="layui-btn layui-btn layui-btn-xs"  onclick="editMenu(' + data[i].gid + ')" ><i class="layui-icon">&#xe642;</i>编辑</button>' +
+                                '<button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(' + data[i].gid + ')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button></td></tr>';
 
                         }
                     } else {
@@ -635,61 +645,62 @@
 
                     $("#myChildMenu").html(html);
                     layer.closeAll("loading");
-                } else if (data.code == 209){
-                    layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 layer.closeAll("loading");
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });
 
     }
-    /**用户-删除*/
-    function member_del(id){
 
-        layer.confirm('该菜单下的子类也会删除,确认要删除吗？',function(index){
-            layer.load(2,{shade:0.3});
+    /**用户-删除*/
+    function member_del(id) {
+
+        layer.confirm('该菜单下的子类也会删除,确认要删除吗？', function (index) {
+            layer.load(2, {shade: 0.3});
             $.ajax({
-                url:URL+"menu/delMenu",
-                type:"get",
-                dataType:"json",
-                data:{
-                    gid:id
+                url: URL + "menu/delMenu",
+                type: "get",
+                dataType: "json",
+                data: {
+                    gid: id
                 },
-                success:function(data){
+                success: function (data) {
                     layer.closeAll("loading");
                     console.log(data);
-                    if(data.code == 200) {
-                        layer.msg("删除成功,请在项目列表查看",{icon:6,time:2000},function(){
+                    if (data.code == 200) {
+                        layer.msg("删除成功,请在项目列表查看", {icon: 6, time: 2000}, function () {
                             location.reload();
                         });
-                    } else if (data.code == 209){
-                        layer.msg(data.msg,{icon:2});
-                        top.location.href = URL+"login";
+                    } else if (data.code == 209) {
+                        layer.msg(data.msg, {icon: 2});
+                        top.location.href = URL + "login";
                     } else {
-                        layer.msg(data.msg,{icon:2});
+                        layer.msg(data.msg, {icon: 2});
                     }
 
-                },error:function(jqXHR, textStatus, errorThrown) {
+                }, error: function (jqXHR, textStatus, errorThrown) {
                     var data = jqXHR.responseText;
-                    if(jqXHR.status == 404){
-                        top.location.href = URL+"errorpage/404";
-                    } else if(jqXHR.status == 500){
-                        top.location.href = URL+"errorpage/500";
+                    if (jqXHR.status == 404) {
+                        top.location.href = URL + "errorpage/404";
+                    } else if (jqXHR.status == 500) {
+                        top.location.href = URL + "errorpage/500";
                     } else {
-                        layer.msg(data.msg,{icon:2});
+                        layer.msg(data.msg, {icon: 2});
                     }
                 }
             });

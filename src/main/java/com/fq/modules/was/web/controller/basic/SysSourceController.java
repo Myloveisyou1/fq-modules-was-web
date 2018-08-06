@@ -22,7 +22,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-16 09:54:44
  */
 @RestController
-@RequestMapping("v1/syssource")
+@RequestMapping("v1/syssource" )
 public class SysSourceController {
 
     @Autowired
@@ -31,29 +31,29 @@ public class SysSourceController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(SysSource sysSource, Pages pages) {
 
-        Map<String, Object> map = sysSourceService.queryPage(ResultUtil.initParams(sysSource,pages));
+        Map<String, Object> map = sysSourceService.queryPage(ResultUtil.initParams(sysSource, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        SysSource sysSource =sysSourceService.selectById(wasId);
+        SysSource sysSource = sysSourceService.selectById(wasId);
         return ResultUtil.success(sysSource, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(SysSource sysSource) {
 
         return ResultUtil.success(sysSourceService.insert(sysSource), null);
@@ -62,7 +62,7 @@ public class SysSourceController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(SysSource sysSource) {
 
         return ResultUtil.success(sysSourceService.updateById(sysSource), null);
@@ -81,12 +81,13 @@ public class SysSourceController {
 
     /**
      * 查询所有平台
+     *
      * @return
      */
-    @RequestMapping(value = "/findAll")
+    @RequestMapping(value = "/findAll" )
     public Result findAll() {
 
-        return ResultUtil.success(sysSourceService.findAll(),null);
+        return ResultUtil.success(sysSourceService.findAll(), null);
     }
 
 }

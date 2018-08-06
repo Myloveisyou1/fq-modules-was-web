@@ -9,8 +9,6 @@ import java.util.Map;
 import java.util.List;
 
 /**
- *
- *
  * @author liuyingjie
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-12 11:14:49
@@ -31,5 +29,5 @@ public interface SysConfigMapper {
 
     int deleteById(Long wasId);
 
-    Map<String,Object> selectByTypeAndSource(@Param("wasType") String wasType, @Param("wasSource") String wasSource);
+    Map<String, Object> selectByTypeAndSource(@Param("wasType" ) String wasType, @Param("wasSource" ) String wasSource);
 }

@@ -31,5 +31,5 @@ public interface WarnRuleMapper {
 
     int deleteById(Integer wasId);
 
-    WarnRule selectByWasTypeAndSource(@Param("wasType") String wasType, @Param("wasSource") String wasSource);
+    WarnRule selectByWasTypeAndSource(@Param("wasType" ) String wasType, @Param("wasSource" ) String wasSource);
 }

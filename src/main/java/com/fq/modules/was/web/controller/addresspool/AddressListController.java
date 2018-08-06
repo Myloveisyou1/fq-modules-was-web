@@ -24,7 +24,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-12 10:06:21
  */
 @RestController
-@RequestMapping("v1/addresslist")
+@RequestMapping("v1/addresslist" )
 public class AddressListController {
 
     @Autowired
@@ -33,29 +33,29 @@ public class AddressListController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(AddressVo vo, Pages pages) {
 
-        Map<String, Object> map = addressListService.queryPage(ResultUtil.initParams(vo,pages));
+        Map<String, Object> map = addressListService.queryPage(ResultUtil.initParams(vo, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        AddressList addressList =addressListService.selectById(wasId);
+        AddressList addressList = addressListService.selectById(wasId);
         return ResultUtil.success(addressList, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(AddressList addressList) {
 
         return ResultUtil.success(addressListService.insert(addressList), null);
@@ -64,7 +64,7 @@ public class AddressListController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(AddressList addressList) {
 
         return ResultUtil.success(addressListService.updateById(addressList), null);
@@ -83,16 +83,17 @@ public class AddressListController {
 
     /**
      * 获取地址明细
+     *
      * @param vo
      * @param pages
      * @return
      */
-    @RequestMapping(value = "/getDetails")
+    @RequestMapping(value = "/getDetails" )
     public Result getDetails(AddressVo vo, Pages pages) throws ParseException {
 
-        Map<String, Object> map = addressListService.queryPageDetails(ResultUtil.initParams(vo,pages));
+        Map<String, Object> map = addressListService.queryPageDetails(ResultUtil.initParams(vo, pages));
 
-        return ResultUtil.success(map.get("result"),(Pages)map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 }

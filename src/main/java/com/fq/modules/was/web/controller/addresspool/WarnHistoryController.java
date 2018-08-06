@@ -22,7 +22,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-12 18:18:34
  */
 @RestController
-@RequestMapping("v1/warnhistory")
+@RequestMapping("v1/warnhistory" )
 public class WarnHistoryController {
 
     @Autowired
@@ -31,29 +31,29 @@ public class WarnHistoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(WarnHistory warnHistory, Pages pages) {
 
-        Map<String, Object> map = warnHistoryService.queryPage(ResultUtil.initParams(warnHistory,pages));
+        Map<String, Object> map = warnHistoryService.queryPage(ResultUtil.initParams(warnHistory, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        WarnHistory warnHistory =warnHistoryService.selectById(wasId);
+        WarnHistory warnHistory = warnHistoryService.selectById(wasId);
         return ResultUtil.success(warnHistory, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(WarnHistory warnHistory) {
 
         return ResultUtil.success(warnHistoryService.insert(warnHistory), null);
@@ -62,7 +62,7 @@ public class WarnHistoryController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(WarnHistory warnHistory) {
 
         return ResultUtil.success(warnHistoryService.updateById(warnHistory), null);

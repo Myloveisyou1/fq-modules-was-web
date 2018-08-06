@@ -19,8 +19,10 @@ import java.util.List;
 @Mapper
 public interface AddressListMapper {
 
-    /**地址池列表**/
-    List<Map<String,Object>> pageQueryList(Map<String, Object> params);
+    /**
+     * 地址池列表
+     **/
+    List<Map<String, Object>> pageQueryList(Map<String, Object> params);
 
     Long pageQueryCount(Map<String, Object> params);
 
@@ -32,16 +34,18 @@ public interface AddressListMapper {
 
     int deleteById(Integer wasId);
 
-    Map<String,Object> queryCountByWasTypeAndSource(@Param("wasType") String wasType, @Param("wasSource") String wasSource);
+    Map<String, Object> queryCountByWasTypeAndSource(@Param("wasType" ) String wasType, @Param("wasSource" ) String wasSource);
 
-    /**地址池明细**/
-    List<Map<String,Object>> queryPageDetailsList(Map<String,Object> params);
+    /**
+     * 地址池明细
+     **/
+    List<Map<String, Object>> queryPageDetailsList(Map<String, Object> params);
 
-    Long queryPageDetailsCount(Map<String,Object> params);
+    Long queryPageDetailsCount(Map<String, Object> params);
 
     /***导出地址池管理的Excel*/
-    List<Map<String,Object>> findAll(Map<String,Object> params);
+    List<Map<String, Object>> findAll(Map<String, Object> params);
 
     /***导出地址池明细的Excel*/
-    List<Map<String,Object>> findAllDetails(Map<String,Object> params);
+    List<Map<String, Object>> findAllDetails(Map<String, Object> params);
 }

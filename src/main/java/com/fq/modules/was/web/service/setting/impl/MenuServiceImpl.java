@@ -32,6 +32,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 查询所有菜单
+     *
      * @return
      */
     public List<Menu> findAllMenu() {
@@ -51,6 +52,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 查询所有图标
+     *
      * @return
      */
     public List<Icon> findIconList() {
@@ -60,11 +62,12 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 添加图标
+     *
      * @param name
      * @param url
      * @return
      */
-    public boolean addIcon(String name,String url) {
+    public boolean addIcon(String name, String url) {
 
         Icon icon = new Icon();
         icon.setName(name);
@@ -78,13 +81,14 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 添加菜单
+     *
      * @param menu
      * @return
      */
     public boolean addMenu(Menu menu) {
 
         List<Menu> menus = null;
-        String content = getUserName()+"在"+DatesUtils.time();
+        String content = getUserName() + "在" + DatesUtils.time();
         //校验是否重复
         if (menu.getParentCode() != 0) {//新增二级菜单
             Menu list = mapper.findMenuByUrl(menu.getUrl());
@@ -97,11 +101,11 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
                 Menu bean = menus.get(0);
                 if (CommonUtil.isNotEmpty(menu.getParentCode())) {
                     if (CommonUtil.isNotEmpty(parentMenu)) {
-                        content += "新增二级菜单"+menu.getMenuName()+",父级菜单为:"+parentMenu.getMenuName();
+                        content += "新增二级菜单" + menu.getMenuName() + ",父级菜单为:" + parentMenu.getMenuName();
                         //添加子菜单
                         List<Menu> menuByParentCode = mapper.findMenuByParentCode(parentMenu.getCode());
                         if (CommonUtil.isNotEmpty(menuByParentCode)) {
-                            menu.setCode(menuByParentCode.get(0).getCode()+1);
+                            menu.setCode(menuByParentCode.get(0).getCode() + 1);
                         } else {
                             menu.setCode(1);
                         }
@@ -111,18 +115,18 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
                     }
 
                 } else {
-                    menu.setCode(bean.getCode()+1);
+                    menu.setCode(bean.getCode() + 1);
                 }
             } else {
                 menu.setCode(1);
             }
-        } else if (menu.getParentCode() == 0){//新增一级菜单
+        } else if (menu.getParentCode() == 0) {//新增一级菜单
             //查询所有的一级菜单
             menus = mapper.findMenuByParentCode(menu.getParentCode());
-            content += "新增一级菜单,菜单为:"+menu.getMenuName();
+            content += "新增一级菜单,菜单为:" + menu.getMenuName();
             if (CommonUtil.isNotEmpty(menus)) {
                 Menu bean = menus.get(0);
-                menu.setCode(bean.getCode()+1);
+                menu.setCode(bean.getCode() + 1);
             } else {
                 menu.setCode(1);
             }
@@ -134,12 +138,13 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
         //记录系统日志
         String result = "新增成功";
-        sysLogMapper.addSysLog(new SysLog(1,getUserName(),content,result));
+        sysLogMapper.addSysLog(new SysLog(1, getUserName(), content, result));
         return mapper.addMenu(menu);
     }
 
     /**
      * 删除菜单
+     *
      * @param gid
      * @return
      */
@@ -147,7 +152,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
     public boolean delMenu(Long gid) {
 
         Menu menu = mapper.findById(gid);
-        String content = getUserName()+"在"+DatesUtils.time()+"删除了菜单:"+menu.getMenuName();
+        String content = getUserName() + "在" + DatesUtils.time() + "删除了菜单:" + menu.getMenuName();
         //查询子类菜单
         List<Menu> cmenu = mapper.findMenuByParentCode(menu.getCode());
         if (CommonUtil.isNotEmpty(cmenu) && cmenu.size() > 0) {
@@ -166,13 +171,14 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
         //记录系统日志
         String result = "删除成功";
-        sysLogMapper.addSysLog(new SysLog(4,getUserName(),content,result));
+        sysLogMapper.addSysLog(new SysLog(4, getUserName(), content, result));
 
-        return mapper.deleteMenuByMenuId(gid,menu.getCode());
+        return mapper.deleteMenuByMenuId(gid, menu.getCode());
     }
 
     /**
      * 根据id查询菜单
+     *
      * @param gid
      * @return
      */
@@ -183,6 +189,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 修改菜单
+     *
      * @param menu
      * @return
      */
@@ -190,34 +197,34 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
         Menu saveBean = findById(menu.getGid());
         if (CommonUtil.isNotEmpty(saveBean)) {
-            String content = getUserName()+"在"+DatesUtils.time()+"修改菜单"+saveBean.getMenuName()+"的信息";
+            String content = getUserName() + "在" + DatesUtils.time() + "修改菜单" + saveBean.getMenuName() + "的信息";
             if (CommonUtil.isNotEmpty(menu.getMenuName())) {
-                content += "menuName="+menu.getMenuName();
+                content += "menuName=" + menu.getMenuName();
                 saveBean.setMenuName(menu.getMenuName());
             }
             if (CommonUtil.isNotEmpty(menu.getUrl())) {
-                content += "url="+menu.getUrl();
+                content += "url=" + menu.getUrl();
                 saveBean.setUrl(menu.getUrl());
             }
             if (CommonUtil.isNotEmpty(menu.getIcon())) {
-                content += "icon="+menu.getIcon();
+                content += "icon=" + menu.getIcon();
                 saveBean.setIcon(menu.getIcon());
             }
             if (CommonUtil.isNotEmpty(menu.getBelong())) {
-                content += "belong="+menu.getBelong();
+                content += "belong=" + menu.getBelong();
                 saveBean.setBelong(menu.getBelong());
             }
             if (CommonUtil.isNotEmpty(menu.getSort())) {
-                content += "sort="+menu.getSort();
+                content += "sort=" + menu.getSort();
                 saveBean.setSort(menu.getSort());
             }
 
             saveBean.setUpdateTime(DatesUtils.time());
-            saveBean.setVersion(saveBean.getVersion()+1);
+            saveBean.setVersion(saveBean.getVersion() + 1);
 
             //记录系统日志
             String result = "修改成功";
-            sysLogMapper.addSysLog(new SysLog(2,getUserName(),content,result));
+            sysLogMapper.addSysLog(new SysLog(2, getUserName(), content, result));
         }
 
         return mapper.updateMenu(saveBean);
@@ -225,6 +232,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 查询子菜单
+     *
      * @param parentCode
      * @return
      */
@@ -243,6 +251,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 查询角色的权限
+     *
      * @param roleId
      * @return
      */
@@ -259,6 +268,7 @@ public class MenuServiceImpl extends BaseServiceImpl implements MenuService {
 
     /**
      * 根据url请求地址查询请求名称
+     *
      * @param url
      * @return
      */

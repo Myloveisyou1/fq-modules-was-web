@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class SimpleInsertLangDriver extends XMLLanguageDriver implements LanguageDriver {
 
-    private final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)");
+    private final Pattern inPattern = Pattern.compile("\\(#\\{(\\w+)\\}\\)" );
 
     @Override
     public SqlSource createSqlSource(Configuration configuration, String script, Class<?> parameterType) {
@@ -24,18 +24,18 @@ public class SimpleInsertLangDriver extends XMLLanguageDriver implements Languag
         if (matcher.find()) {
             StringBuilder sb = new StringBuilder();
             StringBuilder tmp = new StringBuilder();
-            sb.append("(");
+            sb.append("(" );
 
             for (Field field : parameterType.getDeclaredFields()) {
                 if (!field.isAnnotationPresent(Invisible.class)) {  // 排除被Invisble修饰的变量
-                    sb.append(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName()) + ",");
-                    tmp.append("#{" + field.getName() + "},");
+                    sb.append(CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName()) + "," );
+                    tmp.append("#{" + field.getName() + "}," );
                 }
             }
 
-            sb.deleteCharAt(sb.lastIndexOf(","));
-            tmp.deleteCharAt(tmp.lastIndexOf(","));
-            sb.append(") values (" + tmp.toString() + ")");
+            sb.deleteCharAt(sb.lastIndexOf("," ));
+            tmp.deleteCharAt(tmp.lastIndexOf("," ));
+            sb.append(") values (" + tmp.toString() + ")" );
 
             script = matcher.replaceAll(sb.toString());
             script = "<script>" + script + "</script>";

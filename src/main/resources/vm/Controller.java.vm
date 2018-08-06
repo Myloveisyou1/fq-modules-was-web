@@ -1,4 +1,6 @@
-package ${package}.controller;
+package
+
+    ${package}.controller;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -24,7 +26,7 @@ import ${package}.utils.ResultUtil;
  * @date ${datetime}
  */
 @RestController
-@RequestMapping("${moduleName}/${pathName}")
+@RequestMapping("${moduleName}/${pathName}" )
 public class ${className}Controller {
 
     @Autowired
@@ -33,20 +35,20 @@ public class ${className}Controller {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(${className} ${classname}, Pages pages) {
 
-        Map<String, Object> map = ${classname}Service.queryPage(ResultUtil.initParams(${classname},pages));
+        Map<String, Object> map = ${classname}Service.queryPage(ResultUtil.initParams(${classname}, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{${pk.attrname}}")
-    public Result info(@PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}) {
+    @RequestMapping("/info/{${pk.attrname}}" )
+    public Result info(@PathVariable("${pk.attrname}" ) ${pk.attrType} ${pk.attrname}) {
 
         ${className} ${classname} =${classname}Service.selectById(${pk.attrname});
         return ResultUtil.success(${classname}, null);
@@ -55,7 +57,7 @@ public class ${className}Controller {
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(${className} ${classname}) {
 
         return ResultUtil.success(${classname}Service.insert(${classname}), null);
@@ -64,7 +66,7 @@ public class ${className}Controller {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(${className} ${classname}) {
 
         return ResultUtil.success(${classname}Service.updateById(${classname}), null);
@@ -76,7 +78,7 @@ public class ${className}Controller {
     /*
     @RequestMapping("/delete")
     public Result delete(@RequestBody ${pk.attrType}[]${pk.attrname}s) {
-            ${classname}Service.deleteBatchIds(Arrays.asList(${pk.attrname}s));
+    ${classname}Service.deleteBatchIds(Arrays.asList(${pk.attrname}s));
 
         return ResultUtil.success(${classname}Service.deleteBatchIds(Arrays.asList(${pk.attrname}s)), null);
     }*/

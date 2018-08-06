@@ -22,7 +22,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-12 17:15:52
  */
 @RestController
-@RequestMapping("v1/warnrule")
+@RequestMapping("v1/warnrule" )
 public class WarnRuleController {
 
     @Autowired
@@ -31,38 +31,39 @@ public class WarnRuleController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(WarnRule warnRule, Pages pages) {
 
-        Map<String, Object> map = warnRuleService.queryPage(ResultUtil.initParams(warnRule,pages));
+        Map<String, Object> map = warnRuleService.queryPage(ResultUtil.initParams(warnRule, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        WarnRule warnRule =warnRuleService.selectById(wasId);
+        WarnRule warnRule = warnRuleService.selectById(wasId);
         return ResultUtil.success(warnRule, null);
     }
+
     /**
      * 查询单条信息
      */
-    @RequestMapping("/selectByTypeAndSource/{wasType}/{wasSource}")
-    public Result info(@PathVariable("wasType") String wasType,@PathVariable("wasSource") String wasSource) {
+    @RequestMapping("/selectByTypeAndSource/{wasType}/{wasSource}" )
+    public Result info(@PathVariable("wasType" ) String wasType, @PathVariable("wasSource" ) String wasSource) {
 
-        WarnRule warnRule =warnRuleService.selectByTypeAndSource(wasType,wasSource);
+        WarnRule warnRule = warnRuleService.selectByTypeAndSource(wasType, wasSource);
         return ResultUtil.success(warnRule, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(WarnRule warnRule) {
 
         return ResultUtil.success(warnRuleService.insert(warnRule), null);
@@ -71,7 +72,7 @@ public class WarnRuleController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(WarnRule warnRule) {
 
         return ResultUtil.success(warnRuleService.updateById(warnRule), null);

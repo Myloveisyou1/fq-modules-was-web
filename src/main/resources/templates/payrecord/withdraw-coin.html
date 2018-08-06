@@ -19,7 +19,8 @@
         <a href="">首页</a>
         <a href="">提币记录</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
@@ -31,7 +32,8 @@
                     <div class="layui-input-inline">
                         <select id="wasType" lay-filter="aihao" name="wasType">
                             <option value="" selected>全部</option>
-                            <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
+                            <option th:each="list:${currencyList}" th:value="${list.wasShortName}"
+                                    th:text="${list.wasShortName }"></option>
                         </select>
                     </div>
                 </div>
@@ -40,14 +42,16 @@
                     <div class="layui-input-inline">
                         <select id="wasSource" lay-filter="aihao" name="wasSource">
                             <option value="" selected>全部</option>
-                            <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
+                            <option th:each="list:${sourceList}" th:value="${list.wasSource}"
+                                    th:text="${list.wasSource }"></option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">业务流水号:</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="serialNumber" id="serialNumber" autocomplete="off" class="layui-input" placeholder="请输入业务流水号">
+                        <input type="text" name="serialNumber" id="serialNumber" autocomplete="off" class="layui-input"
+                               placeholder="请输入业务流水号">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -105,62 +109,62 @@
 <script>
 
     var layer = "";
-    layui.use(['layer'],function(){
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
-    layui.use('laydate',function () {
+    layui.use('laydate', function () {
         var laydate = layui.laydate;
-        lay('.test-item').each(function(){
+        lay('.test-item').each(function () {
             laydate.render({
                 elem: this
-                ,trigger: 'click'
+                , trigger: 'click'
             });
         });
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
-        layui.use('table', function(){
+        parent.layer.load(2, {shade: 0.3});
+        layui.use('table', function () {
             var table = layui.table;
 
-            result= table.render({
+            result = table.render({
                 elem: '#demo'
-                ,height: 515
-                ,url: URL+"v1/payrecord/list" //数据接口
-                ,request: {
+                , height: 515
+                , url: URL + "v1/payrecord/list" //数据接口
+                , request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
-                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
                 }
-                ,where:{
-                    wasSource:$("#wasSource").val(),
-                    wasType:$("#wasType").val(),
-                    wasSerialNumber:$("#serialNumber").val(),
-                    startTime:$("#startTime").val(),
-                    endTime:$("#endTime").val()
+                , where: {
+                    wasSource: $("#wasSource").val(),
+                    wasType: $("#wasType").val(),
+                    wasSerialNumber: $("#serialNumber").val(),
+                    startTime: $("#startTime").val(),
+                    endTime: $("#endTime").val()
                 }
-                ,page: true //开启分页
-                ,cols: [[ //表头
-                    {field: 'wasCreateTime', title: '提币申请时间', sort: true,templet:'#formatDate2',width:165}
-                    ,{field: 'wasType', title: '币种全称', width:100}
-                    ,{field: 'wasType', title: '币种简称', width:100}
-                    ,{field: 'wasTxid', title: '交易hash', sort: true}
-                    ,{field: 'wasAddress', title: '提币到账地址', sort: true}
-                    ,{field: 'wasSource', title: '业务系统',sort: true}
-                    ,{field: 'wasSerialNumber', title: '业务流水号',sort: true}
-                    ,{field: 'totalCount', title: '手续费',sort:true,event:'totalCount'}
-                    ,{field: 'status', title: '提币状态',sort:true,event:'surplusCount'}
-                    ,{field: 'wasAmount', title: '提币数量', sort: true}
-                    ,{field: 'wasWarnNum', title: '操作历史',toolbar:'#barDemo',align:'center'}
-                    ,{field: 'repData', title: '操作',toolbar:'#barDemo2',align:'center'}
+                , page: true //开启分页
+                , cols: [[ //表头
+                    {field: 'wasCreateTime', title: '提币申请时间', sort: true, templet: '#formatDate2', width: 165}
+                    , {field: 'wasType', title: '币种全称', width: 100}
+                    , {field: 'wasType', title: '币种简称', width: 100}
+                    , {field: 'wasTxid', title: '交易hash', sort: true}
+                    , {field: 'wasAddress', title: '提币到账地址', sort: true}
+                    , {field: 'wasSource', title: '业务系统', sort: true}
+                    , {field: 'wasSerialNumber', title: '业务流水号', sort: true}
+                    , {field: 'totalCount', title: '手续费', sort: true, event: 'totalCount'}
+                    , {field: 'status', title: '提币状态', sort: true, event: 'surplusCount'}
+                    , {field: 'wasAmount', title: '提币数量', sort: true}
+                    , {field: 'wasWarnNum', title: '操作历史', toolbar: '#barDemo', align: 'center'}
+                    , {field: 'repData', title: '操作', toolbar: '#barDemo2', align: 'center'}
                 ]]
-                ,response: {
+                , response: {
                     statusName: 'code' //数据状态的字段名称，默认：code
-                    ,statusCode: 200 //成功的状态码，默认：0
-                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
-                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
-                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                    , statusCode: 200 //成功的状态码，默认：0
+                    , msgName: 'hint' //状态信息的字段名称，默认：msg
+                    , countName: 'totalCount' //数据总数的字段名称，默认：count
+                    , dataName: 'data' //数据列表的字段名称，默认：data
                 }
-                ,done: function(res, curr, count){
+                , done: function (res, curr, count) {
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                     //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                     console.log(res);
@@ -193,19 +197,19 @@
             }
         }
         if (new Date(startTime).getTime() > new Date(endTime).getTime()) {
-            layer.msg("结束时间不能小于开始时间",{icon: 5});
+            layer.msg("结束时间不能小于开始时间", {icon: 5});
             return;
         }
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                wasSource:$("#wasSource").val(),
-                wasType:$("#wasType").val(),
-                wasSerialNumber:$("#serialNumber").val(),
-                startTime:startTime,
-                endTime:endTime
+                wasSource: $("#wasSource").val(),
+                wasType: $("#wasType").val(),
+                wasSerialNumber: $("#serialNumber").val(),
+                startTime: startTime,
+                endTime: endTime
             }
-            ,page: {
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });
@@ -216,36 +220,36 @@
      * @param obj
      * @param wasId
      */
-    function doAgain(obj,wasId) {
+    function doAgain(obj, wasId) {
         obj = 2;
-        layer.confirm('确认要再次执行吗？',function(index){
-           if (index) {
-               //obj 1.未收到hash的情况;2.请求发送失败的情况
-               $.ajax({
-                   type:"post",
-                   url:URL+"v1/payrecord/doAgain",
-                   dataType:"json",
-                   data:{
-                       wasId:wasId,
-                       oType:obj
-                   },success:function (data) {
-                       if (data.code == 200) {
-                           layer.msg("操作成功",{icon:6});
-                       }
-                   }
-               })
-           }
+        layer.confirm('确认要再次执行吗？', function (index) {
+            if (index) {
+                //obj 1.未收到hash的情况;2.请求发送失败的情况
+                $.ajax({
+                    type: "post",
+                    url: URL + "v1/payrecord/doAgain",
+                    dataType: "json",
+                    data: {
+                        wasId: wasId,
+                        oType: obj
+                    }, success: function (data) {
+                        if (data.code == 200) {
+                            layer.msg("操作成功", {icon: 6});
+                        }
+                    }
+                })
+            }
         });
     }
 
     function showDetails(wasId) {
         $.ajax({
-            type:"post",
-            url:URL+"v1/payrecord/findHistoryByWasId",
-            dataType:"json",
-            data:{
-                wasId:wasId
-            },success:function (data) {
+            type: "post",
+            url: URL + "v1/payrecord/findHistoryByWasId",
+            dataType: "json",
+            data: {
+                wasId: wasId
+            }, success: function (data) {
                 console.log(data);
                 if (data.code == 200) {
                     //绑定数据
@@ -255,21 +259,21 @@
                         for (var i = 0; i < ret.length; i++) {
                             var date = new Date();
                             date.setTime(ret[i].wasCreateTime);
-                            var cdate = dateFtt("yyyy-MM-dd hh:mm:ss",date);
+                            var cdate = dateFtt("yyyy-MM-dd hh:mm:ss", date);
                             html += '<tr><td>'
-                                        +ret[i].wasAction+
-                                    '</td><td>'
-                                        +cdate+
-                                    '</td><td>'
-                                        +ret[i].wasCreateUser+
-                                    '</td></tr>';
+                                + ret[i].wasAction +
+                                '</td><td>'
+                                + cdate +
+                                '</td><td>'
+                                + ret[i].wasCreateUser +
+                                '</td></tr>';
                         }
                     } else {
                         html = '<tr><td colspan="100" align="center">暂无操作记录</td></tr>';
                     }
                     $("#myHistory").html(html);
                     layer.open({
-                        type:1,
+                        type: 1,
                         title: '操作历史',
                         content: $("#history"),
                         area: ['400px', '500px']

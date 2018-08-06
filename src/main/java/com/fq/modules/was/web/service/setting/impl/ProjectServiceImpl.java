@@ -25,13 +25,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 查询所有项目
+     *
      * @param projectName
      * @return
      */
     public List<Project> findAllProject(String projectName) {
 
         if (CommonUtil.isNotEmpty(projectName)) {
-            projectName = "%"+projectName+"%";
+            projectName = "%" + projectName + "%";
             return mapper.findProjectByName(projectName);
         } else {
             return mapper.findAllProject();
@@ -40,6 +41,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 修改信息
+     *
      * @param project
      * @return
      */
@@ -65,7 +67,7 @@ public class ProjectServiceImpl implements ProjectService {
                     bean.setStatus(project.getStatus());
                 }
                 bean.setUpdateTime(DatesUtils.time());
-                bean.setVersion(bean.getVersion()+1);
+                bean.setVersion(bean.getVersion() + 1);
             }
         }
 
@@ -74,6 +76,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 删除项目
+     *
      * @param gid
      * @return
      */
@@ -91,6 +94,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     /**
      * 添加项目
+     *
      * @param projectName
      * @param nameEn
      * @return

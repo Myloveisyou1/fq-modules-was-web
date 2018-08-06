@@ -18,10 +18,10 @@ public class BaseProvider {
 
     public String pageQuery${className}List(Map<String, Object> params) {
 
-        StringBuffer sql = new StringBuffer("");
+        StringBuffer sql = new StringBuffer("" );
 
-        ${className} bean = (${className}) params.get("bean");
-        Pages pages = (Pages) params.get("pages");
+        ${className} bean = (${className}) params.get("bean" );
+        Pages pages = (Pages) params.get("pages" );
 
         //这里写查询条件
         #foreach($column in $columns)
@@ -36,9 +36,9 @@ public class BaseProvider {
 
     public String pageQuery${className}Count(Map<String, Object> params) {
 
-        StringBuffer sql = new StringBuffer("select count(0) from ${tableName} where 1=1");
+        StringBuffer sql = new StringBuffer("select count(0) from ${tableName} where 1=1" );
 
-        ${className} bean = (${className}) params.get("bean");
+        ${className} bean = (${className}) params.get("bean" );
 
         //这里写查询条件
         #foreach($column in $columns)

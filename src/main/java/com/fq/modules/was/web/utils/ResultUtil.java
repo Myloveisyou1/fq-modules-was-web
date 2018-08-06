@@ -15,14 +15,14 @@ import java.util.Map;
  */
 public class ResultUtil {
 
-    public static Result success(Object object, Pages pages){
+    public static Result success(Object object, Pages pages) {
         Result result = new Result();
         result.setCode(ResultEnum.SUCCESS.getCode());
         result.setMsg(ResultEnum.SUCCESS.getMsg());
 
         result.setData(object);
         result.setPage(pages);
-        if(CommonUtil.isNotEmpty(pages)) {
+        if (CommonUtil.isNotEmpty(pages)) {
 
             result.setTotalCount(pages.getTotalCount());
         }
@@ -30,11 +30,11 @@ public class ResultUtil {
         return result;
     }
 
-    public static Result success(){
-        return success(null,null);
+    public static Result success() {
+        return success(null, null);
     }
 
-    public static Result error(Integer code, String msg){
+    public static Result error(Integer code, String msg) {
         Result result = new Result();
         result.setCode(code);
         result.setMsg(msg);
@@ -43,14 +43,14 @@ public class ResultUtil {
         return result;
     }
 
-    public static Map<String,Object> initParams(Object o,Pages pages) {
+    public static Map<String, Object> initParams(Object o, Pages pages) {
 
-        Map<String,Object> params = new HashMap<>();
-        params.put("bean",o);
+        Map<String, Object> params = new HashMap<>();
+        params.put("bean", o);
 
         //设置分页信息
-        pages.setPageNumber((pages.getPageNumber()-1)*pages.getPageSize());
-        params.put("pages",pages);
+        pages.setPageNumber((pages.getPageNumber() - 1) * pages.getPageSize());
+        params.put("pages", pages);
 
         return params;
     }

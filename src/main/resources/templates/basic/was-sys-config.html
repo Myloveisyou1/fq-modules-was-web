@@ -20,7 +20,8 @@
         <a href="">基础配置</a>
         <a href="">参数配置</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="queryInfo()" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="queryInfo()"
+       title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
@@ -32,7 +33,8 @@
                     <div class="layui-input-inline">
                         <select id="wasType" lay-filter="aihao" name="wasType">
                             <option value="" selected>全部</option>
-                            <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
+                            <option th:each="list:${currencyList}" th:value="${list.wasShortName}"
+                                    th:text="${list.wasShortName }"></option>
                         </select>
                     </div>
                 </div>
@@ -41,14 +43,16 @@
                     <div class="layui-input-inline">
                         <select id="wasSource" lay-filter="aihao" name="wasSource">
                             <option value="" selected>全部</option>
-                            <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
+                            <option th:each="list:${sourceList}" th:value="${list.wasSource}"
+                                    th:text="${list.wasSource }"></option>
                         </select>
                     </div>
                 </div>
                 <div class="layui-inline">
                     <label class="layui-form-label">配置类型:</label>
                     <div class="layui-input-inline">
-                        <input type="text" name="wasConfigType" id="wasConfigType" autocomplete="off" class="layui-input" placeholder="请输入配置类型">
+                        <input type="text" name="wasConfigType" id="wasConfigType" autocomplete="off"
+                               class="layui-input" placeholder="请输入配置类型">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -76,7 +80,8 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select id="awasType" lay-filter="aihao">
-                    <option  th:each="list:${currencyList}" th:value="${list.wasShortName}" th:text="${list.wasShortName }"></option>
+                    <option th:each="list:${currencyList}" th:value="${list.wasShortName}"
+                            th:text="${list.wasShortName }"></option>
                 </select>
             </div>
         </div>
@@ -86,7 +91,8 @@
             </label>
             <div class="layui-input-inline layui-form" lay-filter="selFilter">
                 <select id="awasSource" lay-filter="aihao">
-                    <option  th:each="list:${sourceList}" th:value="${list.wasSource}" th:text="${list.wasSource }"></option>
+                    <option th:each="list:${sourceList}" th:value="${list.wasSource}"
+                            th:text="${list.wasSource }"></option>
                 </select>
             </div>
         </div>
@@ -167,72 +173,72 @@
 <!--格式化百分比-->
 <script type="text/html" id="p">
     {{#
-        return d.wasPercent+'%';
+    return d.wasPercent+'%';
     }}
 </script>
 <script>
     var result = "";
     var wasId = "";
     var wasType = "";
-    var layer = "",form = "";
-    layui.use(['layer'],function(){
+    var layer = "", form = "";
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
-    layui.use('form', function(){
+    layui.use('form', function () {
         form = layui.form;
     });
-    layui.use('table', function(){
+    layui.use('table', function () {
         var table = layui.table;
         //监听工具条
-        table.on('tool(demo)', function(obj){
+        table.on('tool(demo)', function (obj) {
             var data = obj.data;
-            if(obj.event === 'detail'){
+            if (obj.event === 'detail') {
                 // layer.msg('ID：'+ data.id + ' 的查看操作');
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 getNewBlock(data.wasType);
             }
         });
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
-        layui.use('table', function(){
+        parent.layer.load(2, {shade: 0.3});
+        layui.use('table', function () {
             var table = layui.table;
 
-            result= table.render({
+            result = table.render({
                 elem: '#demo'
-                ,height: 515
-                ,url: URL+"v1/sysconfig/list" //数据接口
-                ,request: {
+                , height: 515
+                , url: URL + "v1/sysconfig/list" //数据接口
+                , request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
-                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
                 }
-                ,where:{
-                    wasSource:$("#wasSource").val(),
-                    wasType:$("#wasType").val(),
-                    wasConfigType:$("#wasConfigType").val()
+                , where: {
+                    wasSource: $("#wasSource").val(),
+                    wasType: $("#wasType").val(),
+                    wasConfigType: $("#wasConfigType").val()
                 }
-                ,page: true //开启分页
-                ,cols: [[ //表头
-                    {field: 'wasId', title: 'ID', width:50, sort: true, fixed: 'left'}
-                    ,{field: 'wasType', title: '币种类型', sort: true}
-                    ,{field: 'wasSource', title: '平台名称'}
-                    ,{field: 'wasConfigType', title: '配置类型',sort:true}
-                    ,{field: 'wasNum', title: '配数置值'}
-                    ,{field: 'wasPercent', title: '配置百分比', sort: true,templet:'#p'}
-                    ,{field: 'wasRemark', title: '备注',width:200}
-                    ,{field: 'wasStatus', title: '状态',templet:'#wasStatus',sort:true}
-                    ,{field: 'wasCreateTime', title: '创建时间',sort: true,templet:'#formatDate2'}
-                    ,{field: 'repData', title: '操作',toolbar:'#barDemo',align:'center'}
+                , page: true //开启分页
+                , cols: [[ //表头
+                    {field: 'wasId', title: 'ID', width: 50, sort: true, fixed: 'left'}
+                    , {field: 'wasType', title: '币种类型', sort: true}
+                    , {field: 'wasSource', title: '平台名称'}
+                    , {field: 'wasConfigType', title: '配置类型', sort: true}
+                    , {field: 'wasNum', title: '配数置值'}
+                    , {field: 'wasPercent', title: '配置百分比', sort: true, templet: '#p'}
+                    , {field: 'wasRemark', title: '备注', width: 200}
+                    , {field: 'wasStatus', title: '状态', templet: '#wasStatus', sort: true}
+                    , {field: 'wasCreateTime', title: '创建时间', sort: true, templet: '#formatDate2'}
+                    , {field: 'repData', title: '操作', toolbar: '#barDemo', align: 'center'}
                 ]]
-                ,response: {
+                , response: {
                     statusName: 'code' //数据状态的字段名称，默认：code
-                    ,statusCode: 200 //成功的状态码，默认：0
-                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
-                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
-                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                    , statusCode: 200 //成功的状态码，默认：0
+                    , msgName: 'hint' //状态信息的字段名称，默认：msg
+                    , countName: 'totalCount' //数据总数的字段名称，默认：count
+                    , dataName: 'data' //数据列表的字段名称，默认：data
                 }
-                ,done: function(res, curr, count){
+                , done: function (res, curr, count) {
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                     //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                     console.log(res);
@@ -256,17 +262,17 @@
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                wasSource:$("#wasSource").val(),
-                wasType:$("#wasType").val(),
-                wasConfigType:$("#wasConfigType").val()
+                wasSource: $("#wasSource").val(),
+                wasType: $("#wasType").val(),
+                wasConfigType: $("#wasConfigType").val()
             }
-            ,page: {
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });
     }
 
-    function add(obj,wasId) {
+    function add(obj, wasId) {
         var title = "";
         if (obj == 0) {//增加
             title = "新增配置";
@@ -281,13 +287,13 @@
         }
 
         layer.open({
-            type:1,
+            type: 1,
             title: title,
             content: $("#addAddress"),
             area: ['450px', '550px'],
             offset: '100px',
-            btn:['保存','取消'],
-            yes: function (index,layero) {
+            btn: ['保存', '取消'],
+            yes: function (index, layero) {
 
                 var wasType = $("#awasType").val();
                 var wasSource = $("#awasSource").val();
@@ -299,66 +305,66 @@
 
                 //校验数据
                 if (wasConfigType == null || wasConfigType == "" || wasConfigType == undefined) {
-                    layer.msg("请输入配置类型",{icon:2});
+                    layer.msg("请输入配置类型", {icon: 2});
                     return;
                 }
                 if (wasNum == null || wasNum == "" || wasNum == undefined) {
-                    layer.msg("请输入数值",{icon:2});
+                    layer.msg("请输入数值", {icon: 2});
                     return;
                 }
                 var regu = /^[1-9]\d*$/;
                 if (!regu.test(wasNum)) {
-                    layer.msg("请输入正确的数字",{icon:2});
+                    layer.msg("请输入正确的数字", {icon: 2});
                     return;
                 }
                 var reg = /^\d{1,2}$/;
                 if (wasPercent == null || wasPercent == "" || wasPercent == undefined) {
-                    layer.msg("请输入百分比",{icon:2});
+                    layer.msg("请输入百分比", {icon: 2});
                     return;
                 }
                 if (!reg.test(wasPercent)) {
-                    layer.msg("百分比范围1%-99%",{icon:2});
+                    layer.msg("百分比范围1%-99%", {icon: 2});
                     return;
                 }
 
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 $.ajax({
-                    url:URL+"v1/sysconfig/saveOrUpdate",
-                    type:"get",
-                    dataType:"json",
-                    data:{
-                        obj:obj,
-                        wasId:wasId,
-                        wasType:wasType,
-                        wasSource:wasSource,
-                        wasConfigType:wasConfigType,
-                        wasNum:wasNum,
-                        wasPercent:wasPercent,
-                        wasRemark:wasRemark,
-                        wasStaus:wasStatus
+                    url: URL + "v1/sysconfig/saveOrUpdate",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        obj: obj,
+                        wasId: wasId,
+                        wasType: wasType,
+                        wasSource: wasSource,
+                        wasConfigType: wasConfigType,
+                        wasNum: wasNum,
+                        wasPercent: wasPercent,
+                        wasRemark: wasRemark,
+                        wasStaus: wasStatus
                     },
-                    success:function(data){
+                    success: function (data) {
                         layer.closeAll("loading");
                         console.log(data);
-                        if(data.code == 200) {
-                            parent.layer.msg("操作成功",{icon:6,time:2000},function(){
+                        if (data.code == 200) {
+                            parent.layer.msg("操作成功", {icon: 6, time: 2000}, function () {
                                 location.reload();
                             });
-                        } else if (data.code == 209){
-                            parent.layer.msg(data.msg,{icon:2});
-                            top.location.href = URL+"login";
+                        } else if (data.code == 209) {
+                            parent.layer.msg(data.msg, {icon: 2});
+                            top.location.href = URL + "login";
                         } else {
-                            parent.layer.msg(data.msg,{icon:2});
+                            parent.layer.msg(data.msg, {icon: 2});
                         }
 
-                    },error:function(jqXHR, textStatus, errorThrown) {
+                    }, error: function (jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseText;
-                        if(jqXHR.status == 404){
-                            top.location.href = URL+"errorpage/404";
-                        } else if(jqXHR.status == 500){
-                            top.location.href = URL+"errorpage/500";
+                        if (jqXHR.status == 404) {
+                            top.location.href = URL + "errorpage/404";
+                        } else if (jqXHR.status == 500) {
+                            top.location.href = URL + "errorpage/500";
                         } else {
-                            layer.msg(data.msg,{icon:2});
+                            layer.msg(data.msg, {icon: 2});
                         }
                     }
                 });
@@ -369,21 +375,21 @@
     function selectById(wasId) {
 
         $.ajax({
-            type:"get",
-            url:URL+"v1/sysconfig/info/"+wasId,
-            dataType:"json",
-            success:function (data) {
+            type: "get",
+            url: URL + "v1/sysconfig/info/" + wasId,
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
                 if (data.code == 200) {
                     var ret = data.data;
-                    $("#awasType").find("option[value='"+ret.wasType+"']").attr("selected",true);
-                    $("#awasSource").find("option[value='"+ret.wasSource+"']").attr("selected",true);
+                    $("#awasType").find("option[value='" + ret.wasType + "']").attr("selected", true);
+                    $("#awasSource").find("option[value='" + ret.wasSource + "']").attr("selected", true);
                     $("#awasConfigType").val(ret.wasConfigType);
                     $("#awasNum").val(ret.wasNum);
                     $("#awasPercent").val(ret.wasPercent);
-                    $("#awasStatus").find("option[value='"+ret.wasStaus+"']").attr("selected",true);
+                    $("#awasStatus").find("option[value='" + ret.wasStaus + "']").attr("selected", true);
                     $("#awasRemark").val(ret.wasRemark);
-                    form.render("select","selFilter");
+                    form.render("select", "selFilter");
                 }
             }
         })

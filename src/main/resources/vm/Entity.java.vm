@@ -1,10 +1,12 @@
-package ${package}.entity;
+package
+
+    ${package}.entity;
 
 import lombok.Data;
 
-#if(${hasBigDecimal})
-import java.math.BigDecimal;
-#end
+    #if(${hasBigDecimal})
+    import java.math.BigDecimal;
+    #end
 import java.util.Date;
 
 /**

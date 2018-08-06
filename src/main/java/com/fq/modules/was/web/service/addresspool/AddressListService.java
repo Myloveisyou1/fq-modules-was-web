@@ -25,7 +25,7 @@ public interface AddressListService {
 
     int deleteById(Integer wasId);
 
-    Map<String,Object> queryPageDetails(Map<String, Object> stringObjectMap) throws ParseException;
+    Map<String, Object> queryPageDetails(Map<String, Object> stringObjectMap) throws ParseException;
 
     String findAll(Map<String, Object> map);
 
@@ -33,9 +33,10 @@ public interface AddressListService {
 
     /**
      * 查询需要预警的币种
+     *
      * @param map
      * @return
      */
-    List<Map<String,Object>> findWarnAddressList(Map<String, Object> map);
+    List<Map<String, Object>> findWarnAddressList(Map<String, Object> map);
 }
 

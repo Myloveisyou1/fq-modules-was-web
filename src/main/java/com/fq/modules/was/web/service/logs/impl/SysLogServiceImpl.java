@@ -23,6 +23,7 @@ public class SysLogServiceImpl extends BaseServiceImpl implements SysLogService 
 
     /**
      * 分页查询数据
+     *
      * @param params
      * @return
      */
@@ -34,10 +35,10 @@ public class SysLogServiceImpl extends BaseServiceImpl implements SysLogService 
         List<SysLog> list = sysLogMapper.pageQueryList(params);
         Long count = sysLogMapper.pageQueryCount(params);
 
-        Pages pages = (Pages) params.get("pages");
+        Pages pages = (Pages) params.get("pages" );
         pages.setTotalCount(count);
         long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
-        pages.setTotalPage(Integer.valueOf(totalPage + ""));
+        pages.setTotalPage(Integer.valueOf(totalPage + "" ));
 
         map.put("result", list);//数据信息
         map.put("pages", pages);//分页信息
@@ -55,6 +56,7 @@ public class SysLogServiceImpl extends BaseServiceImpl implements SysLogService 
 
     /**
      * 保存信息
+     *
      * @param sysLog 需要保存的对象
      * @return
      */
@@ -67,6 +69,7 @@ public class SysLogServiceImpl extends BaseServiceImpl implements SysLogService 
 
     /**
      * 修改信息
+     *
      * @param sysLog 需要修改的对象
      * @return
      */
@@ -79,6 +82,7 @@ public class SysLogServiceImpl extends BaseServiceImpl implements SysLogService 
 
     /**
      * 根据id删除信息
+     *
      * @return
      */
     public int deleteById(Long wasId) {

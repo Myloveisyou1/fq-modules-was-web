@@ -24,7 +24,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-17 14:16:38
  */
 @RestController
-@RequestMapping("v1/datadictionary")
+@RequestMapping("v1/datadictionary" )
 public class DataDictionaryController {
 
     @Autowired
@@ -33,29 +33,29 @@ public class DataDictionaryController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(DataDictionary dataDictionary, Pages pages) {
 
-        Map<String, Object> map = dataDictionaryService.queryPage(ResultUtil.initParams(dataDictionary,pages));
+        Map<String, Object> map = dataDictionaryService.queryPage(ResultUtil.initParams(dataDictionary, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Integer wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Integer wasId) {
 
-        DataDictionary dataDictionary =dataDictionaryService.selectById(wasId);
+        DataDictionary dataDictionary = dataDictionaryService.selectById(wasId);
         return ResultUtil.success(dataDictionary, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(DataDictionary dataDictionary) {
 
         return ResultUtil.success(dataDictionaryService.insert(dataDictionary), null);
@@ -64,7 +64,7 @@ public class DataDictionaryController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(DataDictionary dataDictionary) {
 
         return ResultUtil.success(dataDictionaryService.updateById(dataDictionary), null);
@@ -83,36 +83,38 @@ public class DataDictionaryController {
 
     /**
      * 禁用/启用全部币种
+     *
      * @return
      */
-    @RequestMapping(value = "/disabledAll")
-    public Result disabledAll(@RequestParam("way") String way) {
+    @RequestMapping(value = "/disabledAll" )
+    public Result disabledAll(@RequestParam("way" ) String way) {
 
-        return ResultUtil.success(dataDictionaryService.disabledAll(way),null);
+        return ResultUtil.success(dataDictionaryService.disabledAll(way), null);
 
     }
 
     /**
      * 获取最新区块高度
+     *
      * @param wasType
      * @return
      */
-    @RequestMapping(value = "/getNewHeight")
-    public Result getNewHeight(@RequestParam("wasType") String wasType) {
+    @RequestMapping(value = "/getNewHeight" )
+    public Result getNewHeight(@RequestParam("wasType" ) String wasType) {
 
-        return ResultUtil.success(dataDictionaryService.getNewHeight(wasType),null);
+        return ResultUtil.success(dataDictionaryService.getNewHeight(wasType), null);
     }
 
     /**
      * 编辑/保存信息
      */
-    @RequestMapping("/saveOrUpdate")
-    public Result save(DataDictionary wasDataDictionary, @RequestParam("saveOrUpdate") String saveOrUpdate){
+    @RequestMapping("/saveOrUpdate" )
+    public Result save(DataDictionary wasDataDictionary, @RequestParam("saveOrUpdate" ) String saveOrUpdate) {
 
-        if (saveOrUpdate.equals("1")) {
-            return ResultUtil.success(dataDictionaryService.insert(wasDataDictionary),null);
-        } else if (saveOrUpdate.equals("2")) {
-            return ResultUtil.success(dataDictionaryService.updateById(wasDataDictionary),null);
+        if (saveOrUpdate.equals("1" )) {
+            return ResultUtil.success(dataDictionaryService.insert(wasDataDictionary), null);
+        } else if (saveOrUpdate.equals("2" )) {
+            return ResultUtil.success(dataDictionaryService.updateById(wasDataDictionary), null);
         }
         return null;
     }

@@ -26,7 +26,7 @@ public abstract class CommonUtil {
      * @author(作者) ： suyl
      * @date (开发日期) : 2015年2月15日 上午8:59:56
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes" )
     public static boolean isEmpty(Object pObj) {
         if (pObj == null) {
             return true;
@@ -58,7 +58,7 @@ public abstract class CommonUtil {
      * @author(作者) ： suyl
      * @date (开发日期) : 2015年2月15日 上午8:59:14
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes" )
     public static boolean isNotEmpty(Object pObj) {
         if (pObj == null) {
             return false;
@@ -91,7 +91,7 @@ public abstract class CommonUtil {
      * @author(作者) ： suyl
      * @date (开发日期) : 2015年2月15日 上午8:59:14
      */
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes" )
     public static boolean isNotEmptys(Object... objs) {
         for (Object obj : objs) {
             if (obj == null) {
@@ -138,16 +138,16 @@ public abstract class CommonUtil {
         Method[] methods = bean.getClass().getDeclaredMethods();
         try {
             for (Method method : methods) {
-                if (method.getName().startsWith("get")) {
+                if (method.getName().startsWith("get" )) {
                     String field = method.getName();
-                    field = field.substring(field.indexOf("get") + 3);
+                    field = field.substring(field.indexOf("get" ) + 3);
                     field = field.toLowerCase().charAt(0) + field.substring(1);
                     Object value = method.invoke(bean, (Object[]) null);
                     result.put(field, null == value ? "" : value);
                 }
             }
         } catch (Exception e) {
-            log.error("数据转换失败");
+            log.error("数据转换失败" );
             e.printStackTrace();
         }
     }
@@ -164,9 +164,9 @@ public abstract class CommonUtil {
         Method[] methods = bean.getClass().getDeclaredMethods();
         try {
             for (Method method : methods) {
-                if (method.getName().startsWith("get")) {
+                if (method.getName().startsWith("get" )) {
                     String field = method.getName();
-                    field = field.substring(field.indexOf("get") + 3);
+                    field = field.substring(field.indexOf("get" ) + 3);
                     field = field.toLowerCase().charAt(0) + field.substring(1);
                     Object value = method.invoke(bean, (Object[]) null);
                     if (isNotEmpty(value)) {
@@ -175,7 +175,7 @@ public abstract class CommonUtil {
                 }
             }
         } catch (Exception e) {
-            log.error("数据转换失败");
+            log.error("数据转换失败" );
             e.printStackTrace();
         }
     }
@@ -193,16 +193,16 @@ public abstract class CommonUtil {
         Method[] dmethods = result.getClass().getDeclaredMethods();
         try {
             for (Method smethod : smethods) {
-                if (smethod.getName().startsWith("get")) {
+                if (smethod.getName().startsWith("get" )) {
                     String sfield = smethod.getName();
-                    sfield = sfield.substring(sfield.indexOf("get") + 3);
+                    sfield = sfield.substring(sfield.indexOf("get" ) + 3);
                     sfield = sfield.toLowerCase().charAt(0) + sfield.substring(1);
                     Object value = smethod.invoke(source, (Object[]) null);
                     if (!CommonUtil.isEmpty(value)) {
                         for (Method dmethod : dmethods) {
-                            if (dmethod.getName().startsWith("set")) {
+                            if (dmethod.getName().startsWith("set" )) {
                                 String dfield = dmethod.getName();
-                                dfield = dfield.substring(dfield.indexOf("set") + 3);
+                                dfield = dfield.substring(dfield.indexOf("set" ) + 3);
                                 dfield = dfield.toLowerCase().charAt(0) + dfield.substring(1);
                                 if (dfield.equals(sfield)) {
                                     dmethod.invoke(result, new Object[]{value});
@@ -213,7 +213,7 @@ public abstract class CommonUtil {
                 }
             }
         } catch (Exception e) {
-            log.error("数据转换失败");
+            log.error("数据转换失败" );
             e.printStackTrace();
         }
     }
@@ -242,7 +242,7 @@ public abstract class CommonUtil {
                 // 创建一个get方法数组，专门存放class2的get方法。
                 Method[] get = new Method[length2];
                 for (int i = 0, j = 0; i < length2; i++) {
-                    if (method2[i].getName().indexOf("get") == 0) {
+                    if (method2[i].getName().indexOf("get" ) == 0) {
                         get[j] = method2[i];
                         ++j;
                     }
@@ -293,14 +293,14 @@ public abstract class CommonUtil {
         Method[] methods = result.getClass().getDeclaredMethods();
         for (Method method : methods) {
             try {
-                if (method.getName().startsWith("set")) {
+                if (method.getName().startsWith("set" )) {
                     String field = method.getName();
-                    field = field.substring(field.indexOf("set") + 3);
+                    field = field.substring(field.indexOf("set" ) + 3);
                     field = field.toLowerCase().charAt(0) + field.substring(1);
                     method.invoke(result, new Object[]{map.get(field)});
                 }
             } catch (Exception e) {
-                log.error("数据转换失败");
+                log.error("数据转换失败" );
                 e.printStackTrace();
             }
         }
@@ -329,29 +329,30 @@ public abstract class CommonUtil {
 
     /**
      * 通过父节点得到所有子节点
-     * @param list 需要组装的数据
+     *
+     * @param list     需要组装的数据
      * @param parentId 父节点id
-     * @param pidName 父节点名称
-     * @param idName id名称
+     * @param pidName  父节点名称
+     * @param idName   id名称
      * @return
      */
-    public static List<Object> getChildenId(List<Object> objects, List<Map<String,Object>> list, Object parentId, String pidName, String idName){
-        if(CommonUtil.isNotEmpty(list)){
-            for(Map<String,Object> map:list){
-                if(CommonUtil.isNotEmpty(map.get(pidName))){
-                    Long pid = (Long)map.get(pidName);
-                    if(pid.equals(parentId)){
+    public static List<Object> getChildenId(List<Object> objects, List<Map<String, Object>> list, Object parentId, String pidName, String idName) {
+        if (CommonUtil.isNotEmpty(list)) {
+            for (Map<String, Object> map : list) {
+                if (CommonUtil.isNotEmpty(map.get(pidName))) {
+                    Long pid = (Long) map.get(pidName);
+                    if (pid.equals(parentId)) {
                         Long id = (Long) map.get(idName);
-                        if(!objects.contains(id)){
+                        if (!objects.contains(id)) {
                             objects.add(id);
                         }
-                        if(!objects.contains(parentId)){
+                        if (!objects.contains(parentId)) {
                             objects.add(parentId);
                         }
-                        getChildenId(objects,list, id,pidName,idName);
+                        getChildenId(objects, list, id, pidName, idName);
                     }
-                }else {
-                    if(!objects.contains(parentId)){
+                } else {
+                    if (!objects.contains(parentId)) {
                         objects.add(parentId);
                     }
                 }

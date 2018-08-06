@@ -61,19 +61,20 @@
     </sql>
 
     <!--新增信息-->
-    <insert id="addSysConfig" parameterType="com.fq.modules.was.web.entity.basic.SysConfig" useGeneratedKeys="true" keyProperty="wasId">
+    <insert id="addSysConfig" parameterType="com.fq.modules.was.web.entity.basic.SysConfig" useGeneratedKeys="true"
+            keyProperty="wasId">
         insert into was_sys_config(
         <include refid="sql_for_all_except_p"/>
         )values (
-            #{wasType},
-            #{wasConfigType},
-            #{wasNum},
-            #{wasPercent},
-            #{wasSource},
-            #{wasStaus},
-            #{wasRemark},
-            #{wasCreateTime}
-          )
+        #{wasType},
+        #{wasConfigType},
+        #{wasNum},
+        #{wasPercent},
+        #{wasSource},
+        #{wasStaus},
+        #{wasRemark},
+        #{wasCreateTime}
+        )
     </insert>
 
     <!--修改信息-->
@@ -100,14 +101,14 @@
     <!--根据主键查询单条信息-->
     <select id="selectById" parameterType="Long" resultMap="sysConfigResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_sys_config where was_id = #{wasId}
     </select>
 
     <!-- 分页查询信息 列表-->
     <select id="pageQueryList" parameterType="java.util.Map" resultType="java.util.Map">
         select
-          <include refid="sql_for_all_map"/>
+        <include refid="sql_for_all_map"/>
         from was_sys_config
         where 1=1
         <if test="bean.wasId != null">
@@ -174,7 +175,15 @@
 
     <!--精确查询-->
     <select id="selectByThree" resultMap="sysConfigResultMap">
-        select <include refid="sql_for_all"/>
-        from was_sys_config where was_type = #{wasType} and was_source = #{wasSource} and was_config_type = #{wasConfigType}
+        select
+        <include refid="sql_for_all"/>
+        from was_sys_config where was_type = #{wasType} and was_source = #{wasSource} and was_config_type =
+        #{wasConfigType}
+    </select>
+
+    <!--根据wasType+wasSource 查询信息-->
+    <select id="selectByTypeAndSource" parameterType="java.util.Map" resultType="java.util.Map">
+        select was_num wasNum,was_percent wasPercent,was_remark wasRemark from was_sys_config where was_type =
+        #{wasType} and was_source = #{wasSource}
     </select>
 </mapper>

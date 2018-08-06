@@ -110,30 +110,31 @@
     </sql>
 
     <!--新增信息-->
-    <insert id="addDataDictionary" parameterType="com.fq.modules.was.web.entity.datadictionary.DataDictionary" useGeneratedKeys="true" keyProperty="wasId">
+    <insert id="addDataDictionary" parameterType="com.fq.modules.was.web.entity.datadictionary.DataDictionary"
+            useGeneratedKeys="true" keyProperty="wasId">
         insert into was_data_dictionary(
         <include refid="sql_for_all_except_p"/>
         )values (
-            #{wasBaseCurrency},
-            #{wasType},
-            #{wasBeginBlock},
-            #{wasBlockNum},
-            #{wasGateWay},
-            #{wasTokenAddress},
-            #{wasMinAmount},
-            #{wasMinConfirm},
-            #{wasStatus},
-            #{wasPrecision},
-            #{wasZeroGasPrice},
-            #{wasZeroGasLimit},
-            #{wasTransferGasPrice},
-            #{wasTransferGasLimit},
-            #{wasCoinIntroduceUrl},
-            #{wasBlockBrowsersUrl},
-            #{wasRemark},
-            #{wasSpare},
-            #{wasCreateTime},
-            #{wasLastTime}
+        #{wasBaseCurrency},
+        #{wasType},
+        #{wasBeginBlock},
+        #{wasBlockNum},
+        #{wasGateWay},
+        #{wasTokenAddress},
+        #{wasMinAmount},
+        #{wasMinConfirm},
+        #{wasStatus},
+        #{wasPrecision},
+        #{wasZeroGasPrice},
+        #{wasZeroGasLimit},
+        #{wasTransferGasPrice},
+        #{wasTransferGasLimit},
+        #{wasCoinIntroduceUrl},
+        #{wasBlockBrowsersUrl},
+        #{wasRemark},
+        #{wasSpare},
+        #{wasCreateTime},
+        #{wasLastTime}
         )
     </insert>
 
@@ -153,10 +154,18 @@
             <if test="wasPrecision != null and wasPrecision != ''">was_precision = #{wasPrecision},</if>
             <if test="wasZeroGasPrice != null and wasZeroGasPrice != ''">was_zero_gas_price = #{wasZeroGasPrice},</if>
             <if test="wasZeroGasLimit != null and wasZeroGasLimit != ''">was_zero_gas_limit = #{wasZeroGasLimit},</if>
-            <if test="wasTransferGasPrice != null and wasTransferGasPrice != ''">was_transfer_gas_price = #{wasTransferGasPrice},</if>
-            <if test="wasTransferGasLimit != null and wasTransferGasLimit != ''">was_transfer_gas_limit = #{wasTransferGasLimit},</if>
-            <if test="wasCoinIntroduceUrl != null and wasCoinIntroduceUrl != ''">was_coin_introduce_url = #{wasCoinIntroduceUrl},</if>
-            <if test="wasBlockBrowsersUrl != null and wasBlockBrowsersUrl != ''">was_block_browsers_url = #{wasBlockBrowsersUrl},</if>
+            <if test="wasTransferGasPrice != null and wasTransferGasPrice != ''">was_transfer_gas_price =
+                #{wasTransferGasPrice},
+            </if>
+            <if test="wasTransferGasLimit != null and wasTransferGasLimit != ''">was_transfer_gas_limit =
+                #{wasTransferGasLimit},
+            </if>
+            <if test="wasCoinIntroduceUrl != null and wasCoinIntroduceUrl != ''">was_coin_introduce_url =
+                #{wasCoinIntroduceUrl},
+            </if>
+            <if test="wasBlockBrowsersUrl != null and wasBlockBrowsersUrl != ''">was_block_browsers_url =
+                #{wasBlockBrowsersUrl},
+            </if>
             <if test="wasRemark != null and wasRemark != ''">was_remark = #{wasRemark},</if>
             <if test="wasSpare != null and wasSpare != ''">was_spare = #{wasSpare},</if>
             <if test="wasCreateTime != null and wasCreateTime != ''">was_create_time = #{wasCreateTime},</if>
@@ -173,14 +182,14 @@
     <!--根据主键查询单条信息-->
     <select id="selectById" parameterType="Integer" resultMap="dataDictionaryResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_data_dictionary where was_id = #{wasId}
     </select>
 
     <!-- 分页查询信息 列表-->
     <select id="pageQueryList" parameterType="java.util.Map" resultMap="dataDictionaryResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_data_dictionary
         where 1=1
         <if test="bean.wasId != null">
@@ -246,7 +255,7 @@
         <if test="bean.wasLastTime != null and bean.wasLastTime.trim() != ''">
             and was_last_time = #{bean.wasLastTime}
         </if>
-                order by was_id desc
+        order by was_id desc
         <include refid="limited"/>
     </select>
     <!-- 总数 -->

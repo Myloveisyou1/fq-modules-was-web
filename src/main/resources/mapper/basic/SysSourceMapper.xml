@@ -46,14 +46,15 @@
     </sql>
 
     <!--新增信息-->
-    <insert id="addSysSource" parameterType="com.fq.modules.was.web.entity.basic.SysSource" useGeneratedKeys="true" keyProperty="wasId">
+    <insert id="addSysSource" parameterType="com.fq.modules.was.web.entity.basic.SysSource" useGeneratedKeys="true"
+            keyProperty="wasId">
         insert into was_sys_source(
         <include refid="sql_for_all_except_p"/>
         )values (
-            #{wasSource},
-            #{wasUrl},
-            #{wasCreateTime},
-            #{wasUpdateTime}
+        #{wasSource},
+        #{wasUrl},
+        #{wasCreateTime},
+        #{wasUpdateTime}
         )
     </insert>
 
@@ -77,14 +78,14 @@
     <!--根据主键查询单条信息-->
     <select id="selectById" parameterType="Integer" resultMap="sysSourceResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_sys_source where was_id = #{wasId}
     </select>
 
     <!-- 分页查询信息 列表-->
     <select id="pageQueryList" parameterType="java.util.Map" resultMap="sysSourceResultMap">
         select
-          <include refid="sql_for_all"/>
+        <include refid="sql_for_all"/>
         from was_sys_source
         where 1=1
         <if test="bean.wasId != null and bean.wasId.trim() != ''">
@@ -123,7 +124,7 @@
         <if test="bean.wasUpdateTime != null and bean.wasUpdateTime.trim() != ''">
             and was_update_time = #{bean.wasUpdateTime}
         </if>
-            </select>
+    </select>
 
     <!--根据平台名称查询-->
     <select id="selectByWasSource" parameterType="java.lang.String" resultMap="sysSourceResultMap">
@@ -135,7 +136,8 @@
 
     <!--查询所有平台-->
     <select id="findAll" resultMap="sysSourceResultMap">
-        select <include refid="sql_for_all"/>
+        select
+        <include refid="sql_for_all"/>
         from was_sys_source
         where 1=1
     </select>

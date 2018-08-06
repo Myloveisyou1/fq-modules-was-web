@@ -11,7 +11,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-17 14:16:38
  */
-public interface  DataDictionaryService {
+public interface DataDictionaryService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 
@@ -25,7 +25,7 @@ public interface  DataDictionaryService {
 
     int disabledAll(String way);
 
-    Map<String,Object> getNewHeight(String wasType);
+    Map<String, Object> getNewHeight(String wasType);
 
     String findAll(Map<String, Object> map);
 }

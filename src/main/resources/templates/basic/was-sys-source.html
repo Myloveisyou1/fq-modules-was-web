@@ -20,7 +20,8 @@
         <a href="">基础配置</a>
         <a href="">业务平台管理</a>
       </span>
-    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
 </div>
 <div class="x-body">
@@ -109,41 +110,41 @@
     var result = "";
     var wasId = "";
     var layer = "";
-    layui.use(['layer'],function(){
+    layui.use(['layer'], function () {
         layer = layui.layer;
     });
 
     $(function () {
-        parent.layer.load(2,{shade:0.3});
-        layui.use('table', function(){
+        parent.layer.load(2, {shade: 0.3});
+        layui.use('table', function () {
             var table = layui.table;
 
-            result= table.render({
+            result = table.render({
                 elem: '#demo'
-                ,height: 515
-                ,url: URL+"v1/syssource/list" //数据接口
-                ,request: {
+                , height: 515
+                , url: URL + "v1/syssource/list" //数据接口
+                , request: {
                     pageName: 'pageNumber' //页码的参数名称，默认：page
-                    ,limitName: 'pageSize' //每页数据量的参数名，默认：limit
+                    , limitName: 'pageSize' //每页数据量的参数名，默认：limit
                 }
-                ,where:{
-                    wasSource:$("#was_source").val()
+                , where: {
+                    wasSource: $("#was_source").val()
                 }
-                ,page: true //开启分页
-                ,cols: [[ //表头
+                , page: true //开启分页
+                , cols: [[ //表头
                     {field: 'wasId', title: '平台ID', sort: true}
-                    ,{field: 'wasSource', title: '平台名称', sort: true}
-                    ,{field: 'wasUrl', title: '平台地址',sort: true}
-                    ,{field: 'repData', title: '操作',toolbar:'#barDemo',align:'center'}
+                    , {field: 'wasSource', title: '平台名称', sort: true}
+                    , {field: 'wasUrl', title: '平台地址', sort: true}
+                    , {field: 'repData', title: '操作', toolbar: '#barDemo', align: 'center'}
                 ]]
-                ,response: {
+                , response: {
                     statusName: 'code' //数据状态的字段名称，默认：code
-                    ,statusCode: 200 //成功的状态码，默认：0
-                    ,msgName: 'hint' //状态信息的字段名称，默认：msg
-                    ,countName: 'totalCount' //数据总数的字段名称，默认：count
-                    ,dataName: 'data' //数据列表的字段名称，默认：data
+                    , statusCode: 200 //成功的状态码，默认：0
+                    , msgName: 'hint' //状态信息的字段名称，默认：msg
+                    , countName: 'totalCount' //数据总数的字段名称，默认：count
+                    , dataName: 'data' //数据列表的字段名称，默认：data
                 }
-                ,done: function(res, curr, count){
+                , done: function (res, curr, count) {
                     //如果是异步请求数据方式，res即为你接口返回的信息。
                     //如果是直接赋值的方式，res即为：{data: [], count: 99} data为当前页数据、count为数据总长度
                     console.log(res);
@@ -167,9 +168,9 @@
         //第一个实例
         result.reload({
             where: { //设定异步数据接口的额外参数，任意设
-                wasSource:$("#was_source").val()
+                wasSource: $("#was_source").val()
             }
-            ,page: {
+            , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });
@@ -180,54 +181,54 @@
      */
     function add() {
         layer.open({
-            type:1,
+            type: 1,
             title: '新增平台',
             content: $("#addAddress"),
             area: ['450px', '350px'],
-            btn:['保存','取消'],
-            yes: function (index,layero) {
+            btn: ['保存', '取消'],
+            yes: function (index, layero) {
 
                 var wasSource = $("#wasSource").val();
                 var wasUrl = $("#wasUrl").val();
                 if (wasSource == null || wasSource == "" || wasSource == undefined) {
-                    layer.msg("请输入平台全称",{icon:2});
+                    layer.msg("请输入平台全称", {icon: 2});
                     return;
                 }
                 if (wasUrl == null || wasUrl == "" || wasUrl == undefined) {
-                    layer.msg("请输入平台地址",{icon:2});
+                    layer.msg("请输入平台地址", {icon: 2});
                     return;
                 }
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 $.ajax({
-                    url:URL+"v1/syssource/save",
-                    type:"get",
-                    dataType:"json",
-                    data:{
-                        wasSource:wasSource,
-                        wasUrl:wasUrl
+                    url: URL + "v1/syssource/save",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        wasSource: wasSource,
+                        wasUrl: wasUrl
                     },
-                    success:function(data){
+                    success: function (data) {
                         layer.closeAll("loading");
                         console.log(data);
-                        if(data.code == 200) {
-                            parent.layer.msg("添加成功",{icon:6,time:2000},function(){
+                        if (data.code == 200) {
+                            parent.layer.msg("添加成功", {icon: 6, time: 2000}, function () {
                                 location.reload();
                             });
-                        } else if (data.code == 209){
-                            parent.layer.msg(data.msg,{icon:2});
-                            top.location.href = URL+"login";
+                        } else if (data.code == 209) {
+                            parent.layer.msg(data.msg, {icon: 2});
+                            top.location.href = URL + "login";
                         } else {
-                            parent.layer.msg(data.msg,{icon:2});
+                            parent.layer.msg(data.msg, {icon: 2});
                         }
 
-                    },error:function(jqXHR, textStatus, errorThrown) {
+                    }, error: function (jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseText;
-                        if(jqXHR.status == 404){
-                            top.location.href = URL+"errorpage/404";
-                        } else if(jqXHR.status == 500){
-                            top.location.href = URL+"errorpage/500";
+                        if (jqXHR.status == 404) {
+                            top.location.href = URL + "errorpage/404";
+                        } else if (jqXHR.status == 500) {
+                            top.location.href = URL + "errorpage/500";
                         } else {
-                            layer.msg(data.msg,{icon:2});
+                            layer.msg(data.msg, {icon: 2});
                         }
                     }
                 });
@@ -239,55 +240,55 @@
 
         findById(wasId);
         layer.open({
-            type:1,
+            type: 1,
             title: '编辑币种',
             content: $("#updateAddress"),
             area: ['450px', '350px'],
-            btn:['保存','取消'],
-            yes: function (index,layero) {
+            btn: ['保存', '取消'],
+            yes: function (index, layero) {
 
                 var wasSource = $("#uwasSource").val();
                 var wasUrl = $("#uwasUrl").val();
                 if (wasSource == null || wasSource == "" || wasSource == undefined) {
-                    layer.msg("请输入币种全称",{icon:2});
+                    layer.msg("请输入币种全称", {icon: 2});
                     return;
                 }
                 if (wasUrl == null || wasUrl == "" || wasUrl == undefined) {
-                    layer.msg("请输入币种简称",{icon:2});
+                    layer.msg("请输入币种简称", {icon: 2});
                     return;
                 }
-                layer.load(2,{shade:0.3});
+                layer.load(2, {shade: 0.3});
                 $.ajax({
-                    url:URL+"v1/syssource/update",
-                    type:"get",
-                    dataType:"json",
-                    data:{
-                        wasId:wasId,
-                        wasSource:wasSource,
-                        wasUrl:wasUrl
+                    url: URL + "v1/syssource/update",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        wasId: wasId,
+                        wasSource: wasSource,
+                        wasUrl: wasUrl
                     },
-                    success:function(data){
+                    success: function (data) {
                         layer.closeAll("loading");
                         console.log(data);
-                        if(data.code == 200) {
-                            parent.layer.msg("编辑成功",{icon:6,time:2000},function(){
+                        if (data.code == 200) {
+                            parent.layer.msg("编辑成功", {icon: 6, time: 2000}, function () {
                                 location.reload();
                             });
-                        } else if (data.code == 209){
-                            parent.layer.msg(data.msg,{icon:2});
-                            top.location.href = URL+"login";
+                        } else if (data.code == 209) {
+                            parent.layer.msg(data.msg, {icon: 2});
+                            top.location.href = URL + "login";
                         } else {
-                            parent.layer.msg(data.msg,{icon:2});
+                            parent.layer.msg(data.msg, {icon: 2});
                         }
 
-                    },error:function(jqXHR, textStatus, errorThrown) {
+                    }, error: function (jqXHR, textStatus, errorThrown) {
                         var data = jqXHR.responseText;
-                        if(jqXHR.status == 404){
-                            top.location.href = URL+"errorpage/404";
-                        } else if(jqXHR.status == 500){
-                            top.location.href = URL+"errorpage/500";
+                        if (jqXHR.status == 404) {
+                            top.location.href = URL + "errorpage/404";
+                        } else if (jqXHR.status == 500) {
+                            top.location.href = URL + "errorpage/500";
                         } else {
-                            layer.msg(data.msg,{icon:2});
+                            layer.msg(data.msg, {icon: 2});
                         }
                     }
                 });
@@ -297,30 +298,30 @@
 
     function findById(wasId) {
         $.ajax({
-            url:URL+"v1/syssource/info/"+wasId,
-            type:"get",
-            dataType:"json",
-            success:function(data){
+            url: URL + "v1/syssource/info/" + wasId,
+            type: "get",
+            dataType: "json",
+            success: function (data) {
                 console.log(data);
-                if(data.code == 200) {
+                if (data.code == 200) {
                     $("#uwasSource").val(data.data.wasSource);
                     $("#uwasUrl").val(data.data.wasUrl);
 
-                } else if (data.code == 209){
-                    parent.layer.msg(data.msg,{icon:2});
-                    top.location.href = URL+"login";
+                } else if (data.code == 209) {
+                    parent.layer.msg(data.msg, {icon: 2});
+                    top.location.href = URL + "login";
                 } else {
-                    parent.layer.msg(data.msg,{icon:2});
+                    parent.layer.msg(data.msg, {icon: 2});
                 }
 
-            },error:function(jqXHR, textStatus, errorThrown) {
+            }, error: function (jqXHR, textStatus, errorThrown) {
                 var data = jqXHR.responseText;
-                if(jqXHR.status == 404){
-                    top.location.href = URL+"errorpage/404";
-                } else if(jqXHR.status == 500){
-                    top.location.href = URL+"errorpage/500";
+                if (jqXHR.status == 404) {
+                    top.location.href = URL + "errorpage/404";
+                } else if (jqXHR.status == 500) {
+                    top.location.href = URL + "errorpage/500";
                 } else {
-                    layer.msg(data.msg,{icon:2});
+                    layer.msg(data.msg, {icon: 2});
                 }
             }
         });

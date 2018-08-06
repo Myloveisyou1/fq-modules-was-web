@@ -12,7 +12,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-16 09:54:44
  */
-public interface  SysSourceService {
+public interface SysSourceService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 

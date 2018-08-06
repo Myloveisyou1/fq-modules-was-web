@@ -36,24 +36,24 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        log.info("===========进入拦截器==============");
+        log.info("===========进入拦截器==============" );
 
         HttpSession session = httpServletRequest.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("user" );
         if (CommonUtil.isNotEmpty(user)) {
             String url = httpServletRequest.getRequestURL().toString();
             //校验是否拥有权限
-            if(service.checkPermission(user,url)) {
-                session.setAttribute("user",user);
+            if (service.checkPermission(user, url)) {
+                session.setAttribute("user", user);
                 return true;
             } else {
                 //检验权限
-                String[] str = url.split(":")[2].split("/");//   8081/consume/findConsume
+                String[] str = url.split(":" )[2].split("/" );//   8081/consume/findConsume
                 String checkUrl = "";
-                for (int i=0;i<str.length;i++) {
+                for (int i = 0; i < str.length; i++) {
                     if (i != 0) {
-                        if (i != str.length -1) {
-                            checkUrl += str[i]+"/";
+                        if (i != str.length - 1) {
+                            checkUrl += str[i] + "/";
                         } else {
                             checkUrl += str[i];
                         }
@@ -62,16 +62,16 @@ public class LoginInterceptor implements HandlerInterceptor {
                 Menu menu = menuService.findMenuByUrl(checkUrl);
                 if (CommonUtil.isNotEmpty(menu)) {
                     //记录日志信息
-                    String content = user.getUserName()+"在"+DatesUtils.time()+"尝试进行["+menu.getMenuName()+"]操作,因权限不足失败!";
+                    String content = user.getUserName() + "在" + DatesUtils.time() + "尝试进行[" + menu.getMenuName() + "]操作,因权限不足失败!";
                     String result = "操作失败,权限不足!";
 
-                    SysLog wasSysLog = new SysLog(2,user.getUserName(),content,result);
+                    SysLog wasSysLog = new SysLog(2, user.getUserName(), content, result);
                     sysLogService.insert(wasSysLog);
                 }
                 throw new WasWebException(ResultEnum.NO_PERMISSION);
             }
         } else {
-            httpServletResponse.sendRedirect(httpServletRequest.getContextPath()+"/login");
+            httpServletResponse.sendRedirect(httpServletRequest.getContextPath() + "/login" );
             return false;
         }
     }
@@ -79,12 +79,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
 
-        log.info(">>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）");
+        log.info(">>>MyInterceptor1>>>>>>>请求处理之后进行调用，但是在视图被渲染之前（Controller方法调用之后）" );
 
-        if(httpServletResponse.getStatus()==500){
+        if (httpServletResponse.getStatus() == 500) {
 //            modelAndView.setViewName("/errorpage/500");
             throw new WasWebException(ResultEnum.UNKNOW_ERROR);
-        }else if(httpServletResponse.getStatus()==404){
+        } else if (httpServletResponse.getStatus() == 404) {
 //            modelAndView.setViewName("/errorpage/404");
             throw new WasWebException(ResultEnum.ERROR_PATH);
         }

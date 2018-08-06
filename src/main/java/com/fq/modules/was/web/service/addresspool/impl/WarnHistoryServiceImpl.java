@@ -26,10 +26,11 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
     private SysLogMapper sysLogMapper;
 
     /**
-    * 分页查询数据
-    * @param params
-    * @return
-    */
+     * 分页查询数据
+     *
+     * @param params
+     * @return
+     */
     public Map<String, Object> queryPage(Map<String, Object> params) {
 
         Map<String, Object> map = new HashMap<>();
@@ -38,10 +39,10 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
         List<WarnHistory> list = warnHistoryMapper.pageQueryList(params);
         Long count = warnHistoryMapper.pageQueryCount(params);
 
-        Pages pages = (Pages) params.get("pages");
+        Pages pages = (Pages) params.get("pages" );
         pages.setTotalCount(count);
         long totalPage = count % pages.getPageSize() > 0 ? (1 + count / pages.getPageSize()) : (count / pages.getPageSize());
-        pages.setTotalPage(Integer.valueOf(totalPage + ""));
+        pages.setTotalPage(Integer.valueOf(totalPage + "" ));
 
         map.put("result", list);//数据信息
         map.put("pages", pages);//分页信息
@@ -50,8 +51,8 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
     }
 
     /**
-    * 根据主键查询信息
-    */
+     * 根据主键查询信息
+     */
     public WarnHistory selectById(Integer wasId) {
 
         return warnHistoryMapper.selectById(wasId);
@@ -59,6 +60,7 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
 
     /**
      * 保存信息
+     *
      * @param warnHistory 需要保存的对象
      * @return
      */
@@ -79,6 +81,7 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
 
     /**
      * 修改信息
+     *
      * @param warnHistory 需要修改的对象
      * @return
      */
@@ -86,31 +89,32 @@ public class WarnHistoryServiceImpl extends BaseServiceImpl implements WarnHisto
 
         boolean flag = warnHistoryMapper.optUpdateWarnHistory(warnHistory);
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"修改了【】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "修改了【】的信息";
         String result = "修改成功";
         if (!flag) {
             result = "修改失败";
         }
-        SysLog sysLog = new SysLog(2,getUserName(),content,result);
+        SysLog sysLog = new SysLog(2, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
         return flag;
     }
 
     /**
-    * 根据id删除信息
-    * @return
-    */
+     * 根据id删除信息
+     *
+     * @return
+     */
     public int deleteById(Integer wasId) {
 
         int ret = warnHistoryMapper.deleteById(wasId);
 
         //记录日志信息
-        String content = getUserName()+"在"+DatesUtils.time()+"删除了id=【wasId】的信息";
+        String content = getUserName() + "在" + DatesUtils.time() + "删除了id=【wasId】的信息";
         String result = "删除成功";
         if (ret == 0) {
             result = "删除失败";
         }
-        SysLog sysLog = new SysLog(4,getUserName(),content,result);
+        SysLog sysLog = new SysLog(4, getUserName(), content, result);
         sysLogMapper.addSysLog(sysLog);
 
         return ret;

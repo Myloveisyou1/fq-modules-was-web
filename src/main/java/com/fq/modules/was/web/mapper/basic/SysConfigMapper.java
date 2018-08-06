@@ -31,5 +31,7 @@ public interface SysConfigMapper {
 
     int deleteById(Long wasId);
 
-    SysConfig selectByThree(@Param("wasType") String wasType, @Param("wasSource") String wasSource, @Param("wasConfigType") String wasConfigType);
+    SysConfig selectByThree(@Param("wasType" ) String wasType, @Param("wasSource" ) String wasSource, @Param("wasConfigType" ) String wasConfigType);
+
+    Map<String, Object> selectByTypeAndSource(@Param("wasType" ) String wasType, @Param("wasSource" ) String wasSource);
 }

@@ -31,5 +31,5 @@ public interface PayOperatorHistoryMapper {
 
     int deleteById(Integer wasId);
 
-    List<PayOperatorHistory> findHistoryByWasId(@Param("wasId") Integer wasId, @Param("userName") String userName);
+    List<PayOperatorHistory> findHistoryByWasId(@Param("wasId" ) Integer wasId, @Param("userName" ) String userName);
 }

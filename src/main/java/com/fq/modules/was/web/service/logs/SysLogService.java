@@ -11,7 +11,7 @@ import java.util.Map;
  * @email liuyingjie@fengqun.ltd
  * @date 2018-07-11 19:01:03
  */
-public interface  SysLogService {
+public interface SysLogService {
 
     Map<String, Object> queryPage(Map<String, Object> params);
 

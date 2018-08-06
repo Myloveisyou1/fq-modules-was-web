@@ -22,7 +22,7 @@ import com.fq.modules.was.web.utils.ResultUtil;
  * @date 2018-07-11 19:01:03
  */
 @RestController
-@RequestMapping("v1/syslog")
+@RequestMapping("v1/syslog" )
 public class SysLogController {
 
     @Autowired
@@ -31,29 +31,29 @@ public class SysLogController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list" )
     public Result list(SysLog sysLog, Pages pages) {
 
-        Map<String, Object> map = sysLogService.queryPage(ResultUtil.initParams(sysLog,pages));
+        Map<String, Object> map = sysLogService.queryPage(ResultUtil.initParams(sysLog, pages));
 
-        return ResultUtil.success(map.get("result"), (Pages) map.get("pages"));
+        return ResultUtil.success(map.get("result" ), (Pages) map.get("pages" ));
     }
 
 
     /**
      * 查询单条信息
      */
-    @RequestMapping("/info/{wasId}")
-    public Result info(@PathVariable("wasId") Long wasId) {
+    @RequestMapping("/info/{wasId}" )
+    public Result info(@PathVariable("wasId" ) Long wasId) {
 
-        SysLog sysLog =sysLogService.selectById(wasId);
+        SysLog sysLog = sysLogService.selectById(wasId);
         return ResultUtil.success(sysLog, null);
     }
 
     /**
      * 保存信息
      */
-    @RequestMapping("/save")
+    @RequestMapping("/save" )
     public Result save(SysLog sysLog) {
 
         return ResultUtil.success(sysLogService.insert(sysLog), null);
@@ -62,7 +62,7 @@ public class SysLogController {
     /**
      * 修改信息
      */
-    @RequestMapping("/update")
+    @RequestMapping("/update" )
     public Result update(SysLog sysLog) {
 
         return ResultUtil.success(sysLogService.updateById(sysLog), null);
